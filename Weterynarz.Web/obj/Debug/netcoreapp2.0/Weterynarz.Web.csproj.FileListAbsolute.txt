@@ -1,11 +1,11 @@
-E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.csprojResolveAssemblyReference.cache
-E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.csproj.CoreCompileInputs.cache
-E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.AssemblyInfoInputs.cache
-E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.AssemblyInfo.cs
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Web.deps.json
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Web.runtimeconfig.json
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Web.runtimeconfig.dev.json
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Web.dll
+E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.csprojResolveAssemblyReference.cache
+E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.csproj.CoreCompileInputs.cache
+E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.AssemblyInfoInputs.cache
+E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web.AssemblyInfo.cs
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Web.pdb
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Domain.dll
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Domain.pdb
