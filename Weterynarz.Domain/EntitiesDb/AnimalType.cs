@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Weterynarz.Domain.EntitiesDb
 {
-    public class Test
+    public class AnimalType : BaseEntity
     {
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

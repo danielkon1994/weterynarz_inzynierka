@@ -10,6 +10,13 @@ namespace Weterynarz.Domain.ContextDb
     {
         public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Test> Test { get; set; }        
+        #region DbSets
+        public DbSet<Animal> Animals { get; set; }
+        public DbSet<AnimalType> AnimalTypes { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<MedicalExamination> MedicalExaminations { get; set; }
+        public DbSet<MedicalExaminationType> MedicalExaminationTypes { get; set; }
+        public DbSet<Visit> Visits { get; set; }
+        #endregion
     }
 }
