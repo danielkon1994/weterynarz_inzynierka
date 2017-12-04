@@ -11,7 +11,7 @@ namespace Weterynarz.Domain.EntitiesDb
         public DateTime VisitDate { get; set; }
 
         [Required]
-        public virtual User Doctor { get; set; }
+        public virtual ApplicationUser Doctor { get; set; }
 
         [Required]
         public virtual Animal Animal { get; set; }

@@ -22,8 +22,8 @@ namespace Weterynarz.Domain.EntitiesDb
         public string Description { get; set; }
 
         // Doctor Id
-        public int DoctorId { get; set; }
+        public string DoctorId { get; set; }
         [ForeignKey("DoctorId")]
-        public virtual User Doctor { get; set; }
+        public virtual ApplicationUser Doctor { get; set; }
     }
 }

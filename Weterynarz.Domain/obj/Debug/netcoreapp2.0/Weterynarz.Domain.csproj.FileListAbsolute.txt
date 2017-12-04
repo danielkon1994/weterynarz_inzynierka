@@ -7,3 +7,5 @@ E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.
 E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.AssemblyInfo.cs
 E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.dll
 E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.pdb
+E:\git_projects\Weterynarz\Weterynarz.Domain\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+E:\git_projects\Weterynarz\Weterynarz.Domain\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.xml
