@@ -1,0 +1,9 @@
+E:\git_projects\Weterynarz\Weterynarz.Domain\bin\Debug\netcoreapp2.0\Weterynarz.Domain.deps.json
+E:\git_projects\Weterynarz\Weterynarz.Domain\bin\Debug\netcoreapp2.0\Weterynarz.Domain.dll
+E:\git_projects\Weterynarz\Weterynarz.Domain\bin\Debug\netcoreapp2.0\Weterynarz.Domain.pdb
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.csprojResolveAssemblyReference.cache
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.csproj.CoreCompileInputs.cache
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.AssemblyInfoInputs.cache
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.AssemblyInfo.cs
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.dll
+E:\git_projects\Weterynarz\Weterynarz.Domain\obj\Debug\netcoreapp2.0\Weterynarz.Domain.pdb
