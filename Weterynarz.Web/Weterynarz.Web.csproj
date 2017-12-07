@@ -7,6 +7,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="bootstrap.sass" Version="4.0.0-beta2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.0.1" />
@@ -21,6 +22,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Weterynarz.Domain\Weterynarz.Domain.csproj" />
+    <ProjectReference Include="..\Weterynarz.Services\Weterynarz.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
 </Project>

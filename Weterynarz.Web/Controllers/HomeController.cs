@@ -8,7 +8,7 @@ using Weterynarz.Web.Models;
 
 namespace Weterynarz.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

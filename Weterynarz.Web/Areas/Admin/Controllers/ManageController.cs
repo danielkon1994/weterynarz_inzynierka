@@ -19,7 +19,7 @@ namespace Weterynarz.Web.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class ManageController : Controller
+    public class ManageController : AdminBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;

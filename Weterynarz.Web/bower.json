@@ -2,9 +2,11 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "font-awesome": "Font-Awesome#v4.7.0",
     "jQuery": "3.2.1",
     "moment": "momentjs#2.19.3",
-    "jquery-validation": "1.17.0"
+    "jquery-validation": "1.17.0",
+    "popper.js": "^1.12.9",
+    "chart.js": "^2.7.1",
+    "components-font-awesome": "^4.7.0"
   }
 }

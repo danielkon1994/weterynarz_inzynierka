@@ -12,6 +12,10 @@ using Weterynarz.Web.Models;
 using Weterynarz.Web.Services;
 using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
+using Weterynarz.Domain.Repositories.Interfaces;
+using Weterynarz.Domain.Repositories.Implementations;
+using Weterynarz.Services.Services.Interfaces;
+using Weterynarz.Services.Services.Implementations;
 
 namespace Weterynarz.Web
 {
@@ -34,8 +38,12 @@ namespace Weterynarz.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            // Add application repositories
+            services.AddScoped<IAnimalRepository, AnimalRepository>();
+
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IAnimalService, AnimalService>();
+            //services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
         }
@@ -60,6 +68,10 @@ namespace Weterynarz.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

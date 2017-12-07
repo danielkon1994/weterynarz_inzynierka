@@ -5091,6 +5091,19 @@
         "runtime": {
           "bin/placeholder/Weterynarz.Domain.dll": {}
         }
+      },
+      "Weterynarz.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Weterynarz.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Weterynarz.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Weterynarz.Services.dll": {}
+        }
       }
     }
   },
@@ -13379,6 +13392,11 @@
       "type": "project",
       "path": "../Weterynarz.Domain/Weterynarz.Domain.csproj",
       "msbuildProject": "../Weterynarz.Domain/Weterynarz.Domain.csproj"
+    },
+    "Weterynarz.Services/1.0.0": {
+      "type": "project",
+      "path": "../Weterynarz.Services/Weterynarz.Services.csproj",
+      "msbuildProject": "../Weterynarz.Services/Weterynarz.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13389,6 +13407,7 @@
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.1",
       "Weterynarz.Domain >= 1.0.0",
+      "Weterynarz.Services >= 1.0.0",
       "bootstrap.sass >= 4.0.0-beta2"
     ]
   },
@@ -13427,6 +13446,9 @@
           "projectReferences": {
             "E:\\git_projects\\Weterynarz\\Weterynarz.Domain\\Weterynarz.Domain.csproj": {
               "projectPath": "E:\\git_projects\\Weterynarz\\Weterynarz.Domain\\Weterynarz.Domain.csproj"
+            },
+            "E:\\git_projects\\Weterynarz\\Weterynarz.Services\\Weterynarz.Services.csproj": {
+              "projectPath": "E:\\git_projects\\Weterynarz\\Weterynarz.Services\\Weterynarz.Services.csproj"
             }
           }
         }

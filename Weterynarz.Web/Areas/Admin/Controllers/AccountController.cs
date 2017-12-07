@@ -14,12 +14,13 @@ using Weterynarz.Web.Models;
 using Weterynarz.Web.Models.AccountViewModels;
 using Weterynarz.Web.Services;
 using Weterynarz.Domain.EntitiesDb;
+using Weterynarz.Web.Controllers;
 
-namespace Weterynarz.Web.Controllers
+namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class AccountController : Controller
+    public class AccountController : AdminBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
