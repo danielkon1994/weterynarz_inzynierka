@@ -18,8 +18,8 @@ using Weterynarz.Web.Controllers;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-    [Authorize]
-    [Route("[controller]/[action]")]
+    
+    [Route("admin/[controller]/[action]")]
     public class AccountController : AdminBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;

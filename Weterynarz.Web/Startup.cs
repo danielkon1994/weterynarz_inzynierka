@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +15,8 @@ using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.Repositories.Implementations;
 using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Services.Services.Implementations;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace Weterynarz.Web
 {
@@ -43,7 +44,14 @@ namespace Weterynarz.Web
 
             // Add application services.
             services.AddScoped<IAnimalService, AnimalService>();
-            //services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            // redirect to another login page
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Admin/Account/Login";
+                options.LogoutPath = "/Admin/Account/Logout";
+            });
 
             services.AddMvc();
         }
@@ -69,7 +77,7 @@ namespace Weterynarz.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "areas",
+                    name: "Admin",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(

@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-
     public class AnimalsController : AdminBaseController
     {
         // GET: Animals
