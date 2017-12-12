@@ -7,27 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-    public class AnimalsController : AdminBaseController
+    public class AnimalTypesController : Controller
     {
-        // GET: Animals
+        // GET: AnimalTypes
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Animals/Details/5
+        // GET: AnimalTypes/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Animals/Create
+        // GET: AnimalTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Animals/Create
+        // POST: AnimalTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -44,13 +44,13 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        // GET: Animals/Edit/5
+        // GET: AnimalTypes/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Animals/Edit/5
+        // POST: AnimalTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +67,13 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        // GET: Animals/Delete/5
+        // GET: AnimalTypes/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Animals/Delete/5
+        // POST: AnimalTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

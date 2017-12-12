@@ -17,6 +17,7 @@ using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Services.Services.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Weterynarz.Web.Extensions;
 
 namespace Weterynarz.Web
 {
@@ -32,6 +33,8 @@ namespace Weterynarz.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
@@ -52,12 +55,10 @@ namespace Weterynarz.Web
                 options.LoginPath = "/Admin/Account/Login";
                 options.LogoutPath = "/Admin/Account/Logout";
             });
-
-            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -69,6 +70,9 @@ namespace Weterynarz.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Create super user !
+            //CreateSuperUser.Create(serviceProvider).Wait();
 
             app.UseStaticFiles();
 

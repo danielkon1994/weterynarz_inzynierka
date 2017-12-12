@@ -5075,6 +5075,16 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "Weterynarz.Basic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Weterynarz.Basic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Weterynarz.Basic.dll": {}
+        }
+      },
       "Weterynarz.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -5083,7 +5093,9 @@
           "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
           "Microsoft.EntityFrameworkCore.Design": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
-          "Microsoft.Extensions.Identity.Stores": "2.0.1"
+          "Microsoft.EntityFrameworkCore.Tools": "2.0.1",
+          "Microsoft.Extensions.Identity.Stores": "2.0.1",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.1"
         },
         "compile": {
           "bin/placeholder/Weterynarz.Domain.dll": {}
@@ -13388,6 +13400,11 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "Weterynarz.Basic/1.0.0": {
+      "type": "project",
+      "path": "../Weterynarz.Basic/Weterynarz.Basic.csproj",
+      "msbuildProject": "../Weterynarz.Basic/Weterynarz.Basic.csproj"
+    },
     "Weterynarz.Domain/1.0.0": {
       "type": "project",
       "path": "../Weterynarz.Domain/Weterynarz.Domain.csproj",
@@ -13406,6 +13423,7 @@
       "Microsoft.Extensions.Identity.Stores >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.1",
+      "Weterynarz.Basic >= 1.0.0",
       "Weterynarz.Domain >= 1.0.0",
       "Weterynarz.Services >= 1.0.0",
       "bootstrap.sass >= 4.0.0-beta2"
@@ -13444,6 +13462,9 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
+            "E:\\git_projects\\Weterynarz\\Weterynarz.Basic\\Weterynarz.Basic.csproj": {
+              "projectPath": "E:\\git_projects\\Weterynarz\\Weterynarz.Basic\\Weterynarz.Basic.csproj"
+            },
             "E:\\git_projects\\Weterynarz\\Weterynarz.Domain\\Weterynarz.Domain.csproj": {
               "projectPath": "E:\\git_projects\\Weterynarz\\Weterynarz.Domain\\Weterynarz.Domain.csproj"
             },

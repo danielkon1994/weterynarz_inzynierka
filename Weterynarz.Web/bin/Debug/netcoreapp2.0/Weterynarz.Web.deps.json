@@ -28,6 +28,7 @@
           "Microsoft.Extensions.Identity.Stores": "2.0.1",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.1",
+          "Weterynarz.Basic": "1.0.0",
           "Weterynarz.Domain": "1.0.0",
           "Weterynarz.Services": "1.0.0",
           "bootstrap.sass": "4.0.0-beta2"
@@ -4096,13 +4097,23 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "Weterynarz.Basic/1.0.0": {
+        "runtime": {
+          "Weterynarz.Basic.dll": {}
+        },
+        "compile": {
+          "Weterynarz.Basic.dll": {}
+        }
+      },
       "Weterynarz.Domain/1.0.0": {
         "dependencies": {
           "EntityFramework": "6.2.0",
           "Microsoft.AspNet.Identity.EntityFramework": "2.2.1",
           "Microsoft.EntityFrameworkCore.Design": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
-          "Microsoft.Extensions.Identity.Stores": "2.0.1"
+          "Microsoft.EntityFrameworkCore.Tools": "2.0.1",
+          "Microsoft.Extensions.Identity.Stores": "2.0.1",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.1"
         },
         "runtime": {
           "Weterynarz.Domain.dll": {}
@@ -6475,6 +6486,11 @@
       "sha512": "sha512-W6ZZ0/o7+3Qb77mRAQyLjPudHG3OMeeQ4p9yY13PUdJArmRCx2cLMm5F4tpIjJXxzHC0ew0oK7DMDGILMdfCnw==",
       "path": "windowsazure.storage/8.1.4",
       "hashPath": "windowsazure.storage.8.1.4.nupkg.sha512"
+    },
+    "Weterynarz.Basic/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Weterynarz.Domain/1.0.0": {
       "type": "project",

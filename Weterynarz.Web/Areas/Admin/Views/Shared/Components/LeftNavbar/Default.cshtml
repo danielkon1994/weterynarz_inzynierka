@@ -1,38 +1,24 @@
-﻿<div class="sidebar">
+﻿
+<div class="sidebar">
     <nav class="sidebar-nav">
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fa fa-home" aria-hidden="true"></i> Strona główna</a>
+                <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fa fa-home" aria-hidden="true"></i> @ResAdmin.leftNavbar_home</a>
             </li>
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book" aria-hidden="true"></i> Słowniki</a>
-                <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-buttons.html"><i class="icon-puzzle"></i> Buttons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-social-buttons.html"><i class="icon-puzzle"></i> Social Buttons</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-cards.html"><i class="icon-puzzle"></i> Cards</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-forms.html"><i class="icon-puzzle"></i> Forms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-modals.html"><i class="icon-puzzle"></i> Modals</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-switches.html"><i class="icon-puzzle"></i> Switches</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-tables.html"><i class="icon-puzzle"></i> Tables</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="components-tabs.html"><i class="icon-puzzle"></i> Tabs</a>
-                    </li>
-                </ul>
-            </li>            
+            @if(User.IsInRole(UserRoles.Admin))
+            {
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book" aria-hidden="true"></i> @ResAdmin.leftNavbar_dictionares</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("AnimalTypes", "Index", new { area = AreaNames.Admin})"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_animalTypes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("MedicalExaminationTypes", "Index", new { area = AreaNames.Admin})"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_medicalExaminationTypes</a>
+                        </li>
+                    </ul>
+                </li>  
+            }
         </ul>
     </nav>
     <button class="sidebar-minimizer brand-minimizer" type="button"></button>

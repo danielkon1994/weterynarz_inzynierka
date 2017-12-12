@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Weterynarz.Basic\Weterynarz.Basic.csproj" />
     <ProjectReference Include="..\Weterynarz.Domain\Weterynarz.Domain.csproj" />
     <ProjectReference Include="..\Weterynarz.Services\Weterynarz.Services.csproj" />
   </ItemGroup>

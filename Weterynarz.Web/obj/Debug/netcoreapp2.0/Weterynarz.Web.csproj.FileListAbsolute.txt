@@ -14,3 +14,5 @@ E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\Weterynarz.Web
 E:\git_projects\Weterynarz\Weterynarz.Web\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Services.dll
 E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Services.pdb
+E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Basic.dll
+E:\git_projects\Weterynarz\Weterynarz.Web\bin\Debug\netcoreapp2.0\Weterynarz.Basic.pdb

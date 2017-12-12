@@ -11,8 +11,8 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171204204423_AddEntities")]
-    partial class AddEntities
+    [Migration("20171212203843_AddFieldsToUser")]
+    partial class AddFieldsToUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -138,6 +138,8 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<int?>("AnimalTypeId");
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<DateTime>("BirthDate");
 
                     b.Property<DateTime>("CreationDate");
@@ -154,6 +156,8 @@ namespace Weterynarz.Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalTypeId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("OwnerId");
 
@@ -188,6 +192,10 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Address");
+
+                    b.Property<string>("City");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -196,9 +204,13 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("HouseNumber");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -214,10 +226,14 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("Surname");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("ZipCode");
 
                     b.HasKey("Id");
 
@@ -404,6 +420,10 @@ namespace Weterynarz.Domain.Migrations
                     b.HasOne("Weterynarz.Domain.EntitiesDb.AnimalType", "AnimalType")
                         .WithMany()
                         .HasForeignKey("AnimalTypeId");
+
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser")
+                        .WithMany("Animals")
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.Client", "Owner")
                         .WithMany("Animals")

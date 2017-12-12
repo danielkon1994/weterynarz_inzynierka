@@ -15,6 +15,9 @@ using Weterynarz.Web.Models.AccountViewModels;
 using Weterynarz.Web.Services;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Web.Controllers;
+using Weterynarz.Domain.ContextDb;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -63,7 +66,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
