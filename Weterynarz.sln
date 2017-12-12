@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Basic", "Weteryn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Services", "Weterynarz.Services\Weterynarz.Services.csproj", "{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weterynarz.Web", "Weterynarz.Web\Weterynarz.Web.csproj", "{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Web", "Weterynarz.Web\Weterynarz.Web.csproj", "{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
