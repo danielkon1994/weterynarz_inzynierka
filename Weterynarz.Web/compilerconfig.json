@@ -2,5 +2,13 @@
   {
     "outputFile": "wwwroot/css/custom.css",
     "inputFile": "wwwroot/css/custom.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/customAdmin.css",
+    "inputFile": "wwwroot/css/customAdmin.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/loginPage.css",
+    "inputFile": "wwwroot/css/loginPage.scss"
   }
 ]
