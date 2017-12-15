@@ -4,48 +4,55 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Weterynarz.Services.Services.Interfaces;
+using Weterynarz.Services.ViewModels.AnimalTypes;
+using ReflectionIT.Mvc.Paging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-    public class AnimalTypesController : Controller
+    public class AnimalTypesController : AdminBaseController
     {
-        // GET: AnimalTypes
-        public ActionResult Index()
+        private readonly IAnimalTypesService _animalTypesService;
+
+        public AnimalTypesController(IAnimalTypesService animalTypesService)
         {
-            return View();
+            this._animalTypesService = animalTypesService;
         }
 
-        // GET: AnimalTypes/Details/5
-        public ActionResult Details(int id)
+        // GET: AnimalTypes
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View();
+            var listElements = _animalTypesService.GetIndexViewModel().OrderBy(a => a.Name);
+            var model = await PagingList.CreateAsync(listElements, 20, page);
+
+            return View(model);
         }
 
         // GET: AnimalTypes/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
-            return View();
+            AnimalTypesManageViewModel model = new AnimalTypesManageViewModel();
+
+            return View(model);
         }
 
         // POST: AnimalTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(AnimalTypesManageViewModel model)
         {
-            try
+            if(ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                await _animalTypesService.CreateNewType(model);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(model);
         }
 
         // GET: AnimalTypes/Edit/5
-        public ActionResult Edit(int id)
+        public IActionResult Edit(int id)
         {
             return View();
         }
@@ -53,7 +60,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         // POST: AnimalTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -68,7 +75,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         // GET: AnimalTypes/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             return View();
         }
@@ -76,7 +83,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         // POST: AnimalTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Delete(int id, IFormCollection collection)
         {
             try
             {

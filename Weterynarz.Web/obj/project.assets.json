@@ -2928,6 +2928,26 @@
       "popper.js/1.12.3": {
         "type": "package"
       },
+      "ReflectionIT.Analyzer/1.1.0": {
+        "type": "package"
+      },
+      "ReflectionIT.Mvc.Paging/2.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.1",
+          "Microsoft.AspNetCore.Mvc.Razor": "2.0.1",
+          "Microsoft.EntityFrameworkCore.Relational": "2.0.1",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.0.0",
+          "Microsoft.Extensions.Options": "2.0.0",
+          "ReflectionIT.Analyzer": "1.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
+        }
+      },
       "Remotion.Linq/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -5108,6 +5128,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "Weterynarz.Basic": "1.0.0",
           "Weterynarz.Domain": "1.0.0"
         },
         "compile": {
@@ -8299,6 +8320,28 @@
         "content/Scripts/umd/popper.min.js.map",
         "popper.js.1.12.3.nupkg.sha512",
         "popper.js.nuspec"
+      ]
+    },
+    "ReflectionIT.Analyzer/1.1.0": {
+      "sha512": "uN9N6YnyMkp8vpBToJklhjFpmxLAO8ODZCOfyPRe74URRQsQUVY5VcMxdn1oJhEtjjBSRnZymfUcCeg+0F71bg==",
+      "type": "package",
+      "path": "reflectionit.analyzer/1.1.0",
+      "files": [
+        "analyzers/dotnet/cs/ReflectionITAnalyzer.dll",
+        "reflectionit.analyzer.1.1.0.nupkg.sha512",
+        "reflectionit.analyzer.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "ReflectionIT.Mvc.Paging/2.4.0": {
+      "sha512": "taRXjsB07XSaVNJoUp0ehmUZyEPFGFzI57s51n7rEXRY4VBgfgbypuGicA+q9c1rquoo500206OPDuOcGiUFjg==",
+      "type": "package",
+      "path": "reflectionit.mvc.paging/2.4.0",
+      "files": [
+        "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll",
+        "reflectionit.mvc.paging.2.4.0.nupkg.sha512",
+        "reflectionit.mvc.paging.nuspec"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -13423,6 +13466,7 @@
       "Microsoft.Extensions.Identity.Stores >= 2.0.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.1",
+      "ReflectionIT.Mvc.Paging >= 2.4.0",
       "Weterynarz.Basic >= 1.0.0",
       "Weterynarz.Domain >= 1.0.0",
       "Weterynarz.Services >= 1.0.0",
@@ -13509,6 +13553,10 @@
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "2.0.3"
+          },
+          "ReflectionIT.Mvc.Paging": {
+            "target": "Package",
+            "version": "2.4.0"
           }
         },
         "imports": [

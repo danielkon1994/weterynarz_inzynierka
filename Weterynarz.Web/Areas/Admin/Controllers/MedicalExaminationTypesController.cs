@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-    public class MedicalExaminationTypesController : Controller
+    public class MedicalExaminationTypesController : AdminBaseController
     {
         // GET: MedicalExaminationTypes
         public ActionResult Index()

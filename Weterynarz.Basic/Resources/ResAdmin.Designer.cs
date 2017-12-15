@@ -61,6 +61,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typy zwierząt.
+        /// </summary>
+        public static string animalTypesIndex_listTypes {
+            get {
+                return ResourceManager.GetString("animalTypesIndex_listTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj.
+        /// </summary>
+        public static string button_add {
+            get {
+                return ResourceManager.GetString("button_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Gatunki zwierząt.
         /// </summary>
         public static string leftNavbar_animalTypes {
@@ -120,6 +138,33 @@ namespace Weterynarz.Basic.Resources {
         public static string loginViewModel_userName {
             get {
                 return ResourceManager.GetString("loginViewModel_userName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opis.
+        /// </summary>
+        public static string manageViewModel_description {
+            get {
+                return ResourceManager.GetString("manageViewModel_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa.
+        /// </summary>
+        public static string manageViewModel_name {
+            get {
+                return ResourceManager.GetString("manageViewModel_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opcje.
+        /// </summary>
+        public static string text_options {
+            get {
+                return ResourceManager.GetString("text_options", resourceCulture);
             }
         }
         

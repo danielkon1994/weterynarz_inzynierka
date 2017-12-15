@@ -11,7 +11,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        private ApplicationDbContext _db;
+        protected ApplicationDbContext _db;
         
         public BaseRepository(ApplicationDbContext db)
         {

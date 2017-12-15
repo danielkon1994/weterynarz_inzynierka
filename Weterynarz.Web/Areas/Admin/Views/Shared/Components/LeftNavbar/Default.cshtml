@@ -11,15 +11,15 @@
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book" aria-hidden="true"></i> @ResAdmin.leftNavbar_dictionares</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("AnimalTypes", "Index", new { area = AreaNames.Admin})"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_animalTypes</a>
+                            <a class="nav-link" asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_animalTypes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="@Url.Action("MedicalExaminationTypes", "Index", new { area = AreaNames.Admin})"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_medicalExaminationTypes</a>
+                            <a class="nav-link" asp-controller="MedicalExaminationTypes" asp-action="Index" asp-area="@AreaNames.Admin"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_medicalExaminationTypes</a>
                         </li>
                     </ul>
                 </li>  
             }
         </ul>
     </nav>
-    <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    @*<button class="sidebar-minimizer brand-minimizer" type="button"></button>*@
 </div>

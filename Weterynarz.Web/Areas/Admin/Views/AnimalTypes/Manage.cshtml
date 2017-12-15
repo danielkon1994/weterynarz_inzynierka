@@ -1,0 +1,52 @@
+﻿@model AnimalTypesManageViewModel
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form asp-controller="AnimalTypes" asp-action="Create" method="post">
+                    <div class="card-header">
+                        <strong>Dodaj typ zwierzęcia</strong>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Wprowadź nazwę">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Description"></label>
+                                    <textarea rows="9" class="form-control" asp-for="Description" placeholder="Dodatkowy opis"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
+                        <a asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

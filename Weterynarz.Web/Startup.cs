@@ -18,6 +18,7 @@ using Weterynarz.Services.Services.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Weterynarz.Web.Extensions;
+using ReflectionIT.Mvc.Paging;
 
 namespace Weterynarz.Web
 {
@@ -35,6 +36,8 @@ namespace Weterynarz.Web
         {
             services.AddMvc();
 
+            services.AddPaging();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
@@ -44,9 +47,11 @@ namespace Weterynarz.Web
 
             // Add application repositories
             services.AddScoped<IAnimalRepository, AnimalRepository>();
+            services.AddScoped<IAnimalTypesRepository, AnimalTypesRepository>();
 
             // Add application services.
             services.AddScoped<IAnimalService, AnimalService>();
+            services.AddScoped<IAnimalTypesService, AnimalTypesService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             // redirect to another login page
@@ -78,6 +83,7 @@ namespace Weterynarz.Web
 
             app.UseAuthentication();
 
+            #region Routes
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -85,9 +91,16 @@ namespace Weterynarz.Web
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
+                    name: "visit",
+                    template: "umow_wizyte",
+                    defaults: new {controller = "Visit", action = "MakeVisit"}
+                );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            #endregion
         }
     }
 }
