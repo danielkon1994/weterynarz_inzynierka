@@ -45,6 +45,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             {
                 await _animalTypesService.CreateNewType(model);
 
+                base.NotifyMessage("Jeeessttt", "Typ został dodany", Models.NotifyMessage.MessageStatus.success);
                 return RedirectToAction("Index");
             }
 

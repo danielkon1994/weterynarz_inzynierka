@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/lib/components-font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/css/customAdmin.css" />
+        <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.css" asp-append-version="true">
+
         @* Template style *@
         <link rel="stylesheet" href="~/css/templateStyle/style.css" />
     </environment>
@@ -19,6 +21,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/lib/components-font-awesome/css/font-awesome.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/customAdmin.min.css" asp-append-version="true" />        
+        <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true">
 
         @* Template style *@
         <link rel="stylesheet" href="~/css/templateStyle/style.min.css" asp-append-version="true" />        
@@ -52,8 +55,9 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/popper.js/dist/umd/popper.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/lib/chart.js/dist/Chart.js"></script>
-        <script src="~/js/templateScripts/app.js"></script>
+        <script src="~/lib/sweetalert2/dist/sweetalert2.all.js"></script>
+        @await Html.PartialAsync("_NotifyMessage")
+        <script src="~/js/templateScripts/app.js"></script>       
         <script src="~/js/custom.js"></script>
     </environment>
 
@@ -72,6 +76,8 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/lib/chart.js/dist/Chart.min.js" asp-append-version="true"></script>
+        <script src="~/lib/sweetalert2/dist/sweetalert2.all.js" asp-append-version="true"></script>
+        @await Html.PartialAsync("_NotifyMessage")
         <script src="~/js/templateScripts/app.js" asp-append-version="true"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>

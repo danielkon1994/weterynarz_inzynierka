@@ -3,6 +3,14 @@
     ViewData["Title"] = "Manage";
 }
 
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin">Typy zwierząt</a></li>
+        <li class="breadcrumb-item active">Dodaj</li>
+    </ol>
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -34,6 +42,18 @@
                                 <div class="form-group">
                                     <label asp-for="Description"></label>
                                     <textarea rows="9" class="form-control" asp-for="Description" placeholder="Dodatkowy opis"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
+                                         Czy aktywny?
+                                    </label>
                                 </div>
                             </div>
                         </div>
