@@ -4,89 +4,123 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Weterynarz.Services.Services.Interfaces;
+using ReflectionIT.Mvc.Paging;
+using Weterynarz.Services.ViewModels.MedicalExaminationTypes;
+using Weterynarz.Web.Models.NotifyMessage;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class MedicalExaminationTypesController : AdminBaseController
     {
-        // GET: MedicalExaminationTypes
-        public ActionResult Index()
+        private readonly IMedicalExaminationTypesService _medicalExaminationTypesService;
+
+        public MedicalExaminationTypesController(IMedicalExaminationTypesService medicalExaminationTypesService)
         {
-            return View();
+            _medicalExaminationTypesService = medicalExaminationTypesService;
         }
 
-        // GET: MedicalExaminationTypes/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View();
+            var listElements = _medicalExaminationTypesService.GetIndexViewModel().OrderBy(a => a.Name);
+            var model = await PagingList.CreateAsync(listElements, 20, page);
+
+            return View(model);
         }
 
-        // GET: MedicalExaminationTypes/Create
-        public ActionResult Create()
+        // GET: AnimalTypes/Create
+        public IActionResult Create()
         {
-            return View();
+            MedicalExaminationTypesManageViewModel model = new MedicalExaminationTypesManageViewModel();
+
+            return View(model);
         }
 
-        // POST: MedicalExaminationTypes/Create
+        // POST: AnimalTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(MedicalExaminationTypesManageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _medicalExaminationTypesService.CreateNewType(model);
+
+                Message message = new Message
+                {
+                    Text = "Jeeessttt",
+                    OptionalText = "Typ został dodany",
+                    MessageStatus = Models.NotifyMessage.MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        // GET: AnimalTypes/Edit/5
+        public IActionResult Edit(int id)
+        {
+            MedicalExaminationTypesManageViewModel model = _medicalExaminationTypesService.GetEditViewModel(id);
+            if(model == null)
+            {
+                base.NotifyMessage("Nie znaleziono typu z takim identyfikatorem", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
+        // POST: AnimalTypes/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(MedicalExaminationTypesManageViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                bool result = await _medicalExaminationTypesService.EditType(model);
 
-                return RedirectToAction(nameof(Index));
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie zapisano typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
             }
         }
 
-        // GET: MedicalExaminationTypes/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: MedicalExaminationTypes/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: MedicalExaminationTypes/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: MedicalExaminationTypes/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        // GET: AnimalTypes/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                bool result = await _medicalExaminationTypesService.DeleteType(id);
 
-                return RedirectToAction(nameof(Index));
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie usunięto typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
             }
         }
     }

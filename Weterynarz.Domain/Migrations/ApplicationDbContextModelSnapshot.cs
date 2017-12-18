@@ -195,12 +195,18 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<bool>("Active");
+
                     b.Property<string>("Address");
 
                     b.Property<string>("City");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("Deleted");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -212,6 +218,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<DateTime?>("ModificationDate");
 
                     b.Property<string>("Name");
 
@@ -338,7 +346,7 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Deleted");
 
-                    b.Property<DateTime>("Description");
+                    b.Property<string>("Description");
 
                     b.Property<DateTime?>("ModificationDate");
 

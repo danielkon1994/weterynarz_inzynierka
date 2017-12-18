@@ -10,6 +10,6 @@ namespace Weterynarz.Domain.EntitiesDb
         [Required]
         public string Name { get; set; }
 
-        public DateTime Description { get; set; }
+        public string Description { get; set; }
     }
 }

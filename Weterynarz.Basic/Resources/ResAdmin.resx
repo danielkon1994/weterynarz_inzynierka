@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="accountsListViewModel_address" xml:space="preserve">
+    <value>Adres</value>
+  </data>
+  <data name="accountsListViewModel_city" xml:space="preserve">
+    <value>Miasto</value>
+  </data>
+  <data name="accountsListViewModel_houseNumber" xml:space="preserve">
+    <value>Numer domu</value>
+  </data>
+  <data name="accountsListViewModel_list" xml:space="preserve">
+    <value>Lista użytkowników</value>
+  </data>
+  <data name="accountsListViewModel_name" xml:space="preserve">
+    <value>Imię</value>
+  </data>
+  <data name="accountsListViewModel_surname" xml:space="preserve">
+    <value>Nazwisko</value>
+  </data>
+  <data name="accountsListViewModel_userName" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
+  </data>
+  <data name="accountsListViewModel_zipCode" xml:space="preserve">
+    <value>Kod pocztowy</value>
+  </data>
   <data name="animalTypesCreateView_headerForm" xml:space="preserve">
     <value>Dodaj typ zwierzęcia</value>
   </data>
@@ -141,6 +165,12 @@
   <data name="leftNavbar_medicalExaminationTypes" xml:space="preserve">
     <value>Typy badań</value>
   </data>
+  <data name="leftNavbar_users" xml:space="preserve">
+    <value>Użytkownicy systemu</value>
+  </data>
+  <data name="list_emptyRecords" xml:space="preserve">
+    <value>Brak elementów</value>
+  </data>
   <data name="loginViewModel_password" xml:space="preserve">
     <value>Hasło</value>
   </data>
@@ -155,6 +185,15 @@
   </data>
   <data name="manageViewModel_name" xml:space="preserve">
     <value>Nazwa</value>
+  </data>
+  <data name="medicalExaminationTypesCreateView_headerForm" xml:space="preserve">
+    <value>Dodaj typ badania</value>
+  </data>
+  <data name="medicalExaminationTypesEditView_headerForm" xml:space="preserve">
+    <value>Edytuj typ badania</value>
+  </data>
+  <data name="medicalExaminationTypesIndex_listTypes" xml:space="preserve">
+    <value>Typy badań</value>
   </data>
   <data name="text_options" xml:space="preserve">
     <value>Opcje</value>

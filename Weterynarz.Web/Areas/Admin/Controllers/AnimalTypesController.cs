@@ -64,6 +64,11 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             AnimalTypesManageViewModel model = _animalTypesService.GetEditViewModel(id);
+            if (model == null)
+            {
+                base.NotifyMessage("Nie znaleziono typu z takim identyfikatorem", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
 
             return View(model);
         }

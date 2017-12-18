@@ -61,6 +61,78 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
+        /// </summary>
+        public static string accountsListViewModel_address {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miasto.
+        /// </summary>
+        public static string accountsListViewModel_city {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Numer domu.
+        /// </summary>
+        public static string accountsListViewModel_houseNumber {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_houseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista użytkowników.
+        /// </summary>
+        public static string accountsListViewModel_list {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imię.
+        /// </summary>
+        public static string accountsListViewModel_name {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwisko.
+        /// </summary>
+        public static string accountsListViewModel_surname {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa użytkownika.
+        /// </summary>
+        public static string accountsListViewModel_userName {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_userName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Kod pocztowy.
+        /// </summary>
+        public static string accountsListViewModel_zipCode {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_zipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj typ zwierzęcia.
         /// </summary>
         public static string animalTypesCreateView_headerForm {
@@ -133,6 +205,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Użytkownicy systemu.
+        /// </summary>
+        public static string leftNavbar_users {
+            get {
+                return ResourceManager.GetString("leftNavbar_users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Brak elementów.
+        /// </summary>
+        public static string list_emptyRecords {
+            get {
+                return ResourceManager.GetString("list_emptyRecords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hasło.
         /// </summary>
         public static string loginViewModel_password {
@@ -174,6 +264,33 @@ namespace Weterynarz.Basic.Resources {
         public static string manageViewModel_name {
             get {
                 return ResourceManager.GetString("manageViewModel_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj typ badania.
+        /// </summary>
+        public static string medicalExaminationTypesCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("medicalExaminationTypesCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj typ badania.
+        /// </summary>
+        public static string medicalExaminationTypesEditView_headerForm {
+            get {
+                return ResourceManager.GetString("medicalExaminationTypesEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typy badań.
+        /// </summary>
+        public static string medicalExaminationTypesIndex_listTypes {
+            get {
+                return ResourceManager.GetString("medicalExaminationTypesIndex_listTypes", resourceCulture);
             }
         }
         

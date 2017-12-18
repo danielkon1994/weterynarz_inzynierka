@@ -1,0 +1,80 @@
+﻿@namespace Weterynarz.Services.ViewModels.MedicalExaminationTypes
+@model PagingList<MedicalExaminationTypesIndexViewModel>
+@{
+    ViewData["Title"] = "Typy zwierząt";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item active" >Typy badań</li>
+    </ol>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    @ResAdmin.text_options
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-warning" asp-controller="MedicalExaminationTypes" asp-action="Create">@ResAdmin.button_add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> @ResAdmin.medicalExaminationTypesIndex_listTypes
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Opis</th>
+                                <th>Data utworzenia</th>
+                                <th>Aktywny</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
+                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
+                                        <td class="text-right">
+                                            <a href="@Url.Action("Edit", "MedicalExaminationTypes", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+                                            <a href="@Url.Action("Delete", "MedicalExaminationTypes", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr class="text-center">
+                                    <td colspan="5">@ResAdmin.list_emptyRecords</td>
+                                </tr>
+                            }                            
+                        </tbody>
+                    </table>
+                    <nav aria-label="Suppliers navigation example">
+                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+}

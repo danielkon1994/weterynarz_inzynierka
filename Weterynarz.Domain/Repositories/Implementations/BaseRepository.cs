@@ -34,14 +34,19 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return this.WhereActive().OrderBy(i => i.Id);
         }
 
+        public virtual IQueryable<T> GetAllNotDeleted()
+        {
+            return this.WhereNotDeleted().OrderBy(i => i.Id);
+        }
+
         public virtual IQueryable<T> GetAll()
         {
-            return _db.Set<T>().AsQueryable().Where(i => !i.Deleted).OrderBy(i => i.Id);
+            return _db.Set<T>().AsQueryable().OrderBy(i => i.Id);
         }
 
         public virtual T GetById(int id)
         {
-            return this.WhereActive().FirstOrDefault(i => i.Id == id);
+            return this.WhereNotDeleted().FirstOrDefault(i => i.Id == id);
         }
 
         public virtual async Task<int> InsertAsync(T item)
@@ -60,6 +65,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IQueryable<T> WhereActive()
         {
             return _db.Set<T>().AsQueryable().Where(i => i.Active && !i.Deleted);
+        }
+
+        private IQueryable<T> WhereNotDeleted()
+        {
+            return _db.Set<T>().AsQueryable().Where(i => !i.Deleted);
         }
     }
 }

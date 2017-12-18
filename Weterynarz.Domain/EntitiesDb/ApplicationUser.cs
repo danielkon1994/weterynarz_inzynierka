@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -24,5 +25,12 @@ namespace Weterynarz.Domain.EntitiesDb
         public string HouseNumber { get; set; }
         public string City { get; set; }
         public string ZipCode { get; set; }
+
+        public DateTime CreationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
+
+        public bool Active { get; set; }
+
+        public bool Deleted { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Weterynarz.Services.Services.Implementations
 
         public IQueryable<AnimalTypesIndexViewModel> GetIndexViewModel()
         {
-            return _animalTypesRepository.GetAll().Select(a => new AnimalTypesIndexViewModel
+            return _animalTypesRepository.GetAllNotDeleted().Select(a => new AnimalTypesIndexViewModel
             {
                 Id = a.Id,
                 Active = a.Active,
@@ -50,7 +50,8 @@ namespace Weterynarz.Services.Services.Implementations
             var animalType = _animalTypesRepository.GetById(id);
             if (animalType != null)
             {
-                model = new AnimalTypesManageViewModel {
+                model = new AnimalTypesManageViewModel
+                {
                     Active = animalType.Active,
                     Name = animalType.Name,
                     Id = animalType.Id,

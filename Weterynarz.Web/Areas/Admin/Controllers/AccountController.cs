@@ -18,32 +18,44 @@ using Weterynarz.Web.Controllers;
 using Weterynarz.Domain.ContextDb;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Weterynarz.Basic.Const;
+using Weterynarz.Services.Services.Interfaces;
+using ReflectionIT.Mvc.Paging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
-{
-    
-    [Route("admin/[controller]/[action]")]
+{   
     public class AccountController : AdminBaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly IAccountsService _accountsService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IAccountsService accountsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _accountsService = accountsService;
         }
 
         [TempData]
         public string ErrorMessage { get; set; }
+
+        [HttpGet]
+        public async Task<IActionResult> List(int page = 1)
+        {
+            var listUsers = _accountsService.GetListUsersViewModel().OrderBy(a => a.Name);
+            var model = await PagingList.CreateAsync(listUsers, 20, page);
+
+            return View(model);
+        }
 
         [HttpGet]
         [AllowAnonymous]

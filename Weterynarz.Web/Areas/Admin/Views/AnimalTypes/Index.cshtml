@@ -1,4 +1,5 @@
-﻿@model PagingList<AnimalTypesIndexViewModel>
+﻿@namespace Weterynarz.Services.ViewModels.AnimalTypes
+@model PagingList<AnimalTypesIndexViewModel>
 @{
     ViewData["Title"] = "Typy zwierząt";
 }
@@ -41,19 +42,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @if (Model.Any())
                             {
-                                <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Description</td>
-                                    <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
-                                    <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
-                                    <td class="text-right">
-                                        <a href="@Url.Action("Edit", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
-                                        <a href="@Url.Action("Delete", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
+                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
+                                        <td class="text-right">
+                                            <a href="@Url.Action("Edit", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+                                            <a href="@Url.Action("Delete", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                }
                             }
+                            else
+                            {
+                                <tr class="text-center">
+                                    <td colspan="5">@ResAdmin.list_emptyRecords</td>
+                                </tr>
+                            } 
                         </tbody>
                     </table>
                     <nav aria-label="Suppliers navigation example">
