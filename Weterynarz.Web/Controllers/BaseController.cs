@@ -27,5 +27,15 @@ namespace Weterynarz.Web.Controllers
             };
             TempData[TempDataKey.Notification] = JsonConvert.SerializeObject(tempMessage);
         }
+
+        public void NotifyMessage(Message message)
+        {
+            TempData[TempDataKey.Notification] = JsonConvert.SerializeObject(message);
+        }
+
+        public void NotifyMessageException(Exception ex)
+        {
+            TempData[TempDataKey.Notification] = JsonConvert.SerializeObject(ex);
+        }
     }
 }

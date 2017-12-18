@@ -47,9 +47,10 @@
                                     <td>@item.Name</td>
                                     <td>@item.Description</td>
                                     <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
-                                    <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-error'>Nieaktywny</span>"))</td>
-                                    <td>
-                                        <a href="" class="btn btn-dark">Edytuj</a>
+                                    <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
+                                    <td class="text-right">
+                                        <a href="@Url.Action("Edit", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+                                        <a href="@Url.Action("Delete", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
                                     </td>
                                 </tr>
                             }
@@ -64,3 +65,17 @@
     </div>
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+        //$(document).ready(function () {
+
+        //    $('#btnDeleteType').on('click', function (e) {
+        //        e.preventDefault();
+
+        //        var $row = $(this).closest('tr');
+
+        //    });
+
+        //});
+    </script>
+}

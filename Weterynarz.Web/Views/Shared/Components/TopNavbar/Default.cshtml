@@ -1,4 +1,8 @@
-﻿<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+﻿@using Weterynarz.Domain.EntitiesDb
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" asp-controller="Home" asp-action="Index">WetWebsite</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +26,9 @@
                 <li class="nav-item awarded">
                     <a asp-controller="Visit" asp-action="MakeVisit" class="nav-link js-scroll-trigger"><img src="~/images/24hoursservicedark.svg" /> Umów wizytę</a>
                 </li>
+                @Html.Partial("_LoginPartial")
             </ul>
+            
         </div>
     </div>
 </nav> 

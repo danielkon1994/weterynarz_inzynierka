@@ -14,6 +14,8 @@ namespace Weterynarz.Domain.EntitiesDb
 
         public bool Active { get; set; }
 
+        public bool Deleted { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public DateTime? ModificationDate { get; set; }

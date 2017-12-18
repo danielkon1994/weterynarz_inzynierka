@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="animalTypesCreateView_headerForm" xml:space="preserve">
+    <value>Dodaj typ zwierzęcia</value>
+  </data>
+  <data name="animalTypesEditView_headerForm" xml:space="preserve">
+    <value>Edytuj typ zwierzęcia</value>
+  </data>
   <data name="animalTypesIndex_listTypes" xml:space="preserve">
     <value>Typy zwierząt</value>
   </data>

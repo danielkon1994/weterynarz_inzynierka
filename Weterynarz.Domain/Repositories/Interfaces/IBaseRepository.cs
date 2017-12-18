@@ -11,6 +11,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     {
         T GetById(int id);
         IQueryable<T> GetAllActive();
+        IQueryable<T> GetAll();
         Task<int> InsertAsync(T item);
         Task SoftDeleteAsync(T item);
         void Delete(T item);

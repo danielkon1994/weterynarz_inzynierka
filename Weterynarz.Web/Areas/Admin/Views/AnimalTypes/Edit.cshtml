@@ -17,7 +17,7 @@
             <div class="card">
                 <form asp-controller="AnimalTypes" asp-action="Create" method="post">
                     <div class="card-header">
-                        <strong>@ResAdmin.animalTypesCreateView_headerForm</strong>
+                        <strong>@ResAdmin.animalTypesEditView_headerForm</strong>
                     </div>
                     <div class="card-body">
 
@@ -26,6 +26,8 @@
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             </div>
                         </div>
+
+                        @Html.HiddenFor(m => m.Id)
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -52,7 +54,7 @@
                                 <div class="form-check">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
-                                         Czy aktywny?
+                                        Czy aktywny?
                                     </label>
                                 </div>
                             </div>
@@ -61,7 +63,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Zapisz</button>
                         <a asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
                     </div>
                 </form>

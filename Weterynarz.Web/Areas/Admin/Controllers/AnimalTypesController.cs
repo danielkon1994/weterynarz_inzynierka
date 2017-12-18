@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Services.ViewModels.AnimalTypes;
 using ReflectionIT.Mvc.Paging;
+using Weterynarz.Web.Models.NotifyMessage;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -45,7 +46,14 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             {
                 await _animalTypesService.CreateNewType(model);
 
-                base.NotifyMessage("Jeeessttt", "Typ został dodany", Models.NotifyMessage.MessageStatus.success);
+                Message message = new Message
+                {
+                    OptionalText = "Jeeessttt",
+                    Text = "Typ został dodany",
+                    MessageStatus = Models.NotifyMessage.MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
                 return RedirectToAction("Index");
             }
 
@@ -55,46 +63,60 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         // GET: AnimalTypes/Edit/5
         public IActionResult Edit(int id)
         {
-            return View();
+            AnimalTypesManageViewModel model = _animalTypesService.GetEditViewModel(id);
+
+            return View(model);
         }
 
         // POST: AnimalTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(AnimalTypesManageViewModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                bool result = await _animalTypesService.EditType(model);
 
-                return RedirectToAction(nameof(Index));
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie zapisano typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
             }
         }
 
         // GET: AnimalTypes/Delete/5
-        public IActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: AnimalTypes/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id, IFormCollection collection)
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                // TODO: Add delete logic here
+                bool result = await _animalTypesService.DeleteType(id);
 
-                return RedirectToAction(nameof(Index));
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie usunięto typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch(Exception)
             {
-                return View();
+                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
             }
         }
     }

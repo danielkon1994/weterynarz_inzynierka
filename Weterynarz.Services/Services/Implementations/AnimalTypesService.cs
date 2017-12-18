@@ -21,7 +21,7 @@ namespace Weterynarz.Services.Services.Implementations
 
         public IQueryable<AnimalTypesIndexViewModel> GetIndexViewModel()
         {
-            return _animalTypesRepository.GetAllActive().Select(a => new AnimalTypesIndexViewModel
+            return _animalTypesRepository.GetAll().Select(a => new AnimalTypesIndexViewModel
             {
                 Id = a.Id,
                 Active = a.Active,
@@ -42,6 +42,62 @@ namespace Weterynarz.Services.Services.Implementations
             };
 
             await _animalTypesRepository.InsertAsync(type);
+        }
+
+        public AnimalTypesManageViewModel GetEditViewModel(int id)
+        {
+            AnimalTypesManageViewModel model;
+            var animalType = _animalTypesRepository.GetById(id);
+            if (animalType != null)
+            {
+                model = new AnimalTypesManageViewModel {
+                    Active = animalType.Active,
+                    Name = animalType.Name,
+                    Id = animalType.Id,
+                    Description = animalType.Description,
+                };
+
+                return model;
+            }
+
+            return null;
+        }
+
+        public async Task<bool> EditType(AnimalTypesManageViewModel model)
+        {
+            var animalType = _animalTypesRepository.GetById(model.Id);
+            if (animalType != null)
+            {
+                animalType.Active = model.Active;
+                animalType.Description = model.Description;
+                animalType.Name = model.Name;
+                animalType.ModificationDate = DateTime.Now;
+
+                await _animalTypesRepository.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> DeleteType(int id)
+        {
+            var animalType = _animalTypesRepository.GetById(id);
+            if(animalType != null)
+            { 
+                try
+                {
+                    await _animalTypesRepository.SoftDeleteAsync(animalType);
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    return false;
+                }                
+            }
+
+            return false;
         }
     }
 }

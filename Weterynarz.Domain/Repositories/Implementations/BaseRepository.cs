@@ -20,7 +20,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public virtual async Task SoftDeleteAsync(T item)
         {
-            item.Active = false;
+            item.Deleted = true;
             await this.SaveChangesAsync();
         }
 
@@ -32,6 +32,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public virtual IQueryable<T> GetAllActive()
         {
             return this.WhereActive().OrderBy(i => i.Id);
+        }
+
+        public virtual IQueryable<T> GetAll()
+        {
+            return _db.Set<T>().AsQueryable().Where(i => !i.Deleted).OrderBy(i => i.Id);
         }
 
         public virtual T GetById(int id)
@@ -54,7 +59,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         private IQueryable<T> WhereActive()
         {
-            return _db.Set<T>().AsQueryable().Where(i => i.Active);
+            return _db.Set<T>().AsQueryable().Where(i => i.Active && !i.Deleted);
         }
     }
 }

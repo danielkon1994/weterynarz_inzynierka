@@ -61,6 +61,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj typ zwierzęcia.
+        /// </summary>
+        public static string animalTypesCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("animalTypesCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj typ zwierzęcia.
+        /// </summary>
+        public static string animalTypesEditView_headerForm {
+            get {
+                return ResourceManager.GetString("animalTypesEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typy zwierząt.
         /// </summary>
         public static string animalTypesIndex_listTypes {
