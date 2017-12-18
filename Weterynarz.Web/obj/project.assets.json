@@ -13479,6 +13479,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "E:\\git_projects\\Weterynarz\\Weterynarz.Web\\Weterynarz.Web.csproj",
       "projectName": "Weterynarz.Web",
@@ -13524,25 +13527,12 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "target": "Package",
-            "version": "2.0",
-            "autoReferenced": true
-          },
-          "bootstrap.sass": {
-            "target": "Package",
-            "version": "4.0.0-beta2"
-          },
-          "Microsoft.AspNetCore.All": {
-            "target": "Package",
-            "version": "2.0.3"
-          },
-          "Microsoft.EntityFrameworkCore.Tools": {
-            "suppressParent": "All",
+          "Microsoft.Extensions.Identity.Stores": {
             "target": "Package",
             "version": "2.0.1"
           },
-          "Microsoft.Extensions.Identity.Stores": {
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "2.0.1"
           },
@@ -13550,6 +13540,19 @@
             "suppressParent": "All",
             "target": "Package",
             "version": "2.0.1"
+          },
+          "bootstrap.sass": {
+            "target": "Package",
+            "version": "4.0.0-beta2"
+          },
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "2.0",
+            "autoReferenced": true
+          },
+          "Microsoft.AspNetCore.All": {
+            "target": "Package",
+            "version": "2.0.3"
           },
           "ReflectionIT.Mvc.Paging": {
             "target": "Package",
@@ -13569,7 +13572,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'EntityFramework 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „EntityFramework 6.2.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -13579,7 +13582,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.1' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.Core 2.2.1” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -13589,7 +13592,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.1' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.EntityFramework 2.2.1” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"

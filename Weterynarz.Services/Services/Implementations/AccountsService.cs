@@ -36,5 +36,26 @@ namespace Weterynarz.Services.Services.Implementations
                 UserName = a.UserName
             });
         }
+
+        public AccountsManageViewModel GetEditViewModel(int id)
+        {
+            AccountsManageViewModel model;
+            var account = _accountsRepository.GetById(id);
+            if (account != null)
+            {
+                model = new AccountsManageViewModel
+                {
+                    Active = account.Active,
+                    Name = account.Name,
+                    Id = account.Id,
+                    Surname = account.Surname,
+
+                };
+
+                return model;
+            }
+
+            return null;
+        }
     }
 }

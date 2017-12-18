@@ -7644,6 +7644,9 @@
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
       "projectUniqueName": "E:\\git_projects\\Weterynarz\\Weterynarz.Domain\\Weterynarz.Domain.csproj",
       "projectName": "Weterynarz.Domain",
@@ -7679,15 +7682,27 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.Extensions.Identity.Stores": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
+          "Microsoft.EntityFrameworkCore.Tools": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
+          "Microsoft.EntityFrameworkCore.Design": {
+            "target": "Package",
+            "version": "2.0.1"
+          },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
             "version": "2.0.3",
             "autoReferenced": true
-          },
-          "EntityFramework": {
-            "target": "Package",
-            "version": "6.2.0"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -7697,21 +7712,9 @@
             "target": "Package",
             "version": "2.2.1"
           },
-          "Microsoft.EntityFrameworkCore.Design": {
+          "EntityFramework": {
             "target": "Package",
-            "version": "2.0.1"
-          },
-          "Microsoft.EntityFrameworkCore.Tools": {
-            "target": "Package",
-            "version": "2.0.1"
-          },
-          "Microsoft.Extensions.Identity.Stores": {
-            "target": "Package",
-            "version": "2.0.1"
-          },
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-            "target": "Package",
-            "version": "2.0.1"
+            "version": "6.2.0"
           }
         },
         "imports": [
@@ -7727,7 +7730,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'EntityFramework 6.2.0' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „EntityFramework 6.2.0” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "EntityFramework",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -7737,7 +7740,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.1' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.Core 2.2.1” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"
@@ -7747,7 +7750,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.1' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Microsoft.AspNet.Identity.EntityFramework 2.2.1” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1” zamiast platformy docelowej projektu „.NETCoreApp,Version=v2.0”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         ".NETCoreApp,Version=v2.0"

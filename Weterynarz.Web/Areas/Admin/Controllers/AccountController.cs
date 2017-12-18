@@ -20,6 +20,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Weterynarz.Basic.Const;
 using Weterynarz.Services.Services.Interfaces;
 using ReflectionIT.Mvc.Paging;
+using Weterynarz.Services.ViewModels.Accounts;
+using Weterynarz.Web.Models.NotifyMessage;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {   
@@ -55,6 +57,82 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             var model = await PagingList.CreateAsync(listUsers, 20, page);
 
             return View(model);
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            AccountsManageViewModel model;
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                base.NotifyMessage("Nie znaleziono użytkownika z takim identyfikatorem", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
+
+            model = new AccountsManageViewModel
+            {
+                Active = user.Active,
+                Address = user.Address,
+                City = user.City,
+                UserName = user.UserName,
+                HouseNumber = user.HouseNumber,
+                Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
+                ZipCode = user.ZipCode
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(AccountsManageViewModel model)
+        {
+            try
+            {
+                bool result = await _animalTypesService.EditType(model);
+
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie zapisano typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                bool result = await _animalTypesService.DeleteType(id);
+
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie usunięto typ",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]

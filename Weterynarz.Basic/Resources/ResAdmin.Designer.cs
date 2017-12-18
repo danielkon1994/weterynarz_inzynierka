@@ -61,74 +61,74 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
-        /// </summary>
-        public static string accountsListViewModel_address {
-            get {
-                return ResourceManager.GetString("accountsListViewModel_address", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miasto.
         /// </summary>
-        public static string accountsListViewModel_city {
+        public static string accountsManageViewModel_city {
             get {
-                return ResourceManager.GetString("accountsListViewModel_city", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_city", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Numer domu.
         /// </summary>
-        public static string accountsListViewModel_houseNumber {
+        public static string accountsManageViewModel_houseNumber {
             get {
-                return ResourceManager.GetString("accountsListViewModel_houseNumber", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_houseNumber", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista użytkowników.
         /// </summary>
-        public static string accountsListViewModel_list {
+        public static string accountsManageViewModel_list {
             get {
-                return ResourceManager.GetString("accountsListViewModel_list", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_list", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imię.
         /// </summary>
-        public static string accountsListViewModel_name {
+        public static string accountsManageViewModel_name {
             get {
-                return ResourceManager.GetString("accountsListViewModel_name", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_name", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwisko.
         /// </summary>
-        public static string accountsListViewModel_surname {
+        public static string accountsManageViewModel_surname {
             get {
-                return ResourceManager.GetString("accountsListViewModel_surname", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_surname", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa użytkownika.
         /// </summary>
-        public static string accountsListViewModel_userName {
+        public static string accountsManageViewModel_userName {
             get {
-                return ResourceManager.GetString("accountsListViewModel_userName", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_userName", resourceCulture);
             }
         }
         
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Kod pocztowy.
         /// </summary>
-        public static string accountsListViewModel_zipCode {
+        public static string accountsManageViewModel_zipCode {
             get {
-                return ResourceManager.GetString("accountsListViewModel_zipCode", resourceCulture);
+                return ResourceManager.GetString("accountsManageViewModel_zipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
+        /// </summary>
+        public static string accountsManageViewModell_address {
+            get {
+                return ResourceManager.GetString("accountsManageViewModell_address", resourceCulture);
             }
         }
         

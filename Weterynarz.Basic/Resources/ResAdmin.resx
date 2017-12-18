@@ -117,28 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="accountsListViewModel_address" xml:space="preserve">
+  <data name="accountsManageViewModell_address" xml:space="preserve">
     <value>Adres</value>
   </data>
-  <data name="accountsListViewModel_city" xml:space="preserve">
+  <data name="accountsManageViewModel_city" xml:space="preserve">
     <value>Miasto</value>
   </data>
-  <data name="accountsListViewModel_houseNumber" xml:space="preserve">
+  <data name="accountsManageViewModel_houseNumber" xml:space="preserve">
     <value>Numer domu</value>
   </data>
-  <data name="accountsListViewModel_list" xml:space="preserve">
+  <data name="accountsManageViewModel_list" xml:space="preserve">
     <value>Lista użytkowników</value>
   </data>
-  <data name="accountsListViewModel_name" xml:space="preserve">
+  <data name="accountsManageViewModel_name" xml:space="preserve">
     <value>Imię</value>
   </data>
-  <data name="accountsListViewModel_surname" xml:space="preserve">
+  <data name="accountsManageViewModel_surname" xml:space="preserve">
     <value>Nazwisko</value>
   </data>
-  <data name="accountsListViewModel_userName" xml:space="preserve">
+  <data name="accountsManageViewModel_userName" xml:space="preserve">
     <value>Nazwa użytkownika</value>
   </data>
-  <data name="accountsListViewModel_zipCode" xml:space="preserve">
+  <data name="accountsManageViewModel_zipCode" xml:space="preserve">
     <value>Kod pocztowy</value>
   </data>
   <data name="animalTypesCreateView_headerForm" xml:space="preserve">
