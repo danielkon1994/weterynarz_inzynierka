@@ -35,7 +35,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public ApplicationUser GetById(string id)
         {
-            return this.GetAll().Where(a => !a.Deleted && a.Active);
+            return this.GetAll().Where(a => !a.Deleted && a.Active).FirstOrDefault(i => i.Id == id);
         }
     }
 }

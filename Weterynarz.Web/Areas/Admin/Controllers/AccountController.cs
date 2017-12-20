@@ -89,50 +89,52 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AccountsManageViewModel model)
         {
-            try
-            {
-                bool result = await _animalTypesService.EditType(model);
+            //try
+            //{
+            //    bool result = await _accountsService.EditType(model);
 
-                Message message = new Message
-                {
-                    Text = "Sukces !",
-                    OptionalText = "Pomyślnie zapisano typ",
-                    MessageStatus = MessageStatus.success
-                };
-                base.NotifyMessage(message);
+            //    Message message = new Message
+            //    {
+            //        Text = "Sukces !",
+            //        OptionalText = "Pomyślnie zapisano typ",
+            //        MessageStatus = MessageStatus.success
+            //    };
+            //    base.NotifyMessage(message);
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("Index");
-            }
+            //    return RedirectToAction("Index");
+            //}
+            //catch (Exception)
+            //{
+            //    base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+            //    return RedirectToAction("Index");
+            //}
+            return new EmptyResult();
         }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                bool result = await _animalTypesService.DeleteType(id);
+            //try
+            //{
+            //    bool result = await _accountsService.DeleteType(id);
 
-                Message message = new Message
-                {
-                    Text = "Sukces !",
-                    OptionalText = "Pomyślnie usunięto typ",
-                    MessageStatus = MessageStatus.success
-                };
-                base.NotifyMessage(message);
+            //    Message message = new Message
+            //    {
+            //        Text = "Sukces !",
+            //        OptionalText = "Pomyślnie usunięto typ",
+            //        MessageStatus = MessageStatus.success
+            //    };
+            //    base.NotifyMessage(message);
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("Index");
-            }
+            //    return RedirectToAction("Index");
+            //}
+            //catch (Exception)
+            //{
+            //    base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+            //    return RedirectToAction("Index");
+            //}
+            return new EmptyResult();
         }
 
         [HttpGet]
@@ -303,8 +305,13 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
+            RegisterViewModel model = new RegisterViewModel
+            {
+                RolesList = UserRoles.GetUserRolesList()
+            };
+
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -312,25 +319,42 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            await checkRegisterModel(model);
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Active = true,
+                    Address = model.Address,
+                    City = model.City,
+                    CreationDate = DateTime.Now,
+                    Deleted = false,
+                    EmailConfirmed = true,
+                    HouseNumber = model.HouseNumber,
+                    Name = model.Name,
+                    Surname = model.Surname,
+                    ZipCode = model.ZipCode,
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    //_logger.LogInformation("User created a new account with password.");
+
+                    return RedirectToAction("List");
                 }
                 AddErrors(result);
             }
+
+            model.RolesList = UserRoles.GetUserRolesList();
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -342,7 +366,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+
+            return RedirectToAction("Index", "Home", new { area = AreaNames.None });
         }
 
         [HttpPost]
@@ -551,6 +576,21 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             else
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+
+        private async Task checkRegisterModel(RegisterViewModel model)
+        {
+            var userNameExists = await _userManager.FindByNameAsync(model.UserName);
+            if (userNameExists != null)
+            {
+                ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
+            }
+
+            var userEmailExists = await _userManager.FindByEmailAsync(model.Email);
+            if (userEmailExists != null)
+            {
+                ModelState.AddModelError("", "Użytkownik z takim adresem email już istnieje");
             }
         }
 

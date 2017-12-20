@@ -37,7 +37,7 @@ namespace Weterynarz.Services.Services.Implementations
             });
         }
 
-        public AccountsManageViewModel GetEditViewModel(int id)
+        public AccountsManageViewModel GetEditViewModel(string id)
         {
             AccountsManageViewModel model;
             var account = _accountsRepository.GetById(id);

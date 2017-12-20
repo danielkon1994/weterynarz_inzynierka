@@ -4,6 +4,13 @@
     ViewData["Title"] = "Lista użytkowników";
 }
 
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item active">Lista użytkowników</li>
+    </ol>
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -12,7 +19,7 @@
                     @ResAdmin.text_options
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-warning" asp-controller="AnimalTypes" asp-action="Create">@ResAdmin.button_add</a>
+                    <a class="btn btn-warning" asp-controller="Account" asp-action="Register" asp-area="@AreaNames.Admin">@ResAdmin.button_add</a>
                 </div>
             </div>
         </div>

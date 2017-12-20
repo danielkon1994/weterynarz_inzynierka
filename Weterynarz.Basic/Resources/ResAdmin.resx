@@ -210,4 +210,10 @@
   <data name="userRoles_worker" xml:space="preserve">
     <value>Pracownik</value>
   </data>
+  <data name="accountsListViewModel_list" xml:space="preserve">
+    <value>Lista użytkowników</value>
+  </data>
+  <data name="accountCreateView_header" xml:space="preserve">
+    <value>Dodaj użytkownika</value>
+  </data>
 </root>

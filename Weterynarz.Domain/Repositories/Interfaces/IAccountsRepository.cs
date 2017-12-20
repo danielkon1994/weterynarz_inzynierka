@@ -11,5 +11,6 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         IQueryable<ApplicationUser> GetAllActive();
         IQueryable<ApplicationUser> GetAllNotDeleted();
         IQueryable<ApplicationUser> GetAll();
+        ApplicationUser GetById(string id);
     }
 }

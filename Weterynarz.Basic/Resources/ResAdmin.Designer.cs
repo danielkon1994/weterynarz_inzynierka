@@ -61,6 +61,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj użytkownika.
+        /// </summary>
+        public static string accountCreateView_header {
+            get {
+                return ResourceManager.GetString("accountCreateView_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista użytkowników.
+        /// </summary>
+        public static string accountsListViewModel_list {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miasto.
         /// </summary>
         public static string accountsManageViewModel_city {

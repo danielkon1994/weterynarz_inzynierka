@@ -7,13 +7,18 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-        @*<ul class="navbar-nav text-uppercase ml-auto">*@
-            <li class="nav-item">
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
-            </li>
-        @*</ul>*@
-    </form>
+    <li class="nav-item awarded border-left-1">
+        <a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin" class="nav-link js-scroll-trigger">Panel</a>
+    </li>
+    <li class="nav-item awarded border-left-1">
+        <form asp-area="@AreaNames.Admin" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+            @*<ul class="navbar-nav text-uppercase ml-auto">*@
+
+            <button type="submit" class="btn btn-link navbar-btn navbar-link">Wyloguj sie</button>
+
+            @*</ul>*@
+        </form>
+    </li>
 }
 else
 {
