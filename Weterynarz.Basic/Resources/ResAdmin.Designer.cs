@@ -70,6 +70,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj użytkownika.
+        /// </summary>
+        public static string accountEditView_header {
+            get {
+                return ResourceManager.GetString("accountEditView_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista użytkowników.
         /// </summary>
         public static string accountsListViewModel_list {
@@ -79,11 +88,38 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
+        /// </summary>
+        public static string accountsManageViewModel_address {
+            get {
+                return ResourceManager.GetString("accountsManageViewModel_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miasto.
         /// </summary>
         public static string accountsManageViewModel_city {
             get {
                 return ResourceManager.GetString("accountsManageViewModel_city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Potwierdź hasło.
+        /// </summary>
+        public static string accountsManageViewModel_confirmPassword {
+            get {
+                return ResourceManager.GetString("accountsManageViewModel_confirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres e-mail.
+        /// </summary>
+        public static string accountsManageViewModel_email {
+            get {
+                return ResourceManager.GetString("accountsManageViewModel_email", resourceCulture);
             }
         }
         
@@ -115,6 +151,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hasło.
+        /// </summary>
+        public static string accountsManageViewModel_password {
+            get {
+                return ResourceManager.GetString("accountsManageViewModel_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwisko.
         /// </summary>
         public static string accountsManageViewModel_surname {
@@ -138,15 +183,6 @@ namespace Weterynarz.Basic.Resources {
         public static string accountsManageViewModel_zipCode {
             get {
                 return ResourceManager.GetString("accountsManageViewModel_zipCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
-        /// </summary>
-        public static string accountsManageViewModell_address {
-            get {
-                return ResourceManager.GetString("accountsManageViewModell_address", resourceCulture);
             }
         }
         

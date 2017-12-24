@@ -54,8 +54,8 @@
                                         <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
                                         <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
                                         <td class="text-right">
-                                            <a href="@Url.Action("Edit", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
-                                            <a href="@Url.Action("Delete", "AnimalTypes", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
+                                            <a href="@Url.Action("Edit", "Account", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+                                            <a href="@Url.Action("Delete", "Account", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
                                         </td>
                                     </tr>
                                 }

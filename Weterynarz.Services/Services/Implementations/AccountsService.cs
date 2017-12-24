@@ -37,25 +37,55 @@ namespace Weterynarz.Services.Services.Implementations
             });
         }
 
-        public AccountsManageViewModel GetEditViewModel(string id)
+        public AccountsManageViewModel GetEditViewModel(ApplicationUser account)
         {
-            AccountsManageViewModel model;
-            var account = _accountsRepository.GetById(id);
-            if (account != null)
+            AccountsManageViewModel model = new AccountsManageViewModel
             {
-                model = new AccountsManageViewModel
-                {
-                    Active = account.Active,
-                    Name = account.Name,
-                    Id = account.Id,
-                    Surname = account.Surname,
+                Email = account.Email,
+                Active = account.Active,
+                Address = account.Address,
+                City = account.City,
+                UserName = account.UserName,
+                HouseNumber = account.HouseNumber,
+                Id = account.Id,
+                Name = account.Name,
+                Surname = account.Surname,
+                ZipCode = account.ZipCode
+            };
 
-                };
+            return model;
+        }
 
-                return model;
+        public async Task<ApplicationUser> EditUser(AccountsManageViewModel model)
+        {
+            var user = _accountsRepository.GetById(model.Id);
+            if(user != null)
+            {
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.ZipCode = model.ZipCode;
+                user.ModificationDate = DateTime.Now;
+                user.HouseNumber = model.HouseNumber;
+                user.Email = model.Email;
+                user.City = model.City;
+                user.Address = model.Address;
+
+                await _accountsRepository.SaveChangesAsync();
+
+                return user;
             }
 
             return null;
+        }
+
+        public async Task DeleteUser(string id)
+        {
+            var user = _accountsRepository.GetById(id);
+            if(user != null)
+            {
+                _accountsRepository.DeleteUser(user);
+                await _accountsRepository.SaveChangesAsync();
+            }
         }
     }
 }

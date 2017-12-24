@@ -22,6 +22,7 @@ using Weterynarz.Services.Services.Interfaces;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Services.ViewModels.Accounts;
 using Weterynarz.Web.Models.NotifyMessage;
+using System.Data.Entity;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {   
@@ -69,18 +70,20 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            model = new AccountsManageViewModel
+            model = _accountsService.GetEditViewModel(user);
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var userRolesSelectList = UserRoles.GetUserRolesSelectList();
+
+            foreach(var role in userRolesSelectList)
             {
-                Active = user.Active,
-                Address = user.Address,
-                City = user.City,
-                UserName = user.UserName,
-                HouseNumber = user.HouseNumber,
-                Id = user.Id,
-                Name = user.Name,
-                Surname = user.Surname,
-                ZipCode = user.ZipCode
-            };
+                if(userRoles.Contains(role.Value))
+                {
+                    role.Selected = true;
+                }
+            }
+
+            model.RolesList = userRolesSelectList;
 
             return View(model);
         }
@@ -89,52 +92,60 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AccountsManageViewModel model)
         {
-            //try
-            //{
-            //    bool result = await _accountsService.EditType(model);
+            await checkViewModelAsync(model);
 
-            //    Message message = new Message
-            //    {
-            //        Text = "Sukces !",
-            //        OptionalText = "Pomyślnie zapisano typ",
-            //        MessageStatus = MessageStatus.success
-            //    };
-            //    base.NotifyMessage(message);
+            if (ModelState.IsValid)
+            { 
+                ApplicationUser user = await _accountsService.EditUser(model);
+                if(user != null)
+                {
+                    var currentUserRoles = await _userManager.GetRolesAsync(user);
+                    var newUserRoles = model.SelectedRoles.Except(currentUserRoles).ToList();
 
-            //    return RedirectToAction("Index");
-            //}
-            //catch (Exception)
-            //{
-            //    base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
-            //    return RedirectToAction("Index");
-            //}
-            return new EmptyResult();
+                    Message message = new Message
+                    {
+                        Text = "Sukces !",
+                        OptionalText = "Pomyślnie zapisano typ",
+                        MessageStatus = MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+                }
+                else
+                {
+                    base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            model.RolesList = UserRoles.GetUserRolesSelectList();
+
+            return View(model);
         }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
-            //try
-            //{
-            //    bool result = await _accountsService.DeleteType(id);
+            try
+            {
+                bool result = await _accountsService.DeleteType(id);
 
-            //    Message message = new Message
-            //    {
-            //        Text = "Sukces !",
-            //        OptionalText = "Pomyślnie usunięto typ",
-            //        MessageStatus = MessageStatus.success
-            //    };
-            //    base.NotifyMessage(message);
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Pomyślnie usunięto użytkownika",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
 
-            //    return RedirectToAction("Index");
-            //}
-            //catch (Exception)
-            //{
-            //    base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
-            //    return RedirectToAction("Index");
-            //}
-            return new EmptyResult();
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpGet]
@@ -305,9 +316,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
-            RegisterViewModel model = new RegisterViewModel
+            AccountsManageViewModel model = new AccountsManageViewModel
             {
-                RolesList = UserRoles.GetUserRolesList()
+                RolesList = UserRoles.GetUserRolesSelectList()
             };
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -317,9 +328,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(AccountsManageViewModel model, string returnUrl = null)
         {
-            await checkRegisterModel(model);
+            await checkViewModelAsync(model);
 
             if (ModelState.IsValid)
             {
@@ -340,6 +351,11 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(model.SelectedRoles.Any())
+                    {
+                        await _userManager.AddToRolesAsync(user, model.SelectedRoles);
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -354,7 +370,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 AddErrors(result);
             }
 
-            model.RolesList = UserRoles.GetUserRolesList();
+            model.RolesList = UserRoles.GetUserRolesSelectList();
 
             // If we got this far, something failed, redisplay form
             return View(model);
@@ -579,18 +595,24 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        private async Task checkRegisterModel(RegisterViewModel model)
+        private async Task checkViewModelAsync(AccountsManageViewModel model)
         {
             var userNameExists = await _userManager.FindByNameAsync(model.UserName);
             if (userNameExists != null)
             {
-                ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
+                if(userNameExists.Id != model.Id)
+                { 
+                    ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
+                }
             }
 
             var userEmailExists = await _userManager.FindByEmailAsync(model.Email);
             if (userEmailExists != null)
             {
-                ModelState.AddModelError("", "Użytkownik z takim adresem email już istnieje");
+                if(userEmailExists.Id != model.Id)
+                { 
+                    ModelState.AddModelError("", "Użytkownik z takim adresem email już istnieje");
+                }
             }
         }
 

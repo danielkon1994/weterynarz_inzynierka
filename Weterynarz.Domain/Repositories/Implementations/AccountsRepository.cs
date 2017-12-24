@@ -37,5 +37,15 @@ namespace Weterynarz.Domain.Repositories.Implementations
         {
             return this.GetAll().Where(a => !a.Deleted && a.Active).FirstOrDefault(i => i.Id == id);
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _db.SaveChangesAsync();
+        }
+
+        public void DeleteUser(ApplicationUser user)
+        {
+            _db.Users.Remove(user);
+        }
     }
 }

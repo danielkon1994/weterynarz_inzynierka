@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="accountsManageViewModell_address" xml:space="preserve">
+  <data name="accountsManageViewModel_address" xml:space="preserve">
     <value>Adres</value>
   </data>
   <data name="accountsManageViewModel_city" xml:space="preserve">
@@ -215,5 +215,17 @@
   </data>
   <data name="accountCreateView_header" xml:space="preserve">
     <value>Dodaj użytkownika</value>
+  </data>
+  <data name="accountEditView_header" xml:space="preserve">
+    <value>Edytuj użytkownika</value>
+  </data>
+  <data name="accountsManageViewModel_email" xml:space="preserve">
+    <value>Adres e-mail</value>
+  </data>
+  <data name="accountsManageViewModel_confirmPassword" xml:space="preserve">
+    <value>Potwierdź hasło</value>
+  </data>
+  <data name="accountsManageViewModel_password" xml:space="preserve">
+    <value>Hasło</value>
   </data>
 </root>

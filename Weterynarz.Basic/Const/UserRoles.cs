@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Weterynarz.Basic.Resources;
 
@@ -15,6 +17,15 @@ namespace Weterynarz.Basic.Const
         public static string[] GetUserRolesList()
         {
             return new string[] { Admin, Doctor, Worker, Client };
+        }
+
+        public static IEnumerable<SelectListItem> GetUserRolesSelectList()
+        {
+            return GetUserRolesList().Select(a => new SelectListItem {
+                Text = a,
+                Value = a,
+                Selected = false
+            });
         }
 
         public static string TranslateRole(string role)

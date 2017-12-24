@@ -1,13 +1,13 @@
 ﻿@model AccountsManageViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Edycja użytkownika";
 }
 
 @section breadcrumb {
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
         <li class="breadcrumb-item"><a asp-controller="Account" asp-action="List" asp-area="@AreaNames.Admin">Lista użytkowników</a></li>
-        <li class="breadcrumb-item active">Dodaj</li>
+        <li class="breadcrumb-item active">Edytuj</li>
     </ol>
 }
 
@@ -17,7 +17,7 @@
             <div class="card">
                 <form method="post">
                     <div class="card-header">
-                        <strong>@ResAdmin.accountCreateView_header</strong>
+                        <strong>@ResAdmin.accountEditView_header</strong>
                     </div>
                     <div class="card-body">
 
