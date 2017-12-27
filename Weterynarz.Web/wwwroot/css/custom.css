@@ -1,0 +1,52 @@
+﻿#mainNav .navbar-nav .nav-item .nav-link {
+  color: #FED136 !important;
+  font-weight: bold !important; }
+
+#mainNav .navbar-nav .nav-item #logoutForm .btn {
+  padding: 1.1em 1em !important;
+  color: #212529 !important;
+  cursor: pointer;
+  text-decoration: none; }
+
+#mainNav .navbar-nav .awarded {
+  background-color: #FED136; }
+  #mainNav .navbar-nav .awarded .nav-link {
+    color: #212529 !important; }
+
+header.masthead {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/main_wallpaper.jpg"); }
+  header.masthead .intro-text {
+    padding-top: 230px; }
+
+#about .timeline .timeline-image {
+  border: unset;
+  background-color: white; }
+
+#services .section-heading {
+  color: white; }
+
+#services .service-image {
+  width: 140px;
+  margin: 0 auto; }
+
+#services .service-heading {
+  color: white; }
+
+#team .team-member .table {
+  margin-top: 40px; }
+
+#mainNav .navbar-brand {
+  font-family: unset !important; }
+
+#mainNav #navbarResponsive .nav-item img {
+  height: 23px; }
+
+section {
+  padding: 70px 0; }
+
+.bg-dark {
+  background-color: #212529; }
+
+.border-left-1 {
+  border-left: 1px solid #212529; }
+

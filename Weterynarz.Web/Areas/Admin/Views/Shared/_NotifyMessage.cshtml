@@ -1,16 +1,5 @@
 ﻿
 
 <script type="text/javascript">
-    (function () {
-        try{
-            var notification = JSON.parse('@Html.Raw(TempData[TempDataKey.Notification])');
-            console.log(notification);
-            if (!!notification) {
-                swal(notification.Text, notification.OptionalText, notification.Type);
-            }
-        }
-        catch (ex) {
-            console.log(ex);
-        }
-    })();
+    AppNotify.tempNotifyMessage('@Html.Raw(TempData[TempDataKey.Notification])')
 </script>

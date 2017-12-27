@@ -31,7 +31,7 @@
                     <i class="fa fa-align-justify"></i> @ResAdmin.accountsListViewModel_list
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="usersTable">
                         <thead>
                             <tr>
                                 <th>Imię</th>
@@ -55,7 +55,9 @@
                                         <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
                                         <td class="text-right">
                                             <a href="@Url.Action("Edit", "Account", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
-                                            <a href="@Url.Action("Delete", "Account", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
+                                            @*<a href="@Url.Action("Delete", "Account", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>*@
+                                            <button class="btnDeleteUser btn btn-danger" data-id="@item.Id">Usuń</button>
+                                            <button class="btnBanUser btn btn-secondary" data-id="@item.Id">Zablokuj</button>
                                         </td>
                                     </tr>
                                 }
@@ -77,3 +79,31 @@
     </div>
 </div>
 
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btnDeleteUser").click(function () {
+                var rowId = $(this).data('id');
+                var row = $(this).parents('tr');
+                var table = $("#usersTable");
+
+                AppNotify.confirm('Czy na pewno chcesz usunąć tego użytkownika?', function () {
+                    $.ajax({
+                        method: "POST",
+                        url: '@Url.Action("Delete", "Account", new { area = AreaNames.Admin})',
+                        data: {
+                            id: rowId
+                        },
+                        success: function (response) {
+                            AppNotify.notifyMessage(response);
+                        }
+                    });
+                });
+            });
+
+            $(".btnBanUser").click(function () {
+
+            });
+        });
+    </script>
+}

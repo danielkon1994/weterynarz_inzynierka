@@ -1,0 +1,37 @@
+﻿@import "customVariables.scss";
+
+@import "sectionStyle/navbar.scss";
+@import "sectionStyle/header.scss";
+@import "sectionStyle/aboutUs.scss";
+@import "sectionStyle/offer.scss";
+@import "sectionStyle/team.scss";
+@import "sectionStyle/contact.scss";
+
+body {
+
+}
+
+#mainNav {
+    .navbar-brand {
+        font-family: unset !important;
+    }
+
+    #navbarResponsive {
+        .nav-item img {
+            height: 23px;
+        }
+    }
+}
+
+section {
+    padding: 70px 0;
+}
+
+.bg-dark {
+    background-color: #212529;
+}
+
+.border-left-1 {
+    border-left: 1px solid #212529;
+}
+

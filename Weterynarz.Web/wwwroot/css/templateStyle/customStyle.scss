@@ -1,0 +1,27 @@
+﻿header.app-header {
+    background: $gray-admin-color !important;
+    border-bottom: unset !important;
+
+    .navbar-brand {
+        color: $main-color;
+        background-color: transparent !important;
+        border: unset !important;
+    }
+}
+
+.sidebar {
+    .nav-link {
+        i {
+            color: $main-color !important;
+        }
+
+        &:hover {
+            background-color: $main-color !important;
+            color: $gray-admin-color !important;
+
+            i {
+                color: $gray-admin-color !important;
+            }
+        }
+    }
+}

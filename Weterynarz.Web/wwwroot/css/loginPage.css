@@ -1,0 +1,36 @@
+﻿html {
+  height: 100%; }
+
+body {
+  background-color: #212529;
+  font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: white; }
+
+#loginForm {
+  margin: 0 auto; }
+  #loginForm form {
+    margin-top: 50px; }
+    #loginForm form #loginFormHeader {
+      margin-bottom: 40px; }
+    #loginForm form .form-control {
+      padding: 20px; }
+    #loginForm form input[type=submit] {
+      font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      background-color: #fed136;
+      border-color: #fed136;
+      color: white;
+      font-size: 18px;
+      padding: 20px 40px; }
+    #loginForm form input[type=submit]:hover {
+      box-shadow: 0 0 0 0.2rem rgba(254, 209, 55, 0.5) !important;
+      background-color: #fec810 !important;
+      border-color: #fec810 !important; }
+
+.backBtn {
+  margin-top: 35px; }
+

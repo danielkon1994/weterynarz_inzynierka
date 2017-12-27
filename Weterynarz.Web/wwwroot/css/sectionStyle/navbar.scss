@@ -1,0 +1,27 @@
+﻿#mainNav {
+    .navbar-nav {
+        .nav-item {
+            .nav-link {
+                color: $main-color !important;
+                font-weight: bold !important;
+            }
+
+            #logoutForm {
+                .btn {
+                    padding: 1.1em 1em !important;
+                    color: #212529 !important;
+                    cursor: pointer;
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .awarded {
+            background-color: $main-color;
+
+            .nav-link {
+                color: $dark-color !important;
+            }
+        }
+    }
+}

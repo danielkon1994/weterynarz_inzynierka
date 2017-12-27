@@ -16,10 +16,10 @@ namespace Weterynarz.Web.Models.NotifyMessage
 
     public enum MessageStatus
     {
-        error,
-        success,
-        warning,
-        info,
-        question
+        error = 1,
+        success = 2,
+        warning = 3,
+        info = 4,
+        question = 5
     }
 }

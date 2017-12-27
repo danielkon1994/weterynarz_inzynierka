@@ -1,0 +1,17 @@
+﻿@import "customVariables.scss";
+
+@import "loginPage.scss";
+@import "templateStyle/customStyle.scss";
+
+body {
+    height: 100%;
+}
+
+.bg-dark {
+    background-color: $dark-color;
+}
+
+.fullPage {
+    height: 100%;
+}
+

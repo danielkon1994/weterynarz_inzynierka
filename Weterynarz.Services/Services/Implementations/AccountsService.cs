@@ -78,14 +78,18 @@ namespace Weterynarz.Services.Services.Implementations
             return null;
         }
 
-        public async Task DeleteUser(string id)
+        public async Task<bool> DeleteUser(string id)
         {
             var user = _accountsRepository.GetById(id);
             if(user != null)
             {
                 _accountsRepository.DeleteUser(user);
                 await _accountsRepository.SaveChangesAsync();
+
+                return true;
             }
+
+            return false;
         }
     }
 }

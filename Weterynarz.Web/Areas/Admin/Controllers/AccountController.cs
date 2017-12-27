@@ -123,29 +123,47 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        //[HttpPost]
+        [HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
+            Message message = null;
+
             try
             {
-                bool result = await _accountsService.DeleteType(id);
+                //bool result = await _accountsService.DeleteUser(id);
+                bool result = true;
 
-                Message message = new Message
+                if (result)
+                { 
+                    message = new Message
+                    {
+                        Text = "Sukces !",
+                        OptionalText = "Pomyślnie usunięto użytkownika",
+                        MessageStatus = MessageStatus.success
+                    };
+                }
+                else
                 {
-                    Text = "Sukces !",
-                    OptionalText = "Pomyślnie usunięto użytkownika",
-                    MessageStatus = MessageStatus.success
-                };
-                base.NotifyMessage(message);
-
-                return RedirectToAction("Index");
+                    message = new Message
+                    {
+                        Text = "Uppsss !",
+                        OptionalText = "Coś poszło nie tak przy usuwaniu użytkownika",
+                        MessageStatus = MessageStatus.error
+                    };
+                }
             }
             catch (Exception)
             {
-                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("Index");
+                message = new Message
+                {
+                    Text = "Uppsss !",
+                    OptionalText = "Coś poszło nie tak przy usuwaniu użytkownika",
+                    MessageStatus = MessageStatus.error
+                };
             }
+
+            return Json(message);
         }
 
         [HttpGet]

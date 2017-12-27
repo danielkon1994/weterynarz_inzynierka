@@ -14,6 +14,6 @@ namespace Weterynarz.Services.Services.Interfaces
         IQueryable<AccountsListViewModel> GetListUsersViewModel();
         AccountsManageViewModel GetEditViewModel(ApplicationUser account);
         Task<ApplicationUser> EditUser(AccountsManageViewModel model);
-        Task DeleteUser(string id);
+        Task<bool> DeleteUser(string id);
     }
 }
