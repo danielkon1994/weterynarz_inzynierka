@@ -15,5 +15,8 @@ namespace Weterynarz.Services.Services.Interfaces
         AccountsManageViewModel GetEditViewModel(ApplicationUser account);
         Task<ApplicationUser> EditUser(AccountsManageViewModel model);
         Task<bool> DeleteUser(string id);
+        Task<bool> BanUser(string id);
+        Task<bool> UnlockUser(string id);
+        Task SavePassword(ApplicationUser user, string newPassword);
     }
 }

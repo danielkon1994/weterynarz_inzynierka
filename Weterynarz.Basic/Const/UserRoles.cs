@@ -19,13 +19,28 @@ namespace Weterynarz.Basic.Const
             return new string[] { Admin, Doctor, Worker, Client };
         }
 
-        public static IEnumerable<SelectListItem> GetUserRolesSelectList()
+        public static IEnumerable<SelectListItem> GetUserRolesSelectList(IList<string> userRoles = null)
         {
-            return GetUserRolesList().Select(a => new SelectListItem {
-                Text = a,
-                Value = a,
-                Selected = false
-            });
+            List<SelectListItem> selectList = new List<SelectListItem>();
+            string[] userRolesArr = GetUserRolesList();
+            foreach(string role in userRolesArr)
+            {
+                SelectListItem item = new SelectListItem()
+                {
+                    Text = role,
+                    Value = role
+                };
+
+                if (userRoles != null)
+                {
+                    if(userRoles.Contains(role))
+                    {
+                        item.Selected = true;
+                    }
+                }
+                selectList.Add(item);
+            }
+            return selectList.AsEnumerable();
         }
 
         public static string TranslateRole(string role)

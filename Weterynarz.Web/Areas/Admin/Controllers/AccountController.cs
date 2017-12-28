@@ -54,8 +54,18 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List(int page = 1)
         {
-            var listUsers = _accountsService.GetListUsersViewModel().OrderBy(a => a.Name);
-            var model = await PagingList.CreateAsync(listUsers, 20, page);
+            var listUsersQueryable = _accountsService.GetListUsersViewModel().OrderBy(a => a.Name);
+            //var listUsersList = new List<AccountsListViewModel>();
+            //foreach(var userViewModel in listUsersQueryable)
+            //{
+            //    var user = await _userManager.FindByIdAsync(userViewModel.Id);
+            //    if(user != null)
+            //    {
+            //        userViewModel.Roles = await _userManager.GetRolesAsync(user);
+            //    }
+            //    listUsersList.Add(userViewModel);
+            //}            
+            var model = await PagingList.CreateAsync(listUsersQueryable, 20, page);
 
             return View(model);
         }
@@ -67,23 +77,13 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             if (user == null)
             {
                 base.NotifyMessage("Nie znaleziono użytkownika z takim identyfikatorem", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             model = _accountsService.GetEditViewModel(user);
 
             var userRoles = await _userManager.GetRolesAsync(user);
-            var userRolesSelectList = UserRoles.GetUserRolesSelectList();
-
-            foreach(var role in userRolesSelectList)
-            {
-                if(userRoles.Contains(role.Value))
-                {
-                    role.Selected = true;
-                }
-            }
-
-            model.RolesList = userRolesSelectList;
+            model.RolesList = UserRoles.GetUserRolesSelectList(userRoles);
 
             return View(model);
         }
@@ -99,8 +99,18 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 ApplicationUser user = await _accountsService.EditUser(model);
                 if(user != null)
                 {
+                    if (!string.IsNullOrEmpty(model.Password))
+                    {
+                        string newPasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
+                        await _accountsService.SavePassword(user, newPasswordHash);
+                    }                    
+
                     var currentUserRoles = await _userManager.GetRolesAsync(user);
+                    var deleteUserRoles = currentUserRoles.Except(model.SelectedRoles).ToList();
+                    await _userManager.RemoveFromRolesAsync(user, deleteUserRoles);
+
                     var newUserRoles = model.SelectedRoles.Except(currentUserRoles).ToList();
+                    await _userManager.AddToRolesAsync(user, newUserRoles);
 
                     Message message = new Message
                     {
@@ -115,7 +125,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 }
 
-                return RedirectToAction("Index");
+                return RedirectToAction("List");
             }
 
             model.RolesList = UserRoles.GetUserRolesSelectList();
@@ -124,15 +134,14 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             Message message = null;
 
             try
             {
-                //bool result = await _accountsService.DeleteUser(id);
-                bool result = true;
+                bool result = await _accountsService.DeleteUser(id);
+                //bool result = false;
 
                 if (result)
                 { 
@@ -164,6 +173,98 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
 
             return Json(message);
+        }
+        
+        public async Task<IActionResult> BanAsync(string id)
+        {
+            Message message = null;
+
+            try
+            {
+                bool result = await _accountsService.BanUser(id);
+                //bool result = false;
+
+                if (result)
+                {
+                    message = new Message
+                    {
+                        Text = "Sukces !",
+                        OptionalText = "Pomyślnie zablokowano użytkownika",
+                        MessageStatus = MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+                }
+                else
+                {
+                    message = new Message
+                    {
+                        Text = "Uppsss !",
+                        OptionalText = "Coś poszło nie tak przy blokowaniu użytkownika",
+                        MessageStatus = MessageStatus.error
+                    };
+                    base.NotifyMessage(message);
+                }
+
+                return RedirectToAction("List");
+            }
+            catch (Exception)
+            {
+                message = new Message
+                {
+                    Text = "Uppsss !",
+                    OptionalText = "Coś poszło nie tak przy blokowaniu użytkownika",
+                    MessageStatus = MessageStatus.error
+                };
+                base.NotifyMessage(message);
+            }
+            
+            return RedirectToAction("List");
+        }
+        
+        public async Task<IActionResult> UnlockAsync(string id)
+        {
+            Message message = null;
+
+            try
+            {
+                bool result = await _accountsService.UnlockUser(id);
+                //bool result = false;
+
+                if (result)
+                {
+                    message = new Message
+                    {
+                        Text = "Sukces !",
+                        OptionalText = "Pomyślnie odblokowano użytkownika",
+                        MessageStatus = MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+                }
+                else
+                {
+                    message = new Message
+                    {
+                        Text = "Uppsss !",
+                        OptionalText = "Coś poszło nie tak przy odblokowywaniu użytkownika",
+                        MessageStatus = MessageStatus.error
+                    };
+                    base.NotifyMessage(message);
+                }
+
+                return RedirectToAction("List");
+            }
+            catch (Exception)
+            {
+                message = new Message
+                {
+                    Text = "Uppsss !",
+                    OptionalText = "Coś poszło nie tak przy odblokowywaniu użytkownika",
+                    MessageStatus = MessageStatus.error
+                };
+                base.NotifyMessage(message);
+            }           
+
+            return RedirectToAction("List");
         }
 
         [HttpGet]

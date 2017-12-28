@@ -13,6 +13,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         IQueryable<ApplicationUser> GetAllNotDeleted();
         IQueryable<ApplicationUser> GetAll();
         ApplicationUser GetById(string id);
+        ApplicationUser GetByIdNotDeleted(string id);
         void DeleteUser(ApplicationUser user);
         Task SaveChangesAsync();
     }

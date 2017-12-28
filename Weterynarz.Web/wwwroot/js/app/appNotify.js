@@ -5,7 +5,7 @@ AppNotify.tempNotifyMessage = function (tempObj) {
         var notification = JSON.parse(tempObj);
         if (!!notification) {
             var messageType = null;
-            switch (obj.Type) {
+            switch (notification.MessageStatus) {
                 case 1:
                     messageType = 'error';
                     break;
@@ -22,7 +22,7 @@ AppNotify.tempNotifyMessage = function (tempObj) {
                     messageType = 'question'
                     break;
             }
-            swal(notification.text, notification.optionalText, messageType);
+            swal(notification.Text, notification.OptionalText, messageType);
         }
     }
     catch (ex) {
@@ -34,7 +34,7 @@ AppNotify.notifyMessage = function (obj) {
     try {
         if (!!obj) {
             var messageType = null;
-            switch (obj.Type)
+            switch (obj.messageStatus)
             {
                 case 1:
                     messageType = 'error';
@@ -69,7 +69,7 @@ AppNotify.confirm = function (message, callback) {
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Tak, usuń!',
-        cancelButtonText: 'No, nic nie rób!',
+        cancelButtonText: 'Nie, nic nie rób!',
         confirmButtonClass: 'btn btn-success',
         cancelButtonClass: 'btn btn-danger',
         buttonsStyling: false,

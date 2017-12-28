@@ -18,12 +18,10 @@ namespace Weterynarz.Services.ViewModels.Accounts
         [Display(Name = "accountsManageViewModel_email", ResourceType = typeof(ResAdmin))]
         public string Email { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "accountsManageViewModel_password", ResourceType = typeof(ResAdmin))]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
         [Display(Name = "accountsManageViewModel_confirmPassword", ResourceType = typeof(ResAdmin))]
         [Compare("Password", ErrorMessage = "Hasła muszą być takie same.")]
         public string ConfirmPassword { get; set; }

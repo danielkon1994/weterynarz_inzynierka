@@ -38,6 +38,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return this.GetAll().Where(a => !a.Deleted && a.Active).FirstOrDefault(i => i.Id == id);
         }
 
+        public ApplicationUser GetByIdNotDeleted(string id)
+        {
+            return GetAllNotDeleted().FirstOrDefault(i => i.Id == id);
+        }
+
         public async Task SaveChangesAsync()
         {
             await _db.SaveChangesAsync();

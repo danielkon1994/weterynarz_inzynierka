@@ -61,6 +61,7 @@ namespace Weterynarz.Web
             // redirect to another login page
             services.ConfigureApplicationCookie(options =>
             {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.LoginPath = "/Admin/Account/Login";
                 options.LogoutPath = "/Admin/Account/Logout";
             });

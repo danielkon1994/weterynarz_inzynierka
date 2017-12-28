@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace Weterynarz.Services.Services.Implementations
                 CreationDate = a.CreationDate,
                 HouseNumber = a.HouseNumber,
                 ZipCode = a.ZipCode,
-                UserName = a.UserName
+                UserName = a.UserName,
             });
         }
 
@@ -90,6 +91,43 @@ namespace Weterynarz.Services.Services.Implementations
             }
 
             return false;
+        }
+
+        public async Task<bool> BanUser(string id)
+        {
+            var user = _accountsRepository.GetById(id);
+            if (user != null)
+            {
+                user.Active = false;
+
+                await _accountsRepository.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UnlockUser(string id)
+        {
+            var user = _accountsRepository.GetByIdNotDeleted(id);
+            if (user != null)
+            {
+                user.Active = true;
+
+                await _accountsRepository.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task SavePassword(ApplicationUser user, string newPassword)
+        {
+            user.PasswordHash = newPassword;
+
+            await _accountsRepository.SaveChangesAsync();
         }
     }
 }

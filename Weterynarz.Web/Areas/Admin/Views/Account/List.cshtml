@@ -38,6 +38,7 @@
                                 <th>Nazwisko</th>
                                 <th>Login</th>
                                 <th>Data utworzenia</th>
+                                <th>Role</th>
                                 <th>Aktywny</th>
                                 <th></th>
                             </tr>
@@ -52,12 +53,20 @@
                                         <td>@item.Surname</td>
                                         <td>@item.UserName</td>
                                         <td>@item.CreationDate.ToString(FormatsDate.Date)</td>
+                                        <td>@item.DisplayRoles</td>
                                         <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
                                         <td class="text-right">
-                                            <a href="@Url.Action("Edit", "Account", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
-                                            @*<a href="@Url.Action("Delete", "Account", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>*@
-                                            <button class="btnDeleteUser btn btn-danger" data-id="@item.Id">Usuń</button>
-                                            <button class="btnBanUser btn btn-secondary" data-id="@item.Id">Zablokuj</button>
+                                            @if (item.Active)
+                                            {
+                                                <a href="@Url.Action("Edit", "Account", new { area = AreaNames.Admin, id = item.Id })" class="btn btn-dark">Edytuj</a>
+                                                @*<a href="@Url.Action("Delete", "Account", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>*@
+                                                <a href="@Url.Action("BanAsync", "Account", new { area = AreaNames.Admin, id = item.Id })" class="btn btn-secondary">Zablokuj</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("UnlockAsync", "Account", new { area = AreaNames.Admin, id = item.Id })" class="btn btn-secondary">Odblokuj</a>
+                                            }
+                                            <button class="btnDeleteUser btn btn-danger" data-id="@item.Id">Usuń</button>                                            
                                         </td>
                                     </tr>
                                 }
@@ -90,7 +99,30 @@
                 AppNotify.confirm('Czy na pewno chcesz usunąć tego użytkownika?', function () {
                     $.ajax({
                         method: "POST",
-                        url: '@Url.Action("Delete", "Account", new { area = AreaNames.Admin})',
+                        url: '@Url.Action("DeleteAsync", "Account", new { area = AreaNames.Admin})',
+                        data: {
+                            id: rowId
+                        },
+                        success: function (response) {
+                            if (response.messageStatus == 2)
+                            {
+                                row.fadeOut();
+                            }
+                            AppNotify.notifyMessage(response);
+                        }
+                    });
+                });
+            });
+
+            $(".btnBanUser").click(function () {
+                var rowId = $(this).data('id');
+                var row = $(this).parents('tr');
+                var table = $("#usersTable");
+
+                AppNotify.confirm('Czy na pewno chcesz zablokować tego użytkownika?', function () {
+                    $.ajax({
+                        method: "POST",
+                        url: '@Url.Action("BanAsync", "Account", new { area = AreaNames.Admin})',
                         data: {
                             id: rowId
                         },
@@ -99,10 +131,6 @@
                         }
                     });
                 });
-            });
-
-            $(".btnBanUser").click(function () {
-
             });
         });
     </script>
