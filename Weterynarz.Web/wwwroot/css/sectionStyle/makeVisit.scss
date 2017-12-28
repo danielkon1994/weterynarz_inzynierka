@@ -1,0 +1,59 @@
+﻿section#makeVisit {
+    background-color: #212529;
+    background-image: url("../img/map-image.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 120px 0 70px 0;
+
+    .section-heading {
+        color: #fff;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 20px;
+    }
+
+    .form-group input.form-control {
+        height: auto;
+    }
+
+    .form-group textarea.form-control {
+        height: 248px;
+    }
+
+    .form-control:focus {
+        border-color: #fed136;
+        box-shadow: none;
+    }
+
+    ::-webkit-input-placeholder {
+        font-weight: 700;
+        color: #ced4da;
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    :-moz-placeholder {
+        font-weight: 700;
+        color: #ced4da;
+        /* Firefox 18- */
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    ::-moz-placeholder {
+        font-weight: 700;
+        color: #ced4da;
+        /* Firefox 19+ */
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    :-ms-input-placeholder {
+        font-weight: 700;
+        color: #ced4da;
+        font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+}

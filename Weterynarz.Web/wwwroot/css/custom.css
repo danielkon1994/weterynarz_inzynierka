@@ -35,6 +35,45 @@ header.masthead {
 #team .team-member .table {
   margin-top: 40px; }
 
+section#makeVisit {
+  background-color: #212529;
+  background-image: url("../img/map-image.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 120px 0 70px 0; }
+  section#makeVisit .section-heading {
+    color: #fff; }
+  section#makeVisit .form-group {
+    margin-bottom: 25px; }
+  section#makeVisit .form-group input,
+  section#makeVisit .form-group textarea {
+    padding: 20px; }
+  section#makeVisit .form-group input.form-control {
+    height: auto; }
+  section#makeVisit .form-group textarea.form-control {
+    height: 248px; }
+  section#makeVisit .form-control:focus {
+    border-color: #fed136;
+    box-shadow: none; }
+  section#makeVisit ::-webkit-input-placeholder {
+    font-weight: 700;
+    color: #ced4da;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  section#makeVisit :-moz-placeholder {
+    font-weight: 700;
+    color: #ced4da;
+    /* Firefox 18- */
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  section#makeVisit ::-moz-placeholder {
+    font-weight: 700;
+    color: #ced4da;
+    /* Firefox 19+ */
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  section#makeVisit :-ms-input-placeholder {
+    font-weight: 700;
+    color: #ced4da;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
 #mainNav .navbar-brand {
   font-family: unset !important; }
 
