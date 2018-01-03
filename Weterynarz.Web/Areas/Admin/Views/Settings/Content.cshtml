@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Weterynarz.Services.ViewModels.Settings.SettingsContentItem>
+﻿@model Weterynarz.Services.ViewModels.Settings.SettingsContentViewModel
 @{
     ViewData["Title"] = "Treść strony głównej";
-    //var settingsGroups = Model.GroupBy(i => i.GroupName);
+    var settingsGroups = Model.ListSettings.GroupBy(i => i.GroupName);
 }
 
 @section breadcrumb {
@@ -14,21 +14,20 @@
 <div class="container">
     <div class="row">
         <!-- foreach loop -->
-        @*@foreach (var group in settingsGroups)
-        {
-            
-        }*@
+        @foreach(var group in settingsGroups)
+        { 
         <div class="col-md-6">
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-warning">
-                    Ustawienia ogólne
+                    @group.Key
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+                @foreach(var item in group)
+                { 
+                    <a href="#" class="list-group-item list-group-item-action">@item.Name</a>
+                }
             </div>
         </div>
+        }
         <!-- end foreach loop -->
     </div>
 </div>

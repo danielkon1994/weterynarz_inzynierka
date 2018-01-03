@@ -11,7 +11,7 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180103162111_AddSettingsContentTable")]
+    [Migration("20180103202242_AddSettingsContentTable")]
     partial class AddSettingsContentTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -357,6 +357,33 @@ namespace Weterynarz.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MedicalExaminationTypes");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.SettingsContent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Group");
+
+                    b.Property<DateTime?>("ModificationDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SettingsContent");
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Visit", b =>

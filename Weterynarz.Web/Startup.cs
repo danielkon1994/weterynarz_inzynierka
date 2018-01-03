@@ -50,12 +50,14 @@ namespace Weterynarz.Web
             services.AddScoped<IAnimalTypesRepository, AnimalTypesRepository>();
             services.AddScoped<IMedicalExaminationTypesRepository, MedicalExaminationTypesRepository>();
             services.AddScoped<IAccountsRepository, AccountsRepository>();
+            services.AddScoped<ISettingsContentRepository, SettingsContentRepository>();
 
             // Add application services.
             services.AddScoped<IAnimalService, AnimalService>();
             services.AddScoped<IAnimalTypesService, AnimalTypesService>();
             services.AddScoped<IMedicalExaminationTypesService, MedicalExaminationTypesService>();
             services.AddScoped<IAccountsService, AccountsService>();
+            services.AddScoped<ISettingsContentService, SettingsContentService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             // redirect to another login page
