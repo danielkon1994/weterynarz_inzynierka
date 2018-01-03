@@ -228,4 +228,13 @@
   <data name="accountsManageViewModel_password" xml:space="preserve">
     <value>Hasło</value>
   </data>
+  <data name="leftNavbar_contentHomePage" xml:space="preserve">
+    <value>Treści strony głównej</value>
+  </data>
+  <data name="leftNavbar_settings" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="settingsContent_listContent" xml:space="preserve">
+    <value>Treści strony głównej</value>
+  </data>
 </root>

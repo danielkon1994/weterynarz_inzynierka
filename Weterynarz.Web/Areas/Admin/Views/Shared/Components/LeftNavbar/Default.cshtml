@@ -11,6 +11,14 @@
                     <a class="nav-link" asp-controller="Account" asp-action="List" asp-area="@AreaNames.Admin"><i class="fa fa-users" aria-hidden="true"></i> @ResAdmin.leftNavbar_users</a>
                 </li>
                 <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> @ResAdmin.leftNavbar_settings</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Settings" asp-action="Content" asp-area="@AreaNames.Admin"><i class="fa fa-align-left"></i> @ResAdmin.leftNavbar_contentHomePage</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book" aria-hidden="true"></i> @ResAdmin.leftNavbar_dictionares</a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">

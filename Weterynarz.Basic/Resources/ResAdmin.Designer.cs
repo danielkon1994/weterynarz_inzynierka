@@ -232,6 +232,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Treści strony głównej.
+        /// </summary>
+        public static string leftNavbar_contentHomePage {
+            get {
+                return ResourceManager.GetString("leftNavbar_contentHomePage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Słowniki.
         /// </summary>
         public static string leftNavbar_dictionares {
@@ -255,6 +264,15 @@ namespace Weterynarz.Basic.Resources {
         public static string leftNavbar_medicalExaminationTypes {
             get {
                 return ResourceManager.GetString("leftNavbar_medicalExaminationTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ustawienia.
+        /// </summary>
+        public static string leftNavbar_settings {
+            get {
+                return ResourceManager.GetString("leftNavbar_settings", resourceCulture);
             }
         }
         
@@ -345,6 +363,15 @@ namespace Weterynarz.Basic.Resources {
         public static string medicalExaminationTypesIndex_listTypes {
             get {
                 return ResourceManager.GetString("medicalExaminationTypesIndex_listTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Treści strony głównej.
+        /// </summary>
+        public static string settingsContent_listContent {
+            get {
+                return ResourceManager.GetString("settingsContent_listContent", resourceCulture);
             }
         }
         
