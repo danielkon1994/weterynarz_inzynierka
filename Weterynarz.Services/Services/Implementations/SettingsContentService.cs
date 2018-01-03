@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Services.ViewModels.Settings;
@@ -34,6 +35,37 @@ namespace Weterynarz.Services.Services.Implementations
             };
 
             return model;
+        }
+
+        public SettingsContentManageViewModel GetSettingsContentManageViewModel(int id)
+        {
+            var setting = _settingsContentRepository.GetById(id);
+            if(setting != null)
+            {
+                SettingsContentManageViewModel model = new SettingsContentManageViewModel
+                {
+                    Id = setting.Id,
+                    Name = setting.Name,
+                    Value = setting.Value
+                };
+
+                return model;
+            }
+
+            return null;
+            
+        }
+
+        public async Task SaveSettingsContent(SettingsContentManageViewModel model)
+        {
+            var settings = _settingsContentRepository.GetById(model.Id);
+            if(settings != null)
+            {
+                settings.Value = model.Value;
+                settings.ModificationDate = model.ModificationDate;
+
+                await _settingsContentRepository.SaveChangesAsync();
+            }
         }
     }
 }

@@ -237,4 +237,7 @@
   <data name="settingsContent_listContent" xml:space="preserve">
     <value>Treści strony głównej</value>
   </data>
+  <data name="settingsContentEditView_headerForm" xml:space="preserve">
+    <value>Edytuj treść</value>
+  </data>
 </root>

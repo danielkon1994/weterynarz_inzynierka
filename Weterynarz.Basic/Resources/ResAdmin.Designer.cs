@@ -376,6 +376,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj treść.
+        /// </summary>
+        public static string settingsContentEditView_headerForm {
+            get {
+                return ResourceManager.GetString("settingsContentEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opcje.
         /// </summary>
         public static string text_options {

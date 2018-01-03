@@ -23,7 +23,12 @@
                 </a>
                 @foreach(var item in group)
                 { 
-                    <a href="#" class="list-group-item list-group-item-action">@item.Name</a>
+                    <a href="@Url.Action("ManageContent", "Settings", new { area = AreaNames.Admin, id = item.Id})" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">@item.Name</h6>
+                        </div>
+                        <p class="mb-1">@item.Value</p>
+                    </a>
                 }
             </div>
         </div>
