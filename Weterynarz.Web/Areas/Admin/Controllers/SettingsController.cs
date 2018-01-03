@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
-    public class SettingsController : Controller
+    public class SettingsController : AdminBaseController
     {
         public IActionResult Content()
         {

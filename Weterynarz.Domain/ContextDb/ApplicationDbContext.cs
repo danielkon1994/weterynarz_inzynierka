@@ -26,6 +26,7 @@ namespace Weterynarz.Domain.ContextDb
         public DbSet<MedicalExamination> MedicalExaminations { get; set; }
         public DbSet<MedicalExaminationType> MedicalExaminationTypes { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<SettingsContent> SettingsContent { get; set; }
         #endregion
     }
 }

@@ -1,6 +1,7 @@
-﻿
+﻿@model IEnumerable<Weterynarz.Services.ViewModels.Settings.SettingsContentItem>
 @{
     ViewData["Title"] = "Treść strony głównej";
+    //var settingsGroups = Model.GroupBy(i => i.GroupName);
 }
 
 @section breadcrumb {
@@ -13,15 +14,19 @@
 <div class="container">
     <div class="row">
         <!-- foreach loop -->
-        <div class="col-sm-6 col-md-4">
-            <div class="card card-accent-info">
-                <div class="card-header">
-                    Card with accent
-                </div>
-                <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex
-                    ea commodo consequat.
-                </div>
+        @*@foreach (var group in settingsGroups)
+        {
+            
+        }*@
+        <div class="col-md-6">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-warning">
+                    Ustawienia ogólne
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
             </div>
         </div>
         <!-- end foreach loop -->
