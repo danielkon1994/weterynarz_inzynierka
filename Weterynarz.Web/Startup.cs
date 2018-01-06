@@ -36,6 +36,9 @@ namespace Weterynarz.Web
         {
             services.AddMvc();
 
+            // enable In-Memory Cache
+            services.AddMemoryCache();
+
             services.AddPaging();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -44,6 +47,8 @@ namespace Weterynarz.Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped(p => new ApplicationDbContext(p.GetService<DbContextOptions<ApplicationDbContext>>()));
 
             // Add application repositories
             services.AddScoped<IAnimalRepository, AnimalRepository>();
@@ -58,6 +63,8 @@ namespace Weterynarz.Web
             services.AddScoped<IMedicalExaminationTypesService, MedicalExaminationTypesService>();
             services.AddScoped<IAccountsService, AccountsService>();
             services.AddScoped<ISettingsContentService, SettingsContentService>();
+            services.AddScoped<IMemoryCacheService, MemoryCacheService>();
+            services.AddScoped<IHomeService, HomeService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             // redirect to another login page

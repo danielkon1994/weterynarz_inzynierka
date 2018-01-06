@@ -8,6 +8,6 @@ namespace Weterynarz.Basic.Const
     {
         public const string PageSubTitle = "pageSubTitle";
         public const string PageTitle = "pageTitle";
-        public const string pageTitleButton = "pageTitleButton";
+        public const string PageTitleButton = "pageTitleButton";
     }
 }

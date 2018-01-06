@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Weterynarz.Basic.Const;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Services.ViewModels.Settings;
@@ -12,10 +13,12 @@ namespace Weterynarz.Services.Services.Implementations
     public class SettingsContentService : ISettingsContentService
     {
         private ISettingsContentRepository _settingsContentRepository;
+        private IMemoryCacheService _memoryCacheService;
 
-        public SettingsContentService(ISettingsContentRepository settingsContentRepository)
+        public SettingsContentService(ISettingsContentRepository settingsContentRepository, IMemoryCacheService memoryCacheService)
         {
             _settingsContentRepository = settingsContentRepository;
+            _memoryCacheService = memoryCacheService;
         }
 
         public SettingsContentViewModel GetSettingsContentViewModel()
@@ -65,6 +68,8 @@ namespace Weterynarz.Services.Services.Implementations
                 settings.ModificationDate = model.ModificationDate;
 
                 await _settingsContentRepository.SaveChangesAsync();
+
+                _memoryCacheService.RemoveContentDict(CacheKey.SettingsContentCache);
             }
         }
     }

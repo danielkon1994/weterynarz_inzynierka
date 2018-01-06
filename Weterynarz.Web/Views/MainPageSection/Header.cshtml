@@ -1,9 +1,11 @@
-﻿<header class="masthead">
+﻿@model HomeIndexViewModel
+
+<header class="masthead">
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Witaj !</div>
-            <div class="intro-heading text-uppercase">Całodobowa klinika weterynaryjna</div>
-            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">Więcej</a>
+            <div class="intro-lead-in">@HtmlExtensions.GetCacheContent(SettingsContentState.PageSubTitle, Model.SiteContent)</div>
+            <div class="intro-heading text-uppercase">@HtmlExtensions.GetCacheContent(SettingsContentState.PageTitle, Model.SiteContent)</div>
+            <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#about">@HtmlExtensions.GetCacheContent(SettingsContentState.PageTitleButton, Model.SiteContent)</a>
         </div>
     </div>
 </header>
