@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Weterynarz.Web.Extensions;
 using ReflectionIT.Mvc.Paging;
+using Weterynarz.Web.Models.Emails;
 
 namespace Weterynarz.Web
 {
@@ -66,6 +67,8 @@ namespace Weterynarz.Web
             services.AddScoped<IMemoryCacheService, MemoryCacheService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             // redirect to another login page
             services.ConfigureApplicationCookie(options =>

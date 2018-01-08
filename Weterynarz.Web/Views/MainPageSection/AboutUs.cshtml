@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeIndexViewModel
+@{
     ViewData["Title"] = "O nas";
 }
 
@@ -6,8 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">O nas</h2>
-                <h3 class="section-subheading text-muted">Potrafimy wszystko i jeszcze więcej</h3>
+                <h2 class="section-heading text-uppercase">@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsTitle, Model.SiteContent)</h2>
+                <h3 class="section-subheading text-muted">@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsSubTitle, Model.SiteContent)</h3>
             </div>
         </div>
         <div class="row">
@@ -19,10 +20,10 @@
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Początki</h4>
+                                <h4>@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag1Title, Model.SiteContent)</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu.</p>
+                                <p class="text-muted">@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag1Text, Model.SiteContent)</p>
                             </div>
                         </div>
                     </li>
@@ -32,10 +33,10 @@
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Nasza oferta</h4>
+                                <h4>@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag2Title, Model.SiteContent)</h4>
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu.</p>
+                                <p class="text-muted">@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag1Text, Model.SiteContent)</p>
                             </div>
                         </div>
                     </li>
@@ -45,10 +46,10 @@
                         </div>
                         <div class="timeline-panel">
                             <div class="timeline-heading">
-                                <h4>Zespół</h4>      
+                                <h4>@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag3Title, Model.SiteContent)</h4>      
                             </div>
                             <div class="timeline-body">
-                                <p class="text-muted">Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut molestie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermentum in, dolor. Pellentesque facilisis. Nulla imperdiet sit amet magna. Vestibulum dapibus, mauris nec malesuada fames ac turpis velit, rhoncus eu.</p>
+                                <p class="text-muted">@HtmlExtensions.GetCacheContent(SettingsContentState.AboutUsParag3Text, Model.SiteContent)</p>
                             </div>
                         </div>
                     </li>

@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AlertifyJS" Version="1.11.0" />
     <PackageReference Include="bootstrap.sass" Version="4.0.0-beta2" />
+    <PackageReference Include="MailKit" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.0.1" />
