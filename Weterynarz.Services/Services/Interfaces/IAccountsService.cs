@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,6 @@ namespace Weterynarz.Services.Services.Interfaces
         Task<bool> BanUser(string id);
         Task<bool> UnlockUser(string id);
         Task SavePassword(ApplicationUser user, string newPassword);
+        Task<IEnumerable<SelectListItem>> GetVetsSelectList();
     }
 }

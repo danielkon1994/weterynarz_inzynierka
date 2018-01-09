@@ -22,7 +22,7 @@ namespace Weterynarz.Domain.EntitiesDb
 
         public virtual AnimalType AnimalType { get; set; }
 
-        public virtual Client Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         public virtual ICollection<MedicalExamination> MedicalExaminations { get; set; }
     }

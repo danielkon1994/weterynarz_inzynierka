@@ -1,7 +1,7 @@
-﻿
+﻿@model Weterynarz.Services.ViewModels.Visit.VisitMakeVisitViewModel
 @{
     ViewData["Title"] = "Umów wizytę";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
 }
 
 <section id="makeVisit">
@@ -11,39 +11,82 @@
                 <h2 class="section-heading text-uppercase">Umów wizytę</h2>
                 <h3 class="section-subheading text-muted">Szybko i sprawnie umów się na wizytę do weterynarza</h3>
             </div>
-        </div>
+        </div>        
         <div class="row">
             <div class="col-lg-12">
-                <form id="makeVisitForm" name="makeVisit" novalidate>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input class="form-control" id="name" type="text" placeholder="Nazwa użytkownika" required data-validation-required-message="Podaj swoją nazwę użytkownika">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" id="email" type="email" placeholder="Adres email" required data-validation-required-message="Podaj swój adres email">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" id="phone" type="tel" placeholder="Numer telefonu" required data-validation-required-message="Podaj swój numer telefonu">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <textarea class="form-control" id="message" placeholder="Wiadomość" required data-validation-required-message="Podaj wiadomość"></textarea>
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="col-lg-12 text-center">
-                            <div id="success"></div>
-                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Wyślij</button>
-                        </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Zaloguj się aby <br />uzupełnić niektóre pola</h4>
+                        <a href="@Url.Action("Login", "Account", new { area = AreaNames.Admin, returnUrl = Url.Action("MakeVisit", "Visit", new { account = true }) })" class="btn btn-primary btn-lg text-uppercase mt-2">Zaloguj się</a>
+                        @*<div class="mt-2">(Możliwość sprawdzenia terminu wizyty itp.)</div>*@
                     </div>
-                </form>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="makeVisitForm" asp-controller="Visit" asp-action="MakeVisit" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    @Html.HiddenFor(m => m.UserId)
+
+                                    <div class="form-group">
+                                        <input asp-for="Name" class="form-control" type="text" placeholder="Imię">
+                                        <span asp-validation-for="Name" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="Surname" class="form-control" type="email" placeholder="Nazwisko">
+                                        <span asp-validation-for="Surname" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <input asp-for="Address" class="form-control" type="tel" placeholder="Adres">
+                                            <span asp-validation-for="Address" class="help-block text-danger"></span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input asp-for="HomeNumber" class="form-control" type="tel" placeholder="Numer domu">
+                                            <span asp-validation-for="HomeNumber" class="help-block text-danger"></span>
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <input asp-for="City" class="form-control" type="email" placeholder="Miejscowość">
+                                        <span asp-validation-for="City" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input asp-for="ZipCode" class="form-control" type="email" placeholder="Kod pocztowy">
+                                        <span asp-validation-for="ZipCode" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <select asp-for="VetId" class="form-control" asp-items="@Model.VetsSelectList" placeholder="Lekarz"></select>
+                                        <span asp-validation-for="VetId" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList" placeholder="Zwierzak"></select>
+                                        <span asp-validation-for="AnimalId" class="help-block text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+@section Scripts {
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            $('.nav-link').on('click', function (e) {
+                e.preventDefault();
+
+                var link = $(this);
+                var section = link.prop('href');
+                if (section != '')
+                {
+                    window.location.replace(section);
+                }
+            });
+        });
+    </script>*@
+}

@@ -71,7 +71,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         public async Task<IActionResult> Edit(string id)
-        {
+        {            
             AccountsManageViewModel model;
             var user = await _userManager.FindByIdAsync(id);
             if (user == null)

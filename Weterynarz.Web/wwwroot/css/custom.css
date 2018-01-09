@@ -18,9 +18,11 @@ header.masthead {
   header.masthead .intro-text {
     padding-top: 230px; }
 
-#about .timeline .timeline-image {
-  border: unset;
+#about {
   background-color: white; }
+  #about .timeline .timeline-image {
+    border: unset;
+    background-color: white; }
 
 #services .section-heading {
   color: white; }
@@ -32,15 +34,18 @@ header.masthead {
 #services .service-heading {
   color: white; }
 
-#team .team-member .table {
-  margin-top: 40px; }
+#team {
+  background-color: white; }
+  #team .team-member .table {
+    margin-top: 40px; }
 
 section#makeVisit {
   background-color: #212529;
-  background-image: url("../img/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
+  color: white;
   padding: 120px 0 70px 0; }
+  section#makeVisit hr {
+    margin-top: 3rem;
+    border-top: 1px solid white; }
   section#makeVisit .section-heading {
     color: #fff; }
   section#makeVisit .form-group {
@@ -73,6 +78,9 @@ section#makeVisit {
     font-weight: 700;
     color: #ced4da;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+body {
+  background-color: #212529; }
 
 #mainNav .navbar-brand {
   font-family: unset !important; }

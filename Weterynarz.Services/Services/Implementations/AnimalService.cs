@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Services.Services.Interfaces;
 
@@ -14,7 +15,5 @@ namespace Weterynarz.Services.Services.Implementations
         {
             _animalRepository = animalRepository;
         }
-
-
     }
 }

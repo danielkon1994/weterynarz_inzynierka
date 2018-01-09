@@ -12,5 +12,7 @@ namespace Weterynarz.Services.ViewModels.Home
         }
 
         public Dictionary<string, string> SiteContent { get; set; }
+
+        public HomeContactViewModel ContactForm { get; set; }
     }
 }

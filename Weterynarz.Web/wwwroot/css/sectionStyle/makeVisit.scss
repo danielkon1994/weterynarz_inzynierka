@@ -1,9 +1,14 @@
-﻿section#makeVisit {
-    background-color: #212529;
-    background-image: url("../img/map-image.png");
-    background-repeat: no-repeat;
-    background-position: center;
+﻿@import '../customVariables.scss';
+
+section#makeVisit {
+    background-color: $dark-color;
+    color: $white-color;
     padding: 120px 0 70px 0;
+
+    hr {
+        margin-top: 3rem;
+        border-top: 1px solid $white-color;
+    }
 
     .section-heading {
         color: #fff;

@@ -1,4 +1,8 @@
-﻿#about {
+﻿@import '../customVariables.scss';
+
+#about {
+    background-color: $white-color;
+
     .timeline {
         .timeline-image {
             border: unset;

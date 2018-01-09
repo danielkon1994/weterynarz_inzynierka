@@ -51,5 +51,6 @@ namespace Weterynarz.Web.Controllers
 
             return Json(new JsonResponseModel { Message = "Nie udało się wysłać wiadomości", Status = MessageStatus.error });
         }
+        
     }
 }

@@ -1,4 +1,8 @@
-﻿#team {
+﻿@import '../customVariables.scss';
+
+#team {
+    background-color: $white-color;
+
     .team-member {
         .table {
             margin-top: 40px;

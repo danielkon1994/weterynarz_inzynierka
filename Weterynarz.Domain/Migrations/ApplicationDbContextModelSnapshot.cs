@@ -137,9 +137,9 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<int?>("AnimalTypeId");
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<DateTime>("BirthDate");
+
+                    b.Property<int?>("ClientId");
 
                     b.Property<DateTime>("CreationDate");
 
@@ -152,13 +152,13 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<int?>("OwnerId");
+                    b.Property<string>("OwnerId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalTypeId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("OwnerId");
 
@@ -470,11 +470,11 @@ namespace Weterynarz.Domain.Migrations
                         .WithMany()
                         .HasForeignKey("AnimalTypeId");
 
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser")
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Client")
                         .WithMany("Animals")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ClientId");
 
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.Client", "Owner")
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Owner")
                         .WithMany("Animals")
                         .HasForeignKey("OwnerId");
                 });

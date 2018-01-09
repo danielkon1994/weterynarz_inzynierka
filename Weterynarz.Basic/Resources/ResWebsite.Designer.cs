@@ -59,5 +59,50 @@ namespace Weterynarz.Basic.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres e-mail.
+        /// </summary>
+        public static string homeContactEmail {
+            get {
+                return ResourceManager.GetString("homeContactEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wiadomość.
+        /// </summary>
+        public static string homeContactMessage {
+            get {
+                return ResourceManager.GetString("homeContactMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Numer telefonu.
+        /// </summary>
+        public static string homeContactPhone {
+            get {
+                return ResourceManager.GetString("homeContactPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pole nie może być pustę.
+        /// </summary>
+        public static string homeContactRequiredErrorMessage {
+            get {
+                return ResourceManager.GetString("homeContactRequiredErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa użytkownika.
+        /// </summary>
+        public static string homeContactUserName {
+            get {
+                return ResourceManager.GetString("homeContactUserName", resourceCulture);
+            }
+        }
     }
 }

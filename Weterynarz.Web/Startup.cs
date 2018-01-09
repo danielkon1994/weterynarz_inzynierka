@@ -66,6 +66,7 @@ namespace Weterynarz.Web
             services.AddScoped<ISettingsContentService, SettingsContentService>();
             services.AddScoped<IMemoryCacheService, MemoryCacheService>();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IVisitService, VisitService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
@@ -109,7 +110,7 @@ namespace Weterynarz.Web
 
                 routes.MapRoute(
                     name: "visit",
-                    template: "umow_wizyte",
+                    template: "UmowWizyte",
                     defaults: new {controller = "Visit", action = "MakeVisit"}
                 );
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,18 +6,27 @@ using System.Threading.Tasks;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Services.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Weterynarz.Services.ViewModels.Accounts;
 using Weterynarz.Services.ViewModels.AnimalTypes;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.ObjectModel;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Services.Services.Implementations
 {
     public class AccountsService : IAccountsService
     {
         public IAccountsRepository _accountsRepository;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountsService(IAccountsRepository accountsRepository)
+        public AccountsService(IAccountsRepository accountsRepository, UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             this._accountsRepository = accountsRepository;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IQueryable<AccountsListViewModel> GetListUsersViewModel()
@@ -128,6 +136,24 @@ namespace Weterynarz.Services.Services.Implementations
             user.PasswordHash = newPassword;
 
             await _accountsRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetVetsSelectList()
+        {
+            List<SelectListItem> vetsList = new List<SelectListItem>();
+
+            var users = await _userManager.GetUsersInRoleAsync(UserRoles.Doctor);            
+            if(users != null)
+            {
+                foreach(var user in users)
+                {
+                    vetsList.Add(new SelectListItem {
+                        Text = $"{user.Name} {user.Surname}",
+                        Value = user.Id
+                    });
+                }
+            }
+            return vetsList.AsEnumerable();
         }
     }
 }
