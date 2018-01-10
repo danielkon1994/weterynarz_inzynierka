@@ -19,11 +19,16 @@ section#makeVisit {
     }
 
     .form-group input,
+    .form-group select,
     .form-group textarea {
         padding: 20px;
     }
 
     .form-group input.form-control {
+        height: auto;
+    }
+
+    .form-group select.form-control {
         height: auto;
     }
 

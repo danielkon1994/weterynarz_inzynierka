@@ -29,6 +29,13 @@ namespace Weterynarz.Services.ViewModels.Visit
         public IEnumerable<SelectListItem> AnimalsSelectList { get; set; }
         public int AnimalId { get; set; }
 
+        public IEnumerable<SelectListItem> AnimalTypesSelectList { get; set; }
+        public int AnimalTypeId { get; set; }
+
+        public string AnimalName { get; set; }
+
+        public string AnimalDescription { get; set; }
+
         public DateTime VisitDate { get; set; }
     }
 }

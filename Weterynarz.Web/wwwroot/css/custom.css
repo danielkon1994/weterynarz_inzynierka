@@ -51,9 +51,12 @@ section#makeVisit {
   section#makeVisit .form-group {
     margin-bottom: 25px; }
   section#makeVisit .form-group input,
+  section#makeVisit .form-group select,
   section#makeVisit .form-group textarea {
     padding: 20px; }
   section#makeVisit .form-group input.form-control {
+    height: auto; }
+  section#makeVisit .form-group select.form-control {
     height: auto; }
   section#makeVisit .form-group textarea.form-control {
     height: 248px; }

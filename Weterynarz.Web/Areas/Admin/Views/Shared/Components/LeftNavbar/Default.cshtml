@@ -5,10 +5,13 @@
             <li class="nav-item">
                 <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fa fa-home" aria-hidden="true"></i> @ResAdmin.leftNavbar_home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin"><i class="fa fa-user-md" aria-hidden="true"></i> @ResAdmin.leftNavbar_doctors</a>
+            </li>
             @if (User.IsInRole(UserRoles.Admin))
             {
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Account" asp-action="List" asp-area="@AreaNames.Admin"><i class="fa fa-users" aria-hidden="true"></i> @ResAdmin.leftNavbar_users</a>
+                    <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin"><i class="fa fa-users" aria-hidden="true"></i> @ResAdmin.leftNavbar_users</a>
                 </li>
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> @ResAdmin.leftNavbar_settings</a>

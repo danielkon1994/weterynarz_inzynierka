@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +18,8 @@ namespace Weterynarz.Domain.EntitiesDb
         public string Surname { get; set; }
 
         public virtual ICollection<Animal> Animals { get; set; }
+
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
         //Additional data
         public string Address { get; set; }

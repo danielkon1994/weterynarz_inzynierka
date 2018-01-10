@@ -12,6 +12,7 @@ using Weterynarz.Services.ViewModels.AnimalTypes;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.ObjectModel;
 using Weterynarz.Basic.Const;
+using Microsoft.EntityFrameworkCore;
 
 namespace Weterynarz.Services.Services.Implementations
 {
@@ -29,9 +30,9 @@ namespace Weterynarz.Services.Services.Implementations
             _roleManager = roleManager;
         }
 
-        public IQueryable<AccountsListViewModel> GetListUsersViewModel()
+        public IQueryable<AccountViewModel> GetListUsersViewModel()
         {
-            return _accountsRepository.GetAllNotDeleted().Select(a => new AccountsListViewModel
+            return _accountsRepository.GetAllNotDeleted().Select(a => new AccountViewModel
             {
                 Id = a.Id,
                 Active = a.Active,
@@ -43,6 +44,7 @@ namespace Weterynarz.Services.Services.Implementations
                 HouseNumber = a.HouseNumber,
                 ZipCode = a.ZipCode,
                 UserName = a.UserName,
+                Roles = a.Roles.Select(i => i.RoleId).ToList()
             });
         }
 
@@ -141,6 +143,7 @@ namespace Weterynarz.Services.Services.Implementations
         public async Task<IEnumerable<SelectListItem>> GetVetsSelectList()
         {
             List<SelectListItem> vetsList = new List<SelectListItem>();
+            vetsList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
             var users = await _userManager.GetUsersInRoleAsync(UserRoles.Doctor);            
             if(users != null)

@@ -1,0 +1,154 @@
+﻿@model AccountsManageViewModel
+@{
+    ViewData["Title"] = "Edycja użytkownika";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Users" asp-action="List" asp-area="@AreaNames.Admin">Lista użytkowników</a></li>
+        <li class="breadcrumb-item active">Edytuj</li>
+    </ol>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form method="post">
+                    <div class="card-header">
+                        <strong>@ResAdmin.accountEditView_header</strong>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="UserName"></label>
+                                    <input type="text" class="form-control" asp-for="UserName" placeholder="Wprowadź nazwę użytkownika">
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input type="text" class="form-control" asp-for="Email" placeholder="Wprowadź adres email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Password"></label>
+                                    <input type="password" class="form-control" asp-for="Password" placeholder="Wprowadź hasło">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword"></label>
+                                    <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Wprowadź ponownie hasło">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Name"></label>
+                                    <input type="text" class="form-control" asp-for="Name" placeholder="Wprowadź nazwę">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label asp-for="Surname"></label>
+                                    <input type="text" class="form-control" asp-for="Surname" placeholder="Wprowadź nazwisko">
+                                    <span asp-validation-for="Surname" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label asp-for="Address"></label>
+                                        <input type="text" class="form-control" asp-for="Address" placeholder="Wprowadź adres">
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="HouseNumber"></label>
+                                        <input type="text" class="form-control" asp-for="HouseNumber" placeholder="Wprowadź numer domu/bloku">
+                                        <span asp-validation-for="HouseNumber" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-row">
+                                    <div class="form-group col-md-8">
+                                        <label asp-for="City"></label>
+                                        <input type="text" class="form-control" asp-for="City" placeholder="Wprowadź nazwę miejscowości">
+                                        <span asp-validation-for="City" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="ZipCode"></label>
+                                        <input type="text" class="form-control" asp-for="ZipCode" placeholder="Wprowadź kod pocztowy">
+                                        <span asp-validation-for="ZipCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <strong>Role użytkownika</strong> <hr />
+                                <div class="form-check">
+                                    @foreach (var role in Model.RolesList)
+                                    {
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="SelectedRoles" value="@role.Value" @(role.Selected ? "checked" : "")>
+                                            @UserRoles.TranslateRole(role.Value)
+                                        </label><br />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
+                        <a asp-controller="Users" asp-action="List" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

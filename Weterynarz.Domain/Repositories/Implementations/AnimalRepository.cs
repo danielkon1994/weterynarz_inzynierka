@@ -21,6 +21,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public IEnumerable<SelectListItem> GetUserAnimalsSelectList(string userId)
         {
             List<SelectListItem> list = new List<SelectListItem>();
+            list.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
             if(!string.IsNullOrEmpty(userId))
             {

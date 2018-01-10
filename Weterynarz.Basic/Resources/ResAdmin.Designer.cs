@@ -88,6 +88,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista lekarzy.
+        /// </summary>
+        public static string accountsListViewModel_listDoctors {
+            get {
+                return ResourceManager.GetString("accountsListViewModel_listDoctors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
         /// </summary>
         public static string accountsManageViewModel_address {
@@ -246,6 +255,15 @@ namespace Weterynarz.Basic.Resources {
         public static string leftNavbar_dictionares {
             get {
                 return ResourceManager.GetString("leftNavbar_dictionares", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lekarze.
+        /// </summary>
+        public static string leftNavbar_doctors {
+            get {
+                return ResourceManager.GetString("leftNavbar_doctors", resourceCulture);
             }
         }
         

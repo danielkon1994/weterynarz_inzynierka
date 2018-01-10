@@ -12,7 +12,7 @@ namespace Weterynarz.Services.Services.Interfaces
 {
     public interface IAccountsService
     {
-        IQueryable<AccountsListViewModel> GetListUsersViewModel();
+        IQueryable<AccountViewModel> GetListUsersViewModel();
         AccountsManageViewModel GetEditViewModel(ApplicationUser account);
         Task<ApplicationUser> EditUser(AccountsManageViewModel model);
         Task<bool> DeleteUser(string id);

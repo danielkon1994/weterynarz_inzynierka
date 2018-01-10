@@ -11,12 +11,20 @@ namespace Weterynarz.Services.Services.Implementations
     public class VisitService : IVisitService
     {
         private IAccountsService _accountsService;
+        private IAccountsRepository _accountsRepository;
         private IAnimalRepository _animalRepository;
+        private IAnimalTypesRepository _animalTypesRepository;
 
-        public VisitService(IAccountsService accountsService, IAnimalRepository animalRepository)
+        public VisitService(
+            IAccountsService accountsService, 
+            IAnimalRepository animalRepository, 
+            IAccountsRepository accountsRepository,
+            IAnimalTypesRepository animalTypesRepository)
         {
             _accountsService = accountsService;
             _animalRepository = animalRepository;
+            _accountsRepository = accountsRepository;
+            _animalTypesRepository = animalTypesRepository;
         }
 
         public async Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(string userId)
@@ -25,9 +33,20 @@ namespace Weterynarz.Services.Services.Implementations
 
             if(!string.IsNullOrEmpty(userId))
             {
-                model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(userId);
+                var user = _accountsRepository.GetById(userId);
+                if(user != null)
+                { 
+                    model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(userId);
+                    model.Name = user.Name;
+                    model.Surname = user.Surname;
+                    model.HomeNumber = user.HouseNumber;
+                    model.City = user.City;
+                    model.ZipCode = user.ZipCode;
+                    model.Address = user.Address;
+                }
             }
-            model.VetsSelectList = await _accountsService.GetVetsSelectList();           
+            model.VetsSelectList = await _accountsService.GetVetsSelectList();
+            model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
 
             return model;
         }

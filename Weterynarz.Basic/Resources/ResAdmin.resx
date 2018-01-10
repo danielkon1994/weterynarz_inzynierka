@@ -240,4 +240,10 @@
   <data name="settingsContentEditView_headerForm" xml:space="preserve">
     <value>Edytuj treść</value>
   </data>
+  <data name="leftNavbar_doctors" xml:space="preserve">
+    <value>Lekarze</value>
+  </data>
+  <data name="accountsListViewModel_listDoctors" xml:space="preserve">
+    <value>Lista lekarzy</value>
+  </data>
 </root>
