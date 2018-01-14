@@ -395,16 +395,20 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
+                    b.Property<string>("AnimalDescription")
+                        .IsRequired();
+
                     b.Property<int>("AnimalId");
+
+                    b.Property<bool>("Approved");
+
+                    b.Property<string>("ClientId");
 
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("DoctorId")
-                        .IsRequired();
+                    b.Property<string>("DoctorId");
 
                     b.Property<DateTime?>("ModificationDate");
 
@@ -413,6 +417,8 @@ namespace Weterynarz.Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("DoctorId");
 
@@ -503,10 +509,13 @@ namespace Weterynarz.Domain.Migrations
                         .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
                         .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DoctorId");
                 });
 #pragma warning restore 612, 618
         }

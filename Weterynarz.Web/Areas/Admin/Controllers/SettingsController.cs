@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Weterynarz.Services.ViewModels.Settings;
-using Weterynarz.Services.Services.Interfaces;
 using Weterynarz.Web.Models.NotifyMessage;
+using Weterynarz.Domain.Repositories.Interfaces;
+using Weterynarz.Domain.ViewModels.Settings;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class SettingsController : AdminBaseController
     {
-        private ISettingsContentService _settingsContentService;
+        private ISettingsContentRepository _settingsContentRepository;
 
-        public SettingsController(ISettingsContentService settingsContentService)
+        public SettingsController(ISettingsContentRepository settingsContentRepository)
         {
-            _settingsContentService = settingsContentService;
+            _settingsContentRepository = settingsContentRepository;
         }
 
         public IActionResult Content()
         {
-            SettingsContentViewModel model = _settingsContentService.GetSettingsContentViewModel();
+            SettingsContentViewModel model = _settingsContentRepository.GetSettingsContentViewModel();
             return View(model);
         }
 
         public IActionResult ManageContent(int id)
         {
-            SettingsContentManageViewModel model = _settingsContentService.GetSettingsContentManageViewModel(id);
+            SettingsContentManageViewModel model = _settingsContentRepository.GetSettingsContentManageViewModel(id);
             return View(model);
         }
 
@@ -37,7 +37,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             try
             {
                 model.ModificationDate = DateTime.Now;
-                await _settingsContentService.SaveSettingsContent(model);
+                await _settingsContentRepository.SaveSettingsContent(model);
 
                 Message message = new Message
                 {

@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Domain", "Wetery
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Basic", "Weterynarz.Basic\Weterynarz.Basic.csproj", "{55DF40EE-487A-486A-951A-DDB6886A79A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Services", "Weterynarz.Services\Weterynarz.Services.csproj", "{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weterynarz.Web", "Weterynarz.Web\Weterynarz.Web.csproj", "{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{55DF40EE-487A-486A-951A-DDB6886A79A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55DF40EE-487A-486A-951A-DDB6886A79A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55DF40EE-487A-486A-951A-DDB6886A79A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED70AD75-FB6E-43EC-AC90-353C3F6E7733}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80E2B1C7-3ADA-4576-8A1E-B7195BC717F2}.Release|Any CPU.ActiveCfg = Release|Any CPU

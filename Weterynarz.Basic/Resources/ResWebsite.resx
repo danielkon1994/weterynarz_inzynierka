@@ -132,4 +132,10 @@
   <data name="homeContactUserName" xml:space="preserve">
     <value>Nazwa użytkownika</value>
   </data>
+  <data name="visitAnimalIdNullError" xml:space="preserve">
+    <value>Należy wybrać zwierzę</value>
+  </data>
+  <data name="visitWithDateExistsError" xml:space="preserve">
+    <value>Data wizyty jest już zajęta</value>
+  </data>
 </root>

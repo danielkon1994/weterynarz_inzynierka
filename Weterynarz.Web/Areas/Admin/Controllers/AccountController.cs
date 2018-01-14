@@ -18,9 +18,7 @@ using Weterynarz.Web.Controllers;
 using Weterynarz.Domain.ContextDb;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Weterynarz.Basic.Const;
-using Weterynarz.Services.Services.Interfaces;
 using ReflectionIT.Mvc.Paging;
-using Weterynarz.Services.ViewModels.Accounts;
 using Weterynarz.Web.Models.NotifyMessage;
 using System.Data.Entity;
 
@@ -32,43 +30,21 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
-        private readonly IAccountsService _accountsService;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger,
-            IAccountsService accountsService)
+            ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
-            _accountsService = accountsService;
         }
 
         [TempData]
         public string ErrorMessage { get; set; }
-
-        [HttpGet]
-        public async Task<IActionResult> List(int page = 1)
-        {
-            var listUsersQueryable = _accountsService.GetListUsersViewModel().OrderBy(a => a.Name);
-            //var listUsersList = new List<AccountsListViewModel>();
-            //foreach(var userViewModel in listUsersQueryable)
-            //{
-            //    var user = await _userManager.FindByIdAsync(userViewModel.Id);
-            //    if(user != null)
-            //    {
-            //        userViewModel.Roles = await _userManager.GetRolesAsync(user);
-            //    }
-            //    listUsersList.Add(userViewModel);
-            //}            
-            var model = await PagingList.CreateAsync(listUsersQueryable, 20, page);
-
-            return View(model);
-        }
         
         [HttpGet]
         [AllowAnonymous]

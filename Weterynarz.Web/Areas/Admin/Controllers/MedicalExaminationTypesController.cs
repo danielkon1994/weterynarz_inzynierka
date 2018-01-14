@@ -4,25 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Weterynarz.Services.Services.Interfaces;
 using ReflectionIT.Mvc.Paging;
-using Weterynarz.Services.ViewModels.MedicalExaminationTypes;
 using Weterynarz.Web.Models.NotifyMessage;
+using Weterynarz.Domain.Repositories.Interfaces;
+using Weterynarz.Domain.ViewModels.MedicalExaminationTypes;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class MedicalExaminationTypesController : AdminBaseController
     {
-        private readonly IMedicalExaminationTypesService _medicalExaminationTypesService;
+        private readonly IMedicalExaminationTypesRepository _medicalExaminationTypesRepository;
 
-        public MedicalExaminationTypesController(IMedicalExaminationTypesService medicalExaminationTypesService)
+        public MedicalExaminationTypesController(IMedicalExaminationTypesRepository medicalExaminationTypesRepository)
         {
-            _medicalExaminationTypesService = medicalExaminationTypesService;
+            _medicalExaminationTypesRepository = medicalExaminationTypesRepository;
         }
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var listElements = _medicalExaminationTypesService.GetIndexViewModel().OrderBy(a => a.Name);
+            var listElements = _medicalExaminationTypesRepository.GetIndexViewModel().OrderBy(a => a.Name);
             var model = await PagingList.CreateAsync(listElements, 20, page);
 
             return View(model);
@@ -43,7 +43,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _medicalExaminationTypesService.CreateNewType(model);
+                await _medicalExaminationTypesRepository.CreateNewType(model);
 
                 Message message = new Message
                 {
@@ -62,7 +62,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         // GET: AnimalTypes/Edit/5
         public IActionResult Edit(int id)
         {
-            MedicalExaminationTypesManageViewModel model = _medicalExaminationTypesService.GetEditViewModel(id);
+            MedicalExaminationTypesManageViewModel model = _medicalExaminationTypesRepository.GetEditViewModel(id);
             if(model == null)
             {
                 base.NotifyMessage("Nie znaleziono typu z takim identyfikatorem", "Upppsss !", MessageStatus.error);
@@ -79,7 +79,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             try
             {
-                bool result = await _medicalExaminationTypesService.EditType(model);
+                bool result = await _medicalExaminationTypesRepository.EditType(model);
 
                 Message message = new Message
                 {
@@ -105,7 +105,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             try
             {
-                bool result = await _medicalExaminationTypesService.DeleteType(id);
+                bool result = await _medicalExaminationTypesRepository.DeleteType(id);
 
                 Message message = new Message
                 {

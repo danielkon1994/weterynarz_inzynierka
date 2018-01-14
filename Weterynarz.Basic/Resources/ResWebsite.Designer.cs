@@ -104,5 +104,23 @@ namespace Weterynarz.Basic.Resources {
                 return ResourceManager.GetString("homeContactUserName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Należy wybrać zwierzę.
+        /// </summary>
+        public static string visitAnimalIdNullError {
+            get {
+                return ResourceManager.GetString("visitAnimalIdNullError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data wizyty jest już zajęta.
+        /// </summary>
+        public static string visitWithDateExistsError {
+            get {
+                return ResourceManager.GetString("visitWithDateExistsError", resourceCulture);
+            }
+        }
     }
 }

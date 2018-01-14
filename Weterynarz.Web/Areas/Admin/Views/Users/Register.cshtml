@@ -1,13 +1,12 @@
-﻿@model AccountsManageViewModel
+﻿@model UsersRegisterViewModel
 @{
     ViewData["Title"] = "Rejestracja";
 }
 
 @section breadcrumb {
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
-        <li class="breadcrumb-item"><a asp-controller="Users" asp-action="List" asp-area="@AreaNames.Admin">Lista użytkowników</a></li>
-        <li class="breadcrumb-item active">Dodaj</li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.None">Strona główna</a></li>
+        <li class="breadcrumb-item active">Rejestracja</li>
     </ol>
 }
 
@@ -15,9 +14,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form method="post">
+                <form method="post" asp-controller="Users" asp-action="Register" asp-area="@AreaNames.Admin">
                     <div class="card-header">
-                        <strong>@ResAdmin.accountCreateView_header</strong>
+                        <strong>@ResAdmin.userRegisterView_header</strong>
                     </div>
                     <div class="card-body">
 
@@ -122,25 +121,10 @@
                         </div>
                         <br />
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <strong>Role użytkownika</strong> <hr />
-                                <div class="form-check">
-                                    @foreach (var role in Model.RolesList)
-                                    {
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="SelectedRoles" value="@role.Value" @(role.Selected ? "checked" : "")>
-                                            @UserRoles.TranslateRole(role.Value)
-                                        </label><br />
-                                    }
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
-                        <a asp-controller="Users" asp-action="List" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Zarejestruj się</button>
+                        <a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.None" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
                     </div>
                 </form>
             </div>

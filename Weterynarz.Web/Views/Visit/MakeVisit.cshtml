@@ -1,4 +1,4 @@
-﻿@model Weterynarz.Services.ViewModels.Visit.VisitMakeVisitViewModel
+﻿@model Weterynarz.Domain.ViewModels.Visit.VisitMakeVisitViewModel
 @{
     ViewData["Title"] = "Umów wizytę";
     Layout = "~/Views/Shared/_LayoutSubpage.cshtml";
@@ -20,7 +20,6 @@
                         <div class="col-md-6">
                             <h4>Zaloguj się aby <br />uzupełnić niektóre pola</h4>
                             <a href="@Url.Action("Login", "Account", new { area = AreaNames.Admin, returnUrl = Url.Action("MakeVisit", "Visit", new { account = true }) })" class="btn btn-primary btn-lg text-uppercase mt-2">Zaloguj się</a>
-                            @*<div class="mt-2">(Możliwość sprawdzenia terminu wizyty itp.)</div>*@
                         </div>
                     </div>
                     <hr />
@@ -33,6 +32,25 @@
 
                                     @Html.HiddenFor(m => m.UserId)
 
+                                    @if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="form-group">
+                                            <input asp-for="UserName" class="form-control" type="text" placeholder="Nazwa użytkownika">
+                                            <span asp-validation-for="UserName" class="help-block text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Email" class="form-control" type="text" placeholder="Email">
+                                            <span asp-validation-for="Email" class="help-block text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="Password" class="form-control" type="password" placeholder="Hasło">
+                                            <span asp-validation-for="Password" class="help-block text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <input asp-for="ComparePassword" class="form-control" type="password" placeholder="Potwierdź hasło">
+                                            <span asp-validation-for="ComparePassword" class="help-block text-danger"></span>
+                                        </div>
+                                    }
                                     <div class="form-group">
                                         <input asp-for="Name" class="form-control" type="text" placeholder="Imię">
                                         <span asp-validation-for="Name" class="help-block text-danger"></span>
@@ -54,7 +72,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                     <div class="form-group">
                                         <input asp-for="City" class="form-control" type="text" placeholder="Miejscowość">
                                         <span asp-validation-for="City" class="help-block text-danger"></span>
@@ -64,13 +82,17 @@
                                         <span asp-validation-for="ZipCode" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
+                                        <input asp-for="VisitDate" class="form-control" type="datetime" placeholder="Data wizyty">
+                                        <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
                                         <select asp-for="VetId" class="form-control" asp-items="@Model.VetsSelectList" placeholder="Lekarz"></select>
                                         <span asp-validation-for="VetId" class="help-block text-danger"></span>
                                     </div>
-                                    @if(!string.IsNullOrEmpty(Model.UserId))
-                                    { 
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
                                         <div class="form-group">
-                                            <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList" placeholder="Zwierzak"></select>
+                                            <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList" placeholder="Zwierzę"></select>
                                             <span asp-validation-for="AnimalId" class="help-block text-danger"></span>
                                         </div>
                                     }
@@ -85,10 +107,19 @@
                                             <span asp-validation-for="AnimalTypeId" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <textarea asp-for="AnimalDescription" class="form-control" placeholder="Opis problemu"></textarea>
-                                            <span asp-validation-for="AnimalDescription" class="help-block text-danger"></span>
+                                            <input asp-for="AnimalBirthdate" class="form-control" type="datetime" placeholder="Data urodzenia zwierzęcia">
+                                            <span asp-validation-for="AnimalBirthdate" class="help-block text-danger"></span>
                                         </div>
                                     }
+                                    <div class="form-group">
+                                        <textarea asp-for="AnimalDescription" class="form-control" placeholder="Opis problemu"></textarea>
+                                        <span asp-validation-for="AnimalDescription" class="help-block text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-primary btn-block">Umów wizytę</button>
                                 </div>
                             </div>
                         </form>

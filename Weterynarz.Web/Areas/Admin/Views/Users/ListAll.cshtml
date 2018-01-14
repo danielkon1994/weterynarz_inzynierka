@@ -1,5 +1,5 @@
-﻿@namespace Weterynarz.Services.ViewModels.Accounts
-@model PagingList<AccountViewModel>
+﻿@namespace Weterynarz.Domain.ViewModels.Users
+@model PagingList<UserViewModel>
 @{
     ViewData["Title"] = "Lista użytkowników";
 }
@@ -19,7 +19,7 @@
                     @ResAdmin.text_options
                 </div>
                 <div class="card-body">
-                    <a class="btn btn-warning" asp-controller="Users" asp-action="Register" asp-area="@AreaNames.Admin">@ResAdmin.button_add</a>
+                    <a class="btn btn-warning" asp-controller="Users" asp-action="Add" asp-area="@AreaNames.Admin">@ResAdmin.button_add</a>
                 </div>
             </div>
         </div>

@@ -4,26 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Weterynarz.Services.Services.Interfaces;
-using Weterynarz.Services.ViewModels.AnimalTypes;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
+using Weterynarz.Domain.ViewModels.AnimalTypes;
+using Weterynarz.Domain.Repositories.Interfaces;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class AnimalTypesController : AdminBaseController
     {
-        private readonly IAnimalTypesService _animalTypesService;
+        private readonly IAnimalTypesRepository _animalTypesRepository;
 
-        public AnimalTypesController(IAnimalTypesService animalTypesService)
+        public AnimalTypesController(IAnimalTypesRepository animalTypesRepository)
         {
-            this._animalTypesService = animalTypesService;
+            this._animalTypesRepository = animalTypesRepository;
         }
 
         // GET: AnimalTypes
         public async Task<IActionResult> Index(int page = 1)
         {
-            var listElements = _animalTypesService.GetIndexViewModel().OrderBy(a => a.Name);
+            var listElements = _animalTypesRepository.GetIndexViewModel().OrderBy(a => a.Name);
             var model = await PagingList.CreateAsync(listElements, 20, page);
 
             return View(model);
@@ -44,7 +44,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if(ModelState.IsValid)
             {
-                await _animalTypesService.CreateNewType(model);
+                await _animalTypesRepository.CreateNewType(model);
 
                 Message message = new Message
                 {
@@ -63,7 +63,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         // GET: AnimalTypes/Edit/5
         public IActionResult Edit(int id)
         {
-            AnimalTypesManageViewModel model = _animalTypesService.GetEditViewModel(id);
+            AnimalTypesManageViewModel model = _animalTypesRepository.GetEditViewModel(id);
             if (model == null)
             {
                 base.NotifyMessage("Nie znaleziono typu z takim identyfikatorem", "Upppsss !", MessageStatus.error);
@@ -80,7 +80,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             try
             {
-                bool result = await _animalTypesService.EditType(model);
+                bool result = await _animalTypesRepository.EditType(model);
 
                 Message message = new Message
                 {
@@ -106,7 +106,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             try
             {
-                bool result = await _animalTypesService.DeleteType(id);
+                bool result = await _animalTypesRepository.DeleteType(id);
 
                 Message message = new Message
                 {

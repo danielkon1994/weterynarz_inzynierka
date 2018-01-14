@@ -7,27 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 using Weterynarz.Web.Models;
 using Weterynarz.Domain.ContextDb;
 using Microsoft.Extensions.Caching.Memory;
-using Weterynarz.Services.Services.Interfaces;
-using Weterynarz.Services.ViewModels.Home;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Web.Services;
+using Weterynarz.Domain.ViewModels.Home;
+using Weterynarz.Domain.Repositories.Interfaces;
 
 namespace Weterynarz.Web.Controllers
 {
     public class HomeController : BaseController
     {
-        private IHomeService _homeService;
+        private IHomeRepository _homeRepository;
         private IEmailSender _emailSender;
 
-        public HomeController(IHomeService homeService, IEmailSender emailSender)
+        public HomeController(IHomeRepository homeRepository, IEmailSender emailSender)
         {
-            _homeService = homeService;
+            _homeRepository = homeRepository;
             _emailSender = emailSender;
         }
 
         public IActionResult Index()
         {
-            HomeIndexViewModel model = _homeService.GetIndexViewModel();
+            HomeIndexViewModel model = _homeRepository.GetIndexViewModel();
 
             return View(model);
         }

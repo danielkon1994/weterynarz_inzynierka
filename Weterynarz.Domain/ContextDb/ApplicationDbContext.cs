@@ -22,6 +22,7 @@ namespace Weterynarz.Domain.ContextDb
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.Entity<ApplicationUser>().HasMany(p => p.Roles).WithOne().HasForeignKey(p => p.UserId).HasPrincipalKey(p => p.Id);
+            
         }
 
         #region DbSets

@@ -79,6 +79,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Rejestracja.
+        /// </summary>
+        public static string accountRegisterView_header {
+            get {
+                return ResourceManager.GetString("accountRegisterView_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista użytkowników.
         /// </summary>
         public static string accountsListViewModel_list {
@@ -412,6 +421,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj użytkownika.
+        /// </summary>
+        public static string userCreateView_header {
+            get {
+                return ResourceManager.GetString("userCreateView_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Rejestracja.
+        /// </summary>
+        public static string userRegisterView_header {
+            get {
+                return ResourceManager.GetString("userRegisterView_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Administrator.
         /// </summary>
         public static string userRoles_admin {
@@ -444,6 +471,96 @@ namespace Weterynarz.Basic.Resources {
         public static string userRoles_worker {
             get {
                 return ResourceManager.GetString("userRoles_worker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres.
+        /// </summary>
+        public static string usersManageViewModel_address {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Miejscowość.
+        /// </summary>
+        public static string usersManageViewModel_city {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_city", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Powtórz hasło.
+        /// </summary>
+        public static string usersManageViewModel_confirmPassword {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_confirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu E-mail.
+        /// </summary>
+        public static string usersManageViewModel_email {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nr domu.
+        /// </summary>
+        public static string usersManageViewModel_houseNumber {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_houseNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imię.
+        /// </summary>
+        public static string usersManageViewModel_name {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hasło.
+        /// </summary>
+        public static string usersManageViewModel_password {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwisko.
+        /// </summary>
+        public static string usersManageViewModel_surname {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa użytkownika.
+        /// </summary>
+        public static string usersManageViewModel_userName {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_userName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Kod pocztowy.
+        /// </summary>
+        public static string usersManageViewModel_zipCode {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_zipCode", resourceCulture);
             }
         }
     }

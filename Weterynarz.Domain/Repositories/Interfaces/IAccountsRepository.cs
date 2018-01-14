@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Weterynarz.Domain.EntitiesDb;
+using Weterynarz.Domain.ViewModels.Accounts;
 
 namespace Weterynarz.Domain.Repositories.Interfaces
 {
@@ -16,5 +18,14 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         ApplicationUser GetByIdNotDeleted(string id);
         void DeleteUser(ApplicationUser user);
         Task SaveChangesAsync();
+        IQueryable<AccountViewModel> GetListUsersViewModel();
+        AccountsManageViewModel GetEditViewModel(ApplicationUser account);
+        Task<ApplicationUser> EditUser(AccountsManageViewModel model);
+        Task<bool> DeleteUser(string id);
+        Task<bool> BanUser(string id);
+        Task<bool> UnlockUser(string id);
+        Task SavePassword(ApplicationUser user, string newPassword);
+        Task<IEnumerable<SelectListItem>> GetVetsSelectList();
+        Task InsertAcync(ApplicationUser user);
     }
 }

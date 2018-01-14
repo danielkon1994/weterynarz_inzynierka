@@ -11,11 +11,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
 {
     public class AnimalRepository : BaseRepository<Animal>, IAnimalRepository
     {
-        private ApplicationDbContext _db;
-
         public AnimalRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
 
         public IEnumerable<SelectListItem> GetUserAnimalsSelectList(string userId)

@@ -13,13 +13,12 @@ using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.Repositories.Implementations;
-using Weterynarz.Services.Services.Interfaces;
-using Weterynarz.Services.Services.Implementations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Weterynarz.Web.Extensions;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.Emails;
+using Weterynarz.Domain.Services;
 
 namespace Weterynarz.Web
 {
@@ -57,16 +56,13 @@ namespace Weterynarz.Web
             services.AddScoped<IMedicalExaminationTypesRepository, MedicalExaminationTypesRepository>();
             services.AddScoped<IAccountsRepository, AccountsRepository>();
             services.AddScoped<ISettingsContentRepository, SettingsContentRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IVisitRepository, VisitRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
 
             // Add application services.
-            services.AddScoped<IAnimalService, AnimalService>();
-            services.AddScoped<IAnimalTypesService, AnimalTypesService>();
-            services.AddScoped<IMedicalExaminationTypesService, MedicalExaminationTypesService>();
-            services.AddScoped<IAccountsService, AccountsService>();
-            services.AddScoped<ISettingsContentService, SettingsContentService>();
             services.AddScoped<IMemoryCacheService, MemoryCacheService>();
-            services.AddScoped<IHomeService, HomeService>();
-            services.AddScoped<IVisitService, VisitService>();
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));

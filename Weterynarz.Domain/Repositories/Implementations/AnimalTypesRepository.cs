@@ -7,6 +7,7 @@ using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using System.Linq;
+using Weterynarz.Domain.ViewModels.AnimalTypes;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -29,6 +30,88 @@ namespace Weterynarz.Domain.Repositories.Implementations
             list.Insert(0, new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
             return list.AsEnumerable();
+        }
+
+        public IQueryable<AnimalTypesIndexViewModel> GetIndexViewModel()
+        {
+            return base.GetAllNotDeleted().Select(a => new AnimalTypesIndexViewModel
+            {
+                Id = a.Id,
+                Active = a.Active,
+                Name = a.Name,
+                Description = a.Description,
+                CreationDate = a.CreationDate
+            });
+        }
+
+        public async Task CreateNewType(AnimalTypesManageViewModel model)
+        {
+            AnimalType type = new AnimalType
+            {
+                Active = model.Active,
+                CreationDate = DateTime.Now,
+                Description = model.Description,
+                Name = model.Name
+            };
+
+            await base.InsertAsync(type);
+        }
+
+        public AnimalTypesManageViewModel GetEditViewModel(int id)
+        {
+            AnimalTypesManageViewModel model;
+            var animalType = base.GetById(id);
+            if (animalType != null)
+            {
+                model = new AnimalTypesManageViewModel
+                {
+                    Active = animalType.Active,
+                    Name = animalType.Name,
+                    Id = animalType.Id,
+                    Description = animalType.Description,
+                };
+
+                return model;
+            }
+
+            return null;
+        }
+
+        public async Task<bool> EditType(AnimalTypesManageViewModel model)
+        {
+            var animalType = base.GetById(model.Id);
+            if (animalType != null)
+            {
+                animalType.Active = model.Active;
+                animalType.Description = model.Description;
+                animalType.Name = model.Name;
+                animalType.ModificationDate = DateTime.Now;
+
+                await base.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> DeleteType(int id)
+        {
+            var animalType = base.GetById(id);
+            if (animalType != null)
+            {
+                try
+                {
+                    await base.SoftDeleteAsync(animalType);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+            }
+
+            return false;
         }
     }
 }

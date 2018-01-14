@@ -1,25 +1,31 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Weterynarz.Basic.Const;
 using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
+using Weterynarz.Domain.ViewModels.Accounts;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
     public class AccountsRepository : IAccountsRepository
     {
         private readonly ApplicationDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountsRepository(ApplicationDbContext db)
+        public AccountsRepository(ApplicationDbContext db, UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _db = db;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public IQueryable<ApplicationUser> GetAll()
@@ -55,6 +61,143 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public void DeleteUser(ApplicationUser user)
         {
             _db.Users.Remove(user);
+        }
+
+        public IQueryable<AccountViewModel> GetListUsersViewModel()
+        {
+            return this.GetAllNotDeleted().Select(a => new AccountViewModel
+            {
+                Id = a.Id,
+                Active = a.Active,
+                Name = a.Name,
+                Surname = a.Surname,
+                Address = a.Address,
+                City = a.City,
+                CreationDate = a.CreationDate,
+                HouseNumber = a.HouseNumber,
+                ZipCode = a.ZipCode,
+                UserName = a.UserName,
+                Roles = a.Roles.Select(i => i.RoleId).ToList()
+            });
+        }
+
+        public AccountsManageViewModel GetEditViewModel(ApplicationUser account)
+        {
+            AccountsManageViewModel model = new AccountsManageViewModel
+            {
+                Email = account.Email,
+                Active = account.Active,
+                Address = account.Address,
+                City = account.City,
+                UserName = account.UserName,
+                HouseNumber = account.HouseNumber,
+                Id = account.Id,
+                Name = account.Name,
+                Surname = account.Surname,
+                ZipCode = account.ZipCode
+            };
+
+            return model;
+        }
+
+        public async Task<ApplicationUser> EditUser(AccountsManageViewModel model)
+        {
+            var user = this.GetById(model.Id);
+            if (user != null)
+            {
+                user.Name = model.Name;
+                user.Surname = model.Surname;
+                user.ZipCode = model.ZipCode;
+                user.ModificationDate = DateTime.Now;
+                user.HouseNumber = model.HouseNumber;
+                user.Email = model.Email;
+                user.City = model.City;
+                user.Address = model.Address;
+
+                await this.SaveChangesAsync();
+
+                return user;
+            }
+
+            return null;
+        }
+
+        public async Task<bool> DeleteUser(string id)
+        {
+            var user = this.GetById(id);
+            if (user != null)
+            {
+                this.DeleteUser(user);
+                await this.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> BanUser(string id)
+        {
+            var user = this.GetById(id);
+            if (user != null)
+            {
+                user.Active = false;
+
+                await this.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> UnlockUser(string id)
+        {
+            var user = this.GetByIdNotDeleted(id);
+            if (user != null)
+            {
+                user.Active = true;
+
+                await this.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task SavePassword(ApplicationUser user, string newPassword)
+        {
+            user.PasswordHash = newPassword;
+
+            await this.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetVetsSelectList()
+        {
+            List<SelectListItem> vetsList = new List<SelectListItem>();
+            vetsList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
+
+            var users = await _userManager.GetUsersInRoleAsync(UserRoles.Doctor);
+            if (users != null)
+            {
+                foreach (var user in users)
+                {
+                    vetsList.Add(new SelectListItem
+                    {
+                        Text = $"{user.Name} {user.Surname}",
+                        Value = user.Id
+                    });
+                }
+            }
+            return vetsList.AsEnumerable();
+        }
+
+        public async Task InsertAcync(ApplicationUser user)
+        {
+            _db.Users.Add(user);
+
+            await _db.SaveChangesAsync();
         }
     }
 }

@@ -29,10 +29,11 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-lg-12 text-center">
-                    <input class="btn btn-primary btn-xl text-uppercase" type="submit" value="Zaloguj">
+                    <input class="btn btn-primary btn-xl text-uppercase btn-block" type="submit" value="Zaloguj">
                 </div>
-                <div class="col-lg-12 text-center backBtn">
-                    <a href="@Url.Action("Index", "Home", new { area = AreaNames.None})" class="btn btn-secondary btn-sm">Strona główna</a>
+                <div class="col-lg-12 text-center">
+                    <a href="@Url.Action("Register", "Users", new { area = AreaNames.Admin})" class="btn btn-outline-warning btn-sm backBtn">Rejestracja</a>
+                    <a href="@Url.Action("Index", "Home", new { area = AreaNames.None})" class="btn btn-outline-secondary btn-sm backBtn">Strona główna</a>
                 </div>
             </div>
         </form>
