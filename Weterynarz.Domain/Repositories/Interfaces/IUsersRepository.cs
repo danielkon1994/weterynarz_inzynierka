@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.ViewModels.Users;
+using Weterynarz.Domain.ViewModels.Visit;
 
 namespace Weterynarz.Domain.Repositories.Interfaces
 {

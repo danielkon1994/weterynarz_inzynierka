@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CryptoHelper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,6 +12,7 @@ using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Accounts;
+using Weterynarz.Domain.ViewModels.Visit;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -198,6 +200,31 @@ namespace Weterynarz.Domain.Repositories.Implementations
             _db.Users.Add(user);
 
             await _db.SaveChangesAsync();
+        }
+
+        public async Task<string> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        {
+            ApplicationUser client = new ApplicationUser()
+            {
+                Active = true,
+                Address = model.Address,
+                City = model.City,
+                CreationDate = DateTime.Now,
+                Deleted = false,
+                Email = model.Email,
+                EmailConfirmed = true,
+                HouseNumber = model.HomeNumber,
+                Name = model.Name,
+                Surname = model.Surname,
+                ZipCode = model.ZipCode,
+                UserName = model.UserName
+            };
+
+            client.PasswordHash = Crypto.HashPassword(model.Password);
+
+            await this.InsertAcync(client);
+
+            return client.Id;
         }
     }
 }

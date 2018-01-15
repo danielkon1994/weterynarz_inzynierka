@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Domain.ViewModels.Visit
 {
@@ -42,17 +43,21 @@ namespace Weterynarz.Domain.ViewModels.Visit
         public string VetId { get; set; }
 
         public IEnumerable<SelectListItem> AnimalsSelectList { get; set; }
-        public int AnimalId { get; set; }
+        public int? AnimalId { get; set; }
 
         public IEnumerable<SelectListItem> AnimalTypesSelectList { get; set; }
         public int AnimalTypeId { get; set; }
 
         public string AnimalName { get; set; }
 
-        public DateTime AnimalBirthdate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
+        public DateTime? AnimalBirthdate { get; set; }
 
-        public string AnimalDescription { get; set; }
+        public string DescriptionProblem { get; set; }
 
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
         public DateTime VisitDate { get; set; }
     }
 }

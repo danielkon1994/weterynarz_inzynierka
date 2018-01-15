@@ -135,17 +135,17 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("AnimalTypeId");
+                    b.Property<string>("AnimalDesc");
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<int>("AnimalTypeId");
+
+                    b.Property<DateTime?>("BirthDate");
 
                     b.Property<int?>("ClientId");
 
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
-
-                    b.Property<string>("Description");
 
                     b.Property<DateTime?>("ModificationDate");
 
@@ -474,7 +474,8 @@ namespace Weterynarz.Domain.Migrations
                 {
                     b.HasOne("Weterynarz.Domain.EntitiesDb.AnimalType", "AnimalType")
                         .WithMany()
-                        .HasForeignKey("AnimalTypeId");
+                        .HasForeignKey("AnimalTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.Client")
                         .WithMany("Animals")

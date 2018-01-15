@@ -11,8 +11,8 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     public interface IVisitRepository : IBaseRepository<Visit>
     {
         bool CheckVisitExists(DateTime visitDate);
-        Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(string userId);
+        Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(ApplicationUser user);
         Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(VisitMakeVisitViewModel model);
-        Task InsertNewVisit(VisitMakeVisitViewModel model);
+        Task InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
     }
 }

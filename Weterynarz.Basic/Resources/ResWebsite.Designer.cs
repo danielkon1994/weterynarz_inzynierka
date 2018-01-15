@@ -115,6 +115,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Musisz podać hasło do założenia konta.
+        /// </summary>
+        public static string visitPasswordEmptyError {
+            get {
+                return ResourceManager.GetString("visitPasswordEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data wizyty jest już zajęta.
         /// </summary>
         public static string visitWithDateExistsError {

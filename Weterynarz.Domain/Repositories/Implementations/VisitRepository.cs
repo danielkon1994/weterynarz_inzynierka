@@ -22,7 +22,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public VisitRepository(ApplicationDbContext db, IAnimalRepository animalRepository,
             IUsersRepository userRepository,
-            IAccountsRepository accountsRepository,            
+            IAccountsRepository accountsRepository,
             IAnimalTypesRepository animalTypesRepository) : base(db)
         {
             _animalRepository = animalRepository;
@@ -42,16 +42,17 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return false;
         }
 
-        public async Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(string userId)
+        public async Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(ApplicationUser user)
         {
             VisitMakeVisitViewModel model = new VisitMakeVisitViewModel();
 
-            if (!string.IsNullOrEmpty(userId))
-            {
-                var user = _accountsRepository.GetById(userId);
-                if (user != null)
+            if(user != null)
+            { 
+                if (!string.IsNullOrEmpty(user.Id))
                 {
-                    model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(userId);
+                    model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(user.Id);
+                    model.UserName = user.UserName;
+                    model.Email = user.Email;
                     model.Name = user.Name;
                     model.Surname = user.Surname;
                     model.HomeNumber = user.HouseNumber;
@@ -83,42 +84,26 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public async Task InsertNewVisit(VisitMakeVisitViewModel model)
+        public async Task InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
         {
-            Visit visitEntity = new Visit();
-            ApplicationUser client;
-            
             // Create new client if userId is empty
-            if (string.IsNullOrEmpty(model.UserId))
+            string userId = string.IsNullOrEmpty(model.UserId) ? await _accountsRepository.InsertFromVisitFormAsync(model) : model.UserId;
+
+            int animalId = model.AnimalId ?? await _animalRepository.InsertFromVisitFormAsync(model);
+
+            // create new visit
+            Visit visit = new Visit()
             {
-                client = new ApplicationUser()
-                {
-                    Active = true,
-                    Address = model.Address,
-                    City = model.City,
-                    CreationDate = DateTime.Now,
-                    Deleted = false,
-                    Email = model.Email,
-                    EmailConfirmed = true,
-                    HouseNumber = model.HomeNumber,
-                    Name = model.Name,
-                    Surname = model.Surname,
-                    ZipCode = model.ZipCode,
-                    UserName = model.UserName
-                };
-
-                client.PasswordHash = Crypto.HashPassword(model.Password);
-
-                await _accountsRepository.InsertAcync(client);
-
-                model.UserId = client.Id;
-            }
-
-            //
-            visitEntity = new Visit()
-            {
-
+                Active = true,
+                AnimalId = animalId,
+                Approved = false,
+                ClientId = userId,
+                CreationDate = DateTime.Now,
+                DoctorId = model.VetId,
+                VisitDate = model.VisitDate,                
             };
+
+            await base.InsertAsync(visit);
         }
     }
 }

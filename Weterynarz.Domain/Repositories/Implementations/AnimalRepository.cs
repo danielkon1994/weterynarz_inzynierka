@@ -6,6 +6,8 @@ using Weterynarz.Domain.ContextDb;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
+using Weterynarz.Domain.ViewModels.Visit;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -28,6 +30,23 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 }).ToList();
             }
             return list.AsEnumerable();
+        }
+
+        public async Task<int> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        {
+            Animal animal = new Animal()
+            {
+                Active = true,
+                AnimalTypeId = model.AnimalTypeId,
+                BirthDate = model.AnimalBirthdate,
+                OwnerId = model.UserId,
+                Name = model.AnimalName,
+                CreationDate = DateTime.Now,
+            };
+
+            await base.InsertAsync(animal);
+
+            return animal.Id;
         }
     }
 }

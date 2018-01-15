@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.ViewModels.Accounts;
+using Weterynarz.Domain.ViewModels.Visit;
 
 namespace Weterynarz.Domain.Repositories.Interfaces
 {
@@ -27,5 +28,6 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         Task SavePassword(ApplicationUser user, string newPassword);
         Task<IEnumerable<SelectListItem>> GetVetsSelectList();
         Task InsertAcync(ApplicationUser user);
+        Task<string> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
     }
 }

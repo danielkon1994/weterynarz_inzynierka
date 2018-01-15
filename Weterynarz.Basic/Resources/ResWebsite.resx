@@ -135,6 +135,9 @@
   <data name="visitAnimalIdNullError" xml:space="preserve">
     <value>Należy wybrać zwierzę</value>
   </data>
+  <data name="visitPasswordEmptyError" xml:space="preserve">
+    <value>Musisz podać hasło do założenia konta</value>
+  </data>
   <data name="visitWithDateExistsError" xml:space="preserve">
     <value>Data wizyty jest już zajęta</value>
   </data>

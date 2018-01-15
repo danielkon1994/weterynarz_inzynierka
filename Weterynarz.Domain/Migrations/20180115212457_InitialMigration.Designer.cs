@@ -11,8 +11,8 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180109215308_ChangeOwnerToApplicationUserInAnimalTable")]
-    partial class ChangeOwnerToApplicationUserInAnimalTable
+    [Migration("20180115212457_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,17 +136,17 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("AnimalTypeId");
+                    b.Property<string>("AnimalDesc");
 
-                    b.Property<DateTime>("BirthDate");
+                    b.Property<int>("AnimalTypeId");
+
+                    b.Property<DateTime?>("BirthDate");
 
                     b.Property<int?>("ClientId");
 
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
-
-                    b.Property<string>("Description");
 
                     b.Property<DateTime?>("ModificationDate");
 
@@ -396,16 +396,20 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
+                    b.Property<string>("AnimalDescription")
+                        .IsRequired();
+
                     b.Property<int>("AnimalId");
+
+                    b.Property<bool>("Approved");
+
+                    b.Property<string>("ClientId");
 
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("DoctorId")
-                        .IsRequired();
+                    b.Property<string>("DoctorId");
 
                     b.Property<DateTime?>("ModificationDate");
 
@@ -414,6 +418,8 @@ namespace Weterynarz.Domain.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("DoctorId");
 
@@ -452,7 +458,7 @@ namespace Weterynarz.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser")
-                        .WithMany()
+                        .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -469,7 +475,8 @@ namespace Weterynarz.Domain.Migrations
                 {
                     b.HasOne("Weterynarz.Domain.EntitiesDb.AnimalType", "AnimalType")
                         .WithMany()
-                        .HasForeignKey("AnimalTypeId");
+                        .HasForeignKey("AnimalTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.Client")
                         .WithMany("Animals")
@@ -504,10 +511,13 @@ namespace Weterynarz.Domain.Migrations
                         .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
                         .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DoctorId");
                 });
 #pragma warning restore 612, 618
         }

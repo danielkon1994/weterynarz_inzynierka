@@ -12,6 +12,8 @@ using Weterynarz.Basic.Const;
 using Microsoft.EntityFrameworkCore;
 using Weterynarz.Domain.ViewModels.Users;
 using Weterynarz.Domain.ContextDb;
+using Weterynarz.Domain.ViewModels.Visit;
+using CryptoHelper;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {

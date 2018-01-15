@@ -17,6 +17,7 @@ namespace Weterynarz.Domain.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Active = table.Column<bool>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     ModificationDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false)
@@ -46,19 +47,29 @@ namespace Weterynarz.Domain.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    Active = table.Column<bool>(nullable: false),
+                    Address = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    HouseNumber = table.Column<string>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    ModificationDate = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    ZipCode = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -75,6 +86,7 @@ namespace Weterynarz.Domain.Migrations
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     ModificationDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
@@ -97,13 +109,35 @@ namespace Weterynarz.Domain.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Active = table.Column<bool>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     ModificationDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicalExaminationTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SettingsContent",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    Code = table.Column<string>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Group = table.Column<string>(nullable: true),
+                    ModificationDate = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SettingsContent", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,13 +253,15 @@ namespace Weterynarz.Domain.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Active = table.Column<bool>(nullable: false),
-                    AnimalTypeId = table.Column<int>(nullable: true),
-                    BirthDate = table.Column<DateTime>(nullable: false),
+                    AnimalDesc = table.Column<string>(nullable: true),
+                    AnimalTypeId = table.Column<int>(nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: true),
+                    ClientId = table.Column<int>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false),
                     ModificationDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
-                    OwnerId = table.Column<int>(nullable: true)
+                    OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -235,11 +271,17 @@ namespace Weterynarz.Domain.Migrations
                         column: x => x.AnimalTypeId,
                         principalTable: "AnimalTypes",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Animals_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Animals_Clients_OwnerId",
+                        name: "FK_Animals_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
-                        principalTable: "Clients",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -253,6 +295,7 @@ namespace Weterynarz.Domain.Migrations
                     Active = table.Column<bool>(nullable: false),
                     AnimalId = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     DoctorId = table.Column<string>(nullable: true),
                     ExaminationDate = table.Column<DateTime>(nullable: false),
@@ -289,10 +332,13 @@ namespace Weterynarz.Domain.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Active = table.Column<bool>(nullable: false),
+                    AnimalDescription = table.Column<string>(nullable: false),
                     AnimalId = table.Column<int>(nullable: false),
+                    Approved = table.Column<bool>(nullable: false),
+                    ClientId = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    DoctorId = table.Column<string>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false),
+                    DoctorId = table.Column<string>(nullable: true),
                     ModificationDate = table.Column<DateTime>(nullable: true),
                     VisitDate = table.Column<DateTime>(nullable: false)
                 },
@@ -306,17 +352,28 @@ namespace Weterynarz.Domain.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Visits_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Visits_AspNetUsers_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_AnimalTypeId",
                 table: "Animals",
                 column: "AnimalTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Animals_ClientId",
+                table: "Animals",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Animals_OwnerId",
@@ -383,6 +440,11 @@ namespace Weterynarz.Domain.Migrations
                 column: "AnimalId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Visits_ClientId",
+                table: "Visits",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Visits_DoctorId",
                 table: "Visits",
                 column: "DoctorId");
@@ -409,6 +471,9 @@ namespace Weterynarz.Domain.Migrations
                 name: "MedicalExaminations");
 
             migrationBuilder.DropTable(
+                name: "SettingsContent");
+
+            migrationBuilder.DropTable(
                 name: "Visits");
 
             migrationBuilder.DropTable(
@@ -421,13 +486,13 @@ namespace Weterynarz.Domain.Migrations
                 name: "Animals");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "AnimalTypes");
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
