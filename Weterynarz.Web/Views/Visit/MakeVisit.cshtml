@@ -29,6 +29,11 @@
                         <form id="makeVisitForm" asp-controller="Visit" asp-action="MakeVisit" method="post">
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div asp-validation-summary="All"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
 
                                     @Html.HiddenFor(m => m.UserId)
 
@@ -50,6 +55,11 @@
                                             <input asp-for="ComparePassword" class="form-control" type="password" placeholder="Potwierdź hasło">
                                             <span asp-validation-for="ComparePassword" class="help-block text-danger"></span>
                                         </div>
+                                    }
+                                    else
+                                    {
+                                        @Html.HiddenFor(m => m.UserName)
+                                        @Html.HiddenFor(m => m.Email)
                                     }
                                     <div class="form-group">
                                         <input asp-for="Name" class="form-control" type="text" placeholder="Imię">
@@ -82,14 +92,14 @@
                                         <span asp-validation-for="ZipCode" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <input asp-for="VisitDate" class="form-control" type="datetime" placeholder="Data wizyty">
+                                        <input type="text" class="form-control datetimepicker-input" id="VisitDate" name="VisitDate" value="@Model.VisitDate.ToString(FormatsDate.Date)" data-toggle="datetimepicker" data-target="#VisitDate" placeholder="Data wizyty" />
                                         <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <select asp-for="VetId" class="form-control" asp-items="@Model.VetsSelectList" placeholder="Lekarz"></select>
                                         <span asp-validation-for="VetId" class="help-block text-danger"></span>
                                     </div>
-                                    @if (User.Identity.IsAuthenticated)
+                                    @if (User.Identity.IsAuthenticated && Model.AnimalsSelectList.Count() > 0)
                                     {
                                         <div class="form-group">
                                             <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList" placeholder="Zwierzę"></select>
@@ -107,13 +117,13 @@
                                             <span asp-validation-for="AnimalTypeId" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="AnimalBirthdate" class="form-control" type="datetime" placeholder="Data urodzenia zwierzęcia">
+                                            <input type="text" class="form-control datetimepicker-input" id="AnimalBirthdate" name="AnimalBirthdate" value="@Model.AnimalBirthdate?.ToString(FormatsDate.DateWithoutTime)" placeholder="Date urodzenia zwierzęcia" data-toggle="datetimepicker" data-target="#AnimalBirthdate" />
                                             <span asp-validation-for="AnimalBirthdate" class="help-block text-danger"></span>
                                         </div>
                                     }
                                     <div class="form-group">
-                                        <textarea asp-for="AnimalDescription" class="form-control" placeholder="Opis problemu"></textarea>
-                                        <span asp-validation-for="AnimalDescription" class="help-block text-danger"></span>
+                                        <textarea asp-for="DescriptionProblem" class="form-control" placeholder="Opis problemu"></textarea>
+                                        <span asp-validation-for="DescriptionProblem" class="help-block text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -131,18 +141,31 @@
 </section>
 
 @section Scripts {
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-            $('.nav-link').on('click', function (e) {
-                e.preventDefault();
 
-                var link = $(this);
-                var section = link.prop('href');
-                if (section != '')
-                {
-                    window.location.replace(section);
-                }
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#VisitDate').datetimepicker({
+                locale: 'pl',
+                format: '@FormatsDate.Date',
+                useCurrent: false,
+                sideBySide: true,
+                keepOpen: false,
             });
+
+            $('#AnimalBirthdate').datetimepicker({
+                locale: 'pl',
+                format: '@FormatsDate.DateWithoutTime',
+                useCurrent: false,
+                sideBySide: false,
+                keepOpen: false,
+            });
+
+            //$('button[type="submit"]').on('click', function (e) {
+            //    e.preventDefault();
+
+            //    alert('test');
+            //});
         });
-    </script>*@
+    </script>
 }

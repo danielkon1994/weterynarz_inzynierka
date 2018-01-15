@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Weterynarz.Basic.Resources;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Visit;
+using Weterynarz.Domain.EntitiesDb;
 
 namespace Weterynarz.Web.Controllers
 {
@@ -23,13 +24,13 @@ namespace Weterynarz.Web.Controllers
 
         public async Task<IActionResult> MakeVisit()
         {
-            string userId = "";
+            ApplicationUser user = null;
             if (User.Identity.IsAuthenticated)
             {
-                userId = User.Identity.GetUserId();
+                user = _accountRepository.GetById(User.Identity.GetUserId());
             }
 
-            VisitMakeVisitViewModel model = await _visitRepository.GetMakeVisitViewModel(userId);
+            VisitMakeVisitViewModel model = await _visitRepository.GetMakeVisitViewModel(user);
 
             return View(model);
         }
@@ -43,23 +44,15 @@ namespace Weterynarz.Web.Controllers
             {
                 ModelState.AddModelError("", ResWebsite.visitWithDateExistsError);
             }
-            if(User.Identity.IsAuthenticated)
-            {
-                var user = _accountRepository.GetById(User.Identity.GetUserId());
-                if(user != null)
-                {
-                    model.UserName = user.UserName;
-                    model.Email = user.Email;
-                }
-            }
-            //if (model.AnimalId == 0)
-            //{
-            //    ModelState.AddModelError("", ResWebsite.visitAnimalIdNullError);
-            //}
 
+            if(!User.Identity.IsAuthenticated && (string.IsNullOrEmpty(model.Password) && string.IsNullOrEmpty(model.ComparePassword)))
+            {
+                ModelState.AddModelError("", ResWebsite.visitPasswordEmptyError);
+            }
+                
             if (ModelState.IsValid)
             {
-                await _visitRepository.InsertNewVisit(model);
+                await _visitRepository.InsertFromVisitFormAsync(model);
             }
 
             model = await _visitRepository.GetMakeVisitViewModel(model);

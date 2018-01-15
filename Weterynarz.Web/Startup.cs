@@ -19,6 +19,8 @@ using Weterynarz.Web.Extensions;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.Emails;
 using Weterynarz.Domain.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace Weterynarz.Web
 {
@@ -79,6 +81,18 @@ namespace Weterynarz.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
+            var supportedCultures = new[]
+            {
+                new CultureInfo("pl-PL")
+            };
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pl-PL"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
