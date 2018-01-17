@@ -1,0 +1,116 @@
+﻿@namespace Weterynarz.Domain.ViewModels.Animal
+@model AnimalManageViewModel
+@{
+    ViewData["Title"] = "Edycja zwierzęcia";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Animals" asp-action="Index" asp-area="@AreaNames.Admin">Lista zwierząt</a></li>
+        <li class="breadcrumb-item active">Edycja</li>
+    </ol>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <form asp-controller="Animals" asp-action="Edit" method="post">
+                <div class="card-header">
+                    <strong>@ResAdmin.animalsEditView_headerForm</strong>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input type="text" class="form-control" asp-for="Name" placeholder="Wprowadź imię">
+                                <span asp-validation-for="Name" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="AnimalTypeId"></label>
+                                <select asp-for="AnimalTypeId" class="form-control" asp-items="@Model.AnimalTypesSelectList" placeholder="Typ zwierzęcia"></select>
+                                <span asp-validation-for="AnimalTypeId" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="BirthDay"></label>
+                                <input type="text" class="form-control" id="BirthDay" name="BirthDay" value="@Model.BirthDay.ToString(FormatsDate.DateWithoutTime)" placeholder="Data urodzenia/przyjęcia" />
+                                <span asp-validation-for="BirthDay" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="OwnerId"></label>
+                                <select asp-for="OwnerId" class="form-control" asp-items="@Model.OwnersSelectList" placeholder="Właściciel"></select>
+                                <span asp-validation-for="OwnerId" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <textarea rows="9" class="form-control" asp-for="Description" placeholder="Dodatkowy opis"></textarea>
+                                <span asp-validation-for="Description" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
+                                    Czy aktywny?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Zapisz</button>
+                    <a asp-controller="Animals" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#BirthDay').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateFormatNoHours,
+                useCurrent: false,
+                keepOpen: false
+            });
+        });
+    </script>
+}
+

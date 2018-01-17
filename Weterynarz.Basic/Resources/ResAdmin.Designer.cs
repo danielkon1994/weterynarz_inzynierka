@@ -205,6 +205,33 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj zwierzę.
+        /// </summary>
+        public static string animalsCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("animalsCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj zwierzę.
+        /// </summary>
+        public static string animalsEditView_headerForm {
+            get {
+                return ResourceManager.GetString("animalsEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista zwierząt.
+        /// </summary>
+        public static string animalsIndex_listTypes {
+            get {
+                return ResourceManager.GetString("animalsIndex_listTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj typ zwierzęcia.
         /// </summary>
         public static string animalTypesCreateView_headerForm {
@@ -237,6 +264,15 @@ namespace Weterynarz.Basic.Resources {
         public static string button_add {
             get {
                 return ResourceManager.GetString("button_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zwierzęta.
+        /// </summary>
+        public static string leftNavbar_animals {
+            get {
+                return ResourceManager.GetString("leftNavbar_animals", resourceCulture);
             }
         }
         

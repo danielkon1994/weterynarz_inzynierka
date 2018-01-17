@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,12 +42,12 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public virtual IQueryable<T> GetAll()
         {
-            return _db.Set<T>().AsQueryable().OrderBy(i => i.Id);
+            return _db.Set<T>().AsNoTracking().OrderBy(i => i.Id);
         }
 
         public virtual T GetById(int id)
         {
-            return this.WhereNotDeleted().FirstOrDefault(i => i.Id == id);
+            return _db.Set<T>().Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
         }
 
         public virtual async Task<int> InsertAsync(T item)
@@ -64,12 +65,12 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         private IQueryable<T> WhereActive()
         {
-            return _db.Set<T>().AsQueryable().Where(i => i.Active && !i.Deleted);
+            return _db.Set<T>().AsNoTracking().Where(i => i.Active && !i.Deleted);
         }
 
         private IQueryable<T> WhereNotDeleted()
         {
-            return _db.Set<T>().AsQueryable().Where(i => !i.Deleted);
+            return _db.Set<T>().AsNoTracking().Where(i => !i.Deleted);
         }
     }
 }

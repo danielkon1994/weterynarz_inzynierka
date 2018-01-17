@@ -12,13 +12,14 @@ namespace Weterynarz.Domain.EntitiesDb
         public Animal()
         {
             MedicalExaminations = new Collection<MedicalExamination>();
+            Diseases = new Collection<Disease>();
         }
 
         [Required]
         public string Name { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public string AnimalDesc { get; set; }
 
@@ -31,5 +32,7 @@ namespace Weterynarz.Domain.EntitiesDb
         public virtual ApplicationUser Owner { get; set; }
 
         public virtual ICollection<MedicalExamination> MedicalExaminations { get; set; }
+
+        public virtual ICollection<Disease> Diseases { get; set; }
     }
 }

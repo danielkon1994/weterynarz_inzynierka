@@ -285,4 +285,16 @@
   <data name="userRegisterView_header" xml:space="preserve">
     <value>Rejestracja</value>
   </data>
+  <data name="leftNavbar_animals" xml:space="preserve">
+    <value>Zwierzęta</value>
+  </data>
+  <data name="animalsIndex_listTypes" xml:space="preserve">
+    <value>Lista zwierząt</value>
+  </data>
+  <data name="animalsCreateView_headerForm" xml:space="preserve">
+    <value>Dodaj zwierzę</value>
+  </data>
+  <data name="animalsEditView_headerForm" xml:space="preserve">
+    <value>Edytuj zwierzę</value>
+  </data>
 </root>

@@ -10,8 +10,9 @@
         <link rel="stylesheet" href="~/lib/components-font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="~/css/customAdmin.css" />
         <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.css">        
+        <link rel="stylesheet" href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" />
         @* Template style *@
-        <link rel="stylesheet" href="~/css/templateStyle/style.css" />
+        <link rel="stylesheet" href="~/css/templateStyle/sb-admin.css" />
     </environment>
 
     <environment exclude="Development">
@@ -21,44 +22,43 @@
         <link rel="stylesheet" href="~/lib/components-font-awesome/css/font-awesome.min.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/customAdmin.min.css" asp-append-version="true" />        
         <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true">
+        <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" asp-append-version="true" />
         @* Template style *@
-        <link rel="stylesheet" href="~/css/templateStyle/style.min.css" asp-append-version="true" />        
+        <link rel="stylesheet" href="~/css/templateStyle/sb-admin.min.css" asp-append-version="true" />        
     </environment>
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<body class="fixed-nav bg-dark" id="page-top">
 
-    @await  Component.InvokeAsync("TopNavbar")
+    @await Component.InvokeAsync("TopNavbar")
 
-    <div class="app-body">
-        
-        @await Component.InvokeAsync("LeftNavbar")
-
-        <!-- Main content -->
-        <main class="main">
-            <!-- Breadcrumb -->            
+    <div class="content-wrapper">
+        <div class="container-fluid mb-5">
+            <!-- Breadcrumb -->
             @RenderSection("breadcrumb", false)
 
-            <div class="container-fluid">
-                <div class="animated fadeIn">
-                    
-                    @RenderBody()
+            @RenderBody()
 
-                </div>
-            </div>
             <!-- /.conainer-fluid -->
-        </main>
+        </div>
     </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/moment/moment.min.js"></script>
+        <script src="~/lib/moment/moment-with-locales.min.js"></script>
+        <script src="~/lib/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/lib/popper.js/dist/umd/popper.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery.easing/js/jquery.easing.js"></script>
+        <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
         <script src="~/lib/sweetalert2/dist/sweetalert2.all.js"></script>
         <script src="~/lib/notify/notify.min.js"></script>
         <script src="~/js/app/appNotify.js"></script>
         @await Html.PartialAsync("_NotifyMessage")
-        <script src="~/js/templateScripts/app.js"></script>       
+        <script src="~/js/templateScripts/sb-admin.js"></script>        
+        <script src="~/js/app/appFormats.js"></script>
         <script src="~/js/custom.js"></script>
+
     </environment>
 
     <environment exclude="Development">
@@ -68,6 +68,9 @@
                 crossorigin="anonymous"
                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
         </script>
+        <script src="~/lib/moment/moment.min.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/moment-with-locales.min.js" asp-append-version="true"></script>
+        <script src="~/lib/Microsoft.jQuery.Unobtrusive.Ajax/jquery.unobtrusive-ajax.min.js" asp-append-version="true"></script>
         <script src="~/lib/popper.js/dist/umd/popper.min.js" asp-append-version="true"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
@@ -75,16 +78,20 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
-        <script src="~/lib/chart.js/dist/Chart.min.js" asp-append-version="true"></script>
         <script src="~/lib/sweetalert2/dist/sweetalert2.all.js" asp-append-version="true"></script>
         <script src="~/lib/notify/notify.min.js" asp-append-version="true"></script>
         <script src="~/js/app/appNotify.js" asp-append-version="true"></script>
         @await Html.PartialAsync("_NotifyMessage")
         <script src="~/js/templateScripts/app.js" asp-append-version="true"></script>
+        <script src="~/lib/tempus-dominus-bootstrap4/tempusdominus-bootstrap-4.min.js" asp-append-version="true"></script>
+        <script src="~/js/app/appFormats.js" asp-append-version="true"></script>
         <script src="~/js/custom.min.js" asp-append-version="true"></script>
+
     </environment>
 
     @RenderSection("Scripts", required: false)
 </body>
+
+
 
 </html>

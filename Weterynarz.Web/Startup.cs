@@ -21,6 +21,9 @@ using Weterynarz.Web.Models.Emails;
 using Weterynarz.Domain.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.AspNetCore.Mvc;
+using Weterynarz.Web.ModelBinders;
 
 namespace Weterynarz.Web
 {
@@ -36,7 +39,9 @@ namespace Weterynarz.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(o => {
+                o.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+            });
 
             // enable In-Memory Cache
             services.AddMemoryCache();

@@ -51,13 +51,11 @@ namespace Weterynarz.Domain.ViewModels.Visit
         public string AnimalName { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
-        public DateTime? AnimalBirthdate { get; set; }
+        public DateTime AnimalBirthdate { get; set; }
 
         public string DescriptionProblem { get; set; }
 
         [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy HH:mm}")]
         public DateTime VisitDate { get; set; }
     }
 }

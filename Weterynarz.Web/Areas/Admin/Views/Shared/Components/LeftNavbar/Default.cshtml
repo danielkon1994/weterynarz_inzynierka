@@ -1,39 +1,59 @@
 ﻿
-<div class="sidebar">
-    <nav class="sidebar-nav">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index"><i class="fa fa-home" aria-hidden="true"></i> @ResAdmin.leftNavbar_home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin"><i class="fa fa-user-md" aria-hidden="true"></i> @ResAdmin.leftNavbar_doctors</a>
-            </li>
-            @if (User.IsInRole(UserRoles.Admin))
-            {
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin"><i class="fa fa-users" aria-hidden="true"></i> @ResAdmin.leftNavbar_users</a>
+<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+        <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text"> @ResAdmin.leftNavbar_home</span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+        <a class="nav-link" asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin">
+            <i class="fa fa-fw fa-user-md"></i>
+            <span class="nav-link-text"> @ResAdmin.leftNavbar_doctors</span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+        <a class="nav-link" asp-controller="Animals" asp-action="Index" asp-area="@AreaNames.Admin">
+            <i class="fa fa-fw fa-linux"></i>
+            <span class="nav-link-text"> @ResAdmin.leftNavbar_animals</span>
+        </a>
+    </li>
+    @if (User.IsInRole(UserRoles.Admin))
+    {
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+            <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin">
+                <i class="fa fa-fw fa-users"></i>
+                <span class="nav-link-text"> @ResAdmin.leftNavbar_users</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
+            <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+                <i class="fa fa-fw fa-sitemap"></i>
+                <span class="nav-link-text">@ResAdmin.leftNavbar_settings</span>
+            </a>
+            <ul class="sidenav-second-level collapse" id="collapseMulti">
+                <li>
+                    <a asp-controller="Settings" asp-action="Content" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_contentHomePage</a>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-cogs" aria-hidden="true"></i> @ResAdmin.leftNavbar_settings</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Settings" asp-action="Content" asp-area="@AreaNames.Admin"><i class="fa fa-align-left"></i> @ResAdmin.leftNavbar_contentHomePage</a>
+                <li>
+                    <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">@ResAdmin.leftNavbar_dictionares</a>
+                    <ul class="sidenav-third-level collapse" id="collapseMulti2">
+                        <li>
+                            <a asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_animalTypes</a>
+                        </li>
+                        <li>
+                            <a asp-controller="MedicalExaminationTypes" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_medicalExaminationTypes</a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-book" aria-hidden="true"></i> @ResAdmin.leftNavbar_dictionares</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_animalTypes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="MedicalExaminationTypes" asp-action="Index" asp-area="@AreaNames.Admin"><i class="icon-puzzle"></i> @ResAdmin.leftNavbar_medicalExaminationTypes</a>
-                        </li>
-                    </ul>
-                </li>  
-            }
-        </ul>
-    </nav>
-    @*<button class="sidebar-minimizer brand-minimizer" type="button"></button>*@
-</div>
+            </ul>
+        </li>
+    }
+</ul>
+<ul class="navbar-nav sidenav-toggler">
+    <li class="nav-item">
+        <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+        </a>
+    </li>
+</ul>

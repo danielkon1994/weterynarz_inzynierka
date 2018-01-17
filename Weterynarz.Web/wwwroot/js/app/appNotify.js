@@ -1,32 +1,35 @@
 ﻿var AppNotify = AppNotify || {};
 
 AppNotify.tempNotifyMessage = function (tempObj) {
-    try {
-        var notification = JSON.parse(tempObj);
-        if (!!notification) {
-            var messageType = null;
-            switch (notification.MessageStatus) {
-                case 1:
-                    messageType = 'error';
-                    break;
-                case 2:
-                    messageType = 'success'
-                    break;
-                case 3:
-                    messageType = 'warning'
-                    break;
-                case 4:
-                    messageType = 'info'
-                    break;
-                case 5:
-                    messageType = 'question'
-                    break;
+    if (!!tempObj)
+    { 
+        try {        
+            var notification = JSON.parse(tempObj);
+            if (!!notification) {
+                var messageType = null;
+                switch (notification.MessageStatus) {
+                    case 1:
+                        messageType = 'error';
+                        break;
+                    case 2:
+                        messageType = 'success'
+                        break;
+                    case 3:
+                        messageType = 'warning'
+                        break;
+                    case 4:
+                        messageType = 'info'
+                        break;
+                    case 5:
+                        messageType = 'question'
+                        break;
+                }
+                swal(notification.Text, notification.OptionalText, messageType);
             }
-            swal(notification.Text, notification.OptionalText, messageType);
         }
-    }
-    catch (ex) {
-        console.log(ex);
+        catch (ex) {
+            console.log(ex);
+        }
     }
 };
 

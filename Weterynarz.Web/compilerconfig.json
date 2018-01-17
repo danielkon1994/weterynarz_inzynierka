@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/css/loginPage.css",
     "inputFile": "wwwroot/css/loginPage.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/templateStyle/sb-admin.css",
+    "inputFile": "wwwroot/css/templateStyle/sb-admin.scss"
   }
 ]

@@ -139,7 +139,7 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<int>("AnimalTypeId");
 
-                    b.Property<DateTime?>("BirthDate");
+                    b.Property<DateTime>("BirthDate");
 
                     b.Property<int?>("ClientId");
 
@@ -299,6 +299,33 @@ namespace Weterynarz.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Disease", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
+
+                    b.Property<int?>("AnimalId");
+
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime?>("ModificationDate");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.ToTable("Disease");
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>
@@ -484,6 +511,13 @@ namespace Weterynarz.Domain.Migrations
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Owner")
                         .WithMany("Animals")
                         .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Disease", b =>
+                {
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Animal")
+                        .WithMany("Diseases")
+                        .HasForeignKey("AnimalId");
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>

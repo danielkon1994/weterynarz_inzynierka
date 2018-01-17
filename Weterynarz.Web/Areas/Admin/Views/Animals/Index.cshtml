@@ -1,0 +1,93 @@
+﻿@namespace Weterynarz.Domain.ViewModels.Animal
+@model PagingList<AnimalIndexViewModel>
+@{
+    ViewData["Title"] = "Zwierzęta";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item active">Zwierzęta</li>
+    </ol>
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    @ResAdmin.text_options
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-warning" asp-controller="Animals" asp-action="Create">@ResAdmin.button_add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> @ResAdmin.animalsIndex_listTypes
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Typ</th>
+                                <th>Data urodzenia</th>
+                                <th>Właściciel</th>
+                                <th>Aktywne</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Name</td>
+                                        <td>@item.Type</td>
+                                        <td>@item.BirthDay.ToString(FormatsDate.DateWithoutTime)</td>
+                                        <td>@item.Owner</td>
+                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
+                                        <td class="text-right">
+                                            <a href="@Url.Action("Edit", "Animals", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+                                            <a href="@Url.Action("Delete", "Animals", new { area = AreaNames.Admin, id = item.Id })" id="btnDeleteType" class="btn btn-danger">Usuń</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr class="text-center">
+                                    <td colspan="6">@ResAdmin.list_emptyRecords</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <nav aria-label="Suppliers navigation example">
+                        @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        //$(document).ready(function () {
+
+        //    $('#btnDeleteType').on('click', function (e) {
+        //        e.preventDefault();
+
+        //        var $row = $(this).closest('tr');
+
+        //    });
+
+        //});
+    </script>
+}

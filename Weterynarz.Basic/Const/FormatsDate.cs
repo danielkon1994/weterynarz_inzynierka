@@ -6,8 +6,8 @@ namespace Weterynarz.Basic.Const
 {
     public class FormatsDate
     {
-        public const string Date = "DD-MM-YYYY HH:mm";
-        public const string DateWithoutTime = "DD-MM-YYYY";
+        public const string Date = "dd-MM-yyyy HH:mm";
+        public const string DateWithoutTime = "dd-MM-yyyy";
         public const string OnlyTime = "HH:mm";
     }
 }

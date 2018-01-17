@@ -226,5 +226,25 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             return client.Id;
         }
+
+        public IEnumerable<SelectListItem> GetUsersSelectList()
+        {
+            List<SelectListItem> usersList = new List<SelectListItem>();
+            usersList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
+
+            var users = _userManager.Users;
+            if (users != null)
+            {
+                foreach (var user in users)
+                {
+                    usersList.Add(new SelectListItem
+                    {
+                        Text = $"{user.Name} {user.Surname}",
+                        Value = user.Id
+                    });
+                }
+            }
+            return usersList.AsEnumerable();
+        }
     }
 }
