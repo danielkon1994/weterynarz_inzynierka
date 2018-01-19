@@ -17,11 +17,12 @@ namespace Weterynarz.Domain.EntitiesDb
         public virtual Animal Animal { get; set; }
 
         [Required]
+        public int MedicalExaminationTypeId { get; set; }
+        [ForeignKey("MedicalExaminationTypeId")]
         public virtual MedicalExaminationType MedicalExaminationType { get; set; }
 
         public string Description { get; set; }
 
-        // Doctor Id
         public string DoctorId { get; set; }
         [ForeignKey("DoctorId")]
         public virtual ApplicationUser Doctor { get; set; }

@@ -11,9 +11,10 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180118210259_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,83 +283,6 @@ namespace Weterynarz.Domain.Migrations
                     b.ToTable("Diseases");
                 });
 
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.DoctorGraphic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<DateTime>("AvailableFrom");
-
-                    b.Property<DateTime>("AvailableTo");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<string>("DoctorId")
-                        .IsRequired();
-
-                    b.Property<int>("GraphicId");
-
-                    b.Property<DateTime?>("ModificationDate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("GraphicId");
-
-                    b.ToTable("DoctorGraphics");
-                });
-
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Graphic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<int>("FridayFrom");
-
-                    b.Property<int>("FridayTo");
-
-                    b.Property<DateTime?>("ModificationDate");
-
-                    b.Property<int>("MondayFrom");
-
-                    b.Property<int>("MondayTo");
-
-                    b.Property<int>("SaturdayFrom");
-
-                    b.Property<int>("SaturdayTo");
-
-                    b.Property<int>("SundayFrom");
-
-                    b.Property<int>("SundayTo");
-
-                    b.Property<int>("ThursdayFrom");
-
-                    b.Property<int>("ThursdayTo");
-
-                    b.Property<int>("TuesdayFrom");
-
-                    b.Property<int>("TuesdayTo");
-
-                    b.Property<int>("WednesdayFrom");
-
-                    b.Property<int>("WednesdayTo");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Graphics");
-                });
-
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>
                 {
                     b.Property<int>("Id")
@@ -546,19 +470,6 @@ namespace Weterynarz.Domain.Migrations
                     b.HasOne("Weterynarz.Domain.EntitiesDb.Animal")
                         .WithMany("Diseases")
                         .HasForeignKey("AnimalId");
-                });
-
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.DoctorGraphic", b =>
-                {
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
-                        .WithMany("Graphics")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.Graphic", "Graphic")
-                        .WithMany()
-                        .HasForeignKey("GraphicId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>

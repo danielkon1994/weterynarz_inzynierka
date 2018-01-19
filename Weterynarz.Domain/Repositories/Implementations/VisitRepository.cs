@@ -27,8 +27,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
         {
             _animalRepository = animalRepository;
             _userRepository = userRepository;
-            _animalTypesRepository = animalTypesRepository;
             _accountsRepository = accountsRepository;
+            _animalTypesRepository = animalTypesRepository;
         }
 
         public bool CheckVisitExists(DateTime visitDate)
@@ -40,6 +40,71 @@ namespace Weterynarz.Domain.Repositories.Implementations
             }
 
             return false;
+        }
+
+        public async Task CreateNew(VisitManageViewModel model)
+        {
+            Visit animal = new Visit()
+            {
+                Active = model.Active,
+                CreationDate = DateTime.Now,
+                Deleted = false,
+                AnimalDescription = model.Description,
+                AnimalId = model.AnimalId,
+                DoctorId = model.DoctorId,
+                VisitDate = model.VisitDate                
+            };
+
+            await base.InsertAsync(animal);
+        }
+
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Edit(VisitManageViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public VisitManageViewModel GetCreateNewViewModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<VisitManageViewModel> GetEditViewModel(int id)
+        {
+            VisitManageViewModel model = null;
+
+            Visit visit = base.GetById(id);
+            if (visit != null)
+            {
+                model = new VisitManageViewModel();
+
+                model.Active = visit.Active;
+                model.DoctorId = visit.DoctorId;
+                model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
+                model.Description = visit.AnimalDescription;
+                model.AnimalId = visit.AnimalId;
+                model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(visit.OwnerId);
+                model.VisitDate = visit.VisitDate;
+            }
+
+            return model;
+        }
+
+        public IQueryable<VisitIndexViewModel> GetIndexViewModel()
+        {
+            return base.GetAllNotDeleted().Select(i => new VisitIndexViewModel
+            {
+                Id = i.Id,
+                Active = i.Active,
+                VisitDate = i.VisitDate,
+                CreationDate = i.CreationDate,
+                Animal = i.Animal.Name + " (" + i.Animal.AnimalType.Name + ")",
+                Doctor = i.Doctor.Name + " " + i.Doctor.Surname,
+            });
         }
 
         public async Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(ApplicationUser user)
@@ -97,7 +162,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Active = true,
                 AnimalId = animalId,
                 Approved = false,
-                ClientId = userId,
                 CreationDate = DateTime.Now,
                 DoctorId = model.VetId,
                 VisitDate = model.VisitDate,                

@@ -268,6 +268,24 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wszystkie grafiki lekarza.
+        /// </summary>
+        public static string doctorGraphicsAllGraphics_listGraphics {
+            get {
+                return ResourceManager.GetString("doctorGraphicsAllGraphics_listGraphics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodawanie grafiku.
+        /// </summary>
+        public static string doctorGraphicsCreateGraphicView_headerForm {
+            get {
+                return ResourceManager.GetString("doctorGraphicsCreateGraphicView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zwierzęta.
         /// </summary>
         public static string leftNavbar_animals {
@@ -300,6 +318,15 @@ namespace Weterynarz.Basic.Resources {
         public static string leftNavbar_dictionares {
             get {
                 return ResourceManager.GetString("leftNavbar_dictionares", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choroby.
+        /// </summary>
+        public static string leftNavbar_diseases {
+            get {
+                return ResourceManager.GetString("leftNavbar_diseases", resourceCulture);
             }
         }
         
@@ -345,6 +372,15 @@ namespace Weterynarz.Basic.Resources {
         public static string leftNavbar_users {
             get {
                 return ResourceManager.GetString("leftNavbar_users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wizyty.
+        /// </summary>
+        public static string leftNavbar_visits {
+            get {
+                return ResourceManager.GetString("leftNavbar_visits", resourceCulture);
             }
         }
         

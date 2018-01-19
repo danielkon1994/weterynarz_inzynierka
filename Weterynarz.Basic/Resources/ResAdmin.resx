@@ -297,4 +297,16 @@
   <data name="animalsEditView_headerForm" xml:space="preserve">
     <value>Edytuj zwierzę</value>
   </data>
+  <data name="leftNavbar_visits" xml:space="preserve">
+    <value>Wizyty</value>
+  </data>
+  <data name="leftNavbar_diseases" xml:space="preserve">
+    <value>Choroby</value>
+  </data>
+  <data name="doctorGraphicsAllGraphics_listGraphics" xml:space="preserve">
+    <value>Wszystkie grafiki lekarza</value>
+  </data>
+  <data name="doctorGraphicsCreateGraphicView_headerForm" xml:space="preserve">
+    <value>Dodawanie grafiku</value>
+  </data>
 </root>

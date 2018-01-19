@@ -33,7 +33,7 @@ AppNotify.tempNotifyMessage = function (tempObj) {
     }
 };
 
-AppNotify.notifyMessage = function (obj) {
+AppNotify.notifyMessage = function (obj, cb) {
     try {
         if (!!obj) {
             var messageType = null;
@@ -55,7 +55,7 @@ AppNotify.notifyMessage = function (obj) {
                     messageType = 'question'
                     break;
             }
-            swal(obj.text, obj.optionalText, messageType);
+            swal(obj.text, obj.optionalText, messageType, cb());
         }
     }
     catch (ex) {

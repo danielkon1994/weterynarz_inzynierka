@@ -18,12 +18,24 @@
             <span class="nav-link-text"> @ResAdmin.leftNavbar_animals</span>
         </a>
     </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Visits">
+        <a class="nav-link" asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin">
+            <i class="fa fa-fw fa-umbrella"></i>
+            <span class="nav-link-text"> @ResAdmin.leftNavbar_visits</span>
+        </a>
+    </li>
     @if (User.IsInRole(UserRoles.Admin))
     {
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
             <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin">
                 <i class="fa fa-fw fa-users"></i>
                 <span class="nav-link-text"> @ResAdmin.leftNavbar_users</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Diseases">
+            <a class="nav-link" asp-controller="Diseases" asp-action="Index" asp-area="@AreaNames.Admin">
+                <i class="fa fa-fw fa-thermometer-quarter"></i>
+                <span class="nav-link-text"> @ResAdmin.leftNavbar_diseases</span>
             </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">

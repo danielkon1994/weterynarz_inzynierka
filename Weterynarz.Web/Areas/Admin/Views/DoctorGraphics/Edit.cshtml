@@ -1,0 +1,257 @@
+﻿@namespace Weterynarz.Domain.ViewModels.Doctor
+@model DoctorGraphicManageViewModel
+@{
+    ViewData["Title"] = "Dodawanie grafiku";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin">Lista lekarzy</a></li>
+        <li class="breadcrumb-item"><a asp-controller="DoctorGraphics" asp-action="ShowGraphics" asp-area="@AreaNames.Admin">Wszystkie grafiki lekarza</a></li>
+        <li class="breadcrumb-item active">Dodawanie grafiku</li>
+    </ol>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <form asp-controller="DoctorGraphics" asp-action="CreateGraphic" method="post">
+                <div class="card-header">
+                    <strong>@ResAdmin.doctorGraphicsCreateGraphicView_headerForm</strong>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(m => m.DoctorId)
+                    @Html.HiddenFor(m => m.GraphicId)
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="AvailableFrom"></label>
+                                <input type="text" class="form-control" asp-for="AvailableFrom">
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="AvailableTo"></label>
+                                <input type="text" class="form-control" asp-for="AvailableTo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="MondayFrom"></label>
+                                        <input type="text" class="form-control" id="MondayFrom" name="MondayFrom" value="@Model.MondayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="MondayTo"></label>
+                                        <input type="text" class="form-control" id="MondayTo" name="MondayTo" value="@Model.MondayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="TuesdayFrom"></label>
+                                        <input type="text" class="form-control" id="TuesdayFrom" name="TuesdayFrom" value="@Model.TuesdayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="TuesdayTo"></label>
+                                        <input type="text" class="form-control" id="TuesdayTo" name="TuesdayTo" value="@Model.TuesdayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="WednesdayFrom"></label>
+                                        <input type="text" class="form-control" id="WednesdayFrom" name="WednesdayFrom" value="@Model.WednesdayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="WednesdayTo"></label>
+                                        <input type="text" class="form-control" id="WednesdayTo" name="WednesdayTo" value="@Model.WednesdayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ThursdayFrom"></label>
+                                        <input type="text" class="form-control" id="ThursdayFrom" name="ThursdayFrom" value="@Model.ThursdayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="ThursdayTo"></label>
+                                        <input type="text" class="form-control" id="ThursdayTo" name="ThursdayTo" value="@Model.ThursdayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="FridayFrom"></label>
+                                        <input type="text" class="form-control" id="FridayFrom" name="FridayFrom" value="@Model.FridayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="FridayTo"></label>
+                                        <input type="text" class="form-control" id="FridayTo" name="FridayTo" value="@Model.FridayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="SaturdayFrom"></label>
+                                        <input type="text" class="form-control" id="SaturdayFrom" name="SaturdayFrom" value="@Model.SaturdayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="SaturdayTo"></label>
+                                        <input type="text" class="form-control" id="SaturdayTo" name="SaturdayTo" value="@Model.SaturdayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="SundayFrom"></label>
+                                        <input type="text" class="form-control" id="SundayFrom" name="SundayFrom" value="@Model.SundayFrom.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="SundayTo"></label>
+                                        <input type="text" class="form-control" id="SundayTo" name="SundayTo" value="@Model.SundayTo.ToString(FormatsDate.OnlyTime)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
+                                    Czy aktywny?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Zapisz</button>
+                    <a href="@Url.Action("ShowGraphics", "DoctorGraphics", new { area = AreaNames.Admin, doctorId = Model.DoctorId})" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#AvailableFrom, #AvailableTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateFormatNoHours,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#MondayFrom, #MondayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#TuesdayFrom, #TuesdayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#WednesdayFrom, #WednesdayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#ThursdayFrom, #ThursdayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#FridayFrom, #FridayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#SaturdayFrom, #SaturdayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+            $('#SundayFrom, #SundayTo').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateTimeFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+        });
+    </script>
+}
+

@@ -63,10 +63,10 @@ namespace Weterynarz.Web
             services.AddScoped<IMedicalExaminationTypesRepository, MedicalExaminationTypesRepository>();
             services.AddScoped<IAccountsRepository, AccountsRepository>();
             services.AddScoped<ISettingsContentRepository, SettingsContentRepository>();
-            services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IVisitRepository, VisitRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IDoctorGraphicsRepository, DoctorGraphicsRepository>();
 
             // Add application services.
             services.AddScoped<IMemoryCacheService, MemoryCacheService>();

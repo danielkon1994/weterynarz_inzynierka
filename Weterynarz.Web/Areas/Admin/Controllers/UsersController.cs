@@ -24,22 +24,19 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly IUsersRepository _usersRepository;
-        private readonly IClientRepository _clientsRepository;
 
         public UsersController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
-            IUsersRepository usersRepository,
-            IClientRepository clientsRepository)
+            IUsersRepository usersRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _usersRepository = usersRepository;
-            _clientsRepository = clientsRepository;
         }
 
         [HttpGet]
@@ -374,6 +371,38 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
 
             return RedirectToAction("ListAll");
+        }
+
+        public async Task<IActionResult> ShowGraphic(string id)
+        {
+            Message message = null;
+
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            if(user == null)
+            {
+                message = new Message
+                {
+                    Text = "Uppsss !",
+                    OptionalText = "Nie znaleziono użytkownika",
+                    MessageStatus = MessageStatus.error
+                };
+                base.NotifyMessage(message);
+            }
+
+            if(!await _userManager.IsInRoleAsync(user, UserRoles.Doctor))
+            {
+                message = new Message
+                {
+                    Text = "Uppsss !",
+                    OptionalText = "Ten użytkownik nie jest lekarzem",
+                    MessageStatus = MessageStatus.error
+                };
+                base.NotifyMessage(message);
+            }
+
+
+
+            return View();
         }
 
         private void AddErrors(IdentityResult result)

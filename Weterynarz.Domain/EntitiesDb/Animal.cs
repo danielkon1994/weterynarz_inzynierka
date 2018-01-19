@@ -9,12 +9,6 @@ namespace Weterynarz.Domain.EntitiesDb
 {
     public class Animal : BaseEntity
     {
-        public Animal()
-        {
-            MedicalExaminations = new Collection<MedicalExamination>();
-            Diseases = new Collection<Disease>();
-        }
-
         [Required]
         public string Name { get; set; }
 
@@ -34,5 +28,7 @@ namespace Weterynarz.Domain.EntitiesDb
         public virtual ICollection<MedicalExamination> MedicalExaminations { get; set; }
 
         public virtual ICollection<Disease> Diseases { get; set; }
+
+        public virtual ICollection<Visit> Visits { get; set; }
     }
 }

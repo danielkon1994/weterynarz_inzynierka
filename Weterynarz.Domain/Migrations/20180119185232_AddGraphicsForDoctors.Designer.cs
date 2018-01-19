@@ -11,9 +11,10 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180119185232_AddGraphicsForDoctors")]
+    partial class AddGraphicsForDoctors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,6 +325,8 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Deleted");
 
+                    b.Property<int>("DoctorGraphicId");
+
                     b.Property<int>("FridayFrom");
 
                     b.Property<int>("FridayTo");
@@ -355,6 +358,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<int>("WednesdayTo");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorGraphicId");
 
                     b.ToTable("Graphics");
                 });
@@ -558,6 +563,14 @@ namespace Weterynarz.Domain.Migrations
                     b.HasOne("Weterynarz.Domain.EntitiesDb.Graphic", "Graphic")
                         .WithMany()
                         .HasForeignKey("GraphicId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Graphic", b =>
+                {
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.DoctorGraphic", "DoctorGraphic")
+                        .WithMany()
+                        .HasForeignKey("DoctorGraphicId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
