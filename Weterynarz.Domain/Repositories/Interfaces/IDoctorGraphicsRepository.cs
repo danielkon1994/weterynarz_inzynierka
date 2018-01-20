@@ -14,6 +14,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     {
         IEnumerable<SelectListItem> GetDoctorGraphicsSelectList();
         IQueryable<DoctorGraphicItem> GetAllGraphicsForDoctorViewModel();
+        DoctorShowGraphicViewModel GetDoctorGraphicToShowViewModel(string doctorId);
         Task CreateNew(DoctorGraphicManageViewModel model);
         Task<DoctorGraphicManageViewModel> GetEditGraphicViewModel(int id, string doctorId);
         Task Update(DoctorGraphicManageViewModel model);

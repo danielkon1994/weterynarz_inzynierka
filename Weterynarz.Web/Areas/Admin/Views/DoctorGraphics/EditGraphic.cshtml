@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <form asp-controller="DoctorGraphics" asp-action="CreateGraphic" method="post">
+            <form asp-controller="DoctorGraphics" asp-action="EditGraphic" method="post">
                 <div class="card-header">
                     <strong>@ResAdmin.doctorGraphicsCreateGraphicView_headerForm</strong>
                 </div>
@@ -24,18 +24,18 @@
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
                         </div>
                     </div>
 
+                    @Html.HiddenFor(m => m.Id)
                     @Html.HiddenFor(m => m.DoctorId)
-                    @Html.HiddenFor(m => m.GraphicId)
 
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label asp-for="AvailableFrom"></label>
-                                <input type="text" class="form-control" asp-for="AvailableFrom">
+                                <label asp-for="AvailableFrom"></label>                                
+                                <input type="text" class="form-control" id="AvailableFrom" name="AvailableFrom" value="@Model.AvailableFrom.ToString(FormatsDate.DateWithoutTime)">
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label asp-for="AvailableTo"></label>
-                                <input type="text" class="form-control" asp-for="AvailableTo">
+                                <input type="text" class="form-control" id="AvailableTo" name="AvailableTo" value="@Model.AvailableTo.ToString(FormatsDate.DateWithoutTime)">
                             </div>
                         </div>
                     </div>
@@ -56,13 +56,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="MondayFrom"></label>
-                                        <input type="text" class="form-control" id="MondayFrom" name="MondayFrom" value="@Model.MondayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="MondayFrom" name="MondayFrom" value="@Model.MondayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="MondayTo"></label>
-                                        <input type="text" class="form-control" id="MondayTo" name="MondayTo" value="@Model.MondayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="MondayTo" name="MondayTo" value="@Model.MondayTo">
                                     </div>
                                 </div>
                             </div>
@@ -74,13 +74,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="TuesdayFrom"></label>
-                                        <input type="text" class="form-control" id="TuesdayFrom" name="TuesdayFrom" value="@Model.TuesdayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="TuesdayFrom" name="TuesdayFrom" value="@Model.TuesdayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="TuesdayTo"></label>
-                                        <input type="text" class="form-control" id="TuesdayTo" name="TuesdayTo" value="@Model.TuesdayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="TuesdayTo" name="TuesdayTo" value="@Model.TuesdayTo">
                                     </div>
                                 </div>
                             </div>
@@ -92,13 +92,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="WednesdayFrom"></label>
-                                        <input type="text" class="form-control" id="WednesdayFrom" name="WednesdayFrom" value="@Model.WednesdayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="WednesdayFrom" name="WednesdayFrom" value="@Model.WednesdayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="WednesdayTo"></label>
-                                        <input type="text" class="form-control" id="WednesdayTo" name="WednesdayTo" value="@Model.WednesdayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="WednesdayTo" name="WednesdayTo" value="@Model.WednesdayTo">
                                     </div>
                                 </div>
                             </div>
@@ -110,13 +110,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="ThursdayFrom"></label>
-                                        <input type="text" class="form-control" id="ThursdayFrom" name="ThursdayFrom" value="@Model.ThursdayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="ThursdayFrom" name="ThursdayFrom" value="@Model.ThursdayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="ThursdayTo"></label>
-                                        <input type="text" class="form-control" id="ThursdayTo" name="ThursdayTo" value="@Model.ThursdayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="ThursdayTo" name="ThursdayTo" value="@Model.ThursdayTo">
                                     </div>
                                 </div>
                             </div>
@@ -128,13 +128,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="FridayFrom"></label>
-                                        <input type="text" class="form-control" id="FridayFrom" name="FridayFrom" value="@Model.FridayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="FridayFrom" name="FridayFrom" value="@Model.FridayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="FridayTo"></label>
-                                        <input type="text" class="form-control" id="FridayTo" name="FridayTo" value="@Model.FridayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="FridayTo" name="FridayTo" value="@Model.FridayTo">
                                     </div>
                                 </div>
                             </div>
@@ -146,13 +146,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="SaturdayFrom"></label>
-                                        <input type="text" class="form-control" id="SaturdayFrom" name="SaturdayFrom" value="@Model.SaturdayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="SaturdayFrom" name="SaturdayFrom" value="@Model.SaturdayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="SaturdayTo"></label>
-                                        <input type="text" class="form-control" id="SaturdayTo" name="SaturdayTo" value="@Model.SaturdayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="SaturdayTo" name="SaturdayTo" value="@Model.SaturdayTo">
                                     </div>
                                 </div>
                             </div>
@@ -164,13 +164,13 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="SundayFrom"></label>
-                                        <input type="text" class="form-control" id="SundayFrom" name="SundayFrom" value="@Model.SundayFrom.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="SundayFrom" name="SundayFrom" value="@Model.SundayFrom">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label asp-for="SundayTo"></label>
-                                        <input type="text" class="form-control" id="SundayTo" name="SundayTo" value="@Model.SundayTo.ToString(FormatsDate.OnlyTime)">
+                                        <input type="text" class="form-control" id="SundayTo" name="SundayTo" value="@Model.SundayTo">
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,8 @@
                         <div class="col-sm-12">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
+                                    @*<input class="form-check-input" type="checkbox" id="Active" name="Active" @(Model.Active ? "checked='checked'" : "")>*@
+                                    <input class="form-check-input" type="checkbox" asp-for="Active")>
                                     Czy aktywny?
                                 </label>
                             </div>

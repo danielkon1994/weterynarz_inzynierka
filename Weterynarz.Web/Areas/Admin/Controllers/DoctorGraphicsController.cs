@@ -19,9 +19,27 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             _doctorGraphicsRepository = doctorGraphicsRepository;
         }
 
-        public async Task<IActionResult> ShowGraphics(string doctorId, int page = 1)
+        public IActionResult ShowGraphic(string doctorId)
         {
             if(string.IsNullOrEmpty(doctorId))
+            {
+                base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("ListDoctors", "Users");
+            }
+
+            DoctorShowGraphicViewModel model = _doctorGraphicsRepository.GetDoctorGraphicToShowViewModel(doctorId);
+            if(model == null)
+            {
+                base.NotifyMessage("Nie udało się pobrać grafiku lekarza", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("ListDoctors", "Users");
+            }
+
+            return PartialView("_ShowGraphic", model);
+        }
+
+        public async Task<IActionResult> ShowGraphics(string doctorId, int page = 1)
+        {
+            if (string.IsNullOrEmpty(doctorId))
             {
                 base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("ListDoctors", "Users");
@@ -62,8 +80,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     Message message = new Message
                     {
-                        OptionalText = "Jeeessttt",
-                        Text = "Grafik został dodany",
+                        OptionalText = "Grafik został dodany",
+                        Text = "Jeeessstt",
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
@@ -80,7 +98,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Edit(int id, string doctorId)
+        public async Task<IActionResult> EditGraphic(int id, string doctorId)
         {
             if (string.IsNullOrEmpty(doctorId))
             {
@@ -94,7 +112,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(DoctorGraphicManageViewModel model)
+        public async Task<IActionResult> EditGraphic(DoctorGraphicManageViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -104,15 +122,15 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     Message message = new Message
                     {
-                        OptionalText = "Jeeessttt",
-                        Text = "Grafik został zapisany",
+                        Text = "Jeeessttt",
+                        OptionalText = "Grafik został zapisany",
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
 
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     base.NotifyMessage("Wystąpił problem z zapisem grafiku lekarza", "Upppsss !", MessageStatus.error);
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
@@ -123,7 +141,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int id, string doctorId)
+        public async Task<IActionResult> DeleteGraphic(int id, string doctorId)
         {
             Message message = null;
 

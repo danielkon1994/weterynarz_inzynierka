@@ -26,7 +26,12 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public DoctorGraphic GetById(string id)
         {
-            return _db.DoctorGraphics.Where(i => !i.Deleted).FirstOrDefault(i => i.DoctorId == id);
+            return _db.DoctorGraphics.Include("Graphic").Where(i => !i.Deleted).FirstOrDefault(i => i.DoctorId == id);
+        }
+
+        public override DoctorGraphic GetById(int id)
+        {
+            return _db.DoctorGraphics.Include("Graphic").Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
         }
 
         public async Task CreateNew(DoctorGraphicManageViewModel model)
@@ -55,9 +60,9 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             DoctorGraphic doctorGraphic = new DoctorGraphic()
             {
-                GraphicId = graphic.Id,
+                Graphic = graphic,
                 CreationDate = DateTime.Now,
-                Active = true,
+                Active = model.Active,
                 DoctorId = model.DoctorId,
                 AvailableFrom = model.AvailableFrom,
                 AvailableTo = model.AvailableTo
@@ -68,7 +73,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task Update(DoctorGraphicManageViewModel model)
         {
-            DoctorGraphic doctorGraphic = base.GetById(model.Id);
+            DoctorGraphic doctorGraphic = this.GetById(model.Id);
             if (doctorGraphic != null)
             {
                 doctorGraphic.Graphic.Active = model.Active;
@@ -110,16 +115,17 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public async Task<DoctorGraphicManageViewModel> GetEditGraphicViewModel(int id, string doctorId)
         {
             DoctorGraphic doctorGraphic = GetById(doctorId);
+
             DoctorGraphicManageViewModel model = null;
             if (doctorGraphic != null)
             {
                 model = new DoctorGraphicManageViewModel()
                 {
+                    Id = doctorGraphic.Id,
                     Active = doctorGraphic.Active,
                     AvailableFrom = doctorGraphic.AvailableFrom,
                     AvailableTo = doctorGraphic.AvailableTo,
                     DoctorId = doctorId,
-                    GraphicId = id,
                     MondayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.MondayFrom),
                     MondayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.MondayTo),
                     TuesdayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.TuesdayFrom),
@@ -149,7 +155,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 CreationDate = i.CreationDate,
                 AvailableFrom = i.AvailableFrom,
                 AvailableTo = i.AvailableTo,
-                GraphicId = i.GraphicId,
             });
         }
 
@@ -164,6 +169,42 @@ namespace Weterynarz.Domain.Repositories.Implementations
             }).ToList();
 
             return list.AsEnumerable();
+        }
+
+        public DoctorShowGraphicViewModel GetDoctorGraphicToShowViewModel(string doctorId)
+        {
+            DoctorGraphic doctorGraphic = this.getActualGraphic(doctorId);
+
+            DoctorShowGraphicViewModel model = null;
+            if (doctorGraphic != null)
+            {
+                model = new DoctorShowGraphicViewModel()
+                {
+                    Id = doctorGraphic.Id,
+                    MondayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.MondayFrom),
+                    MondayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.MondayTo),
+                    TuesdayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.TuesdayFrom),
+                    TuesdayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.TuesdayTo),
+                    WednesdayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.WednesdayFrom),
+                    WednesdayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.WednesdayTo),
+                    ThursdayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.ThursdayFrom),
+                    ThursdayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.ThursdayTo),
+                    FridayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.FridayFrom),
+                    FridayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.FridayTo),
+                    SaturdayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.SaturdayFrom),
+                    SaturdayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.SaturdayTo),
+                    SundayFrom = TimeSpan.FromMinutes(doctorGraphic.Graphic.SundayFrom),
+                    SundayTo = TimeSpan.FromMinutes(doctorGraphic.Graphic.SundayTo),
+                };
+            }
+
+            return model;
+        }
+
+        private DoctorGraphic getActualGraphic(string doctorId)
+        {
+            DateTime now = DateTime.Now;
+            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).FirstOrDefault(i => i.DoctorId == doctorId);
         }
     }
 }

@@ -50,7 +50,7 @@
                                     <td>@item.AvailableTo.ToString(FormatsDate.DateWithoutTime)</td>
                                     <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
                                     <td class="text-right">
-                                        <a href="@Url.Action("Edit", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id, doctorId = (string)ViewBag.DoctorId })" class="btn btn-dark">Edytuj</a>
+                                        <a href="@Url.Action("EditGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id, doctorId = (string)ViewBag.DoctorId })" class="btn btn-dark">Edytuj</a>
                                         <button id="btnDeleteGraphic" class="btn btn-danger" data-id="@item.Id">Usuń</button>
                                     </td>
                                 </tr>
@@ -83,10 +83,9 @@
                 AppNotify.confirm('Czy na pewno chcesz usunąć ten grafik?', function () {
                     $.ajax({
                         method: "POST",
-                        url: '@Url.Action("Delete", "DoctorGraphics", new { area = AreaNames.Admin})',
+                        url: '@Url.Action("DeleteGraphic", "DoctorGraphics", new { area = AreaNames.Admin})',
                         data: {
                             id: rowId,
-                            doctorId: '@((string)ViewBag.DoctorId)'
                         },
                         success: function (response) {
                             if (response.messageStatus == 2)

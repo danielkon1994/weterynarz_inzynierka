@@ -10,8 +10,6 @@ namespace Weterynarz.Domain.ViewModels.Doctor
         [Required]
         public string DoctorId { get; set; }
 
-        public int GraphicId { get; set; }
-
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Data obowiązywania od")]
