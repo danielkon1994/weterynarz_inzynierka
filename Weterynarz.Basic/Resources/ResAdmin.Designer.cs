@@ -268,6 +268,33 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj chorobę.
+        /// </summary>
+        public static string diseasesCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("diseasesCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj chorobę.
+        /// </summary>
+        public static string diseasesEditView_headerForm {
+            get {
+                return ResourceManager.GetString("diseasesEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choroby.
+        /// </summary>
+        public static string diseasesIndex_list {
+            get {
+                return ResourceManager.GetString("diseasesIndex_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wszystkie grafiki lekarza.
         /// </summary>
         public static string doctorGraphicsAllGraphics_listGraphics {

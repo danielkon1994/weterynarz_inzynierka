@@ -32,12 +32,6 @@
                 <span class="nav-link-text"> @ResAdmin.leftNavbar_users</span>
             </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Diseases">
-            <a class="nav-link" asp-controller="Diseases" asp-action="Index" asp-area="@AreaNames.Admin">
-                <i class="fa fa-fw fa-thermometer-quarter"></i>
-                <span class="nav-link-text"> @ResAdmin.leftNavbar_diseases</span>
-            </a>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
                 <i class="fa fa-fw fa-sitemap"></i>
@@ -55,6 +49,9 @@
                         </li>
                         <li>
                             <a asp-controller="MedicalExaminationTypes" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_medicalExaminationTypes</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Diseases" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_diseases</a>
                         </li>
                     </ul>
                 </li>

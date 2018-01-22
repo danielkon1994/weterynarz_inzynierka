@@ -8,6 +8,12 @@ namespace Weterynarz.Domain.EntitiesDb
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public ApplicationUser()
+        {
+            Animals = new Collection<Animal>();
+            Graphics = new Collection<DoctorGraphic>();
+        }
+
         public string Name { get; set; }
 
         public string Surname { get; set; }

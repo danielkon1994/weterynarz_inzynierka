@@ -71,6 +71,16 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label asp-for="DiseaseIds"></label>
+                                <select asp-for="DiseaseIds" class="form-control" asp-items="@Model.DiseasesSelectList" placeholder="Przebyte choroby"></select>
+                                <span asp-validation-for="DiseaseIds" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
                                 <label asp-for="Description"></label>
                                 <textarea rows="9" class="form-control" asp-for="Description" placeholder="Dodatkowy opis"></textarea>
                                 <span asp-validation-for="Description" class="help-block text-danger"></span>
@@ -83,7 +93,7 @@
                         <div class="col-sm-12">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
+                                    <input class="form-check-input" type="checkbox" asp-for="Active">
                                     Czy aktywny?
                                 </label>
                             </div>
@@ -110,6 +120,8 @@
                 useCurrent: false,
                 keepOpen: false
             });
+
+            $('#DiseaseIds').select2();
         });
     </script>
 }

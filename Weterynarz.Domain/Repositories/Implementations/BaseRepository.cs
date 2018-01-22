@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Weterynarz.Domain.ContextDb;
@@ -61,6 +62,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public virtual async Task SaveChangesAsync()
         {
             await _db.SaveChangesAsync();
+        }
+
+        public IQueryable<T> Where(Expression<Func<T, bool>> func)
+        {
+            return _db.Set<T>().Where(i => !i.Deleted).Where(func);
         }
 
         private IQueryable<T> WhereActive()

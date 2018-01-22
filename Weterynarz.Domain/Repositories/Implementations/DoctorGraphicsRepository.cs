@@ -26,7 +26,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public DoctorGraphic GetById(string id)
         {
-            return _db.DoctorGraphics.Include("Graphic").Where(i => !i.Deleted).FirstOrDefault(i => i.DoctorId == id);
+            return _db.DoctorGraphics.Include("Graphic,Disease").Where(i => !i.Deleted).FirstOrDefault(i => i.DoctorId == id);
         }
 
         public override DoctorGraphic GetById(int id)
@@ -60,7 +60,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             DoctorGraphic doctorGraphic = new DoctorGraphic()
             {
-                Graphic = graphic,
+                GraphicId = graphic.Id,
                 CreationDate = DateTime.Now,
                 Active = model.Active,
                 DoctorId = model.DoctorId,
@@ -204,7 +204,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private DoctorGraphic getActualGraphic(string doctorId)
         {
             DateTime now = DateTime.Now;
-            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).FirstOrDefault(i => i.DoctorId == doctorId);
+            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).OrderByDescending(i => i.CreationDate).FirstOrDefault(i => i.DoctorId == doctorId);
         }
     }
 }

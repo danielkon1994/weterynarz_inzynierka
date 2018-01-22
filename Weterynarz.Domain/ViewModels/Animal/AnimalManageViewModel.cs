@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -10,7 +11,7 @@ namespace Weterynarz.Domain.ViewModels.Animal
     {
         public AnimalManageViewModel()
         {
-            DiseaseIds = new int[] { };
+            DiseaseIds = new Collection<int>();
         }
 
         [Required(ErrorMessage = "Imię zwierzęcia jest wymagane")]
@@ -21,7 +22,7 @@ namespace Weterynarz.Domain.ViewModels.Animal
         [Display(Name = "Data urodzenia/przyjęcia")]
         public DateTime BirthDay { get; set; }
 
-        [Display(Name = "Dodatkowy opis")]
+        [Display(Name = "Dodatkowe informacje")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Właściciel jest wymagany")]
@@ -35,7 +36,7 @@ namespace Weterynarz.Domain.ViewModels.Animal
         public IEnumerable<SelectListItem> AnimalTypesSelectList { get; set; }
 
         [Display(Name = "Przebyte choroby")]
-        public IEnumerable<int> DiseaseIds { get; set; }
+        public ICollection<int> DiseaseIds { get; set; }
         public IEnumerable<SelectListItem> DiseasesSelectList { get; set; }
     }
 }

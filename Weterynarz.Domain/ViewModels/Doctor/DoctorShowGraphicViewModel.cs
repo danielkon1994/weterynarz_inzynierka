@@ -27,7 +27,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder mondayString = new StringBuilder();
-                if (MondayFrom != TimeSpan.MinValue && MondayTo != TimeSpan.MinValue)
+                if (MondayFrom != TimeSpan.Zero && MondayTo != TimeSpan.Zero)
                 {
                     mondayString.Append(MondayFrom.ToString() + " - " + MondayTo.ToString());
                 }
@@ -42,7 +42,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder tuesdayString = new StringBuilder();
-                if (TuesdayFrom != TimeSpan.MinValue && TuesdayTo != TimeSpan.MinValue)
+                if (TuesdayFrom != TimeSpan.Zero && TuesdayTo != TimeSpan.Zero)
                 {
                     tuesdayString.Append(TuesdayFrom.ToString() + " - " + TuesdayTo.ToString());
                 }
@@ -57,7 +57,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder wednesdayString = new StringBuilder();
-                if (WednesdayFrom != TimeSpan.MinValue && WednesdayTo != TimeSpan.MinValue)
+                if (WednesdayFrom != TimeSpan.Zero && WednesdayTo != TimeSpan.Zero)
                 {
                     wednesdayString.Append(WednesdayFrom.ToString() + " - " + WednesdayTo.ToString());
                 }
@@ -72,7 +72,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder thursdayString = new StringBuilder();
-                if (ThursdayFrom != TimeSpan.MinValue && ThursdayTo != TimeSpan.MinValue)
+                if (ThursdayFrom != TimeSpan.Zero && ThursdayTo != TimeSpan.Zero)
                 {
                     thursdayString.Append(ThursdayFrom.ToString() + " - " + ThursdayTo.ToString());
                 }
@@ -87,7 +87,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder fridayString = new StringBuilder();
-                if (FridayFrom != TimeSpan.MinValue && FridayTo != TimeSpan.MinValue)
+                if (FridayFrom != TimeSpan.Zero && FridayTo != TimeSpan.Zero)
                 {
                     fridayString.Append(FridayFrom.ToString() + " - " + FridayTo.ToString());
                 }
@@ -102,7 +102,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder saturdayString = new StringBuilder();
-                if (SaturdayFrom != TimeSpan.MinValue && SaturdayTo != TimeSpan.MinValue)
+                if (SaturdayFrom != TimeSpan.Zero && SaturdayTo != TimeSpan.Zero)
                 {
                     saturdayString.Append(SaturdayFrom.ToString() + " - " + SaturdayTo.ToString());
                 }
@@ -117,7 +117,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
             get
             {
                 StringBuilder sundayString = new StringBuilder();
-                if (SundayFrom != TimeSpan.MinValue && SundayTo != TimeSpan.MinValue)
+                if (SundayFrom != TimeSpan.Zero && SundayTo != TimeSpan.Zero)
                 {
                     sundayString.Append(SundayFrom.ToString() + " - " + SundayTo.ToString());
                 }

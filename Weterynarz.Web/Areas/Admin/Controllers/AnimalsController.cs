@@ -44,8 +44,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 Message message = new Message
                 {
-                    OptionalText = "Jeeessttt",
-                    Text = "Zwierzak został dodany",
+                    Text = "Jeeessttt",
+                    OptionalText = "Zwierzak został dodany",
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -53,6 +53,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            model = _animalsRepository.GetAllSelectListProperties(model);
             return View(model);
         }
 
@@ -72,25 +73,31 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(AnimalManageViewModel model)
         {
-            try
-            {
-                await _animalsRepository.Edit(model);
-
-                Message message = new Message
+            if(ModelState.IsValid)
+            { 
+                try
                 {
-                    Text = "Sukces !",
-                    OptionalText = "Pomyślnie zapisano",
-                    MessageStatus = MessageStatus.success
-                };
-                base.NotifyMessage(message);
+                    await _animalsRepository.Edit(model);
 
-                return RedirectToAction("Index");
+                    Message message = new Message
+                    {
+                        Text = "Sukces !",
+                        OptionalText = "Pomyślnie zapisano",
+                        MessageStatus = MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                    return RedirectToAction("Index");
+                }
             }
-            catch (Exception)
-            {
-                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("Index");
-            }
+
+            model = _animalsRepository.GetAllSelectListProperties(model);
+            return View(model);
         }
         
         //[HttpPost]

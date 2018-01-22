@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Weterynarz.Domain.ViewModels.Visit;
 using Weterynarz.Domain.ViewModels.Animal;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -17,12 +18,14 @@ namespace Weterynarz.Domain.Repositories.Implementations
     {
         private IAccountsRepository _accountsRepository;
         private IAnimalTypesRepository _animalTypesRepository;
+        private IDiseasesRepository _diseasesRepository;
 
         public AnimalRepository(ApplicationDbContext db, IAccountsRepository accountsRepository,
-            IAnimalTypesRepository animalTypesRepository) : base(db)
+            IAnimalTypesRepository animalTypesRepository, IDiseasesRepository diseasesRepository) : base(db)
         {
             _accountsRepository = accountsRepository;
             _animalTypesRepository = animalTypesRepository;
+            _diseasesRepository = diseasesRepository;
         }
 
         public async Task CreateNew(AnimalManageViewModel model)
@@ -38,6 +41,15 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Name = model.Name,
                 OwnerId = model.OwnerId
             };
+
+            var diseasesDbSelected = _diseasesRepository.Where(i => model.DiseaseIds.Contains(i.Id)).ToList();
+            if (model.DiseaseIds.Any())
+            {
+                foreach (int diseaseId in model.DiseaseIds)
+                {
+                    animal.Diseases.Add(diseasesDbSelected.Find(i => i.Id == diseaseId));
+                }
+            }
 
             await base.InsertAsync(animal);
         }
@@ -55,7 +67,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task Edit(AnimalManageViewModel model)
         {
-            Animal animal = base.GetById(model.Id);
+            Animal animal = getByIdWithInclude(model.Id);
             if (animal != null)
             {
                 animal.Active = model.Active;
@@ -66,6 +78,24 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 animal.AnimalTypeId = model.AnimalTypeId;
                 animal.BirthDate = model.BirthDay;
 
+                var diseasesDbSelected = _diseasesRepository.Where(i => model.DiseaseIds.Contains(i.Id)).ToList();
+                var existingDiseases = animal.Diseases?.ToList();
+                var existingDiseaseIds = existingDiseases?.Select(i => i.Id).ToList();
+
+                if (model.DiseaseIds.Any())
+                {
+                    var diseasesToAddList = model.DiseaseIds.Except(existingDiseaseIds);
+                    foreach(var diseaseId in diseasesToAddList)
+                    {
+                        animal.Diseases.Add(diseasesDbSelected.First(i => i.Id == diseaseId));
+                    }
+                    var diseasesToRemoveList = existingDiseaseIds.Except(model.DiseaseIds);
+                    foreach (int diseaseId in diseasesToRemoveList)
+                    {
+                        animal.Diseases.Remove(existingDiseases.First(i => i.Id == diseaseId));
+                    }
+                }
+
                 await base.SaveChangesAsync();
             }
         }
@@ -75,7 +105,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
             AnimalManageViewModel model = new AnimalManageViewModel();
 
             model.OwnersSelectList = _accountsRepository.GetUsersSelectList();
-            model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList(); ;
+            model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+            model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
 
             return model;
         }
@@ -84,7 +115,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
         {
             AnimalManageViewModel model = null;
 
-            Animal animal = base.GetById(id);
+            Animal animal = getByIdWithInclude(id);
             if (animal != null)
             {
                 model = new AnimalManageViewModel();
@@ -96,7 +127,21 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 model.Description = animal.AnimalDesc;
                 model.AnimalTypeId = animal.AnimalTypeId;
                 model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+                model.DiseaseIds = animal.Diseases?.Select(i => i.Id).ToList();
+                model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
                 model.BirthDay = animal.BirthDate;
+            }
+
+            return model;
+        }
+
+        public AnimalManageViewModel GetAllSelectListProperties(AnimalManageViewModel model)
+        {
+            if(model != null)
+            {
+                model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
+                model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+                model.OwnersSelectList = _accountsRepository.GetUsersSelectList();
             }
 
             return model;
@@ -129,6 +174,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 }).ToList();
             }
             return list.AsEnumerable();
+        }
+
+        private Animal getByIdWithInclude(int id)
+        {
+            return _db.Animals.Include(i => i.Diseases).Include(i => i.Visits).Include(i => i.MedicalExaminations).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
         }
 
         public async Task<int> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)

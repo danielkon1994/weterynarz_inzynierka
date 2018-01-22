@@ -222,6 +222,15 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home", new { area = AreaNames.None });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> LogoutGet()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation("User logged out.");
+
+            return RedirectToAction("Index", "Home", new { area = AreaNames.None });
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

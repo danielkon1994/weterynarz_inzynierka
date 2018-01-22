@@ -31,6 +31,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         public IActionResult Create()
         {
             DiseaseManageViewModel model = new DiseaseManageViewModel();
+            model.Active = true;
 
             return View(model);
         }
@@ -45,8 +46,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 Message message = new Message
                 {
-                    OptionalText = "Jeeessttt",
-                    Text = "Choroba została dodana",
+                    Text = "Jeeessttt",
+                    OptionalText = "Choroba została dodana",
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);

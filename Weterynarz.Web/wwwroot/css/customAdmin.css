@@ -60,3 +60,12 @@ body {
 .fullPage {
   height: 100%; }
 
+#graphicModal .modal-body h3 {
+  color: #212529;
+  margin-bottom: 1.5rem; }
+
+.select2-selection--multiple {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #495057;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+

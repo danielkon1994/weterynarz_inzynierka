@@ -20,6 +20,8 @@ namespace Weterynarz.Domain.EntitiesDb
         public ApplicationUser Doctor { get; set; }
 
         [Required]
+        public int GraphicId { get; set; }
+        [ForeignKey("GraphicId")]
         public Graphic Graphic { get; set; }
     }
 }

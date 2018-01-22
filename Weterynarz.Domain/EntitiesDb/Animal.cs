@@ -9,6 +9,13 @@ namespace Weterynarz.Domain.EntitiesDb
 {
     public class Animal : BaseEntity
     {
+        public Animal()
+        {
+            MedicalExaminations = new Collection<MedicalExamination>();
+            Diseases = new Collection<Disease>();
+            Visits = new Collection<Visit>();
+        }
+
         [Required]
         public string Name { get; set; }
 

@@ -93,7 +93,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public IEnumerable<SelectListItem> GetDiseasesSelectList()
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
             list = base.GetAllActive().Select(i => new SelectListItem {
                 Text = i.Name,
