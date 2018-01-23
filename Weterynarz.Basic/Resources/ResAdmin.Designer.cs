@@ -662,5 +662,32 @@ namespace Weterynarz.Basic.Resources {
                 return ResourceManager.GetString("usersManageViewModel_zipCode", resourceCulture);
             }
         }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj wizytę.
+        /// </summary>
+        public static string visitCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("visitCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edytuj wizytę.
+        /// </summary>
+        public static string visitEditView_headerForm {
+            get {
+                return ResourceManager.GetString("visitEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista wizyt.
+        /// </summary>
+        public static string visitsIndex_list {
+            get {
+                return ResourceManager.GetString("visitsIndex_list", resourceCulture);
+            }
+        }
     }
 }

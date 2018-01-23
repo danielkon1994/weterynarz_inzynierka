@@ -24,5 +24,8 @@ namespace Weterynarz.Domain.ViewModels.Visit
         [Display(Name = "Doktor")]
         public string DoctorId { get; set; }
         public IEnumerable<SelectListItem> DoctorsSelectList { get; set; }
+
+        [Display(Name = "Zatwierdzona")]
+        public bool Approved { get; set; }
     }
 }

@@ -318,4 +318,13 @@
   <data name="diseasesIndex_list" xml:space="preserve">
     <value>Choroby</value>
   </data>
+  <data name="visitCreateView_headerForm" xml:space="preserve">
+    <value>Dodaj wizytę</value>
+  </data>
+  <data name="visitEditView_headerForm" xml:space="preserve">
+    <value>Edytuj wizytę</value>
+  </data>
+  <data name="visitsIndex_list" xml:space="preserve">
+    <value>Lista wizyt</value>
+  </data>
 </root>

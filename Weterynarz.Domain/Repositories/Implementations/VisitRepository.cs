@@ -68,9 +68,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public VisitManageViewModel GetCreateNewViewModel()
+        public async Task<VisitManageViewModel> GetCreateNewViewModel()
         {
-            throw new NotImplementedException();
+            VisitManageViewModel model = new VisitManageViewModel();
+            model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
+            model.AnimalsSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+
+            return model;
         }
 
         public async Task<VisitManageViewModel> GetEditViewModel(int id)
@@ -102,8 +106,10 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Active = i.Active,
                 VisitDate = i.VisitDate,
                 CreationDate = i.CreationDate,
+                Owner = i.Animal.Owner.Name + " " + i.Animal.Owner.Surname,
                 Animal = i.Animal.Name + " (" + i.Animal.AnimalType.Name + ")",
                 Doctor = i.Doctor.Name + " " + i.Doctor.Surname,
+                Approved = i.Approved
             });
         }
 
