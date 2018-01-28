@@ -195,6 +195,26 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return vetsList.AsEnumerable();
         }
 
+        public async Task<IEnumerable<SelectListItem>> GetOwnersSelectList()
+        {
+            List<SelectListItem> ownersList = new List<SelectListItem>();
+            ownersList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
+
+            var users = await _userManager.GetUsersInRoleAsync(UserRoles.Client);
+            if (users != null)
+            {
+                foreach (var user in users)
+                {
+                    ownersList.Add(new SelectListItem
+                    {
+                        Text = $"{user.Name} {user.Surname}",
+                        Value = user.Id
+                    });
+                }
+            }
+            return ownersList.AsEnumerable();
+        }
+
         public async Task InsertAcync(ApplicationUser user)
         {
             _db.Users.Add(user);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Domain.ViewModels.Doctor
 {
@@ -29,7 +30,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder mondayString = new StringBuilder();
                 if (MondayFrom != TimeSpan.Zero && MondayTo != TimeSpan.Zero)
                 {
-                    mondayString.Append(MondayFrom.ToString() + " - " + MondayTo.ToString());
+                    mondayString.Append(MondayFrom.ToString(@"hh\:mm") + " - " + MondayTo.ToString(@"hh\:mm"));
                 }
                 if (mondayString.Length == 0)
                 {
@@ -44,7 +45,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder tuesdayString = new StringBuilder();
                 if (TuesdayFrom != TimeSpan.Zero && TuesdayTo != TimeSpan.Zero)
                 {
-                    tuesdayString.Append(TuesdayFrom.ToString() + " - " + TuesdayTo.ToString());
+                    tuesdayString.Append(TuesdayFrom.ToString(@"hh\:mm") + " - " + TuesdayTo.ToString(@"hh\:mm"));
                 }
                 if(tuesdayString.Length == 0)
                 {
@@ -59,7 +60,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder wednesdayString = new StringBuilder();
                 if (WednesdayFrom != TimeSpan.Zero && WednesdayTo != TimeSpan.Zero)
                 {
-                    wednesdayString.Append(WednesdayFrom.ToString() + " - " + WednesdayTo.ToString());
+                    wednesdayString.Append(WednesdayFrom.ToString(@"hh\:mm") + " - " + WednesdayTo.ToString(@"hh\:mm"));
                 }
                 if (wednesdayString.Length == 0)
                 {
@@ -74,7 +75,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder thursdayString = new StringBuilder();
                 if (ThursdayFrom != TimeSpan.Zero && ThursdayTo != TimeSpan.Zero)
                 {
-                    thursdayString.Append(ThursdayFrom.ToString() + " - " + ThursdayTo.ToString());
+                    thursdayString.Append(ThursdayFrom.ToString(@"hh\:mm") + " - " + ThursdayTo.ToString(@"hh\:mm"));
                 }
                 if (thursdayString.Length == 0)
                 {
@@ -89,7 +90,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder fridayString = new StringBuilder();
                 if (FridayFrom != TimeSpan.Zero && FridayTo != TimeSpan.Zero)
                 {
-                    fridayString.Append(FridayFrom.ToString() + " - " + FridayTo.ToString());
+                    fridayString.Append(FridayFrom.ToString(@"hh\:mm") + " - " + FridayTo.ToString(@"hh\:mm"));
                 }
                 if (fridayString.Length == 0)
                 {
@@ -104,7 +105,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder saturdayString = new StringBuilder();
                 if (SaturdayFrom != TimeSpan.Zero && SaturdayTo != TimeSpan.Zero)
                 {
-                    saturdayString.Append(SaturdayFrom.ToString() + " - " + SaturdayTo.ToString());
+                    saturdayString.Append(SaturdayFrom.ToString(@"hh\:mm") + " - " + SaturdayTo.ToString(@"hh\:mm"));
                 }
                 if (saturdayString.Length == 0)
                 {
@@ -119,7 +120,7 @@ namespace Weterynarz.Domain.ViewModels.Doctor
                 StringBuilder sundayString = new StringBuilder();
                 if (SundayFrom != TimeSpan.Zero && SundayTo != TimeSpan.Zero)
                 {
-                    sundayString.Append(SundayFrom.ToString() + " - " + SundayTo.ToString());
+                    sundayString.Append(SundayFrom.ToString(@"hh\:mm") + " - " + SundayTo.ToString(@"hh\:mm"));
                 }
                 if (sundayString.Length == 0)
                 {

@@ -27,6 +27,12 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        public IActionResult FillAnimalList(string userId)
+        {
+            var animalSelectList = _animalsRepository.GetUserAnimalsSelectList(userId);
+            return Json(animalSelectList);
+        }
+
         public IActionResult Create()
         {
             AnimalManageViewModel model = _animalsRepository.GetCreateNewViewModel();

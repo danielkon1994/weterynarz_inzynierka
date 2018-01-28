@@ -12,8 +12,14 @@ namespace Weterynarz.Domain.ViewModels.Visit
         [Display(Name = "Data wizyty")]
         public DateTime VisitDate { get; set; }
 
-        [Display(Name = "Dodatkowy opis")]
-        public string Description { get; set; }
+        [Required(ErrorMessage = "Przyczyna wizyty jest wymagana")]
+        [Display(Name = "Przyczyna wizyty")]
+        public string ReasonVisit { get; set; }
+
+        [Required(ErrorMessage = "Właściciel jest wymagany")]
+        [Display(Name = "Właściciel")]
+        public string OwnerId { get; set; }
+        public IEnumerable<SelectListItem> OwnersSelectList { get; set; }
 
         [Required(ErrorMessage = "Zwierzę jest wymagane")]
         [Display(Name = "Zwierze")]

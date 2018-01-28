@@ -31,6 +31,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
             _animalTypesRepository = animalTypesRepository;
         }
 
+        public async Task Approved(Visit visit)
+        {
+            visit.Approved = true;
+
+            await base.SaveChangesAsync();
+        }
+
         public bool CheckVisitExists(DateTime visitDate)
         {
             var visitExist = base.GetAllActive().Any();
@@ -44,35 +51,58 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task CreateNew(VisitManageViewModel model)
         {
-            Visit animal = new Visit()
+            Visit visit = new Visit()
             {
-                Active = model.Active,
+                Active = true,
                 CreationDate = DateTime.Now,
                 Deleted = false,
-                AnimalDescription = model.Description,
+                ReasonVisit = model.ReasonVisit,
                 AnimalId = model.AnimalId,
                 DoctorId = model.DoctorId,
-                VisitDate = model.VisitDate                
+                OwnerId = model.OwnerId,
+                Approved = model.Approved,
+                VisitDate = model.VisitDate,         
             };
 
-            await base.InsertAsync(animal);
+            await base.InsertAsync(visit);
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            Visit visit = base.GetById(id);
+            if (visit != null)
+            {
+                visit.Active = false;
+                visit.Deleted = true;
+            }
+
+            await base.SaveChangesAsync();
         }
 
-        public Task Edit(VisitManageViewModel model)
+        public async Task Edit(VisitManageViewModel model)
         {
-            throw new NotImplementedException();
+            Visit visit = base.GetById(model.Id);
+            if (visit != null)
+            {
+                visit.Approved = model.Approved;
+                visit.DoctorId = model.DoctorId;
+                visit.ReasonVisit = model.ReasonVisit;
+                visit.AnimalId = model.AnimalId;
+                visit.VisitDate = model.VisitDate;
+                visit.OwnerId = model.OwnerId;
+            }
+
+            await base.SaveChangesAsync();
         }
 
-        public async Task<VisitManageViewModel> GetCreateNewViewModel()
+        public async Task<VisitManageViewModel> GetCreateNewViewModel(VisitManageViewModel model = null)
         {
-            VisitManageViewModel model = new VisitManageViewModel();
+            if(model == null)
+                model = new VisitManageViewModel();
+
             model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
             model.AnimalsSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+            model.OwnersSelectList = await _accountsRepository.GetOwnersSelectList();
 
             return model;
         }
@@ -85,14 +115,16 @@ namespace Weterynarz.Domain.Repositories.Implementations
             if (visit != null)
             {
                 model = new VisitManageViewModel();
-
-                model.Active = visit.Active;
+                model.Id = visit.Id;
+                model.Approved = visit.Approved;
                 model.DoctorId = visit.DoctorId;
                 model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
-                model.Description = visit.AnimalDescription;
+                model.ReasonVisit = visit.ReasonVisit;
                 model.AnimalId = visit.AnimalId;
                 model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(visit.OwnerId);
                 model.VisitDate = visit.VisitDate;
+                model.OwnerId = visit.OwnerId;
+                model.OwnersSelectList = await _accountsRepository.GetOwnersSelectList();
             }
 
             return model;

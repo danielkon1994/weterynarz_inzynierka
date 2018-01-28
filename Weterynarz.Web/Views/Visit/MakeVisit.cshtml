@@ -38,7 +38,7 @@
                                     @Html.HiddenFor(m => m.UserId)
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control datetimepicker-input" id="VisitDate" name="VisitDate" data-toggle="datetimepicker" data-target="#VisitDate" />
+                                        <input type="text" class="form-control" id="VisitDate" name="VisitDate" placeholder="Data urodzenia/przyjęcia" />
                                         <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
@@ -144,7 +144,6 @@
 </section>
 
 @section Scripts {
-
     <script type="text/javascript">
         $(document).ready(function () {
             

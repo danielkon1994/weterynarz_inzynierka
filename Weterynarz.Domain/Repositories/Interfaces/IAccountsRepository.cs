@@ -30,5 +30,6 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         Task InsertAcync(ApplicationUser user);
         Task<string> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
         IEnumerable<SelectListItem> GetUsersSelectList();
+        Task<IEnumerable<SelectListItem>> GetOwnersSelectList();
     }
 }

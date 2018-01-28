@@ -31,7 +31,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label asp-for="VisitDate"></label>
-                                <input type="text" class="form-control" id="VisitDate" name="VisitDate" value="@(Model.VisitDate == DateTime.MinValue ? "" : Model.VisitDate.ToString(FormatsDate.DateWithoutTime))" placeholder="Data wizyty" />
+                                <input type="text" class="form-control" id="VisitDate" name="VisitDate" placeholder="Data wizyty" />
                                 <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
                             </div>
                         </div>
@@ -41,8 +41,39 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label asp-for="Description"></label>
-                                <textarea rows="9" class="form-control" asp-for="Description" placeholder="Dodatkowy opis"></textarea>
+                                <label asp-for="OwnerId"></label>
+                                <select asp-for="OwnerId" class="form-control" asp-items="@Model.OwnersSelectList" placeholder="Właściciel" onchange="fillAnimalList()"></select>
+                                <span asp-validation-for="OwnerId" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="AnimalId"></label>
+                                <select asp-for="AnimalId" class="form-control" placeholder="Zwierze" disabled="true"></select>
+                                <span asp-validation-for="AnimalId" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="DoctorId"></label>
+                                <select asp-for="DoctorId" class="form-control" asp-items="@Model.DoctorsSelectList" placeholder="Lekarz"></select>
+                                <span asp-validation-for="DoctorId" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="ReasonVisit"></label>
+                                <textarea rows="9" class="form-control" asp-for="ReasonVisit" placeholder="Przyczyna wizyty"></textarea>
+                                <span asp-validation-for="ReasonVisit" class="help-block text-danger"></span>
                             </div>
                         </div>
                     </div>
@@ -52,8 +83,8 @@
                         <div class="col-sm-12">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" asp-for="Active" checked="checked">
-                                        Czy aktywny?
+                                    <input class="form-check-input" type="checkbox" asp-for="Approved">
+                                        Czy zatwierdzona?
                                 </label>
                             </div>
                         </div>
@@ -63,10 +94,50 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
-                    <a asp-controller="AnimalTypes" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                    <a asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        function fillAnimalList()
+        {
+            var animalsSelectListUrl = '@Url.Action("FillAnimalList", "Animals", new { area = AreaNames.Admin})';
+            var ownerId = $("#OwnerId").val();
+            if (ownerId != "")
+            {
+                $.ajax({
+                    url: animalsSelectListUrl,
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { userId: ownerId },
+                    success: function (animalsSelectList) {
+                        $("#AnimalId").prop("disabled", false);
+                        $("#AnimalId").html("");  
+                        $.each(animalsSelectList, function (i, item) {
+                            $("#AnimalId").append(
+                                $('<option></option>').val(item.value).html(item.text));
+                        });
+                    },
+                    error: function (err)
+                    {
+                        AppNotify.showMessage("Upppsss", "Nie udało się pobrać zwierząt dla danego właściciela", 1);
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            $('#VisitDate').datetimepicker({
+                locale: 'pl',
+                format: _formats_.dateFormat,
+                useCurrent: false,
+                keepOpen: false
+            });
+        });
+    </script>
+}

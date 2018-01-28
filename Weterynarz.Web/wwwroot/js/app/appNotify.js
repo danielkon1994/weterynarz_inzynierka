@@ -63,6 +63,32 @@ AppNotify.notifyMessage = function (obj, cb) {
     }
 };
 
+AppNotify.showMessage = function (text, message, type, cb) {
+    try {
+        switch (type) {
+            case 1:
+                messageType = 'error';
+                break;
+            case 2:
+                messageType = 'success'
+                break;
+            case 3:
+                messageType = 'warning'
+                break;
+            case 4:
+                messageType = 'info'
+                break;
+            case 5:
+                messageType = 'question'
+                break;
+        }
+        swal(text, message, type, cb());
+    }
+    catch (ex) {
+        console.log(ex);
+    }
+};
+
 AppNotify.confirm = function (message, callback) {
     swal({
         title: 'Jesteś pewny?',

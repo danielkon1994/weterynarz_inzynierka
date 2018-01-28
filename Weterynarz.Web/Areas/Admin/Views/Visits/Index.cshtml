@@ -31,7 +31,7 @@
                     <i class="fa fa-align-justify"></i> @ResAdmin.visitsIndex_list
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <thead>
                             <tr>
                                 <th>Data wizyty</th>
@@ -51,11 +51,21 @@
                                         <td>@item.VisitDate.ToString(FormatsDate.DateWithoutTime)</td>
                                         <td>@item.Animal</td>
                                         <td>@item.Doctor</td>
-                                        <td>@(item.Approved ? Html.Raw("<span class='badge badge-success'>Zaakceptowana</span>") : Html.Raw("<span class='badge badge-danger'>Niezaakceptowana</span>"))</td>
-                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
+                                        <td>@(item.Approved ? Html.Raw("<span class='badge badge-success'>Zatwierdzona</span>") : Html.Raw("<span class='badge badge-danger'>Nie zatwierdzona</span>"))</td>
+                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywna</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywna</span>"))</td>
                                         <td class="text-right">
-                                            <a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
-                                            <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="btn btn-danger">Usuń</a>
+                                            @*<a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
+            <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="btn btn-danger">Usuń</a>*@
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Menu
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a href="@Url.Action("Approved", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Zatwierdź wizytę</a>
+                                                    <a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Edytuj</a>
+                                                    <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="dropdown-item">Usuń</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 }

@@ -28,9 +28,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            VisitManageViewModel model = _visitsRepository.GetCreateNewViewModel();
+            VisitManageViewModel model = await _visitsRepository.GetCreateNewViewModel();
 
             return View(model);
         }
@@ -53,6 +53,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
+
+            model = await _visitsRepository.GetCreateNewViewModel();
 
             return View(model);
         }
@@ -93,7 +95,37 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
-        
+
+        public async Task<IActionResult> Approved(int id)
+        {
+            var visit = _visitsRepository.GetById(id);
+            if(visit?.Approved == true)
+            {
+                base.NotifyMessage("", "Wizyta została już wcześniej zatwierdzona", MessageStatus.warning);
+                return RedirectToAction("Index");
+            }
+
+            try
+            {
+                await _visitsRepository.Approved(visit);
+
+                Message message = new Message
+                {
+                    Text = "Sukces !",
+                    OptionalText = "Zatwierdzono wizytę",
+                    MessageStatus = MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                base.NotifyMessage("Wystąpił błąd podczas zatwierdzania wizyty", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
+        }
+
         //[HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

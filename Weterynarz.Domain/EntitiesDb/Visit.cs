@@ -26,7 +26,7 @@ namespace Weterynarz.Domain.EntitiesDb
         [ForeignKey("AnimalId")]
         public virtual Animal Animal { get; set; }
         
-        public string AnimalDescription { get; set; }
+        public string ReasonVisit { get; set; }
 
         public bool Approved { get; set; } = false;
     }
