@@ -18,34 +18,3 @@
 <!-- Footer -->
 @Html.Partial("~/Views/MainPageSection/Footer.cshtml", Model)
 
-
-@section Scripts {
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript">
-        var resultDiv = $('#resultContactForm');
-        var onSuccessAjaxContactForm = function (data) {
-            var alertType = 'warning';
-            if (data.status == 1)
-            { 
-                alertType = 'danger';
-            }
-            var alertDiv = '<div class="alert alert-' + alertType + ' alert-dismissible fade show" role="alert">'
-                + data.message + '</div >';
-            
-            resultDiv.append(alertDiv);
-            setTimeout(function () {
-                resultDiv.find('.alert').fadeOut();
-            }, 4000);
-        };
-
-        var onErrorAjaxContactForm = function (data) {
-            var alertDiv = '<div class="alert alert-danger alert-dismissible fade show" role="alert">Wystąpił problem przy wysyłaniu wiadomości</div >';
-
-            resultDiv.append(alertDiv);
-            setTimeout(function () {
-                resultDiv.find('.alert').fadeOut();
-            }, 4000);
-        };
-    </script>
-}

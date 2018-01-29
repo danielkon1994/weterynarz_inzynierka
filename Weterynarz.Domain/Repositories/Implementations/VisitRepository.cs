@@ -40,7 +40,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public bool CheckVisitExists(DateTime visitDate)
         {
-            var visitExist = base.GetAllActive().Any();
+            DateTime visitDateRange = visitDate.AddMinutes(30);
+            bool visitExist = base.GetAllActive().Any(v => v.VisitDate == visitDate || (v.VisitDate >= visitDate && v.VisitDate <= visitDateRange));
             if(visitExist)
             {
                 return true;
@@ -202,7 +203,9 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Approved = false,
                 CreationDate = DateTime.Now,
                 DoctorId = model.VetId,
-                VisitDate = model.VisitDate,                
+                VisitDate = model.VisitDate, 
+                OwnerId = userId,
+                ReasonVisit = model.ReasonVisit
             };
 
             await base.InsertAsync(visit);

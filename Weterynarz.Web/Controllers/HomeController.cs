@@ -34,22 +34,32 @@ namespace Weterynarz.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Contact(HomeIndexViewModel model)
+        public async Task<IActionResult> Contact(HomeIndexViewModel model)
         {
             if(ModelState.IsValid)
             {
                 try
                 {
-                    _emailSender.SendEmailAsync(model.ContactForm.Email, "Kontakt ze strony", model.ContactForm.Message);
-                    return Json(new JsonResponseModel { Message = "Wiadomość została wysłana", Status = MessageStatus.success });
+                    await _emailSender.SendEmailAsync(model.ContactForm.Email, "Kontakt ze strony", model.ContactForm.Message);
+
+                    Message message = new Message
+                    {
+                        Text = "Jeeessttt",
+                        OptionalText = "Wiadomość została wysłana",
+                        MessageStatus = Models.NotifyMessage.MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+                    return RedirectToAction("Index");
                 }
                 catch(Exception)
                 {
-                    return Json(new JsonResponseModel { Message = "Coś poszło nie tak przy wysyłaniu wiadomości", Status = MessageStatus.error });
+                    base.NotifyMessage("Coś poszło nie tak przy wysyłaniu wiadomości", "Upppsss !", MessageStatus.error);
+                    return RedirectToAction("Index");
                 }
             }
 
-            return Json(new JsonResponseModel { Message = "Nie udało się wysłać wiadomości", Status = MessageStatus.error });
+            base.NotifyMessage("Nie udało się wysłać wiadomości", "Upppsss !", MessageStatus.error);
+            return RedirectToAction("Index");
         }
         
     }

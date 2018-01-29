@@ -14,12 +14,16 @@ namespace Weterynarz.Web
     {
         public static void Main(string[] args)
         {
+            // NLog: setup the logger first to catch all errors
+            var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+
             BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                //.UseNLog()
                 .Build();
     }
 }

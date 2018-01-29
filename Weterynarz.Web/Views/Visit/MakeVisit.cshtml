@@ -26,7 +26,7 @@
                 }
                 <div class="row">
                     <div class="col-lg-12">
-                        <form id="makeVisitForm" asp-controller="Visit" asp-action="MakeVisit" method="post">
+                        <form id="makeVisitForm" asp-controller="Visit" asp-action="MakeVisit" method="post">                  
                             <div class="row">
                                 <div class="col-md-6">
                                     <div asp-validation-summary="All"></div>
@@ -38,80 +38,91 @@
                                     @Html.HiddenFor(m => m.UserId)
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="VisitDate" name="VisitDate" placeholder="Data urodzenia/przyjęcia" />
+                                        <label asp-for="VisitDate"></label>
+                                        <input type="text" class="form-control" id="VisitDate" name="VisitDate" />
                                         <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <select asp-for="VetId" class="form-control" asp-items="@Model.VetsSelectList" placeholder="Lekarz"></select>
+                                        <label asp-for="VetId"></label>
+                                        <select asp-for="VetId" class="form-control" asp-items="@Model.VetsSelectList"></select>
                                         <span asp-validation-for="VetId" class="help-block text-danger"></span>
                                     </div><br /><br />
 
                                     @if (User.Identity.IsAuthenticated && Model.AnimalsSelectList.Count() > 0)
                                     {
                                         <div class="form-group">
-                                            <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList" placeholder="Zwierzę"></select>
+                                            <label asp-for="AnimalId"></label>
+                                            <select asp-for="AnimalId" class="form-control" asp-items="@Model.AnimalsSelectList"></select>
                                             <span asp-validation-for="AnimalId" class="help-block text-danger"></span>
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="form-group">
-                                            <input asp-for="AnimalName" class="form-control" type="text" placeholder="Imię zwierzęcia">
+                                            <label asp-for="AnimalName"></label>
+                                            <input asp-for="AnimalName" class="form-control" type="text">
                                             <span asp-validation-for="AnimalName" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <select asp-for="AnimalTypeId" class="form-control" asp-items="@Model.AnimalTypesSelectList" placeholder="Typ zwierzęcia"></select>
+                                            <label asp-for="AnimalTypeId"></label>
+                                            <select asp-for="AnimalTypeId" class="form-control" asp-items="@Model.AnimalTypesSelectList"></select>
                                             <span asp-validation-for="AnimalTypeId" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control datetimepicker-input" id="AnimalBirthdate" name="AnimalBirthdate" data-toggle="datetimepicker" data-target="#AnimalBirthdate" />
+                                            <label asp-for="AnimalBirthdate"></label>
+                                            <input type="text" class="form-control" id="AnimalBirthdate" name="AnimalBirthdate" />
                                             <span asp-validation-for="AnimalBirthdate" class="help-block text-danger"></span>
                                         </div>
                                     }
                                     <div class="form-group">
-                                        <textarea asp-for="DescriptionProblem" class="form-control" placeholder="Opis problemu"></textarea>
-                                        <span asp-validation-for="DescriptionProblem" class="help-block text-danger"></span>
+                                        <label asp-for="ReasonVisit"></label>
+                                        <textarea asp-for="ReasonVisit" class="form-control"></textarea>
+                                        <span asp-validation-for="ReasonVisit" class="help-block text-danger"></span>
                                     </div>
                                     @*<div class="form-group">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-9 pl-0">
-                                                    <input asp-for="Address" class="form-control" type="text" placeholder="Adres">
-                                                    <span asp-validation-for="Address" class="help-block text-danger"></span>
-                                                </div>
-                                                <div class="col-md-3 pr-0">
-                                                    <input asp-for="HomeNumber" class="form-control" type="text" placeholder="Numer domu">
-                                                    <span asp-validation-for="HomeNumber" class="help-block text-danger"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input asp-for="City" class="form-control" type="text" placeholder="Miejscowość">
-                                        <span asp-validation-for="City" class="help-block text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input asp-for="ZipCode" class="form-control" type="text" placeholder="Kod pocztowy">
-                                        <span asp-validation-for="ZipCode" class="help-block text-danger"></span>
-                                    </div>*@                                    
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-9 pl-0">
+                                    <input asp-for="Address" class="form-control" type="text" placeholder="Adres">
+                                    <span asp-validation-for="Address" class="help-block text-danger"></span>
+                                </div>
+                                <div class="col-md-3 pr-0">
+                                    <input asp-for="HomeNumber" class="form-control" type="text" placeholder="Numer domu">
+                                    <span asp-validation-for="HomeNumber" class="help-block text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="City" class="form-control" type="text" placeholder="Miejscowość">
+                        <span asp-validation-for="City" class="help-block text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="ZipCode" class="form-control" type="text" placeholder="Kod pocztowy">
+                        <span asp-validation-for="ZipCode" class="help-block text-danger"></span>
+                    </div>*@
                                 </div>
                                 <div class="col-md-6">
                                     @if (!User.Identity.IsAuthenticated)
                                     {
                                         <div class="form-group">
-                                            <input asp-for="UserName" class="form-control" type="text" placeholder="Nazwa użytkownika">
+                                            <label asp-for="UserName"></label>
+                                            <input asp-for="UserName" class="form-control" type="text">
                                             <span asp-validation-for="UserName" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="Email" class="form-control" type="text" placeholder="Email">
+                                            <label asp-for="Email"></label>
+                                            <input asp-for="Email" class="form-control" type="text">
                                             <span asp-validation-for="Email" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="Password" class="form-control" type="password" placeholder="Hasło">
+                                            <label asp-for="Password"></label>
+                                            <input asp-for="Password" class="form-control" type="password">
                                             <span asp-validation-for="Password" class="help-block text-danger"></span>
                                         </div>
                                         <div class="form-group">
-                                            <input asp-for="ComparePassword" class="form-control" type="password" placeholder="Potwierdź hasło">
+                                            <label asp-for="ComparePassword"></label>
+                                            <input asp-for="ComparePassword" class="form-control" type="password">
                                             <span asp-validation-for="ComparePassword" class="help-block text-danger"></span>
                                         </div>
                                     }
@@ -121,13 +132,15 @@
                                         @Html.HiddenFor(m => m.Email)
                                     }
                                     <div class="form-group">
-                                        <input asp-for="Name" class="form-control" type="text" placeholder="Imię">
+                                        <label asp-for="Name"></label>
+                                        <input asp-for="Name" class="form-control" type="text">
                                         <span asp-validation-for="Name" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
-                                        <input asp-for="Surname" class="form-control" type="text" placeholder="Nazwisko">
+                                        <label asp-for="Surname"></label>
+                                        <input asp-for="Surname" class="form-control" type="text">
                                         <span asp-validation-for="Surname" class="help-block text-danger"></span>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -144,9 +157,11 @@
 </section>
 
 @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script type="text/javascript">
+
         $(document).ready(function () {
-            
+
             $('#VisitDate').datetimepicker({
                 locale: 'pl',
                 format: _formats_.dateFormat,
@@ -159,12 +174,6 @@
                 format: _formats_.dateFormatNoHours,
                 useCurrent: false,
                 keepOpen: false
-            });
-
-            $('button[type="submit"]').on('click', function (e) {
-                e.preventDefault();
-
-                alert('test');
             });
         });
     </script>

@@ -8,6 +8,7 @@ using Weterynarz.Basic.Resources;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Visit;
 using Weterynarz.Domain.EntitiesDb;
+using Weterynarz.Web.Models.NotifyMessage;
 
 namespace Weterynarz.Web.Controllers
 {
@@ -53,10 +54,20 @@ namespace Weterynarz.Web.Controllers
             if (ModelState.IsValid)
             {
                 await _visitRepository.InsertFromVisitFormAsync(model);
+
+                Message message = new Message
+                {
+                    Text = "Jeeessttt",
+                    OptionalText = "Wizyta została zapisana",
+                    MessageStatus = Models.NotifyMessage.MessageStatus.success
+                };
+                base.NotifyMessage(message);
+
+                return RedirectToAction("MakeVisit");
             }
 
+            base.NotifyMessage("Nie udało się zapisać wizyty", "Upppsss !", MessageStatus.error);
             model = await _visitRepository.GetMakeVisitViewModel(model);
-
             return View(model);
         }
     }
