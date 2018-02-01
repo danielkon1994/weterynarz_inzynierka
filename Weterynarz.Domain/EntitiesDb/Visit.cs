@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -8,6 +9,12 @@ namespace Weterynarz.Domain.EntitiesDb
 {
     public class Visit : BaseEntity
     {
+        public Visit()
+        {
+            Diseases = new Collection<Disease>();
+            MedicalExaminations = new Collection<MedicalExaminationType>();
+        }
+
         [Required]
         public DateTime VisitDate { get; set; }
 
@@ -29,5 +36,11 @@ namespace Weterynarz.Domain.EntitiesDb
         public string ReasonVisit { get; set; }
 
         public bool Approved { get; set; } = false;
+
+        public ICollection<Disease> Diseases { get; set; }
+
+        public ICollection<MedicalExaminationType> MedicalExaminations { get; set; }
+
+        public string Diagnosis { get; set; }
     }
 }

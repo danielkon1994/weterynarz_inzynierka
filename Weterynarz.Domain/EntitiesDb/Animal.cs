@@ -11,7 +11,6 @@ namespace Weterynarz.Domain.EntitiesDb
     {
         public Animal()
         {
-            MedicalExaminations = new Collection<MedicalExamination>();
             Diseases = new Collection<Disease>();
             Visits = new Collection<Visit>();
         }
@@ -31,8 +30,6 @@ namespace Weterynarz.Domain.EntitiesDb
         public string OwnerId { get; set; }
         [ForeignKey("OwnerId")]
         public virtual ApplicationUser Owner { get; set; }
-
-        public virtual ICollection<MedicalExamination> MedicalExaminations { get; set; }
 
         public virtual ICollection<Disease> Diseases { get; set; }
 

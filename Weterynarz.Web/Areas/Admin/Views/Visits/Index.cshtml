@@ -61,7 +61,11 @@
                                                     Menu
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a href="@Url.Action("Approved", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Zatwierdź wizytę</a>
+                                                    @if(!item.Approved)
+                                                    { 
+                                                        <a href="@Url.Action("Approved", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Zatwierdź wizytę</a>
+                                                    }
+                                                    <a href="" class="dropdown-item">Podsumowanie wizyty</a>
                                                     <a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Edytuj</a>
                                                     <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="dropdown-item">Usuń</a>
                                                 </div>

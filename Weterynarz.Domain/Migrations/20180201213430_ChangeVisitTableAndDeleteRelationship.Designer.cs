@@ -11,9 +11,10 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180201213430_ChangeVisitTableAndDeleteRelationship")]
+    partial class ChangeVisitTableAndDeleteRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

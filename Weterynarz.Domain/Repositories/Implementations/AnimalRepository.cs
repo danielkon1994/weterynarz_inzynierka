@@ -178,7 +178,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         private Animal getByIdWithInclude(int id)
         {
-            return _db.Animals.Include(i => i.Diseases).Include(i => i.Visits).Include(i => i.MedicalExaminations).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
+            return _db.Animals.Include(i => i.Diseases).Include(i => i.Visits).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
         }
 
         public async Task<int> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)

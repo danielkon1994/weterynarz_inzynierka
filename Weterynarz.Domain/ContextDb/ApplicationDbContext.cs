@@ -27,10 +27,6 @@ namespace Weterynarz.Domain.ContextDb
                 .HasMany(i => i.Visits)
                 .WithOne(x => x.Animal);
 
-            builder.Entity<Animal>()
-                .HasMany(i => i.MedicalExaminations)
-                .WithOne(x => x.Animal);
-
             builder.Entity<ApplicationUser>()
                 .HasMany(i => i.Animals)
                 .WithOne(x => x.Owner);
@@ -39,7 +35,6 @@ namespace Weterynarz.Domain.ContextDb
         #region DbSets
         public DbSet<Animal> Animals { get; set; }
         public DbSet<AnimalType> AnimalTypes { get; set; }
-        public DbSet<MedicalExamination> MedicalExaminations { get; set; }
         public DbSet<MedicalExaminationType> MedicalExaminationTypes { get; set; }
         public DbSet<Visit> Visits { get; set; }
         public DbSet<SettingsContent> SettingsContent { get; set; }
