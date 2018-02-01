@@ -22,14 +22,14 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
-        private readonly ILogger _logger;
+        private readonly ILogger<UsersController> _logger;
         private readonly IUsersRepository _usersRepository;
 
         public UsersController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger,
+            ILogger<UsersController> logger,
             IUsersRepository usersRepository)
         {
             _userManager = userManager;
@@ -91,6 +91,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     Name = model.Name,
                     Surname = model.Surname,
                     ZipCode = model.ZipCode,
+                    DoctorSpecialization = model.Specialization,
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -212,16 +213,16 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     }
 
                     var currentUserRoles = await _userManager.GetRolesAsync(user);
-                    var deleteUserRoles = currentUserRoles.Except(model.SelectedRoles).ToList();
+                    var deleteUserRoles = currentUserRoles.Except(model.SelectedRoles ?? new string[] { }).ToList();
                     await _userManager.RemoveFromRolesAsync(user, deleteUserRoles);
 
-                    var newUserRoles = model.SelectedRoles.Except(currentUserRoles).ToList();
+                    var newUserRoles = model.SelectedRoles?.Except(currentUserRoles).ToList();
                     await _userManager.AddToRolesAsync(user, newUserRoles);
 
                     Message message = new Message
                     {
                         Text = "Sukces !",
-                        OptionalText = "Pomyślnie zapisano typ",
+                        OptionalText = "Pomyślnie zapisano użytkownika",
                         MessageStatus = MessageStatus.success
                     };
                     base.NotifyMessage(message);

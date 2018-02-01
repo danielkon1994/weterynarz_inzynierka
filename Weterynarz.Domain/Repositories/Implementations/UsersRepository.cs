@@ -45,7 +45,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 HouseNumber = a.HouseNumber,
                 ZipCode = a.ZipCode,
                 UserName = a.UserName,
-                Roles = a.Roles.Select(i => i.RoleId).ToList()
+                Roles = a.Roles.Select(i => i.RoleId).ToList(),
+                Specialization = a.DoctorSpecialization
             });
         }
 
@@ -62,7 +63,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Id = account.Id,
                 Name = account.Name,
                 Surname = account.Surname,
-                ZipCode = account.ZipCode
+                ZipCode = account.ZipCode,
+                Specialization = account.DoctorSpecialization
             };
 
             return model;
@@ -81,6 +83,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 user.Email = model.Email;
                 user.City = model.City;
                 user.Address = model.Address;
+                user.DoctorSpecialization = model.Specialization;
 
                 await _accountsRepository.SaveChangesAsync();
 

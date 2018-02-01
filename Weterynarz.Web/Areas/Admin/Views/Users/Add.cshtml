@@ -121,6 +121,16 @@
                     </div>
                     <br />
 
+                    <div class="row specializationAdditionalRow hidden">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Specialization"></label>
+                                <input type="text" class="form-control" asp-for="Specialization" placeholder="Wprowadź specjalizację">
+                                <span asp-validation-for="Specialization" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-sm-12">
                             <strong>Role użytkownika</strong> <hr />
@@ -149,4 +159,26 @@
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('input[name="SelectedRoles"]').change(function () {
+                showSpecializationField();
+            });
+
+            function showSpecializationField()
+            {
+                var rolesArr = [];
+                $('input[name="SelectedRoles"]:checked').each(function () {
+                    rolesArr.push(this.value);
+                });
+                if (rolesArr.indexOf('@UserRoles.Doctor') >= 0) {
+                    $(".specializationAdditionalRow").removeClass('hidden');
+                }
+                else {
+                    $(".specializationAdditionalRow").addClass('hidden').find('#Specialization').val('');
+                }
+            }
+        });
+    </script>
 }

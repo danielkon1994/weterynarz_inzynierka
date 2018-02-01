@@ -145,8 +145,15 @@
                             doctorId: doctorIdData
                         },
                         success: function (response) {
-                            $("#graphicModal .modal-body").html(response);
-                            $("#graphicModal").modal('show');
+                            if (response != "")
+                            {
+                                $("#graphicModal .modal-body").html(response);
+                                $("#graphicModal").modal('show');
+                            }
+                            else
+                            {
+                                location.reload();
+                            }
                         }
                     });
                 }

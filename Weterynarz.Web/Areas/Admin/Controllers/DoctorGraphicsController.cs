@@ -27,14 +27,14 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             if(string.IsNullOrEmpty(doctorId))
             {
                 base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("ListDoctors", "Users");
+                return new EmptyResult();
             }
 
             DoctorShowGraphicViewModel model = _doctorGraphicsRepository.GetDoctorGraphicToShowViewModel(doctorId);
             if(model == null)
             {
                 base.NotifyMessage("Nie udało się pobrać grafiku lekarza", "Upppsss !", MessageStatus.error);
-                return RedirectToAction("ListDoctors", "Users");
+                return new EmptyResult();
             }
 
             return PartialView("_ShowGraphic", model);

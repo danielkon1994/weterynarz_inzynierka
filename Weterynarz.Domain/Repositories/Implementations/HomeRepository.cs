@@ -35,7 +35,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
             foreach(var doctor in availableDoctorsList)
             {
                 DoctorShowGraphicViewModel doctorGraphic = _doctorGraphicsRepository.GetDoctorGraphicToShowViewModel(doctor.Id);
-                model.Doctors.Add(new ViewModels.Doctor.DoctorHomeItem() { Name = doctor.Name, Surname = doctor.Surname, Specialization = "Lek.wet.", Graphic = doctorGraphic });           
+                model.Doctors.Add(new ViewModels.Doctor.DoctorHomeItem() { Name = doctor.Name, Surname = doctor.Surname, Specialization = doctor.Specialization, Graphic = doctorGraphic });           
             }
 
             return model;

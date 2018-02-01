@@ -26,6 +26,8 @@ namespace Weterynarz.Domain.ViewModels.Users
 
         public string ZipCode { get; set; }
 
+        public string Specialization { get; set; }
+
         public IList<string> Roles { get; set; }
 
         public string DisplayRoles

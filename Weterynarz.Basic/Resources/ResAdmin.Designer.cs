@@ -637,6 +637,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Specjalizacja.
+        /// </summary>
+        public static string usersManageViewModel_specialization {
+            get {
+                return ResourceManager.GetString("usersManageViewModel_specialization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwisko.
         /// </summary>
         public static string usersManageViewModel_surname {

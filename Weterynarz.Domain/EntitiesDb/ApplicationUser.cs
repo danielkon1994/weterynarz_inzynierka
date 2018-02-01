@@ -25,6 +25,8 @@ namespace Weterynarz.Domain.EntitiesDb
         public virtual ICollection<DoctorGraphic> Graphics { get; set; }
 
         //Additional data
+        public string DoctorSpecialization { get; set; }
+
         public string Address { get; set; }
         public string HouseNumber { get; set; }
         public string City { get; set; }

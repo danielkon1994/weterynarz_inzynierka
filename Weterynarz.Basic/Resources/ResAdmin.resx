@@ -327,4 +327,7 @@
   <data name="visitsIndex_list" xml:space="preserve">
     <value>Lista wizyt</value>
   </data>
+  <data name="usersManageViewModel_specialization" xml:space="preserve">
+    <value>Specjalizacja</value>
+  </data>
 </root>

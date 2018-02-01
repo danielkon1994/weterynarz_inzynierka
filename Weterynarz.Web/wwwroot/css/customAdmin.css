@@ -60,6 +60,9 @@ body {
 .fullPage {
   height: 100%; }
 
+.hidden {
+  display: none; }
+
 #graphicModal .modal-body h3 {
   color: #212529;
   margin-bottom: 1.5rem; }

@@ -46,6 +46,9 @@ namespace Weterynarz.Domain.ViewModels.Users
         [Display(Name = "usersManageViewModel_zipCode", ResourceType = typeof(ResAdmin))]
         public string ZipCode { get; set; }
 
+        [Display(Name = "usersManageViewModel_specialization", ResourceType = typeof(ResAdmin))]
+        public string Specialization { get; set; }
+
         public IEnumerable<SelectListItem> RolesList { get; set; }
         public IEnumerable<string> SelectedRoles { get; set; }
     }
