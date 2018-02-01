@@ -11,6 +11,7 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Web.Services;
 using Weterynarz.Domain.ViewModels.Home;
 using Weterynarz.Domain.Repositories.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Controllers
 {
@@ -18,15 +19,17 @@ namespace Weterynarz.Web.Controllers
     {
         private IHomeRepository _homeRepository;
         private IEmailSender _emailSender;
+        private ILogger<HomeController> _logger;
 
-        public HomeController(IHomeRepository homeRepository, IEmailSender emailSender)
+        public HomeController(IHomeRepository homeRepository, IEmailSender emailSender, ILogger<HomeController> logger)
         {
             _homeRepository = homeRepository;
             _emailSender = emailSender;
+            _logger = logger;
         }
 
         public IActionResult Index()
-        {
+        {            
             HomeIndexViewModel model = _homeRepository.GetIndexViewModel();
 
             return View(model);
@@ -51,8 +54,9 @@ namespace Weterynarz.Web.Controllers
                     base.NotifyMessage(message);
                     return RedirectToAction("Index");
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    _logger.LogError(ex, "Coś poszło nie tak przy wysyłaniu wiadomości");
                     base.NotifyMessage("Coś poszło nie tak przy wysyłaniu wiadomości", "Upppsss !", MessageStatus.error);
                     return RedirectToAction("Index");
                 }

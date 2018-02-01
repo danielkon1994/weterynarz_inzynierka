@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
 {
     public class MedicalExaminationTypesRepository : BaseRepository<MedicalExaminationType>, IMedicalExaminationTypesRepository
     {
-        public MedicalExaminationTypesRepository(ApplicationDbContext db) : base(db)
+        private ILogger<MedicalExaminationTypesRepository> _logger;
+
+        public MedicalExaminationTypesRepository(ApplicationDbContext db, ILogger<MedicalExaminationTypesRepository> logger) : base(db)
         {
+            _logger = logger;
         }
 
         public IQueryable<MedicalExaminationTypesIndexViewModel> GetIndexViewModel()
@@ -91,6 +95,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 }
                 catch (Exception ex)
                 {
+                    _logger.LogError(ex, "Wystąpił błąd podczas usuwania typu badania");
                     return false;
                 }
             }

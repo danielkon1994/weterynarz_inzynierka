@@ -8,13 +8,17 @@ using Weterynarz.Domain.EntitiesDb;
 using Weterynarz.Domain.Repositories.Interfaces;
 using System.Linq;
 using Weterynarz.Domain.ViewModels.AnimalTypes;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
     public class AnimalTypesRepository : BaseRepository<AnimalType>, IAnimalTypesRepository
     {
-        public AnimalTypesRepository(ApplicationDbContext db) : base(db)
+        private ILogger<AnimalTypesRepository> _logger;
+
+        public AnimalTypesRepository(ApplicationDbContext db, ILogger<AnimalTypesRepository> logger) : base(db)
         {
+            _logger = logger;
         }
 
         public IEnumerable<SelectListItem> GetAnimalTypesSelectList()
@@ -107,6 +111,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 }
                 catch (Exception ex)
                 {
+                    _logger.LogError(ex, "Błąd przy usuwaniu typu zwierzęcia");
                     return false;
                 }
             }

@@ -7,16 +7,19 @@ using Weterynarz.Domain.Repositories.Interfaces;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Domain.ViewModels.Doctor;
 using Weterynarz.Web.Models.NotifyMessage;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class DoctorGraphicsController : AdminBaseController
     {
         private IDoctorGraphicsRepository _doctorGraphicsRepository;
+        private ILogger<DoctorGraphicsController> _logger;
 
-        public DoctorGraphicsController(IDoctorGraphicsRepository doctorGraphicsRepository)
+        public DoctorGraphicsController(IDoctorGraphicsRepository doctorGraphicsRepository, ILogger<DoctorGraphicsController> logger)
         {
             _doctorGraphicsRepository = doctorGraphicsRepository;
+            _logger = logger;
         }
 
         public IActionResult ShowGraphic(string doctorId)
@@ -88,8 +91,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId});
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    _logger.LogError(ex, "Wystąpił problem z dodaniem grafiku lekarza");
                     base.NotifyMessage("Wystąpił problem z dodaniem grafiku lekarza", "Upppsss !", MessageStatus.error);
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
                 }
@@ -132,6 +136,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
+                    _logger.LogError(ex, "Wystąpił problem z zapisem grafiku lekarza");
                     base.NotifyMessage("Wystąpił problem z zapisem grafiku lekarza", "Upppsss !", MessageStatus.error);
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
                 }
@@ -158,8 +163,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return Json(message);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Coś poszło nie tak przy usuwaniu grafiki");
                 message = new Message
                 {
                     Text = "Uppsss !",

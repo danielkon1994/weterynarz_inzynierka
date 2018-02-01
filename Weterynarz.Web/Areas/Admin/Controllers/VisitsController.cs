@@ -8,16 +8,19 @@ using Weterynarz.Domain.ViewModels.Animal;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.Visit;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class VisitsController : AdminBaseController
     {
         private IVisitRepository _visitsRepository;
+        private ILogger<VisitsController> _logger;
 
-        public VisitsController(IVisitRepository visitsRepository)
+        public VisitsController(IVisitRepository visitsRepository, ILogger<VisitsController> logger)
         {
             this._visitsRepository = visitsRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index(int page = 1)
@@ -89,8 +92,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
                 base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
@@ -119,8 +123,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas zatwierdzania wizyty");
                 base.NotifyMessage("Wystąpił błąd podczas zatwierdzania wizyty", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
@@ -143,8 +148,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas usuwania");
                 base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }

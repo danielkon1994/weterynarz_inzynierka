@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Settings;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class SettingsController : AdminBaseController
     {
         private ISettingsContentRepository _settingsContentRepository;
+        private ILogger<SettingsController> _logger;
 
-        public SettingsController(ISettingsContentRepository settingsContentRepository)
+        public SettingsController(ISettingsContentRepository settingsContentRepository, ILogger<SettingsController> logger)
         {
             _settingsContentRepository = settingsContentRepository;
+            _logger = logger;
         }
 
         public IActionResult Content()
@@ -49,8 +52,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Content");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
                 base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Content");
             }

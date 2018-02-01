@@ -8,16 +8,19 @@ using Weterynarz.Domain.ViewModels.Animal;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.Disease;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class DiseasesController : AdminBaseController
     {
         private IDiseasesRepository _diseasesRepository;
+        private ILogger<DiseasesController> _logger;
 
-        public DiseasesController(IDiseasesRepository diseasesRepository)
+        public DiseasesController(IDiseasesRepository diseasesRepository, ILogger<DiseasesController> logger)
         {
             this._diseasesRepository = diseasesRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index(int page = 1)
@@ -88,8 +91,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
                 base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
@@ -112,8 +116,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas usuwania");
                 base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }

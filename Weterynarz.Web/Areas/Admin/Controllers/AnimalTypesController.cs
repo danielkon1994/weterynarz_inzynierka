@@ -8,16 +8,19 @@ using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.AnimalTypes;
 using Weterynarz.Domain.Repositories.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class AnimalTypesController : AdminBaseController
     {
         private readonly IAnimalTypesRepository _animalTypesRepository;
+        private ILogger<AnimalTypesController> _logger;
 
-        public AnimalTypesController(IAnimalTypesRepository animalTypesRepository)
+        public AnimalTypesController(IAnimalTypesRepository animalTypesRepository, ILogger<AnimalTypesController> logger)
         {
             this._animalTypesRepository = animalTypesRepository;
+            _logger = logger;
         }
 
         // GET: AnimalTypes
@@ -92,8 +95,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
                 base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
@@ -118,8 +122,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas usuwania");
                 base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }

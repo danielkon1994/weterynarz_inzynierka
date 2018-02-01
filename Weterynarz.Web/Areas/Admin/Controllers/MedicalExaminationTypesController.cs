@@ -8,16 +8,19 @@ using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.MedicalExaminationTypes;
+using Microsoft.Extensions.Logging;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class MedicalExaminationTypesController : AdminBaseController
     {
         private readonly IMedicalExaminationTypesRepository _medicalExaminationTypesRepository;
+        private ILogger<MedicalExaminationTypesController> _logger;
 
-        public MedicalExaminationTypesController(IMedicalExaminationTypesRepository medicalExaminationTypesRepository)
+        public MedicalExaminationTypesController(IMedicalExaminationTypesRepository medicalExaminationTypesRepository, ILogger<MedicalExaminationTypesController> logger)
         {
             _medicalExaminationTypesRepository = medicalExaminationTypesRepository;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index(int page = 1)
@@ -91,8 +94,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
                 base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
@@ -117,8 +121,9 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Wystąpił błąd podczas usuwania");
                 base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
