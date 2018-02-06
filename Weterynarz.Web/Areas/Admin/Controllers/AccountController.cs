@@ -21,6 +21,7 @@ using Weterynarz.Basic.Const;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using System.Data.Entity;
+using Weterynarz.Basic.Resources;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {   
@@ -316,15 +317,28 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if (userId == null || code == null)
             {
+                base.NotifyMessage("Upppsss !", ResAdmin.account_errorIncorrectLink, MessageStatus.error);
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+                _logger.LogError(ResAdmin.account_errorUserNotExists);
+                base.NotifyMessage("Upppsss !", ResAdmin.account_errorUserNotExists, MessageStatus.error);
+                throw new ApplicationException($"{ResAdmin.account_errorUserNotExists}: '{userId}'.");
             }
+
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            if(result.Succeeded)
+            {
+                base.NotifyMessage("Jeeesssttt !", ResAdmin.account_successConfirmedEmail, MessageStatus.success);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                base.NotifyMessage("Upppsss !", ResAdmin.account_errorConfirmedEmail, MessageStatus.error);
+                return RedirectToAction("Login");
+            }
         }
 
         [HttpGet]

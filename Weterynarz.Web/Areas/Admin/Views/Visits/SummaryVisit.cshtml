@@ -1,0 +1,95 @@
+﻿@namespace Weterynarz.Domain.ViewModels.Visit
+@model VisitSummaryViewModel
+@{
+    ViewData["Title"] = "Podsumowanie wizyty";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin">Wizyty</a></li>
+        <li class="breadcrumb-item active">Podsumowanie wizyty</li>
+    </ol>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <form asp-controller="Visits" asp-action="SummaryVisit" method="post">
+                <div class="card-header">
+                    <strong>@ResAdmin.visitSummaryView_headerForm</strong>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+                    </div>
+
+                    @Html.HiddenFor(m => m.VisitId)
+
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="DiseaseIds"></label>
+                                <select asp-for="DiseaseIds" class="form-control" asp-items="@Model.DiseaseSelectList" placeholder="Choroby"></select>
+                                <span asp-validation-for="DiseaseIds" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="MedicalExaminationIds"></label>
+                                <select asp-for="MedicalExaminationIds" asp-items="@Model.MedicalExaminationSelectList" class="form-control" placeholder="Badania"></select>
+                                <span asp-validation-for="MedicalExaminationIds" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Drugs"></label>
+                                <textarea rows="6" class="form-control" asp-for="Drugs" placeholder="Leki"></textarea>
+                                <span asp-validation-for="Drugs" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <textarea rows="9" class="form-control" asp-for="Description" placeholder="Opis"></textarea>
+                                <span asp-validation-for="Description" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
+                    <a asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+            $('#DiseaseIds').select2();
+
+            $('#MedicalExaminationIds').select2();
+        });
+    </script>
+}

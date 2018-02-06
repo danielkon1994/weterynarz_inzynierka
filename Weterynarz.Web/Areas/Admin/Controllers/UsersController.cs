@@ -14,6 +14,7 @@ using System.Collections.ObjectModel;
 using Microsoft.AspNetCore.Authorization;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Users;
+using Weterynarz.Basic.Resources;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -154,19 +155,33 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     Name = model.Name,
                     Surname = model.Surname,
                     ZipCode = model.ZipCode,
-                    EmailConfirmed = true,
                 };
                 var result = await _userManager.CreateAsync(client, model.Password);
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(client, UserRoles.Client);
-                
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(client);
+                    var callbackUrl = Url.EmailConfirmationLink(client.Id, code, Request.Scheme);
+                    try
+                    {
+                        await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    }
+                    catch(Exception ex)
+                    {
+                        _logger.LogError("Nie można wysłać wiadomości z linkiem aktywacyjnym",ex);
+                    }
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     //_logger.LogInformation("User created a new account with password.");
+
+                    Message message = new Message
+                    {
+                        Text = "Jeeessttt",
+                        OptionalText = ResAdmin.user_successRegister,
+                        MessageStatus = Models.NotifyMessage.MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
 
                     return RedirectToAction("Login", "Account");
                 }
@@ -440,7 +455,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             var userNameExists = await _userManager.FindByNameAsync(model.UserName);
             if (userNameExists != null)
             {
-                if (userNameExists.Id != model.Id)
+                if (userNameExists.UserName == model.UserName && userNameExists.Active)
                 {
                     ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
                 }
@@ -449,7 +464,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             var userEmailExists = await _userManager.FindByEmailAsync(model.Email);
             if (userEmailExists != null)
             {
-                if (userEmailExists.Id != model.Id)
+                if (userEmailExists.Email == model.Email && userEmailExists.Active)
                 {
                     ModelState.AddModelError("", "Użytkownik z takim adresem email już istnieje");
                 }

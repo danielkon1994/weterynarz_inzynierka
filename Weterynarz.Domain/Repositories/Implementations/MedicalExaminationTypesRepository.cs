@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,19 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Description = a.Description,
                 CreationDate = a.CreationDate
             });
+        }
+
+        public IEnumerable<SelectListItem> GetMedicalExaminationSelectList()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            list = base.GetAllActive().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }).ToList();
+
+            return list.AsEnumerable();
         }
 
         public async Task CreateNewType(MedicalExaminationTypesManageViewModel model)

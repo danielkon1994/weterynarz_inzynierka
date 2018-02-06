@@ -9,28 +9,29 @@ namespace Weterynarz.Domain.ViewModels.Users
 {
     public class UsersRegisterViewModel : BaseViewModel<string>
     {
-        [Required]
+        [Required(ErrorMessage = "Pole Nazwa użytkownika jest wymagane")]
         [Display(Name = "usersManageViewModel_userName", ResourceType = typeof(ResAdmin))]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Adres e-mail jest wymagane")]
         [EmailAddress]
         [Display(Name = "usersManageViewModel_email", ResourceType = typeof(ResAdmin))]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "usersManageViewModel_password", ResourceType = typeof(ResAdmin))]
+        [Required(ErrorMessage = "Pole Hasło jest wymagane")]
         public string Password { get; set; }
 
         [Display(Name = "usersManageViewModel_confirmPassword", ResourceType = typeof(ResAdmin))]
         [Compare("Password", ErrorMessage = "Hasła muszą być takie same.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Imię jest wymagane")]
         [Display(Name = "usersManageViewModel_name", ResourceType = typeof(ResAdmin))]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Pole Nazwisko wymagane")]
         [Display(Name = "usersManageViewModel_surname", ResourceType = typeof(ResAdmin))]
         public string Surname { get; set; }
 

@@ -41,6 +41,7 @@ namespace Weterynarz.Domain.ContextDb
         public DbSet<Disease> Diseases { get; set; }
         public DbSet<Graphic> Graphics { get; set; }
         public DbSet<DoctorGraphic> DoctorGraphics { get; set; }
+        public DbSet<SummaryVisit> SummaryVisits { get;set }
         #endregion
     }
 }

@@ -61,6 +61,42 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Błąd podczas potwierdzania adresu e-mail.
+        /// </summary>
+        public static string account_errorConfirmedEmail {
+            get {
+                return ResourceManager.GetString("account_errorConfirmedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Niepoprawny link.
+        /// </summary>
+        public static string account_errorIncorrectLink {
+            get {
+                return ResourceManager.GetString("account_errorIncorrectLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Użytkownik nie istnieje.
+        /// </summary>
+        public static string account_errorUserNotExists {
+            get {
+                return ResourceManager.GetString("account_errorUserNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adres e-mail został potwierdzony.
+        /// </summary>
+        public static string account_successConfirmedEmail {
+            get {
+                return ResourceManager.GetString("account_successConfirmedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj użytkownika.
         /// </summary>
         public static string accountCreateView_header {
@@ -520,6 +556,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Konto zostało utworzone lecz proszę potwierdzić jeszcze założenie konta.
+        /// </summary>
+        public static string user_successRegister {
+            get {
+                return ResourceManager.GetString("user_successRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj użytkownika.
         /// </summary>
         public static string userCreateView_header {
@@ -696,6 +741,15 @@ namespace Weterynarz.Basic.Resources {
         public static string visitsIndex_list {
             get {
                 return ResourceManager.GetString("visitsIndex_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Podsumowanie wizyty.
+        /// </summary>
+        public static string visitSummaryView_headerForm {
+            get {
+                return ResourceManager.GetString("visitSummaryView_headerForm", resourceCulture);
             }
         }
     }

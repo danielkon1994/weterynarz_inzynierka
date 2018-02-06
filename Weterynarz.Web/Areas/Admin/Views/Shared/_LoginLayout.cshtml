@@ -13,7 +13,7 @@
         <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
+        <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="~/css/loginPage.css" />
     </environment>
 
@@ -27,7 +27,7 @@
         <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-
+        <link rel="stylesheet" href="~/lib/sweetalert2/dist/sweetalert2.min.css" asp-append-version="true">
         <link rel="stylesheet" href="~/css/loginPage.min.css" asp-append-version="true" />
     </environment>
 
@@ -41,6 +41,9 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/popper.js/dist/umd/popper.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/sweetalert2/dist/sweetalert2.all.js"></script>
+        <script src="~/js/app/appNotify.js"></script>
+        @await Html.PartialAsync("_NotifyMessage")
         <script src="~/js/custom.js"></script>
     </environment>
 
@@ -58,6 +61,10 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
+        <script src="~/lib/sweetalert2/dist/sweetalert2.all.js" asp-append-version="true"></script>
+        <script src="~/js/app/appNotify.js" asp-append-version="true"></script>
+        @await Html.PartialAsync("_NotifyMessage")
+        <script src="~/js/custom.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)

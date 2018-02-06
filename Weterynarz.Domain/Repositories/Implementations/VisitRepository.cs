@@ -19,16 +19,22 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IAccountsRepository _accountsRepository;
         private IAnimalRepository _animalRepository;
         private IAnimalTypesRepository _animalTypesRepository;
+        private IMedicalExaminationTypesRepository _medicalExaminationRepository;
+        private IDiseasesRepository _diseasesRepository;
 
         public VisitRepository(ApplicationDbContext db, IAnimalRepository animalRepository,
             IUsersRepository userRepository,
             IAccountsRepository accountsRepository,
-            IAnimalTypesRepository animalTypesRepository) : base(db)
+            IAnimalTypesRepository animalTypesRepository,
+            IMedicalExaminationTypesRepository medicalExaminationRepository,
+            IDiseasesRepository diseasesRepository) : base(db)
         {
             _animalRepository = animalRepository;
             _userRepository = userRepository;
             _accountsRepository = accountsRepository;
             _animalTypesRepository = animalTypesRepository;
+            _medicalExaminationRepository = medicalExaminationRepository;
+            _diseasesRepository = diseasesRepository;
         }
 
         public async Task Approved(Visit visit)
@@ -184,6 +190,33 @@ namespace Weterynarz.Domain.Repositories.Implementations
             }
             model.VetsSelectList = await _accountsRepository.GetVetsSelectList();
             model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+
+            return model;
+        }
+
+        public async Task<VisitSummaryViewModel> GetSummaryVisitViewModel(int visitId)
+        {
+            VisitSummaryViewModel model = null;
+
+            Visit visit = base.GetById(visitId);
+            if (visit != null)
+            {
+                model = new VisitSummaryViewModel();
+                model.VisitId = visit.Id;
+                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
+                model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
+            }
+
+            return model;
+        }
+
+        public async Task<VisitSummaryViewModel> GetSummaryVisitViewModel(VisitSummaryViewModel model)
+        {
+            if (model != null)
+            {
+                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
+                model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
+            }
 
             return model;
         }

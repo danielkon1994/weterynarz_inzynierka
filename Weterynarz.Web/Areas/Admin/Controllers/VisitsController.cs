@@ -155,5 +155,12 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public async Task<ActionResult> SummaryVisit(int id)
+        {
+            VisitSummaryViewModel model = await _visitsRepository.GetSummaryVisitViewModel(id);
+
+            return View(model);
+        }
     }
 }

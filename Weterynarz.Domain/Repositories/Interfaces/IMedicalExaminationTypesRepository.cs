@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         Task CreateNewType(MedicalExaminationTypesManageViewModel model);
         Task<bool> EditType(MedicalExaminationTypesManageViewModel model);
         Task<bool> DeleteType(int id);
+        IEnumerable<SelectListItem> GetMedicalExaminationSelectList();
     }
 }

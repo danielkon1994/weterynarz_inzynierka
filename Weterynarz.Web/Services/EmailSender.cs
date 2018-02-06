@@ -34,10 +34,9 @@ namespace Weterynarz.Web.Services
             mimeMessage.To.Add(new MailboxAddress(toEmail));
             mimeMessage.Subject = subject;
 
-            mimeMessage.Body = new TextPart("plain")
-            {
-                Text = message
-            };
+            var bodyBuilder = new BodyBuilder();
+            bodyBuilder.HtmlBody = message;
+            mimeMessage.Body = bodyBuilder.ToMessageBody();
 
             using (var client = new SmtpClient())
             {

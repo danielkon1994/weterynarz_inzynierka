@@ -32,6 +32,10 @@ namespace Weterynarz.Domain.EntitiesDb
         public int AnimalId { get; set; }
         [ForeignKey("AnimalId")]
         public virtual Animal Animal { get; set; }
+
+        public int SummaryVisitId { get; set; }
+        [ForeignKey("SummaryVisitId")]
+        public virtual SummaryVisit SummaryVisit { get; set; }
         
         public string ReasonVisit { get; set; }
 

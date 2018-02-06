@@ -330,4 +330,22 @@
   <data name="usersManageViewModel_specialization" xml:space="preserve">
     <value>Specjalizacja</value>
   </data>
+  <data name="account_errorUserNotExists" xml:space="preserve">
+    <value>Użytkownik nie istnieje</value>
+  </data>
+  <data name="account_errorConfirmedEmail" xml:space="preserve">
+    <value>Błąd podczas potwierdzania adresu e-mail</value>
+  </data>
+  <data name="account_errorIncorrectLink" xml:space="preserve">
+    <value>Niepoprawny link</value>
+  </data>
+  <data name="account_successConfirmedEmail" xml:space="preserve">
+    <value>Adres e-mail został potwierdzony</value>
+  </data>
+  <data name="user_successRegister" xml:space="preserve">
+    <value>Konto zostało utworzone lecz proszę potwierdzić jeszcze założenie konta</value>
+  </data>
+  <data name="visitSummaryView_headerForm" xml:space="preserve">
+    <value>Podsumowanie wizyty</value>
+  </data>
 </root>

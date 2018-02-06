@@ -17,11 +17,14 @@
                     <i class="fa fa-fw fa-home"></i>Przejdź do witryny
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="@Url.Action("LogoutGet", "Account", new { area = AreaNames.Admin })" class="nav-link">
-                    <i class="fa fa-fw fa-sign-out"></i>Wyloguj się
-                </a>
-            </li>
+            @if(User.Identity.IsAuthenticated)
+            { 
+                <li class="nav-item">
+                    <a href="@Url.Action("LogoutGet", "Account", new { area = AreaNames.Admin })" class="nav-link">
+                        <i class="fa fa-fw fa-sign-out"></i>Wyloguj się
+                    </a>
+                </li>
+            }
         </ul>
     </div>
 </nav>
