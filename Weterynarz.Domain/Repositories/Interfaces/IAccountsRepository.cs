@@ -16,6 +16,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         IQueryable<ApplicationUser> GetAllNotDeleted();
         IQueryable<ApplicationUser> GetAll();
         ApplicationUser GetById(string id);
+        Task<ApplicationUser> GetByIdFromUserManager(string id);
         ApplicationUser GetByIdNotDeleted(string id);
         void DeleteUser(ApplicationUser user);
         Task SaveChangesAsync();
@@ -28,7 +29,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         Task SavePassword(ApplicationUser user, string newPassword);
         Task<IEnumerable<SelectListItem>> GetVetsSelectList();
         Task InsertAcync(ApplicationUser user);
-        Task<string> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
+        Task<ApplicationUser> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
         IEnumerable<SelectListItem> GetUsersSelectList();
         Task<IEnumerable<SelectListItem>> GetOwnersSelectList();
     }

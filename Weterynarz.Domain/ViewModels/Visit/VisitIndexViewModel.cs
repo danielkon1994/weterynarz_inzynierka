@@ -11,5 +11,6 @@ namespace Weterynarz.Domain.ViewModels.Visit
         public string Animal { get; set; }
         public string Doctor { get; set; }
         public bool Approved { get; set; }
+        public int? SummaryId { get; set; }
     }
 }

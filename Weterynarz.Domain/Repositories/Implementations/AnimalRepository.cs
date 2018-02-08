@@ -28,26 +28,34 @@ namespace Weterynarz.Domain.Repositories.Implementations
             _diseasesRepository = diseasesRepository;
         }
 
+        public Animal GetById(int? id)
+        {
+            return _db.Animals.Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
+        }
+
         public async Task CreateNew(AnimalManageViewModel model)
         {
+            var owner = await _accountsRepository.GetByIdFromUserManager(model.OwnerId);
+            var animalType = _animalTypesRepository.GetById(model.AnimalTypeId);
+
             Animal animal = new Animal()
             {
+                Owner = owner,
+                AnimalType = animalType,                
                 Active = model.Active,
                 AnimalDesc = model.Description,
-                AnimalTypeId = model.AnimalTypeId,
                 BirthDate = model.BirthDay,
                 CreationDate = DateTime.Now,
                 Deleted = false,
                 Name = model.Name,
-                OwnerId = model.OwnerId
             };
 
             var diseasesDbSelected = _diseasesRepository.Where(i => model.DiseaseIds.Contains(i.Id)).ToList();
-            if (model.DiseaseIds.Any())
+            if (diseasesDbSelected.Any())
             {
-                foreach (int diseaseId in model.DiseaseIds)
+                foreach (var disease in diseasesDbSelected)
                 {
-                    animal.Diseases.Add(diseasesDbSelected.Find(i => i.Id == diseaseId));
+                    animal.AnimalDiseases.Add(new AnimalDisease { Disease = disease, Animal = animal});
                 }
             }
 
@@ -73,27 +81,32 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 animal.Active = model.Active;
                 animal.ModificationDate = DateTime.Now;
                 animal.Name = model.Name;
-                animal.OwnerId = model.OwnerId;
+                if(model.OwnerId != animal.Owner.Id)
+                {
+                    var owner = await _accountsRepository.GetByIdFromUserManager(model.OwnerId);
+                    animal.Owner = owner;
+                }
                 animal.AnimalDesc = model.Description;
-                animal.AnimalTypeId = model.AnimalTypeId;
+                if (model.AnimalTypeId != animal.AnimalType.Id)
+                {
+                    var animalType = _animalTypesRepository.GetById(model.AnimalTypeId);
+                    animal.AnimalType = animalType;
+                }
                 animal.BirthDate = model.BirthDay;
 
                 var diseasesDbSelected = _diseasesRepository.Where(i => model.DiseaseIds.Contains(i.Id)).ToList();
-                var existingDiseases = animal.Diseases?.ToList();
-                var existingDiseaseIds = existingDiseases?.Select(i => i.Id).ToList();
+                var existingDiseases = animal.AnimalDiseases.Select(x => x.Disease).ToList();
 
-                if (model.DiseaseIds.Any())
+                var diseasesToAddList = diseasesDbSelected.Except(existingDiseases).ToList();
+                foreach (var disease in diseasesToAddList)
                 {
-                    var diseasesToAddList = model.DiseaseIds.Except(existingDiseaseIds);
-                    foreach(var diseaseId in diseasesToAddList)
-                    {
-                        animal.Diseases.Add(diseasesDbSelected.First(i => i.Id == diseaseId));
-                    }
-                    var diseasesToRemoveList = existingDiseaseIds.Except(model.DiseaseIds);
-                    foreach (int diseaseId in diseasesToRemoveList)
-                    {
-                        animal.Diseases.Remove(existingDiseases.First(i => i.Id == diseaseId));
-                    }
+                    animal.AnimalDiseases.Add(new AnimalDisease { Disease = disease, Animal = animal});
+                }
+
+                var diseasesToRemoveList = existingDiseases.Except(diseasesDbSelected).ToList();
+                foreach (var disease in diseasesToRemoveList)
+                {
+                    animal.AnimalDiseases.Remove(animal.AnimalDiseases.First(x => x.Disease == disease));
                 }
 
                 await base.SaveChangesAsync();
@@ -122,12 +135,12 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
                 model.Active = animal.Active;
                 model.Name = animal.Name;
-                model.OwnerId = animal.OwnerId;
+                model.OwnerId = animal.Owner.Id;
                 model.OwnersSelectList = _accountsRepository.GetUsersSelectList();
                 model.Description = animal.AnimalDesc;
-                model.AnimalTypeId = animal.AnimalTypeId;
+                model.AnimalTypeId = animal.AnimalType.Id;
                 model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
-                model.DiseaseIds = animal.Diseases?.Select(i => i.Id).ToList();
+                model.DiseaseIds = animal.AnimalDiseases.Select(i => i.DiseaseId).ToList();
                 model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
                 model.BirthDay = animal.BirthDate;
             }
@@ -178,24 +191,32 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         private Animal getByIdWithInclude(int id)
         {
-            return _db.Animals.Include(i => i.Diseases).Include(i => i.Visits).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
+            return _db.Animals.Include(i => i.AnimalDiseases).Include(i => i.Visits).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
         }
 
-        public async Task<int> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        public async Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
         {
+            if(model.AnimalId != null)
+            {
+                return GetById(model.AnimalId);
+            }
+
+            var owner = await _accountsRepository.GetByIdFromUserManager(model.UserId);
+            var animalType = _animalTypesRepository.GetById(model.AnimalTypeId);
+
             Animal animal = new Animal()
             {
                 Active = true,
-                AnimalTypeId = model.AnimalTypeId,
+                AnimalType = animalType,
                 BirthDate = model.AnimalBirthdate,
-                OwnerId = model.UserId,
+                Owner = owner,
                 Name = model.AnimalName,
                 CreationDate = DateTime.Now,
             };
 
             await base.InsertAsync(animal);
 
-            return animal.Id;
+            return animal;
         }
     }
 }

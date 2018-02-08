@@ -9,17 +9,21 @@ using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.Visit;
 using Microsoft.Extensions.Logging;
+using Weterynarz.Domain.ViewModels.SummaryVisit;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
     public class VisitsController : AdminBaseController
     {
         private IVisitRepository _visitsRepository;
+        private ISummaryVisitRepository _summaryVisitRepository;
         private ILogger<VisitsController> _logger;
 
-        public VisitsController(IVisitRepository visitsRepository, ILogger<VisitsController> logger)
+        public VisitsController(IVisitRepository visitsRepository, ILogger<VisitsController> logger,
+            ISummaryVisitRepository summaryVisitRepository)
         {
             this._visitsRepository = visitsRepository;
+            _summaryVisitRepository = summaryVisitRepository;
             _logger = logger;
         }
 
@@ -48,8 +52,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 Message message = new Message
                 {
-                    OptionalText = "Jeeessttt",
-                    Text = "Wizyta została dodana",
+                    Text = "Jeeessttt",
+                    OptionalText = "Wizyta została dodana",
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -156,10 +160,64 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        public async Task<ActionResult> SummaryVisit(int id)
+        public ActionResult SummaryVisit(int id)
         {
-            VisitSummaryViewModel model = await _visitsRepository.GetSummaryVisitViewModel(id);
+            var model = _summaryVisitRepository.GetIndexViewModel(id);
+            if(model != null)
+            { 
+                return View(model);
+            }
 
+            base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult CreateSummaryVisit(int visitId)
+        {
+            if(visitId == 0)
+            {
+                base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+                return RedirectToAction("Index");
+            }
+
+            var model = _summaryVisitRepository.GetCreateViewModel(visitId);
+            if (model != null)
+            {
+                return View(model);
+            }
+
+            base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateSummaryVisit(SummaryVisitManageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {                
+                    await _summaryVisitRepository.CreateNew(model);
+
+                    Message message = new Message
+                    {
+                        Text = "Jeeessttt",
+                        OptionalText = "Podsumowanie zostało dodane",
+                        MessageStatus = Models.NotifyMessage.MessageStatus.success
+                    };
+                    base.NotifyMessage(message);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Wystąpił błąd podczas dodawania podsumowania");
+                    base.NotifyMessage("Wystąpił błąd podczas dodawania podsumowania", "Upppsss !", MessageStatus.error);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            model = _summaryVisitRepository.GetCreateViewModel(model.VisitId, model);
             return View(model);
         }
     }

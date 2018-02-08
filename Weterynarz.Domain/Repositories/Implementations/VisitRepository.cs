@@ -58,17 +58,19 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task CreateNew(VisitManageViewModel model)
         {
+            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
+            Animal animal = _animalRepository.GetById(model.AnimalId);
+
             Visit visit = new Visit()
             {
                 Active = true,
                 CreationDate = DateTime.Now,
                 Deleted = false,
                 ReasonVisit = model.ReasonVisit,
-                AnimalId = model.AnimalId,
-                DoctorId = model.DoctorId,
-                OwnerId = model.OwnerId,
+                Animal = animal,
+                Doctor = doctor,
                 Approved = model.Approved,
-                VisitDate = model.VisitDate,         
+                VisitDate = model.VisitDate, 
             };
 
             await base.InsertAsync(visit);
@@ -88,15 +90,18 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task Edit(VisitManageViewModel model)
         {
+            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
+            Animal animal = _animalRepository.GetById(model.AnimalId);
+
             Visit visit = base.GetById(model.Id);
             if (visit != null)
             {
                 visit.Approved = model.Approved;
-                visit.DoctorId = model.DoctorId;
+                visit.Doctor = doctor;
                 visit.ReasonVisit = model.ReasonVisit;
-                visit.AnimalId = model.AnimalId;
+                visit.Animal = animal;
                 visit.VisitDate = model.VisitDate;
-                visit.OwnerId = model.OwnerId;
+                visit.ModificationDate = DateTime.Now;
             }
 
             await base.SaveChangesAsync();
@@ -124,13 +129,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 model = new VisitManageViewModel();
                 model.Id = visit.Id;
                 model.Approved = visit.Approved;
-                model.DoctorId = visit.DoctorId;
+                model.DoctorId = visit.Doctor.Id;
                 model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
                 model.ReasonVisit = visit.ReasonVisit;
-                model.AnimalId = visit.AnimalId;
-                model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(visit.OwnerId);
+                model.AnimalId = visit.Animal.Id;
+                model.AnimalsSelectList = _animalRepository.GetUserAnimalsSelectList(visit.Animal.Owner.Id);
                 model.VisitDate = visit.VisitDate;
-                model.OwnerId = visit.OwnerId;
+                model.OwnerId = visit.Animal.Owner.Id;
                 model.OwnersSelectList = await _accountsRepository.GetOwnersSelectList();
             }
 
@@ -148,7 +153,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Owner = i.Animal.Owner.Name + " " + i.Animal.Owner.Surname,
                 Animal = i.Animal.Name + " (" + i.Animal.AnimalType.Name + ")",
                 Doctor = i.Doctor.Name + " " + i.Doctor.Surname,
-                Approved = i.Approved
+                Approved = i.Approved,
+                SummaryId = i.SummaryVisit.Id,
             });
         }
 
@@ -194,50 +200,21 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public async Task<VisitSummaryViewModel> GetSummaryVisitViewModel(int visitId)
-        {
-            VisitSummaryViewModel model = null;
-
-            Visit visit = base.GetById(visitId);
-            if (visit != null)
-            {
-                model = new VisitSummaryViewModel();
-                model.VisitId = visit.Id;
-                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
-                model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
-            }
-
-            return model;
-        }
-
-        public async Task<VisitSummaryViewModel> GetSummaryVisitViewModel(VisitSummaryViewModel model)
-        {
-            if (model != null)
-            {
-                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
-                model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
-            }
-
-            return model;
-        }
-
         public async Task InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
         {
-            // Create new client if userId is empty
-            string userId = string.IsNullOrEmpty(model.UserId) ? await _accountsRepository.InsertFromVisitFormAsync(model) : model.UserId;
-
-            int animalId = model.AnimalId ?? await _animalRepository.InsertFromVisitFormAsync(model);
+            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.VetId);
+            Animal animal = await _animalRepository.InsertFromVisitFormAsync(model);
 
             // create new visit
             Visit visit = new Visit()
             {
+                Animal = animal,
+                Description = model.ReasonVisit,
+                Doctor = doctor,
                 Active = true,
-                AnimalId = animalId,
                 Approved = false,
                 CreationDate = DateTime.Now,
-                DoctorId = model.VetId,
                 VisitDate = model.VisitDate, 
-                OwnerId = userId,
                 ReasonVisit = model.ReasonVisit
             };
 

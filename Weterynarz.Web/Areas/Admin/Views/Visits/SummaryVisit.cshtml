@@ -1,5 +1,5 @@
-﻿@namespace Weterynarz.Domain.ViewModels.Visit
-@model VisitSummaryViewModel
+﻿@namespace Weterynarz.Domain.ViewModels.SummaryVisit
+@model SummaryVisitIndexViewModel
 @{
     ViewData["Title"] = "Podsumowanie wizyty";
 }
@@ -15,69 +15,70 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <form asp-controller="Visits" asp-action="SummaryVisit" method="post">
-                <div class="card-header">
-                    <strong>@ResAdmin.visitSummaryView_headerForm</strong>
-                </div>
-                <div class="card-body">
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_visitDate</h5>
                     </div>
-
-                    @Html.HiddenFor(m => m.VisitId)
-
-                    <!--/.row-->
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label asp-for="DiseaseIds"></label>
-                                <select asp-for="DiseaseIds" class="form-control" asp-items="@Model.DiseaseSelectList" placeholder="Choroby"></select>
-                                <span asp-validation-for="DiseaseIds" class="help-block text-danger"></span>
-                            </div>
-                        </div>
+                    <p class="mb-1">@Model.VisitDate.ToString(FormatsDate.Date)</p>
+                </a> 
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_owner</h5>
                     </div>
-
-                    <div class="row" id="">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label asp-for="MedicalExaminationIds"></label>
-                                <select asp-for="MedicalExaminationIds" asp-items="@Model.MedicalExaminationSelectList" class="form-control" placeholder="Badania"></select>
-                                <span asp-validation-for="MedicalExaminationIds" class="help-block text-danger"></span>
-                            </div>
-                        </div>
+                    <p class="mb-1">@Model.Owner</p>
+                </a> 
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_animal</h5>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label asp-for="Drugs"></label>
-                                <textarea rows="6" class="form-control" asp-for="Drugs" placeholder="Leki"></textarea>
-                                <span asp-validation-for="Drugs" class="help-block text-danger"></span>
-                            </div>
+                    <p class="mb-1">@Model.Animal</p>
+                </a> 
+                @if(Model.Diseases.Any())
+                { 
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_diseases</h5>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label asp-for="Description"></label>
-                                <textarea rows="9" class="form-control" asp-for="Description" placeholder="Opis"></textarea>
-                                <span asp-validation-for="Description" class="help-block text-danger"></span>
-                            </div>
+                        <p class="mb-1">
+                            <ul>
+                                @foreach(var disease in Model.Diseases)
+                                { 
+                                    <li>@disease</li>
+                                }
+                            </ul>
+                        </p>
+                    </a>
+                }
+                @if (Model.MedicalExaminations.Any())
+                {
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_medicalExaminations</h5>
                         </div>
+                        <p class="mb-1">
+                            <ul>
+                                @foreach (var medicalExaminations in Model.MedicalExaminations)
+                                {
+                                    <li>@medicalExaminations</li>
+                                }
+                            </ul>
+                        </p>
+                    </a>
+                }
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_drugs</h5>
                     </div>
-                    <!--/.row-->
-
-                </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Dodaj</button>
-                    <a asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
-                </div>
-            </form>
+                    <p class="mb-1">@Model.Drugs</p>
+                </a> 
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_description</h5>
+                    </div>
+                    <p class="mb-1">@Model.Description</p>
+                </a> 
+            </div>            
         </div>
     </div>
 </div>

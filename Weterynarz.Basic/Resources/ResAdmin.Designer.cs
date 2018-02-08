@@ -736,11 +736,101 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Do tej wizyty nie jest przypisane żadne zwierzę.
+        /// </summary>
+        public static string visitRepo_animalNotFoundException {
+            get {
+                return ResourceManager.GetString("visitRepo_animalNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista wizyt.
         /// </summary>
         public static string visitsIndex_list {
             get {
                 return ResourceManager.GetString("visitsIndex_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj podsumowanie.
+        /// </summary>
+        public static string visitSummaryCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("visitSummaryCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zwierze.
+        /// </summary>
+        public static string visitSummaryIndexView_animal {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_animal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opis wizyty.
+        /// </summary>
+        public static string visitSummaryIndexView_description {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choroby.
+        /// </summary>
+        public static string visitSummaryIndexView_diseases {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_diseases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Leki.
+        /// </summary>
+        public static string visitSummaryIndexView_drugs {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_drugs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Badania.
+        /// </summary>
+        public static string visitSummaryIndexView_medicalExaminations {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_medicalExaminations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Właściciel zwierzęcia.
+        /// </summary>
+        public static string visitSummaryIndexView_owner {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data wizyty.
+        /// </summary>
+        public static string visitSummaryIndexView_visitDate {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_visitDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie znaleziono wizyty o podanym Id.
+        /// </summary>
+        public static string visitSummaryRepo_visitNotFoundException {
+            get {
+                return ResourceManager.GetString("visitSummaryRepo_visitNotFoundException", resourceCulture);
             }
         }
         

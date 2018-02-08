@@ -22,7 +22,5 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         Task CreateNew(VisitManageViewModel model);
         Task Edit(VisitManageViewModel model);
         Task Delete(int id);
-        Task<VisitSummaryViewModel> GetSummaryVisitViewModel(int visitId);
-        Task<VisitSummaryViewModel> GetSummaryVisitViewModel(VisitSummaryViewModel model);
     }
 }

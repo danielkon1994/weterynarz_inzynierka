@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Weterynarz.Domain.ViewModels.SummaryVisit
 {
-    public class SummaryVisitManageViewModel
+    public class SummaryVisitManageViewModel : BaseViewModel<int>
     {
         public int VisitId { get; set; }
 

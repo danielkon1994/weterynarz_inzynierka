@@ -15,13 +15,9 @@ namespace Weterynarz.Domain.EntitiesDb
         public DateTime AvailableTo { get; set; }
 
         [Required]
-        public string DoctorId { get; set; }
-        [ForeignKey("DoctorId")]
         public ApplicationUser Doctor { get; set; }
 
         [Required]
-        public int GraphicId { get; set; }
-        [ForeignKey("GraphicId")]
         public Graphic Graphic { get; set; }
     }
 }

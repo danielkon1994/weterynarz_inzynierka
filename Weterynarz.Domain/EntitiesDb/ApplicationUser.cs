@@ -11,18 +11,21 @@ namespace Weterynarz.Domain.EntitiesDb
         public ApplicationUser()
         {
             Animals = new Collection<Animal>();
-            Graphics = new Collection<DoctorGraphic>();
+            DoctorGraphics = new Collection<DoctorGraphic>();
+            Visits = new Collection<Visit>();
         }
 
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
-        public virtual ICollection<Animal> Animals { get; set; }
+        public ICollection<Animal> Animals { get; set; }
 
-        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public ICollection<IdentityUserRole<string>> Roles { get; set; }
 
-        public virtual ICollection<DoctorGraphic> Graphics { get; set; }
+        public ICollection<DoctorGraphic> DoctorGraphics { get; set; }
+
+        public ICollection<Visit> Visits { get; set; }
 
         //Additional data
         public string DoctorSpecialization { get; set; }

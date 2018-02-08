@@ -50,6 +50,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return this.GetAll().Where(a => !a.Deleted && a.Active).FirstOrDefault(i => i.Id == id);
         }
 
+        public async Task<ApplicationUser> GetByIdFromUserManager(string id)
+        {
+            return await _userManager.FindByIdAsync(id);
+        }
+
         public ApplicationUser GetByIdNotDeleted(string id)
         {
             return GetAllNotDeleted().FirstOrDefault(i => i.Id == id);
@@ -222,8 +227,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
             await _db.SaveChangesAsync();
         }
 
-        public async Task<string> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        public async Task<ApplicationUser> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
         {
+            if(!string.IsNullOrEmpty(model.UserId))
+            {
+                return await _userManager.FindByIdAsync(model.UserId);
+            }
+
             ApplicationUser client = new ApplicationUser()
             {
                 Active = true,
@@ -244,7 +254,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             await this.InsertAcync(client);
 
-            return client.Id;
+            return client;
         }
 
         public IEnumerable<SelectListItem> GetUsersSelectList()

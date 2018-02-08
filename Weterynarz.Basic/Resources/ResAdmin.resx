@@ -348,4 +348,34 @@
   <data name="visitSummaryView_headerForm" xml:space="preserve">
     <value>Podsumowanie wizyty</value>
   </data>
+  <data name="visitSummaryIndexView_animal" xml:space="preserve">
+    <value>Zwierze</value>
+  </data>
+  <data name="visitSummaryIndexView_description" xml:space="preserve">
+    <value>Opis wizyty</value>
+  </data>
+  <data name="visitSummaryIndexView_diseases" xml:space="preserve">
+    <value>Choroby</value>
+  </data>
+  <data name="visitSummaryIndexView_drugs" xml:space="preserve">
+    <value>Leki</value>
+  </data>
+  <data name="visitSummaryIndexView_medicalExaminations" xml:space="preserve">
+    <value>Badania</value>
+  </data>
+  <data name="visitSummaryIndexView_owner" xml:space="preserve">
+    <value>Właściciel zwierzęcia</value>
+  </data>
+  <data name="visitSummaryIndexView_visitDate" xml:space="preserve">
+    <value>Data wizyty</value>
+  </data>
+  <data name="visitSummaryCreateView_headerForm" xml:space="preserve">
+    <value>Dodaj podsumowanie</value>
+  </data>
+  <data name="visitSummaryRepo_visitNotFoundException" xml:space="preserve">
+    <value>Nie znaleziono wizyty o podanym Id</value>
+  </data>
+  <data name="visitRepo_animalNotFoundException" xml:space="preserve">
+    <value>Do tej wizyty nie jest przypisane żadne zwierzę</value>
+  </data>
 </root>

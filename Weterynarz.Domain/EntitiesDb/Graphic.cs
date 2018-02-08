@@ -22,5 +22,9 @@ namespace Weterynarz.Domain.EntitiesDb
         public int SaturdayTo { get; set; }
         public int SundayFrom { get; set; }
         public int SundayTo { get; set; }
+
+        [Required]
+        public int DoctorGraphicId { get; set; }
+        public DoctorGraphic DoctorGraphic { get; set; }
     }
 }

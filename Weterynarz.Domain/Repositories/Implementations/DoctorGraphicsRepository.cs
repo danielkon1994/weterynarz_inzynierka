@@ -18,20 +18,21 @@ namespace Weterynarz.Domain.Repositories.Implementations
 {
     public class DoctorGraphicsRepository : BaseRepository<DoctorGraphic>, IDoctorGraphicsRepository
     {
+        private IAccountsRepository _accountsRepository;
 
-        public DoctorGraphicsRepository(ApplicationDbContext db) : base(db)
+        public DoctorGraphicsRepository(ApplicationDbContext db, IAccountsRepository accountsRepository) : base(db)
         {
-
+            _accountsRepository = accountsRepository;
         }
 
         public DoctorGraphic GetById(string id)
         {
-            return _db.DoctorGraphics.Include("Graphic,Disease").Where(i => !i.Deleted).FirstOrDefault(i => i.DoctorId == id);
+            return _db.DoctorGraphics.Include(g => g.Graphic).Include(d => d.Doctor).Where(i => !i.Deleted).FirstOrDefault(i => i.Doctor.Id == id);
         }
 
         public override DoctorGraphic GetById(int id)
         {
-            return _db.DoctorGraphics.Include("Graphic").Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
+            return _db.DoctorGraphics.Include(g => g.Graphic).Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
         }
 
         public async Task CreateNew(DoctorGraphicManageViewModel model)
@@ -58,14 +59,16 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             await _db.Graphics.AddAsync(graphic);
 
+            var doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
+
             DoctorGraphic doctorGraphic = new DoctorGraphic()
             {
-                GraphicId = graphic.Id,
                 CreationDate = DateTime.Now,
                 Active = model.Active,
-                DoctorId = model.DoctorId,
                 AvailableFrom = model.AvailableFrom,
-                AvailableTo = model.AvailableTo
+                AvailableTo = model.AvailableTo,
+                Graphic = graphic,
+                Doctor = doctor
             };
 
             await base.InsertAsync(doctorGraphic);
@@ -204,7 +207,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private DoctorGraphic getActualGraphic(string doctorId)
         {
             DateTime now = DateTime.Now;
-            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).OrderByDescending(i => i.CreationDate).FirstOrDefault(i => i.DoctorId == doctorId);
+            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).OrderByDescending(i => i.CreationDate).FirstOrDefault(i => i.Doctor.Id == doctorId);
         }
     }
 }

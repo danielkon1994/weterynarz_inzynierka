@@ -51,7 +51,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Jeeessttt",
-                    OptionalText = "Typ został dodany",
+                    OptionalText = "Badanie zostało dodane",
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -68,7 +68,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             MedicalExaminationTypesManageViewModel model = _medicalExaminationTypesRepository.GetEditViewModel(id);
             if(model == null)
             {
-                base.NotifyMessage("Nie znaleziono typu z takim identyfikatorem", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Nie znaleziono badania z takim identyfikatorem", "Upppsss !", MessageStatus.error);
                 return RedirectToAction("Index");
             }
 
@@ -87,7 +87,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Pomyślnie zapisano typ",
+                    OptionalText = "Pomyślnie zapisano badanie",
                     MessageStatus = MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -114,7 +114,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Pomyślnie usunięto typ",
+                    OptionalText = "Pomyślnie usunięto badanie",
                     MessageStatus = MessageStatus.success
                 };
                 base.NotifyMessage(message);

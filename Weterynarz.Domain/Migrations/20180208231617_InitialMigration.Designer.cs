@@ -11,7 +11,7 @@ using Weterynarz.Domain.ContextDb;
 namespace Weterynarz.Domain.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180122213804_InitialMigration")]
+    [Migration("20180208231617_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,7 +136,8 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<string>("AnimalDesc");
+                    b.Property<string>("AnimalDesc")
+                        .IsRequired();
 
                     b.Property<int>("AnimalTypeId");
 
@@ -151,7 +152,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<string>("OwnerId");
+                    b.Property<string>("OwnerId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -160,6 +162,32 @@ namespace Weterynarz.Domain.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Animals");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.AnimalDisease", b =>
+                {
+                    b.Property<int>("AnimalId");
+
+                    b.Property<int>("DiseaseId");
+
+                    b.HasKey("AnimalId", "DiseaseId");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.ToTable("AnimalDiseases");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.AnimalMedicalExamination", b =>
+                {
+                    b.Property<int>("AnimalId");
+
+                    b.Property<int>("MedicalExaminationId");
+
+                    b.HasKey("AnimalId", "MedicalExaminationId");
+
+                    b.HasIndex("MedicalExaminationId");
+
+                    b.ToTable("AnimalMedicalExaminations");
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.AnimalType", b =>
@@ -204,6 +232,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
+
+                    b.Property<string>("DoctorSpecialization");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -263,8 +293,6 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("AnimalId");
-
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
@@ -277,8 +305,6 @@ namespace Weterynarz.Domain.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AnimalId");
 
                     b.ToTable("Diseases");
                 });
@@ -301,15 +327,11 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<string>("DoctorId")
                         .IsRequired();
 
-                    b.Property<int>("GraphicId");
-
                     b.Property<DateTime?>("ModificationDate");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("GraphicId");
 
                     b.ToTable("DoctorGraphics");
                 });
@@ -324,6 +346,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<DateTime>("CreationDate");
 
                     b.Property<bool>("Deleted");
+
+                    b.Property<int>("DoctorGraphicId");
 
                     b.Property<int>("FridayFrom");
 
@@ -357,41 +381,10 @@ namespace Weterynarz.Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorGraphicId")
+                        .IsUnique();
+
                     b.ToTable("Graphics");
-                });
-
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<int>("AnimalId");
-
-                    b.Property<DateTime>("CreationDate");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("DoctorId");
-
-                    b.Property<DateTime>("ExaminationDate");
-
-                    b.Property<int>("MedicalExaminationTypeId");
-
-                    b.Property<DateTime?>("ModificationDate");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnimalId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("MedicalExaminationTypeId");
-
-                    b.ToTable("MedicalExaminations");
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExaminationType", b =>
@@ -447,14 +440,40 @@ namespace Weterynarz.Domain.Migrations
                     b.ToTable("SettingsContent");
                 });
 
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Visit", b =>
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.SummaryVisit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Active");
 
-                    b.Property<string>("AnimalDescription");
+                    b.Property<DateTime>("CreationDate");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("Drugs");
+
+                    b.Property<DateTime?>("ModificationDate");
+
+                    b.Property<int>("VisitId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VisitId")
+                        .IsUnique();
+
+                    b.ToTable("SummaryVisits");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Visit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Active");
 
                     b.Property<int>("AnimalId");
 
@@ -464,13 +483,14 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Deleted");
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("DoctorId")
                         .IsRequired();
 
                     b.Property<DateTime?>("ModificationDate");
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired();
+                    b.Property<string>("ReasonVisit");
 
                     b.Property<DateTime>("VisitDate");
 
@@ -479,8 +499,6 @@ namespace Weterynarz.Domain.Migrations
                     b.HasIndex("AnimalId");
 
                     b.HasIndex("DoctorId");
-
-                    b.HasIndex("OwnerId");
 
                     b.ToTable("Visits");
                 });
@@ -533,49 +551,63 @@ namespace Weterynarz.Domain.Migrations
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Animal", b =>
                 {
                     b.HasOne("Weterynarz.Domain.EntitiesDb.AnimalType", "AnimalType")
-                        .WithMany()
+                        .WithMany("Animals")
                         .HasForeignKey("AnimalTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Owner")
                         .WithMany("Animals")
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Disease", b =>
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.AnimalDisease", b =>
                 {
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.Animal")
-                        .WithMany("Diseases")
-                        .HasForeignKey("AnimalId");
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Animal", "Animal")
+                        .WithMany("AnimalDiseases")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Disease", "Disease")
+                        .WithMany("AnimalDiseases")
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.AnimalMedicalExamination", b =>
+                {
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Animal", "Animal")
+                        .WithMany("AnimalMedicalExaminations")
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.MedicalExaminationType", "MedicalExamination")
+                        .WithMany("AnimalMedicalExaminations")
+                        .HasForeignKey("MedicalExaminationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.DoctorGraphic", b =>
                 {
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
-                        .WithMany("Graphics")
+                        .WithMany("DoctorGraphics")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.Graphic", "Graphic")
-                        .WithMany()
-                        .HasForeignKey("GraphicId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.MedicalExamination", b =>
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.Graphic", b =>
                 {
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.Animal", "Animal")
-                        .WithMany("MedicalExaminations")
-                        .HasForeignKey("AnimalId")
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.DoctorGraphic", "DoctorGraphic")
+                        .WithOne("Graphic")
+                        .HasForeignKey("Weterynarz.Domain.EntitiesDb.Graphic", "DoctorGraphicId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId");
-
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.MedicalExaminationType", "MedicalExaminationType")
-                        .WithMany()
-                        .HasForeignKey("MedicalExaminationTypeId")
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.SummaryVisit", b =>
+                {
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.Visit", "Visit")
+                        .WithOne("SummaryVisit")
+                        .HasForeignKey("Weterynarz.Domain.EntitiesDb.SummaryVisit", "VisitId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -587,13 +619,8 @@ namespace Weterynarz.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Doctor")
-                        .WithMany()
+                        .WithMany("Visits")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Weterynarz.Domain.EntitiesDb.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

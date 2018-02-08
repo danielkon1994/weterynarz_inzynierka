@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Weterynarz.Domain.ViewModels.SummaryVisit
 {
-    public class SummaryVisitIndexViewModel
+    public class SummaryVisitIndexViewModel : BaseViewModel<int>
     {
         public DateTime VisitDate { get; set; }
         public string Owner { get; set; }
