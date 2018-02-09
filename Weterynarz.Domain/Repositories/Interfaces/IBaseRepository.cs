@@ -12,6 +12,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     public interface IBaseRepository<T> where T : BaseEntity
     {
         T GetById(int id);
+        T GetById(int id, string[] includeEntities);
         IQueryable<T> GetAllActive();
         IQueryable<T> GetAllNotDeleted();
         IQueryable<T> GetAll();

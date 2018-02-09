@@ -39,24 +39,28 @@ namespace Weterynarz.Domain.Repositories.Implementations
             throw new NotImplementedException();
         }
 
-        public SummaryVisitIndexViewModel GetIndexViewModel(int id)
+        public SummaryVisitIndexViewModel GetIndexViewModel(int visitId)
         {
             SummaryVisitIndexViewModel model;
             //var summaryVisit = base.GetById(id);
-            var summaryVisit = _db.SummaryVisits.Include(v => v.Visit).Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
-            if (summaryVisit != null)
+            var visit = _visitRepository.GetById(visitId, new string[] { "SummaryVisit", "Animal.Owner", "Animal.AnimalDiseases.Disease", "Animal.AnimalMedicalExaminations.MedicalExamination" });
+
+            if (visit.SummaryVisit != null)
             {
+                var diseases = visit.Animal.AnimalDiseases?.Select(m => m.Disease).ToList();
+                var medicalExamination = visit.Animal.AnimalMedicalExaminations?.Select(m => m.MedicalExamination).ToList();
+
                 model = new SummaryVisitIndexViewModel
                 {
-                    Active = summaryVisit.Active,
-                    Animal = summaryVisit.Visit.Animal.Name,
-                    Diseases = summaryVisit.Visit.Animal.AnimalDiseases.Select(m => m.Disease).ToList().Select(m => m.Name),
-                    Drugs = summaryVisit.Drugs,
-                    MedicalExaminations = summaryVisit.Visit.Animal.AnimalMedicalExaminations.Select(m => m.MedicalExamination).ToList().Select(m => m.Name),
-                    Owner = summaryVisit.Visit.Animal.Owner.Name + " " + summaryVisit.Visit.Animal.Owner.Surname,
-                    VisitDate = summaryVisit.Visit.VisitDate,
-                    Id = summaryVisit.Id,
-                    Description = summaryVisit.Description,
+                    Active = visit.SummaryVisit.Active,
+                    Animal = visit.Animal.Name,
+                    Diseases = diseases?.Select(x => x.Name),
+                    Drugs = visit.SummaryVisit.Drugs,
+                    MedicalExaminations = medicalExamination?.Select(x => x.Name),
+                    Owner = visit.Animal.Owner.Name + " " + visit.Animal.Owner.Surname,
+                    VisitDate = visit.VisitDate,
+                    Id = visit.SummaryVisit.Id,
+                    Description = visit.SummaryVisit.Description,
                 };
 
                 return model;
@@ -81,7 +85,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task CreateNew(SummaryVisitManageViewModel model)
         {
-            var visit = _visitRepository.GetById(model.VisitId);
+            var visit = _visitRepository.GetById(model.VisitId, new string[] { "Doctor", "Animal", "SummaryVisit" });
 
             SummaryVisit summary = new SummaryVisit
             {
@@ -89,6 +93,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Active = true,
                 CreationDate = DateTime.Now,
                 Description = model.Description,
+                VisitId = model.VisitId,
                 Visit = visit
             };
 
@@ -99,7 +104,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
             }
 
             var diseasesCollection = _db.Diseases.AsNoTracking().Where(d => model.DiseaseIds.Contains(d.Id)).ToList();
-            var existingDiseases = animal.AnimalDiseases.Select(x => x.Disease).ToList();
+            var existingDiseases = _db.AnimalDiseases.AsNoTracking().Where(x => x.AnimalId == animal.Id).Select(x => x.Disease).ToList();
             var diseasesToAddList = diseasesCollection.Except(existingDiseases).ToList();
             foreach (var disease in diseasesToAddList)
             {
@@ -112,7 +117,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
             }
 
             var medicalExaminationCollection = _db.MedicalExaminationTypes.AsNoTracking().Where(d => model.MedicalExaminationIds.Contains(d.Id)).ToList();
-            var existingMedicalExaminations = animal.AnimalMedicalExaminations.Select(x => x.MedicalExamination).ToList();
+            var existingMedicalExaminations = _db.AnimalMedicalExaminations.AsNoTracking().Where(x => x.AnimalId == animal.Id).Select(x => x.MedicalExamination).ToList();
             var medicalExaminationToAddList = medicalExaminationCollection.Except(existingMedicalExaminations).ToList();
             foreach (var medicalExamination in medicalExaminationToAddList)
             {

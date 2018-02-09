@@ -13,6 +13,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     public interface IAnimalRepository : IBaseRepository<Animal>
     {
         IEnumerable<SelectListItem> GetUserAnimalsSelectList(string userId);
+        IEnumerable<SelectListItem> GetAnimalsSelectList();
         Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
         IQueryable<AnimalIndexViewModel> GetIndexViewModel();
         AnimalManageViewModel GetAllSelectListProperties(AnimalManageViewModel model);

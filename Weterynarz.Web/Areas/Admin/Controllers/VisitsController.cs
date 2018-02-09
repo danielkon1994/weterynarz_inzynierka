@@ -10,6 +10,7 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.Visit;
 using Microsoft.Extensions.Logging;
 using Weterynarz.Domain.ViewModels.SummaryVisit;
+using Weterynarz.Basic.Resources;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -53,7 +54,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Jeeessttt",
-                    OptionalText = "Wizyta została dodana",
+                    OptionalText = ResAdmin.visit_successAddVisit,
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -71,7 +72,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             VisitManageViewModel model = await _visitsRepository.GetEditViewModel(id);
             if (model == null)
             {
-                base.NotifyMessage("Nie znaleziono wizyty", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorVisitNotFound, MessageStatus.error);
                 return RedirectToAction("Index");
             }
 
@@ -89,7 +90,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Pomyślnie zapisano",
+                    OptionalText = ResAdmin.visit_successSaveVisit,
                     MessageStatus = MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -98,8 +99,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Wystąpił błąd podczas edycji");
-                base.NotifyMessage("Wystąpił błąd podczas edycji", "Upppsss !", MessageStatus.error);
+                _logger.LogError(ex, ResAdmin.visit_errorEditVisit);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorEditVisit, MessageStatus.error);
                 return RedirectToAction("Index");
             }
         }
@@ -109,7 +110,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             var visit = _visitsRepository.GetById(id);
             if(visit?.Approved == true)
             {
-                base.NotifyMessage("", "Wizyta została już wcześniej zatwierdzona", MessageStatus.warning);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorVisitEarlyApproved, MessageStatus.warning);
                 return RedirectToAction("Index");
             }
 
@@ -120,7 +121,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Zatwierdzono wizytę",
+                    OptionalText = ResAdmin.visit_successVisitApproved,
                     MessageStatus = MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -129,8 +130,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Wystąpił błąd podczas zatwierdzania wizyty");
-                base.NotifyMessage("Wystąpił błąd podczas zatwierdzania wizyty", "Upppsss !", MessageStatus.error);
+                _logger.LogError(ex, ResAdmin.visit_errorVisitApproved);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorVisitApproved, MessageStatus.error);
                 return RedirectToAction("Index");
             }
         }
@@ -145,7 +146,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 Message message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Pomyślnie usunięto",
+                    OptionalText = ResAdmin.visit_successDeleteVisit,
                     MessageStatus = MessageStatus.success
                 };
                 base.NotifyMessage(message);
@@ -154,21 +155,21 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Wystąpił błąd podczas usuwania");
-                base.NotifyMessage("Wystąpił błąd podczas usuwania", "Upppsss !", MessageStatus.error);
+                _logger.LogError(ex, ResAdmin.visit_errorDeleteVisit);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorDeleteVisit, MessageStatus.error);
                 return RedirectToAction("Index");
             }
         }
 
-        public ActionResult SummaryVisit(int id)
+        public ActionResult SummaryVisit(int visitId)
         {
-            var model = _summaryVisitRepository.GetIndexViewModel(id);
+            var model = _summaryVisitRepository.GetIndexViewModel(visitId);
             if(model != null)
             { 
                 return View(model);
             }
 
-            base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+            base.NotifyMessage("Upppsss !", ResAdmin.summaryVisit_errorNotFoundSummary, MessageStatus.error);
             return RedirectToAction("Index");
         }
 
@@ -176,7 +177,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if(visitId == 0)
             {
-                base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.visit_errorVisitNotFound, MessageStatus.error);
                 return RedirectToAction("Index");
             }
 
@@ -186,7 +187,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return View(model);
             }
 
-            base.NotifyMessage("Nie znaleziono podsumowania wizyty", "Upppsss !", MessageStatus.error);
+            base.NotifyMessage("Upppsss !", ResAdmin.visit_errorVisitNotFound, MessageStatus.error);
             return RedirectToAction("Index");
         }
 
@@ -203,15 +204,15 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     Message message = new Message
                     {
                         Text = "Jeeessttt",
-                        OptionalText = "Podsumowanie zostało dodane",
+                        OptionalText = ResAdmin.summaryVisit_successAddSummary,
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Wystąpił błąd podczas dodawania podsumowania");
-                    base.NotifyMessage("Wystąpił błąd podczas dodawania podsumowania", "Upppsss !", MessageStatus.error);
+                    _logger.LogError(ex, ResAdmin.summaryVisit_errorAddSummary);
+                    base.NotifyMessage("Upppsss !", ResAdmin.summaryVisit_errorAddSummary, MessageStatus.error);
                 }
 
                 return RedirectToAction("Index");

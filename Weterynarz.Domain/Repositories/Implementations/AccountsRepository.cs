@@ -183,7 +183,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public async Task<IEnumerable<SelectListItem>> GetVetsSelectList()
         {
             List<SelectListItem> vetsList = new List<SelectListItem>();
-            vetsList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
+
+            vetsList.Add(new SelectListItem { Disabled = true, Group = null, Selected = true, Text = "--- wybierz ---", Value = "" });
 
             var users = await _userManager.GetUsersInRoleAsync(UserRoles.Doctor);
             if (users != null)
@@ -203,7 +204,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public async Task<IEnumerable<SelectListItem>> GetOwnersSelectList()
         {
             List<SelectListItem> ownersList = new List<SelectListItem>();
-            ownersList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
+
+            ownersList.Add(new SelectListItem { Disabled = true, Group = null, Selected = true, Text = "--- wybierz ---", Value = "" });
 
             var users = await _userManager.GetUsersInRoleAsync(UserRoles.Client);
             if (users != null)

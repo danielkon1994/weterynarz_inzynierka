@@ -405,4 +405,40 @@
   <data name="doctorGraphic_successSaveGraphic" xml:space="preserve">
     <value>Grafik został zapisany</value>
   </data>
+  <data name="summaryVisit_errorAddSummary" xml:space="preserve">
+    <value>Wystąpił błąd podczas dodawania podsumowania</value>
+  </data>
+  <data name="summaryVisit_errorNotFoundSummary" xml:space="preserve">
+    <value>Nie znaleziono podsumowania wizyty</value>
+  </data>
+  <data name="summaryVisit_successAddSummary" xml:space="preserve">
+    <value>Podsumowanie zostało dodane</value>
+  </data>
+  <data name="visit_errorDeleteVisit" xml:space="preserve">
+    <value>Wystąpił błąd podczas usuwania wizyty</value>
+  </data>
+  <data name="visit_errorEditVisit" xml:space="preserve">
+    <value>Wystąpił błąd podczas edycji wizyty</value>
+  </data>
+  <data name="visit_errorVisitApproved" xml:space="preserve">
+    <value>Wystąpił błąd podczas zatwierdzania wizyty</value>
+  </data>
+  <data name="visit_errorVisitEarlyApproved" xml:space="preserve">
+    <value>Wizyta została już wcześniej zatwierdzona</value>
+  </data>
+  <data name="visit_errorVisitNotFound" xml:space="preserve">
+    <value>Nie znaleziono wizyty</value>
+  </data>
+  <data name="visit_successAddVisit" xml:space="preserve">
+    <value>Wizyta została dodana</value>
+  </data>
+  <data name="visit_successDeleteVisit" xml:space="preserve">
+    <value>Pomyślnie usunięto wizytę</value>
+  </data>
+  <data name="visit_successSaveVisit" xml:space="preserve">
+    <value>Pomyślnie zapisano wizytę</value>
+  </data>
+  <data name="visit_successVisitApproved" xml:space="preserve">
+    <value>Zatwierdzono wizytę</value>
+  </data>
 </root>

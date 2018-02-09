@@ -168,14 +168,27 @@ namespace Weterynarz.Domain.Repositories.Implementations
             });
         }
 
+        public IEnumerable<SelectListItem> GetAnimalsSelectList()
+        {
+            List<SelectListItem> list = new List<SelectListItem>();
+
+            list = base.GetAllActive().Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            }).ToList();
+
+            return list.AsEnumerable();
+        }
+
         public IEnumerable<SelectListItem> GetUserAnimalsSelectList(string userId)
         {
             List<SelectListItem> list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
-            if(!string.IsNullOrEmpty(userId))
+            if (!string.IsNullOrEmpty(userId))
             {
-                list = base.GetAllActive().Where(i => i.Owner.Id == userId).Select(i => new SelectListItem {
+                list = base.GetAllActive().Where(i => i.Owner.Id == userId).Select(i => new SelectListItem
+                {
                     Text = i.Name,
                     Value = i.Id.ToString()
                 }).ToList();

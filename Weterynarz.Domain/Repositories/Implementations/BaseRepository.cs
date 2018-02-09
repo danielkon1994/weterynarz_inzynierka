@@ -51,6 +51,18 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return _db.Set<T>().Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
         }
 
+        public virtual T GetById(int id, string[] includeEntities)
+        {
+            IQueryable<T> entityQuery = _db.Set<T>();
+
+            foreach (var include in includeEntities)
+            {
+                entityQuery = entityQuery.Include(include);
+            }
+
+            return entityQuery.Where(i => !i.Deleted).FirstOrDefault(i => i.Id == id);
+        }
+
         public virtual async Task<int> InsertAsync(T item)
         {
             await _db.Set<T>().AddAsync(item);

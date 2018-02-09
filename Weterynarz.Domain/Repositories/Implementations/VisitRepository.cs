@@ -58,17 +58,14 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task CreateNew(VisitManageViewModel model)
         {
-            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
-            Animal animal = _animalRepository.GetById(model.AnimalId);
-
             Visit visit = new Visit()
             {
                 Active = true,
                 CreationDate = DateTime.Now,
                 Deleted = false,
                 ReasonVisit = model.ReasonVisit,
-                Animal = animal,
-                Doctor = doctor,
+                AnimalId = model.AnimalId,
+                DoctorId = model.DoctorId,
                 Approved = model.Approved,
                 VisitDate = model.VisitDate, 
             };
@@ -90,16 +87,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public async Task Edit(VisitManageViewModel model)
         {
-            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
-            Animal animal = _animalRepository.GetById(model.AnimalId);
-
             Visit visit = base.GetById(model.Id);
             if (visit != null)
             {
                 visit.Approved = model.Approved;
-                visit.Doctor = doctor;
+                visit.DoctorId = model.DoctorId;
                 visit.ReasonVisit = model.ReasonVisit;
-                visit.Animal = animal;
+                visit.AnimalId = model.AnimalId;
                 visit.VisitDate = model.VisitDate;
                 visit.ModificationDate = DateTime.Now;
             }
@@ -113,7 +107,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 model = new VisitManageViewModel();
 
             model.DoctorsSelectList = await _accountsRepository.GetVetsSelectList();
-            model.AnimalsSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
+            model.AnimalsSelectList = _animalRepository.GetAnimalsSelectList();
             model.OwnersSelectList = await _accountsRepository.GetOwnersSelectList();
 
             return model;
@@ -144,7 +138,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
         public IQueryable<VisitIndexViewModel> GetIndexViewModel()
         {
-            return base.GetAllNotDeleted().Select(i => new VisitIndexViewModel
+            return base.GetAllNotDeleted().Include(x => x.Animal).Include(x => x.Doctor).Include(x => x.SummaryVisit).Select(i => new VisitIndexViewModel
             {
                 Id = i.Id,
                 Active = i.Active,

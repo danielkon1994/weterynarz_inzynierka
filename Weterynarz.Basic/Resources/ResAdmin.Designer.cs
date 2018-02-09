@@ -628,6 +628,33 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas dodawania podsumowania.
+        /// </summary>
+        public static string summaryVisit_errorAddSummary {
+            get {
+                return ResourceManager.GetString("summaryVisit_errorAddSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie znaleziono podsumowania wizyty.
+        /// </summary>
+        public static string summaryVisit_errorNotFoundSummary {
+            get {
+                return ResourceManager.GetString("summaryVisit_errorNotFoundSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Podsumowanie zostało dodane.
+        /// </summary>
+        public static string summaryVisit_successAddSummary {
+            get {
+                return ResourceManager.GetString("summaryVisit_successAddSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opcje.
         /// </summary>
         public static string text_options {
@@ -795,6 +822,87 @@ namespace Weterynarz.Basic.Resources {
         public static string usersManageViewModel_zipCode {
             get {
                 return ResourceManager.GetString("usersManageViewModel_zipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas usuwania wizyty.
+        /// </summary>
+        public static string visit_errorDeleteVisit {
+            get {
+                return ResourceManager.GetString("visit_errorDeleteVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas edycji wizyty.
+        /// </summary>
+        public static string visit_errorEditVisit {
+            get {
+                return ResourceManager.GetString("visit_errorEditVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas zatwierdzania wizyty.
+        /// </summary>
+        public static string visit_errorVisitApproved {
+            get {
+                return ResourceManager.GetString("visit_errorVisitApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wizyta została już wcześniej zatwierdzona.
+        /// </summary>
+        public static string visit_errorVisitEarlyApproved {
+            get {
+                return ResourceManager.GetString("visit_errorVisitEarlyApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie znaleziono wizyty.
+        /// </summary>
+        public static string visit_errorVisitNotFound {
+            get {
+                return ResourceManager.GetString("visit_errorVisitNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wizyta została dodana.
+        /// </summary>
+        public static string visit_successAddVisit {
+            get {
+                return ResourceManager.GetString("visit_successAddVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pomyślnie usunięto wizytę.
+        /// </summary>
+        public static string visit_successDeleteVisit {
+            get {
+                return ResourceManager.GetString("visit_successDeleteVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pomyślnie zapisano wizytę.
+        /// </summary>
+        public static string visit_successSaveVisit {
+            get {
+                return ResourceManager.GetString("visit_successSaveVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Zatwierdzono wizytę.
+        /// </summary>
+        public static string visit_successVisitApproved {
+            get {
+                return ResourceManager.GetString("visit_successVisitApproved", resourceCulture);
             }
         }
         

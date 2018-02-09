@@ -67,7 +67,7 @@
                                                     }
                                                     @if(item.SummaryId != null)
                                                     { 
-                                                        <a href="@Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, id = item.SummaryId})" class="dropdown-item">Pokaż podsumowanie wizyty</a>
+                                                        <a href="@Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Pokaż podsumowanie wizyty</a>
                                                     }
                                                     else
                                                     {
