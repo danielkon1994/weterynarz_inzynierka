@@ -11,7 +11,8 @@ namespace Weterynarz.Domain.EntitiesDb
     {
         [Required]
         public int VisitId { get; set; }
-        public Visit Visit { get; set; }
+        [ForeignKey("VisitId")]
+        public virtual Visit Visit { get; set; }
 
         public string Drugs { get; set; }
 

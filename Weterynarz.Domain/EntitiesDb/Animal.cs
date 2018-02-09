@@ -26,15 +26,19 @@ namespace Weterynarz.Domain.EntitiesDb
         public string AnimalDesc { get; set; }
 
         [Required]
-        public AnimalType AnimalType { get; set; }
+        public int AnimalTypeId { get; set; }
+        [ForeignKey("AnimalTypeId")]
+        public virtual AnimalType AnimalType { get; set; }
 
         [Required]
-        public ApplicationUser Owner { get; set; }
+        public string OwnerId { get; set; }
+        [ForeignKey("OwnerId")]
+        public virtual ApplicationUser Owner { get; set; }
 
-        public ICollection<AnimalDisease> AnimalDiseases { get; set; }
+        public virtual ICollection<AnimalDisease> AnimalDiseases { get; set; }
 
-        public ICollection<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
+        public virtual ICollection<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
 
-        public ICollection<Visit> Visits { get; set; }
+        public virtual ICollection<Visit> Visits { get; set; }
     }
 }

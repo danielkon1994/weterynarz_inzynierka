@@ -8,6 +8,7 @@ using ReflectionIT.Mvc.Paging;
 using Weterynarz.Domain.ViewModels.Doctor;
 using Weterynarz.Web.Models.NotifyMessage;
 using Microsoft.Extensions.Logging;
+using Weterynarz.Basic.Resources;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -26,14 +27,14 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if(string.IsNullOrEmpty(doctorId))
             {
-                base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorDoctorNotFound, MessageStatus.error);
                 return new EmptyResult();
             }
 
             DoctorShowGraphicViewModel model = _doctorGraphicsRepository.GetDoctorGraphicToShowViewModel(doctorId);
             if(model == null)
             {
-                base.NotifyMessage("Nie udało się pobrać grafiku lekarza", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorGraphicNotFound, MessageStatus.error);
                 return new EmptyResult();
             }
 
@@ -44,7 +45,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(doctorId))
             {
-                base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorDoctorNotFound, MessageStatus.error);
                 return RedirectToAction("ListDoctors", "Users");
             }
 
@@ -60,7 +61,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(doctorId))
             {
-                base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorDoctorNotFound, MessageStatus.error);
                 return RedirectToAction("ListDoctors", "Users");
             }
 
@@ -83,7 +84,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     Message message = new Message
                     {
-                        OptionalText = "Grafik został dodany",
+                        OptionalText = ResAdmin.doctorGraphic_successAddGraphic,
                         Text = "Jeeessstt",
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
@@ -93,8 +94,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Wystąpił problem z dodaniem grafiku lekarza");
-                    base.NotifyMessage("Wystąpił problem z dodaniem grafiku lekarza", "Upppsss !", MessageStatus.error);
+                    _logger.LogError(ex, ResAdmin.doctorGraphic_errorAddGraphic);
+                    base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorAddGraphic, MessageStatus.error);
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
                 }
             }
@@ -106,7 +107,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             if (string.IsNullOrEmpty(doctorId))
             {
-                base.NotifyMessage("Nie wiadomo o jakiego lekarza chodzi", "Upppsss !", MessageStatus.error);
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorDoctorNotFound, MessageStatus.error);
                 return RedirectToAction("ListDoctors", "Users");
             }
 
@@ -127,7 +128,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                     Message message = new Message
                     {
                         Text = "Jeeessttt",
-                        OptionalText = "Grafik został zapisany",
+                        OptionalText = ResAdmin.doctorGraphic_successSaveGraphic,
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
@@ -136,8 +137,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Wystąpił problem z zapisem grafiku lekarza");
-                    base.NotifyMessage("Wystąpił problem z zapisem grafiku lekarza", "Upppsss !", MessageStatus.error);
+                    _logger.LogError(ex, ResAdmin.doctorGraphic_errorSaveGraphic);
+                    base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorSaveGraphic, MessageStatus.error);
                     return RedirectToAction("ShowGraphics", new { doctorId = model.DoctorId });
                 }
             }
@@ -157,7 +158,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 message = new Message
                 {
                     Text = "Sukces !",
-                    OptionalText = "Pomyślnie usunięto grafik",
+                    OptionalText = ResAdmin.doctorGraphic_successDeleteGraphic,
                     MessageStatus = MessageStatus.success
                 };
 
@@ -165,11 +166,11 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Coś poszło nie tak przy usuwaniu grafiki");
+                _logger.LogError(ex, ResAdmin.doctorGraphic_errorDeleteGraphic);
                 message = new Message
                 {
                     Text = "Uppsss !",
-                    OptionalText = "Coś poszło nie tak przy usuwaniu grafiki",
+                    OptionalText = ResAdmin.doctorGraphic_errorDeleteGraphic,
                     MessageStatus = MessageStatus.error
                 };
                 return Json(message);

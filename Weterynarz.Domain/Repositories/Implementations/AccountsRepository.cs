@@ -260,7 +260,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
         public IEnumerable<SelectListItem> GetUsersSelectList()
         {
             List<SelectListItem> usersList = new List<SelectListItem>();
-            usersList.Add(new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
 
             var users = _userManager.Users;
             if (users != null)

@@ -13,12 +13,16 @@ namespace Weterynarz.Domain.EntitiesDb
         public DateTime VisitDate { get; set; }
 
         [Required]
-        public ApplicationUser Doctor { get; set; }
+        public string DoctorId { get; set; }
+        [ForeignKey("DoctorId")]
+        public virtual ApplicationUser Doctor { get; set; }
 
         [Required]
-        public Animal Animal { get; set; }
+        public int AnimalId { get; set; }
+        [ForeignKey("AnimalId")]
+        public virtual Animal Animal { get; set; }
         
-        public SummaryVisit SummaryVisit { get; set; }
+        public virtual SummaryVisit SummaryVisit { get; set; }
         
         public string ReasonVisit { get; set; }
 

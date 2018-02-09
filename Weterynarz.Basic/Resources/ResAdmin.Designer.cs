@@ -79,6 +79,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa użytkownika nie może być pusta.
+        /// </summary>
+        public static string account_errorUserNameIsNull {
+            get {
+                return ResourceManager.GetString("account_errorUserNameIsNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Użytkownik nie istnieje.
         /// </summary>
         public static string account_errorUserNotExists {
@@ -327,6 +336,78 @@ namespace Weterynarz.Basic.Resources {
         public static string diseasesIndex_list {
             get {
                 return ResourceManager.GetString("diseasesIndex_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił problem z dodaniem grafiku lekarza.
+        /// </summary>
+        public static string doctorGraphic_errorAddGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_errorAddGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Coś poszło nie tak przy usuwaniu grafiki.
+        /// </summary>
+        public static string doctorGraphic_errorDeleteGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_errorDeleteGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie wiadomo o jakiego lekarza chodzi.
+        /// </summary>
+        public static string doctorGraphic_errorDoctorNotFound {
+            get {
+                return ResourceManager.GetString("doctorGraphic_errorDoctorNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie udało się pobrać grafiku lekarza.
+        /// </summary>
+        public static string doctorGraphic_errorGraphicNotFound {
+            get {
+                return ResourceManager.GetString("doctorGraphic_errorGraphicNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił problem z zapisem grafiku lekarza.
+        /// </summary>
+        public static string doctorGraphic_errorSaveGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_errorSaveGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Grafik został dodany.
+        /// </summary>
+        public static string doctorGraphic_successAddGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_successAddGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pomyślnie usunięto grafik.
+        /// </summary>
+        public static string doctorGraphic_successDeleteGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_successDeleteGraphic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Grafik został zapisany.
+        /// </summary>
+        public static string doctorGraphic_successSaveGraphic {
+            get {
+                return ResourceManager.GetString("doctorGraphic_successSaveGraphic", resourceCulture);
             }
         }
         

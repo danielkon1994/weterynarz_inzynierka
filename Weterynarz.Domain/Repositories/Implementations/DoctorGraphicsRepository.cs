@@ -59,8 +59,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             await _db.Graphics.AddAsync(graphic);
 
-            var doctor = await _accountsRepository.GetByIdFromUserManager(model.DoctorId);
-
             DoctorGraphic doctorGraphic = new DoctorGraphic()
             {
                 CreationDate = DateTime.Now,
@@ -68,7 +66,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 AvailableFrom = model.AvailableFrom,
                 AvailableTo = model.AvailableTo,
                 Graphic = graphic,
-                Doctor = doctor
+                DoctorId = model.DoctorId
             };
 
             await base.InsertAsync(doctorGraphic);
@@ -207,7 +205,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private DoctorGraphic getActualGraphic(string doctorId)
         {
             DateTime now = DateTime.Now;
-            return _db.DoctorGraphics.Include("Graphic").Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).OrderByDescending(i => i.CreationDate).FirstOrDefault(i => i.Doctor.Id == doctorId);
+            return _db.DoctorGraphics.Include(x => x.Graphic).Where(i => i.Active && !i.Deleted && (i.AvailableTo >= now && i.AvailableFrom <= now)).OrderByDescending(i => i.CreationDate).FirstOrDefault(i => i.Doctor.Id == doctorId);
         }
     }
 }

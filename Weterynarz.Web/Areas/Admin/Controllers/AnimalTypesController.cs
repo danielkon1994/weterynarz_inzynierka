@@ -51,8 +51,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                 Message message = new Message
                 {
-                    OptionalText = "Jeeessttt",
-                    Text = "Typ został dodany",
+                    Text = "Jeeessttt",
+                    OptionalText = "Typ został dodany",
                     MessageStatus = Models.NotifyMessage.MessageStatus.success
                 };
                 base.NotifyMessage(message);

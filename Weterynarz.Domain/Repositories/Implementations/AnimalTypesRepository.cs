@@ -31,8 +31,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Value = i.Id.ToString()
             }).ToList();
 
-            list.Insert(0, new SelectListItem { Value = "", Text = "-- wybierz --", Disabled = true, Selected = true });
-
             return list.AsEnumerable();
         }
 

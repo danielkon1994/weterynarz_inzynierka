@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Weterynarz.Domain.EntitiesDb
@@ -7,8 +8,11 @@ namespace Weterynarz.Domain.EntitiesDb
     public class AnimalMedicalExamination
     {
         public int AnimalId { get; set; }
-        public Animal Animal { get; set; }
+        [ForeignKey("AnimalId")]
+        public virtual Animal Animal { get; set; }
+
         public int MedicalExaminationId { get; set; }
-        public MedicalExaminationType MedicalExamination { get; set; }
+        [ForeignKey("MedicalExaminationId")]
+        public virtual MedicalExaminationType MedicalExamination { get; set; }
     }
 }

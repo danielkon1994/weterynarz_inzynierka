@@ -19,13 +19,13 @@ namespace Weterynarz.Domain.EntitiesDb
 
         public string Surname { get; set; }
 
-        public ICollection<Animal> Animals { get; set; }
+        public virtual ICollection<Animal> Animals { get; set; }
 
-        public ICollection<IdentityUserRole<string>> Roles { get; set; }
+        public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 
-        public ICollection<DoctorGraphic> DoctorGraphics { get; set; }
+        public virtual ICollection<DoctorGraphic> DoctorGraphics { get; set; }
 
-        public ICollection<Visit> Visits { get; set; }
+        public virtual ICollection<Visit> Visits { get; set; }
 
         //Additional data
         public string DoctorSpecialization { get; set; }

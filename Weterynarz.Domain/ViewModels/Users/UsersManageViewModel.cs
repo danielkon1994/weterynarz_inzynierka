@@ -9,7 +9,6 @@ namespace Weterynarz.Domain.ViewModels.Users
 {
     public class UsersManageViewModel : BaseViewModel<string>
     {
-        [Required]
         [Display(Name = "usersManageViewModel_userName", ResourceType = typeof(ResAdmin))]
         public string UserName { get; set; }
 

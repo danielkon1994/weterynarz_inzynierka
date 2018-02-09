@@ -18,6 +18,6 @@ namespace Weterynarz.Domain.EntitiesDb
 
         public string Description { get; set; }
 
-        public ICollection<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
+        public virtual ICollection<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
     }
 }

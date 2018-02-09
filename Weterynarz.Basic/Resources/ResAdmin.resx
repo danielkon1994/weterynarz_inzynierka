@@ -378,4 +378,31 @@
   <data name="visitRepo_animalNotFoundException" xml:space="preserve">
     <value>Do tej wizyty nie jest przypisane żadne zwierzę</value>
   </data>
+  <data name="account_errorUserNameIsNull" xml:space="preserve">
+    <value>Nazwa użytkownika nie może być pusta</value>
+  </data>
+  <data name="doctorGraphic_errorAddGraphic" xml:space="preserve">
+    <value>Wystąpił problem z dodaniem grafiku lekarza</value>
+  </data>
+  <data name="doctorGraphic_errorDeleteGraphic" xml:space="preserve">
+    <value>Coś poszło nie tak przy usuwaniu grafiki</value>
+  </data>
+  <data name="doctorGraphic_errorDoctorNotFound" xml:space="preserve">
+    <value>Nie wiadomo o jakiego lekarza chodzi</value>
+  </data>
+  <data name="doctorGraphic_errorGraphicNotFound" xml:space="preserve">
+    <value>Nie udało się pobrać grafiku lekarza</value>
+  </data>
+  <data name="doctorGraphic_errorSaveGraphic" xml:space="preserve">
+    <value>Wystąpił problem z zapisem grafiku lekarza</value>
+  </data>
+  <data name="doctorGraphic_successAddGraphic" xml:space="preserve">
+    <value>Grafik został dodany</value>
+  </data>
+  <data name="doctorGraphic_successDeleteGraphic" xml:space="preserve">
+    <value>Pomyślnie usunięto grafik</value>
+  </data>
+  <data name="doctorGraphic_successSaveGraphic" xml:space="preserve">
+    <value>Grafik został zapisany</value>
+  </data>
 </root>

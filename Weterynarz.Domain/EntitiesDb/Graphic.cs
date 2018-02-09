@@ -25,6 +25,7 @@ namespace Weterynarz.Domain.EntitiesDb
 
         [Required]
         public int DoctorGraphicId { get; set; }
-        public DoctorGraphic DoctorGraphic { get; set; }
+        [ForeignKey("DoctorGraphicId")]
+        public virtual DoctorGraphic DoctorGraphic { get; set; }
     }
 }

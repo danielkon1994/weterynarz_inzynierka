@@ -74,7 +74,15 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(UsersManageViewModel model, string returnUrl = null)
         {
-            await checkUsersManageViewModelAsync(model);
+            if(string.IsNullOrEmpty(model.UserName))
+            {
+                ModelState.AddModelError("", ResAdmin.account_errorUserNameIsNull);
+            }
+
+            if(ModelState.IsValid)
+            { 
+                await checkUsersManageViewModelAsync(model);
+            }
 
             if (ModelState.IsValid)
             {
@@ -214,7 +222,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UsersManageViewModel model)
         {
-            await checkUsersManageViewModelAsync(model);
+            await checkUsersManageViewModelAsync(model, true);
 
             if (ModelState.IsValid)
             {
@@ -429,14 +437,17 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        private async Task checkUsersManageViewModelAsync(UsersManageViewModel model)
+        private async Task checkUsersManageViewModelAsync(UsersManageViewModel model, bool isEditMode = false)
         {
-            var userNameExists = await _userManager.FindByNameAsync(model.UserName);
-            if (userNameExists != null)
-            {
-                if (userNameExists.Id != model.Id)
+            if(!isEditMode)
+            { 
+                var userNameExists = await _userManager.FindByNameAsync(model.UserName);
+                if (userNameExists != null)
                 {
-                    ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
+                    if (userNameExists.Id != model.Id)
+                    {
+                        ModelState.AddModelError("", "Użytkownik o takiej nazwie użytkownika już istnieje");
+                    }
                 }
             }
 
