@@ -252,9 +252,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 UserName = model.UserName
             };
 
-            client.PasswordHash = Crypto.HashPassword(model.Password);
-
-            await this.InsertAcync(client);
+            var result = await _userManager.CreateAsync(client, model.Password);
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(client, UserRoles.Client);
+            }
 
             return client;
         }

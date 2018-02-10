@@ -39,7 +39,7 @@
 
                                     <div class="form-group">
                                         <label asp-for="VisitDate"></label>
-                                        <input type="text" class="form-control" id="VisitDate" name="VisitDate" />
+                                        <input type="text" class="form-control" id="VisitDate" name="VisitDate" value="@(Model.VisitDate == DateTime.MinValue ? "" : Model.VisitDate.ToString(FormatsDate.Date))" />
                                         <span asp-validation-for="VisitDate" class="help-block text-danger"></span>
                                     </div>
                                     <div class="form-group">
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label asp-for="AnimalBirthdate"></label>
-                                            <input type="text" class="form-control" id="AnimalBirthdate" name="AnimalBirthdate" />
+                                            <input type="text" class="form-control" id="AnimalBirthdate" name="AnimalBirthdate" value="@(Model.AnimalBirthdate == DateTime.MinValue ? "" : Model.AnimalBirthdate.ToString(FormatsDate.DateWithoutTime))" />
                                             <span asp-validation-for="AnimalBirthdate" class="help-block text-danger"></span>
                                         </div>
                                     }
@@ -144,8 +144,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary btn-block">Umów wizytę</button>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-block p-3">Umów wizytę</button>
                                 </div>
                             </div>
                         </form>

@@ -135,8 +135,7 @@ namespace Weterynarz.Domain.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<string>("AnimalDesc")
-                        .IsRequired();
+                    b.Property<string>("AnimalDesc");
 
                     b.Property<int>("AnimalTypeId");
 

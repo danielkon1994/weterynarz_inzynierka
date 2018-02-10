@@ -11,6 +11,9 @@ using Weterynarz.Domain.ViewModels.Visit;
 using Microsoft.Extensions.Logging;
 using Weterynarz.Domain.ViewModels.SummaryVisit;
 using Weterynarz.Basic.Resources;
+using Microsoft.AspNet.Identity;
+using Weterynarz.Basic.Const;
+using Weterynarz.Web.Services;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -19,19 +22,23 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         private IVisitRepository _visitsRepository;
         private ISummaryVisitRepository _summaryVisitRepository;
         private ILogger<VisitsController> _logger;
+        private IEmailSender _emailSender;
 
         public VisitsController(IVisitRepository visitsRepository, ILogger<VisitsController> logger,
-            ISummaryVisitRepository summaryVisitRepository)
+            ISummaryVisitRepository summaryVisitRepository, IEmailSender emailSender)
         {
             this._visitsRepository = visitsRepository;
             _summaryVisitRepository = summaryVisitRepository;
             _logger = logger;
+            _emailSender = emailSender;
         }
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var listElements = _visitsRepository.GetIndexViewModel().OrderBy(a => a.VisitDate);
-            var model = await PagingList.CreateAsync(listElements, 20, page);
+            var userId = User.Identity.GetUserId();
+            var listElements = await _visitsRepository.GetIndexViewModel(userId);
+            var listVisit = listElements.OrderBy(a => a.VisitDate);
+            var model = await PagingList.CreateAsync(listVisit, 20, page);
 
             return View(model);
         }
@@ -208,6 +215,25 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
+
+                    try
+                    {
+                        string summaryVisitUrl = Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = model.VisitId }, Request.Path);
+                        var visit = _visitsRepository.GetById(model.VisitId, new string[] { "Animal.Owner" });
+
+                        string userEmail = string.Empty;
+                        if (visit != null)
+                        { 
+                            userEmail = visit.Animal.Owner.Email;
+                        }
+
+                        await _emailSender.SendEmailAsync(userEmail, "Dodano podsumowanie wizyty",
+                           $"Dodano podsumowanie wizyty. Aby zobaczyć naciśnij: <a href='{summaryVisitUrl}'>Link</a>");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, ResAdmin.visitSummary_errorSendEmail);
+                    }
                 }
                 catch (Exception ex)
                 {

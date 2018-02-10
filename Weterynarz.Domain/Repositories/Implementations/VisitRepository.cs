@@ -10,6 +10,8 @@ using System.Linq;
 using System.Data.Entity;
 using Weterynarz.Domain.ViewModels.Visit;
 using CryptoHelper;
+using Weterynarz.Basic.Const;
+using Microsoft.AspNetCore.Identity;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -21,13 +23,15 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IAnimalTypesRepository _animalTypesRepository;
         private IMedicalExaminationTypesRepository _medicalExaminationRepository;
         private IDiseasesRepository _diseasesRepository;
+        private UserManager<ApplicationUser> _userManager;
 
         public VisitRepository(ApplicationDbContext db, IAnimalRepository animalRepository,
             IUsersRepository userRepository,
             IAccountsRepository accountsRepository,
             IAnimalTypesRepository animalTypesRepository,
             IMedicalExaminationTypesRepository medicalExaminationRepository,
-            IDiseasesRepository diseasesRepository) : base(db)
+            IDiseasesRepository diseasesRepository,
+            UserManager<ApplicationUser> userManager) : base(db)
         {
             _animalRepository = animalRepository;
             _userRepository = userRepository;
@@ -35,6 +39,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
             _animalTypesRepository = animalTypesRepository;
             _medicalExaminationRepository = medicalExaminationRepository;
             _diseasesRepository = diseasesRepository;
+            _userManager = userManager;
         }
 
         public async Task Approved(Visit visit)
@@ -136,9 +141,26 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public IQueryable<VisitIndexViewModel> GetIndexViewModel()
+        public async Task<IQueryable<VisitIndexViewModel>> GetIndexViewModel(string userId)
         {
-            return base.GetAllNotDeleted().Include(x => x.Animal).Include(x => x.Doctor).Include(x => x.SummaryVisit).Select(i => new VisitIndexViewModel
+            var listQueryable = base.GetAllNotDeleted().Include(x => x.Animal.Owner).Include(x => x.Doctor).Include(x => x.SummaryVisit);
+
+            var user = _accountsRepository.GetById(userId);
+            if(user != null)
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+                List<string> userRolesList = userRoles.ToList();
+                if (userRolesList.Contains(UserRoles.Client) && (!userRolesList.Contains(UserRoles.Admin) || !userRolesList.Contains(UserRoles.Worker)))
+                {
+                    listQueryable = listQueryable.Where(x => x.Animal.OwnerId == user.Id);
+                }
+                if (userRolesList.Contains(UserRoles.Doctor) && (!userRolesList.Contains(UserRoles.Admin) || !userRolesList.Contains(UserRoles.Worker)))
+                {
+                    listQueryable = listQueryable.Where(x => x.DoctorId == user.Id);
+                }
+            }           
+            
+            return listQueryable.Select(i => new VisitIndexViewModel
             {
                 Id = i.Id,
                 Active = i.Active,
@@ -194,25 +216,27 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public async Task InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        public async Task<Visit> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
         {
-            ApplicationUser doctor = await _accountsRepository.GetByIdFromUserManager(model.VetId);
-            Animal animal = await _animalRepository.InsertFromVisitFormAsync(model);
+            ApplicationUser owner = await _accountsRepository.InsertFromVisitFormAsync(model);
+            Animal animal = await _animalRepository.InsertFromVisitFormAsync(model, owner);
 
             // create new visit
             Visit visit = new Visit()
             {
                 Animal = animal,
                 Description = model.ReasonVisit,
-                Doctor = doctor,
+                DoctorId = model.VetId,
                 Active = true,
                 Approved = false,
                 CreationDate = DateTime.Now,
                 VisitDate = model.VisitDate, 
-                ReasonVisit = model.ReasonVisit
+                ReasonVisit = model.ReasonVisit,
             };
 
             await base.InsertAsync(visit);
+
+            return visit;
         }
     }
 }

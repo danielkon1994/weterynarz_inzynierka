@@ -135,8 +135,17 @@
   <data name="visitAnimalIdNullError" xml:space="preserve">
     <value>Należy wybrać zwierzę</value>
   </data>
+  <data name="visitCannotSaveVisitError" xml:space="preserve">
+    <value>Nie udało się zapisać wizyty</value>
+  </data>
   <data name="visitPasswordEmptyError" xml:space="preserve">
     <value>Musisz podać hasło do założenia konta</value>
+  </data>
+  <data name="visitSaveVisitSuccess" xml:space="preserve">
+    <value>Wizyta została zapisana</value>
+  </data>
+  <data name="visitSendEmailError" xml:space="preserve">
+    <value>Wystąpił błąd podczas wysyłania wiadomości z potwierdzeniem dodania wizyty</value>
   </data>
   <data name="visitWithDateExistsError" xml:space="preserve">
     <value>Data wizyty jest już zajęta</value>

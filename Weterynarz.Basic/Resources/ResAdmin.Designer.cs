@@ -943,6 +943,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas wysyłania wiadomości e-mail z podsumowaniem wizyty.
+        /// </summary>
+        public static string visitSummary_errorSendEmail {
+            get {
+                return ResourceManager.GetString("visitSummary_errorSendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj podsumowanie.
         /// </summary>
         public static string visitSummaryCreateView_headerForm {

@@ -8,6 +8,7 @@ using Weterynarz.Domain.ViewModels.Animal;
 using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNet.Identity;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -24,8 +25,10 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int page = 1)
         {
-            var listElements = _animalsRepository.GetIndexViewModel().OrderBy(a => a.Name);
-            var model = await PagingList.CreateAsync(listElements, 20, page);
+            var userId = User.Identity.GetUserId();
+            var listElements = await _animalsRepository.GetIndexViewModel(userId);
+            var listAnimals = listElements.OrderBy(a => a.Name);
+            var model = await PagingList.CreateAsync(listAnimals, 20, page);
 
             return View(model);
         }

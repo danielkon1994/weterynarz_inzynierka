@@ -441,4 +441,7 @@
   <data name="visit_successVisitApproved" xml:space="preserve">
     <value>Zatwierdzono wizytę</value>
   </data>
+  <data name="visitSummary_errorSendEmail" xml:space="preserve">
+    <value>Wystąpił błąd podczas wysyłania wiadomości e-mail z podsumowaniem wizyty</value>
+  </data>
 </root>

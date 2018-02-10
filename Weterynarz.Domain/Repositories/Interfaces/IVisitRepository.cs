@@ -14,9 +14,9 @@ namespace Weterynarz.Domain.Repositories.Interfaces
         bool CheckVisitExists(DateTime visitDate);
         Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(ApplicationUser user);
         Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(VisitMakeVisitViewModel model);
-        Task InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
+        Task<Visit> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
         Task Approved(Visit visit);
-        IQueryable<VisitIndexViewModel> GetIndexViewModel();
+        Task<IQueryable<VisitIndexViewModel>> GetIndexViewModel(string userId);
         Task<VisitManageViewModel> GetCreateNewViewModel(VisitManageViewModel model = null);
         Task<VisitManageViewModel> GetEditViewModel(int id);
         Task CreateNew(VisitManageViewModel model);

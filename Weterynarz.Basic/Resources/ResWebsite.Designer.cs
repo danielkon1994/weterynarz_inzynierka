@@ -115,11 +115,38 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie udało się zapisać wizyty.
+        /// </summary>
+        public static string visitCannotSaveVisitError {
+            get {
+                return ResourceManager.GetString("visitCannotSaveVisitError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Musisz podać hasło do założenia konta.
         /// </summary>
         public static string visitPasswordEmptyError {
             get {
                 return ResourceManager.GetString("visitPasswordEmptyError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wizyta została zapisana.
+        /// </summary>
+        public static string visitSaveVisitSuccess {
+            get {
+                return ResourceManager.GetString("visitSaveVisitSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas wysyłania wiadomości z potwierdzeniem dodania wizyty.
+        /// </summary>
+        public static string visitSendEmailError {
+            get {
+                return ResourceManager.GetString("visitSendEmailError", resourceCulture);
             }
         }
         

@@ -61,20 +61,26 @@
                                                     Menu
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    @if(!item.Approved)
+                                                    @if(!item.Approved && !User.IsInRole(UserRoles.Client))
                                                     { 
                                                         <a href="@Url.Action("Approved", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Zatwierdź wizytę</a>
                                                     }
-                                                    @if(item.SummaryId != null)
+                                                    @if(User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Doctor))
                                                     { 
-                                                        <a href="@Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Pokaż podsumowanie wizyty</a>
+                                                        if(item.SummaryId != null)
+                                                        { 
+                                                            <a href="@Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Pokaż podsumowanie wizyty</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="@Url.Action("CreateSummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Dodaj podsumowanie wizyty</a>
+                                                        }
                                                     }
-                                                    else
-                                                    {
-                                                        <a href="@Url.Action("CreateSummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Dodaj podsumowanie wizyty</a>
+                                                    @if(!User.IsInRole(UserRoles.Doctor))
+                                                    { 
+                                                        <a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Edytuj</a>
+                                                        <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="dropdown-item">Usuń</a>
                                                     }
-                                                    <a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Edytuj</a>
-                                                    <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="dropdown-item">Usuń</a>
                                                 </div>
                                             </div>
                                         </td>

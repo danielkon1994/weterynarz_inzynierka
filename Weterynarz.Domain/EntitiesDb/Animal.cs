@@ -22,7 +22,6 @@ namespace Weterynarz.Domain.EntitiesDb
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
-        [Required]
         public string AnimalDesc { get; set; }
 
         [Required]

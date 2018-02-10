@@ -14,8 +14,8 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     {
         IEnumerable<SelectListItem> GetUserAnimalsSelectList(string userId);
         IEnumerable<SelectListItem> GetAnimalsSelectList();
-        Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model);
-        IQueryable<AnimalIndexViewModel> GetIndexViewModel();
+        Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model, ApplicationUser owner);
+        Task<IQueryable<AnimalIndexViewModel>> GetIndexViewModel(string userId);
         AnimalManageViewModel GetAllSelectListProperties(AnimalManageViewModel model);
         AnimalManageViewModel GetCreateNewViewModel();
         AnimalManageViewModel GetEditViewModel(int id);

@@ -11,6 +11,8 @@ using Weterynarz.Domain.ViewModels.Visit;
 using Weterynarz.Domain.ViewModels.Animal;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Weterynarz.Basic.Const;
+using Microsoft.AspNetCore.Identity;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -19,13 +21,16 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IAccountsRepository _accountsRepository;
         private IAnimalTypesRepository _animalTypesRepository;
         private IDiseasesRepository _diseasesRepository;
+        private UserManager<ApplicationUser> _userManager;
 
         public AnimalRepository(ApplicationDbContext db, IAccountsRepository accountsRepository,
-            IAnimalTypesRepository animalTypesRepository, IDiseasesRepository diseasesRepository) : base(db)
+            IAnimalTypesRepository animalTypesRepository, IDiseasesRepository diseasesRepository,
+            UserManager<ApplicationUser> userManager) : base(db)
         {
             _accountsRepository = accountsRepository;
             _animalTypesRepository = animalTypesRepository;
             _diseasesRepository = diseasesRepository;
+            _userManager = userManager;
         }
 
         public Animal GetById(int? id)
@@ -154,9 +159,21 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public IQueryable<AnimalIndexViewModel> GetIndexViewModel()
+        public async Task<IQueryable<AnimalIndexViewModel>> GetIndexViewModel(string userId)
         {
-            return base.GetAllNotDeleted().Select(i => new AnimalIndexViewModel
+            var listQueryable = base.GetAllNotDeleted();
+            var user = _accountsRepository.GetById(userId);
+            if(user != null)
+            {
+                var userRoles = await _userManager.GetRolesAsync(user);
+                List<string> userRolesList = userRoles.ToList();
+                if (userRolesList.Contains(UserRoles.Client))
+                {
+                    listQueryable = listQueryable.Where(x => x.OwnerId == user.Id);
+                }
+            }
+
+            return listQueryable.Select(i => new AnimalIndexViewModel
             {
                 Id = i.Id,
                 Active = i.Active,
@@ -201,14 +218,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return _db.Animals.Include(x=>x.AnimalType).Include(x=>x.Owner).Include(x => x.Visits).Include(x => x.AnimalMedicalExaminations).Include(x => x.AnimalDiseases).Where(i => i.Active && !i.Deleted && i.Id == id).FirstOrDefault();
         }
 
-        public async Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model)
+        public async Task<Animal> InsertFromVisitFormAsync(VisitMakeVisitViewModel model, ApplicationUser owner)
         {
             if(model.AnimalId != null)
             {
                 return GetById(model.AnimalId);
             }
-
-            var owner = await _accountsRepository.GetByIdFromUserManager(model.UserId);
+            
             var animalType = _animalTypesRepository.GetById(model.AnimalTypeId);
 
             Animal animal = new Animal()
