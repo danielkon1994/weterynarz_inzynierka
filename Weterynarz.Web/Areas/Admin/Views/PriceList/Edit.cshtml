@@ -1,0 +1,128 @@
+﻿@using Weterynarz.Basic.Enum
+@namespace Weterynarz.Domain.ViewModels.PriceList
+@model PriceListManageViewModel
+@{
+    ViewData["Title"] = "Edytuj cene";
+}
+
+@section breadcrumb {
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index" asp-area="@AreaNames.Admin">Strona główna</a></li>
+        <li class="breadcrumb-item"><a asp-controller="PriceList" asp-action="Index" asp-area="@AreaNames.Admin">Cennik</a></li>
+        <li class="breadcrumb-item active">Edytuj</li>
+    </ol>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <form asp-controller="PriceList" asp-action="Create" method="post">
+                <div class="card-header">
+                    <strong>@ResAdmin.priceListEditView_headerForm</strong>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input type="text" class="form-control" asp-for="Name" placeholder="Wprowadź nazwę">
+                                <span asp-validation-for="Name" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Type"></label>
+                                <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<PriceListEntryType>()"></select>
+                                <span asp-validation-for="Type" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row hidden">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="SelectedMedicalExaminationId"></label>
+                                <select asp-for="SelectedMedicalExaminationId" class="form-control" asp-items="Model.MedicalExaminationSelectList">
+                                    <option value="">-- wybierz --</option>
+                                </select>
+                                <span asp-validation-for="SelectedMedicalExaminationId" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Price"></label>
+                                <input type="text" class="form-control" asp-for="Price" placeholder="Wprowadź cenę">
+                                <span asp-validation-for="Price" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" asp-for="Active">
+                                    Czy aktywna?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.row-->
+
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Zapisz</button>
+                    <a asp-controller="Diseases" asp-action="Index" asp-area="@AreaNames.Admin" class="btn btn-sm btn-danger pull-right"><i class="fa fa-ban"></i> Anuluj</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            checkType($('#Type'));
+            $('#Type').change(function () {
+                checkType($(this));
+            });
+
+            function checkType(input)
+            {
+                var value = input.val();
+                if (value == 2)
+                {
+                    $('#SelectedMedicalExaminationId').closest('.row').removeClass('hidden');
+                }
+                else
+                {
+                    if (!$('#SelectedMedicalExaminationId').closest('.row').hasClass('hidden'))
+                    {
+                        $('#SelectedMedicalExaminationId').closest('.row').addClass('hidden');
+                    }
+
+                    $('#SelectedMedicalExaminationId').val('');
+                }
+            }
+        });
+    </script>
+}
+

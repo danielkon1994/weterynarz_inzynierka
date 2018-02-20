@@ -502,6 +502,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cennik.
+        /// </summary>
+        public static string leftNavbar_priceList {
+            get {
+                return ResourceManager.GetString("leftNavbar_priceList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ustawienia.
         /// </summary>
         public static string leftNavbar_settings {
@@ -606,6 +615,123 @@ namespace Weterynarz.Basic.Resources {
         public static string medicalExaminationTypesIndex_listTypes {
             get {
                 return ResourceManager.GetString("medicalExaminationTypesIndex_listTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodanie ceny.
+        /// </summary>
+        public static string priceListCreateView_headerForm {
+            get {
+                return ResourceManager.GetString("priceListCreateView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edycja ceny.
+        /// </summary>
+        public static string priceListEditView_headerForm {
+            get {
+                return ResourceManager.GetString("priceListEditView_headerForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Badanie.
+        /// </summary>
+        public static string priceListEntryType_examination {
+            get {
+                return ResourceManager.GetString("priceListEntryType_examination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ogólne.
+        /// </summary>
+        public static string priceListEntryType_overall {
+            get {
+                return ResourceManager.GetString("priceListEntryType_overall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wizyta.
+        /// </summary>
+        public static string priceListEntryType_visit {
+            get {
+                return ResourceManager.GetString("priceListEntryType_visit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Lista cen.
+        /// </summary>
+        public static string priceListIndex_list {
+            get {
+                return ResourceManager.GetString("priceListIndex_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pole badanie jest wymagane.
+        /// </summary>
+        public static string priceListManageViewMode_errorExaminationId {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_errorExaminationId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pole nazwa jest wymagane.
+        /// </summary>
+        public static string priceListManageViewMode_errorName {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_errorName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pole cena jest wymagane.
+        /// </summary>
+        public static string priceListManageViewMode_errorPrice {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_errorPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Badanie.
+        /// </summary>
+        public static string priceListManageViewMode_medicalExamination {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_medicalExamination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nazwa.
+        /// </summary>
+        public static string priceListManageViewMode_name {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cena.
+        /// </summary>
+        public static string priceListManageViewMode_price {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typ.
+        /// </summary>
+        public static string priceListManageViewMode_type {
+            get {
+                return ResourceManager.GetString("priceListManageViewMode_type", resourceCulture);
             }
         }
         

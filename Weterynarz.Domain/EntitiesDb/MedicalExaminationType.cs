@@ -19,5 +19,7 @@ namespace Weterynarz.Domain.EntitiesDb
         public string Description { get; set; }
 
         public virtual ICollection<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
+
+        public virtual PriceList Price { get; set; }
     }
 }

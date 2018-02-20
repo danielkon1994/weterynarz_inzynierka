@@ -444,4 +444,46 @@
   <data name="visitSummary_errorSendEmail" xml:space="preserve">
     <value>Wystąpił błąd podczas wysyłania wiadomości e-mail z podsumowaniem wizyty</value>
   </data>
+  <data name="priceListEntryType_examination" xml:space="preserve">
+    <value>Badanie</value>
+  </data>
+  <data name="priceListEntryType_overall" xml:space="preserve">
+    <value>Ogólne</value>
+  </data>
+  <data name="priceListEntryType_visit" xml:space="preserve">
+    <value>Wizyta</value>
+  </data>
+  <data name="leftNavbar_priceList" xml:space="preserve">
+    <value>Cennik</value>
+  </data>
+  <data name="priceListCreateView_headerForm" xml:space="preserve">
+    <value>Dodanie ceny</value>
+  </data>
+  <data name="priceListEditView_headerForm" xml:space="preserve">
+    <value>Edycja ceny</value>
+  </data>
+  <data name="priceListIndex_list" xml:space="preserve">
+    <value>Lista cen</value>
+  </data>
+  <data name="priceListManageViewMode_errorExaminationId" xml:space="preserve">
+    <value>Pole badanie jest wymagane</value>
+  </data>
+  <data name="priceListManageViewMode_errorName" xml:space="preserve">
+    <value>Pole nazwa jest wymagane</value>
+  </data>
+  <data name="priceListManageViewMode_errorPrice" xml:space="preserve">
+    <value>Pole cena jest wymagane</value>
+  </data>
+  <data name="priceListManageViewMode_medicalExamination" xml:space="preserve">
+    <value>Badanie</value>
+  </data>
+  <data name="priceListManageViewMode_name" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="priceListManageViewMode_price" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="priceListManageViewMode_type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
 </root>

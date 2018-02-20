@@ -108,6 +108,7 @@ namespace Weterynarz.Domain.ContextDb
         public DbSet<SummaryVisit> SummaryVisits { get; set; }
         public DbSet<AnimalDisease> AnimalDiseases { get; set; }
         public DbSet<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
+        public DbSet<PriceList> PriceLists { get; set; }
         #endregion
     }
 }

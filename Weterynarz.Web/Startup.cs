@@ -70,6 +70,7 @@ namespace Weterynarz.Web
             services.AddScoped<IDoctorGraphicsRepository, DoctorGraphicsRepository>();
             services.AddScoped<IDiseasesRepository, DiseasesRepository>();
             services.AddScoped<ISummaryVisitRepository, SummaryVisitRepository>();
+            services.AddScoped<IPriceListRepository, PriceListRepository>();
 
             // Add application services.
             services.AddScoped<IMemoryCacheService, MemoryCacheService>();
