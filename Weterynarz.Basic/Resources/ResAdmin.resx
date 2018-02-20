@@ -343,7 +343,7 @@
     <value>Adres e-mail został potwierdzony</value>
   </data>
   <data name="user_successRegister" xml:space="preserve">
-    <value>Konto zostało utworzone lecz proszę potwierdzić jeszcze założenie konta</value>
+    <value>Konto zostało utworzone.</value>
   </data>
   <data name="visitSummaryView_headerForm" xml:space="preserve">
     <value>Podsumowanie wizyty</value>
@@ -391,7 +391,7 @@
     <value>Nie wiadomo o jakiego lekarza chodzi</value>
   </data>
   <data name="doctorGraphic_errorGraphicNotFound" xml:space="preserve">
-    <value>Nie udało się pobrać grafiku lekarza</value>
+    <value>Nie odnaleziono grafiku</value>
   </data>
   <data name="doctorGraphic_errorSaveGraphic" xml:space="preserve">
     <value>Wystąpił problem z zapisem grafiku lekarza</value>

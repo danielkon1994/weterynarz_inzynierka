@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.0-rc2" />
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="2.4.0" />
+    <PackageReference Include="Rotativa.AspNetCore" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +34,13 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\Rotativa\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Rotativa\wkhtmltoimage.exe" />
+    <None Include="wwwroot\Rotativa\wkhtmltopdf.exe" />
+    <None Include="wwwroot\Rotativa\wkhtmltox.dll" />
   </ItemGroup>
 
   <ItemGroup>

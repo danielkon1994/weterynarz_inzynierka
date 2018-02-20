@@ -168,11 +168,11 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult SummaryVisit(int visitId)
+        public IActionResult SummaryVisit(int visitId)
         {
             var model = _summaryVisitRepository.GetIndexViewModel(visitId);
             if(model != null)
-            { 
+            {
                 return View(model);
             }
 
@@ -180,7 +180,19 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateSummaryVisit(int visitId)
+        public IActionResult SummaryVisitPdf(int visitId)
+        {
+            var model = _summaryVisitRepository.GetIndexViewModel(visitId);
+            if (model != null)
+            {
+                return new Rotativa.AspNetCore.ViewAsPdf("SummaryVisitPdf", model) { FileName = "test.pdf" };
+            }
+
+            base.NotifyMessage("Upppsss !", ResAdmin.summaryVisit_errorNotFoundSummary, MessageStatus.error);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CreateSummaryVisit(int visitId)
         {
             if(visitId == 0)
             {
@@ -200,7 +212,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateSummaryVisit(SummaryVisitManageViewModel model)
+        public async Task<IActionResult> CreateSummaryVisit(SummaryVisitManageViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -218,7 +230,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     try
                     {
-                        string summaryVisitUrl = Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = model.VisitId }, Request.Path);
+                        string summaryVisitUrl = Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = model.VisitId }, this.HttpContext.Request.Scheme);
                         var visit = _visitsRepository.GetById(model.VisitId, new string[] { "Animal.Owner" });
 
                         string userEmail = string.Empty;

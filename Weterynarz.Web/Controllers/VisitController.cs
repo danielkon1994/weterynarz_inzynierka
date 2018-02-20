@@ -93,7 +93,7 @@ namespace Weterynarz.Web.Controllers
 
                     try
                     {
-                        string visitUrl = Url.Action("Index", "Visits", new { area = AreaNames.Admin}, Request.Path);
+                        string visitUrl = Url.Action("Index", "Visits", new { area = AreaNames.Admin}, this.HttpContext.Request.Path);
                         string userEmail = visit.Animal.Owner.Email;
 
                         await _emailSender.SendEmailAsync(userEmail, "Dodano wizytę",

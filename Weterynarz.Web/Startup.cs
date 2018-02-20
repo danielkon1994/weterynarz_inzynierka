@@ -24,6 +24,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.Mvc;
 using Weterynarz.Web.ModelBinders;
+using Rotativa.AspNetCore;
 
 namespace Weterynarz.Web
 {
@@ -99,6 +100,7 @@ namespace Weterynarz.Web
                 SupportedUICultures = supportedCultures
             });
 
+            RotativaConfiguration.Setup(env);
 
             if (env.IsDevelopment())
             {

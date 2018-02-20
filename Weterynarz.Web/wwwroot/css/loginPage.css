@@ -14,7 +14,8 @@ h1, h2, h3, h4, h5, h6 {
   #loginForm form {
     margin-top: 50px; }
     #loginForm form #loginFormHeader {
-      margin-bottom: 40px; }
+      margin-bottom: 40px;
+      color: white; }
     #loginForm form .form-control {
       padding: 20px; }
     #loginForm form input[type=submit] {

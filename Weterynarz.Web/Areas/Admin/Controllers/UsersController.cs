@@ -52,7 +52,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult ListDoctors(int page = 1)
         {
-            IQueryable<UserViewModel> listUsersQueryable = _usersRepository.GetListUsersViewModel().Where(u => u.Roles.Contains<string>(UserRoles.Doctor));
+            IQueryable<UserViewModel> listUsersQueryable = _usersRepository.GetListUsersViewModel().Where(u => u.Roles.Contains<string>(UserRoles.Doctor) && u.Active);
             var model = PagingList.Create(listUsersQueryable.OrderBy(a => a.Name), 20, page);
 
             return View(model);
@@ -155,6 +155,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 {
                     UserName = model.UserName,
                     Email = model.Email,
+                    EmailConfirmed = true,
                     Active = true,
                     Address = model.Address,
                     City = model.City,
@@ -171,14 +172,16 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(client);
                     var callbackUrl = Url.EmailConfirmationLink(client.Id, code, Request.Scheme);
-                    try
-                    {
-                        await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-                    }
-                    catch(Exception ex)
-                    {
-                        _logger.LogError("Nie można wysłać wiadomości z linkiem aktywacyjnym",ex);
-                    }
+                    
+                    // TODO : sprawdzić
+                    //try
+                    //{
+                    //    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    //}
+                    //catch(Exception ex)
+                    //{
+                    //    _logger.LogError("Nie można wysłać wiadomości z linkiem aktywacyjnym",ex);
+                    //}
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     //_logger.LogInformation("User created a new account with password.");

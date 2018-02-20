@@ -367,7 +367,7 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie udało się pobrać grafiku lekarza.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie odnaleziono grafiku.
         /// </summary>
         public static string doctorGraphic_errorGraphicNotFound {
             get {
@@ -664,7 +664,7 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Konto zostało utworzone lecz proszę potwierdzić jeszcze założenie konta.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Konto zostało utworzone..
         /// </summary>
         public static string user_successRegister {
             get {

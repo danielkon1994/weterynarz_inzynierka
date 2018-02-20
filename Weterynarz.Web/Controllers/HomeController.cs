@@ -43,7 +43,7 @@ namespace Weterynarz.Web.Controllers
             {
                 try
                 {
-                    await _emailSender.SendEmailAsync(model.ContactForm.Email, "Kontakt ze strony", model.ContactForm.Message);
+                    await _emailSender.SendContactMessageAsync(model.ContactForm.Email, "Kontakt ze strony", model.ContactForm.Message);
 
                     Message message = new Message
                     {
