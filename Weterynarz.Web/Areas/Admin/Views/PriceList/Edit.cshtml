@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <form asp-controller="PriceList" asp-action="Create" method="post">
+            <form asp-controller="PriceList" asp-action="Edit" method="post">
                 <div class="card-header">
                     <strong>@ResAdmin.priceListEditView_headerForm</strong>
                 </div>
@@ -54,9 +54,10 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label asp-for="SelectedMedicalExaminationId"></label>
-                                <select asp-for="SelectedMedicalExaminationId" class="form-control" asp-items="Model.MedicalExaminationSelectList">
+                                @*<select asp-for="SelectedMedicalExaminationId" class="form-control" asp-items="Model.MedicalExaminationSelectList">
                                     <option value="">-- wybierz --</option>
-                                </select>
+                                </select>*@
+                                @Html.DropDownListFor(m => m.SelectedMedicalExaminationId, Model.MedicalExaminationSelectList, new { @class = "form-control"})
                                 <span asp-validation-for="SelectedMedicalExaminationId" class="text-danger" />
                             </div>
                         </div>

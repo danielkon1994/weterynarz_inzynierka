@@ -68,6 +68,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="AdditionalCostIds"></label>
+                                <select asp-for="AdditionalCostIds" class="form-control" asp-items="@Model.AdditionalCostsSelectList" placeholder="Dodatkowe koszty"></select>
+                                <span asp-validation-for="AdditionalCostIds" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
                     <!--/.row-->
 
                 </div>
@@ -86,6 +96,7 @@
         $(document).ready(function () {
             $('#DiseaseIds').select2();
             $('#MedicalExaminationIds').select2();
+            $('#AdditionalCostIds').select2();
         });
     </script>
 }

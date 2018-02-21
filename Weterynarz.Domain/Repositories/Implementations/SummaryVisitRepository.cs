@@ -22,16 +22,19 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IMedicalExaminationTypesRepository _medicalExaminationTypesRepository;
         private IDiseasesRepository _diseasesRepository;
         private IVisitRepository _visitRepository;
+        private IPriceListRepository _priceListRepository;
 
         public SummaryVisitRepository(ApplicationDbContext db, ILogger<SummaryVisitRepository> logger,
             IMedicalExaminationTypesRepository medicalExaminationTypesRepository,
             IDiseasesRepository diseasesRepository,
+            IPriceListRepository priceListRepository,
             IVisitRepository visitRepository) : base(db)
         {
             _logger = logger;
             _medicalExaminationTypesRepository = medicalExaminationTypesRepository;
             _diseasesRepository = diseasesRepository;
             _visitRepository = visitRepository;
+            _priceListRepository = priceListRepository;
         }
 
         public IEnumerable<SelectListItem> GetSummaryVisitSelectList()
@@ -79,6 +82,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
             model.MedicalExaminationSelectList = _medicalExaminationTypesRepository.GetMedicalExaminationSelectList();
+            model.AdditionalCostsSelectList = _priceListRepository.GetPriceListSelectList();
 
             return model;
         }
@@ -94,7 +98,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 CreationDate = DateTime.Now,
                 Description = model.Description,
                 VisitId = model.VisitId,
-                Visit = visit
+                Visit = visit,
+                Price = model.Price
             };
 
             var animal = visit.Animal;
@@ -144,8 +149,10 @@ namespace Weterynarz.Domain.Repositories.Implementations
                     Drugs = summaryVisit.Drugs,
                     MedicalExaminationSelectList = _medicalExaminationTypesRepository.GetMedicalExaminationSelectList(),
                     DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList(),
+                    AdditionalCostsSelectList = _priceListRepository.GetPriceListSelectList(),
                     Id = summaryVisit.Id,
                     Description = summaryVisit.Description,
+                    Price = summaryVisit.Price
                 };
 
                 return model;
@@ -195,6 +202,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 summaryVisit.Drugs = model.Drugs;
                 summaryVisit.Description = model.Description;
                 summaryVisit.ModificationDate = DateTime.Now;
+                summaryVisit.Price = model.Price;
 
                 await _db.SaveChangesAsync();
 

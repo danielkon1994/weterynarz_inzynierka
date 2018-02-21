@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Weterynarz.Domain.ViewModels.Disease;
 using Weterynarz.Basic.Enum;
 using Weterynarz.Domain.ViewModels.PriceList;
+using Weterynarz.Domain.Extension;
 
 namespace Weterynarz.Domain.Repositories.Implementations
 {
@@ -101,7 +102,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Active = i.Active,
                 CreationDate = i.CreationDate,
                 Name = i.Name,
-                Price = i.Price.ToString(),
+                Price = i.Price,
                 Type = i.PriceListEntryType
             });
         }
@@ -114,6 +115,20 @@ namespace Weterynarz.Domain.Repositories.Implementations
             {
                 Text = i.MedicalExamination.Name,
                 Value = i.MedicalExaminationId.ToString()
+            }).ToList();
+
+            return list.AsEnumerable();
+        }
+
+        public IEnumerable<ExtendSelectListItem> GetPriceListSelectList()
+        {
+            List<ExtendSelectListItem> list = new List<ExtendSelectListItem>();
+
+            list = base.GetAllActive().Select(i => new ExtendSelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString(),
+                DataAttribute = i.Price.ToString()
             }).ToList();
 
             return list.AsEnumerable();

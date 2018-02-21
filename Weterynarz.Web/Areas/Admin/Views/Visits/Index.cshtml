@@ -51,8 +51,15 @@
                                         <td>@item.VisitDate.ToString(FormatsDate.DateWithoutTime)</td>
                                         <td>@item.Animal</td>
                                         <td>@item.Doctor</td>
-                                        <td>@(item.Approved ? Html.Raw("<span class='badge badge-success'>Zatwierdzona</span>") : Html.Raw("<span class='badge badge-danger'>Nie zatwierdzona</span>"))</td>
-                                        <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywna</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywna</span>"))</td>
+                                        @if (item.SummaryId == null)
+                                        { 
+                                            <td>@(item.Approved ? Html.Raw("<span class='badge badge-success'>Zatwierdzona</span>") : Html.Raw("<span class='badge badge-danger'>Nie zatwierdzona</span>"))</td>                                        
+                                            <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywna</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywna</span>"))</td>
+                                        }
+                                        else
+                                        {
+                                            <td colspan="2" class="text-center"><span class='badge badge-warning'>Zakończona</span></td>
+                                        }
                                         <td class="text-right">
                                             @*<a href="@Url.Action("Edit", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="btn btn-dark">Edytuj</a>
             <a href="@Url.Action("Delete", "Visits", new { area = AreaNames.Admin, id = item.Id })" id="btnDelete" class="btn btn-danger">Usuń</a>*@
@@ -61,8 +68,8 @@
                                                     Menu
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    @if(!item.Approved && !User.IsInRole(UserRoles.Client))
-                                                    { 
+                                                    @if (!item.Approved && !User.IsInRole(UserRoles.Client))
+                                                    {
                                                         <a href="@Url.Action("Approved", "Visits", new { area = AreaNames.Admin, id = item.Id})" class="dropdown-item">Zatwierdź wizytę</a>
                                                     }
                                                     @if(User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Doctor))
@@ -70,9 +77,9 @@
                                                         if(item.SummaryId != null)
                                                         { 
                                                             @*<a href="@Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Pokaż podsumowanie wizyty</a>*@
-                                                            <a href="@Url.Action("SummaryVisitPdf", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Pokaż podsumowanie wizyty</a>
+                                                            <a href="@Url.Action("SummaryVisitPdf", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" target="_blank" class="dropdown-item">Pokaż podsumowanie wizyty</a>
                                                         }
-                                                        else
+                                                        else if(item.Approved)
                                                         {
                                                             <a href="@Url.Action("CreateSummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = item.Id})" class="dropdown-item">Dodaj podsumowanie wizyty</a>
                                                         }

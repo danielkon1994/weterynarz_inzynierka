@@ -9,6 +9,6 @@ namespace Weterynarz.Domain.ViewModels.PriceList
     {
         public string Name { get; set; }
         public PriceListEntryType Type { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
     }
 }

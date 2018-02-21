@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Weterynarz.Basic.Enum;
 using Weterynarz.Domain.EntitiesDb;
+using Weterynarz.Domain.Extension;
 using Weterynarz.Domain.ViewModels.Disease;
 using Weterynarz.Domain.ViewModels.PriceList;
 
@@ -14,6 +15,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     public interface IPriceListRepository : IBaseRepository<PriceList>
     {
         IEnumerable<SelectListItem> GetMedicalExaminationSelectList(PriceListEntryType type);
+        IEnumerable<ExtendSelectListItem> GetPriceListSelectList();
         IQueryable<PriceListIndexViewModel> GetIndexViewModel();
         PriceListManageViewModel GetEditViewModel(int id);
         Task CreateNew(PriceListManageViewModel model);

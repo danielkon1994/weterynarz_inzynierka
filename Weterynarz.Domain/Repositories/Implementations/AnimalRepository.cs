@@ -21,15 +21,18 @@ namespace Weterynarz.Domain.Repositories.Implementations
         private IAccountsRepository _accountsRepository;
         private IAnimalTypesRepository _animalTypesRepository;
         private IDiseasesRepository _diseasesRepository;
+        private IMedicalExaminationTypesRepository _medicalExaminationRepository;
         private UserManager<ApplicationUser> _userManager;
 
         public AnimalRepository(ApplicationDbContext db, IAccountsRepository accountsRepository,
             IAnimalTypesRepository animalTypesRepository, IDiseasesRepository diseasesRepository,
+            IMedicalExaminationTypesRepository medicalExaminationRepository,
             UserManager<ApplicationUser> userManager) : base(db)
         {
             _accountsRepository = accountsRepository;
             _animalTypesRepository = animalTypesRepository;
             _diseasesRepository = diseasesRepository;
+            _medicalExaminationRepository = medicalExaminationRepository;
             _userManager = userManager;
         }
 
@@ -66,6 +69,15 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 }
             }
 
+            var medicalExaminationDbSelected = _medicalExaminationRepository.Where(i => model.MedicalExaminationIds.Contains(i.Id)).ToList();
+            if (medicalExaminationDbSelected.Any())
+            {
+                foreach (var medicalExamination in medicalExaminationDbSelected)
+                {
+                    animal.AnimalMedicalExaminations.Add(new AnimalMedicalExamination { MedicalExamination = medicalExamination, Animal = animal });
+                }
+            }
+
             await base.InsertAsync(animal);
         }
 
@@ -95,6 +107,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
                 var diseasesDbSelected = _diseasesRepository.Where(i => model.DiseaseIds.Contains(i.Id)).ToList();
                 var existingDiseases = animal.AnimalDiseases.Select(x => x.Disease).ToList();
+                var medicalExaminationDbSelected = _medicalExaminationRepository.Where(i => model.MedicalExaminationIds.Contains(i.Id)).ToList();
+                var existingMedicalExaminations = animal.AnimalMedicalExaminations.Select(x => x.MedicalExamination).ToList();
 
                 var diseasesToAddList = diseasesDbSelected.Except(existingDiseases).ToList();
                 foreach (var disease in diseasesToAddList)
@@ -108,6 +122,18 @@ namespace Weterynarz.Domain.Repositories.Implementations
                     animal.AnimalDiseases.Remove(animal.AnimalDiseases.First(x => x.Disease == disease));
                 }
 
+                var medicalExaminationToAddList = medicalExaminationDbSelected.Except(existingMedicalExaminations).ToList();
+                foreach (var medicalExamination in medicalExaminationToAddList)
+                {
+                    animal.AnimalMedicalExaminations.Add(new AnimalMedicalExamination { MedicalExamination = medicalExamination, Animal = animal });
+                }
+
+                var medicalExaminationToRemoveList = existingMedicalExaminations.Except(medicalExaminationDbSelected).ToList();
+                foreach (var medicalExamination in medicalExaminationToRemoveList)
+                {
+                    animal.AnimalMedicalExaminations.Remove(animal.AnimalMedicalExaminations.First(x => x.MedicalExamination == medicalExamination));
+                }
+
                 await base.SaveChangesAsync();
             }
         }
@@ -119,6 +145,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
             model.OwnersSelectList = _accountsRepository.GetUsersSelectList();
             model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
             model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
+            model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
 
             return model;
         }
@@ -141,6 +168,8 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
                 model.DiseaseIds = animal.AnimalDiseases.Select(i => i.DiseaseId).ToList();
                 model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
+                model.MedicalExaminationIds = animal.AnimalMedicalExaminations.Select(i => i.MedicalExaminationId).ToList();
+                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
                 model.BirthDay = animal.BirthDate;
             }
 
@@ -154,6 +183,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 model.DiseasesSelectList = _diseasesRepository.GetDiseasesSelectList();
                 model.AnimalTypesSelectList = _animalTypesRepository.GetAnimalTypesSelectList();
                 model.OwnersSelectList = _accountsRepository.GetUsersSelectList();
+                model.MedicalExaminationSelectList = _medicalExaminationRepository.GetMedicalExaminationSelectList();
             }
 
             return model;

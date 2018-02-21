@@ -16,6 +16,8 @@ namespace Weterynarz.Domain.EntitiesDb
 
         public string Drugs { get; set; }
 
+        public decimal Price { get; set; }
+
         [Required]
         public string Description { get; set; }
     }

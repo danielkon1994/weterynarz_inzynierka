@@ -250,6 +250,105 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typ.
+        /// </summary>
+        public static string animalManageViewModel_animalType {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_animalType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typ zwierzęcia jest wymagany.
+        /// </summary>
+        public static string animalManageViewModel_animalTypeRequired {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_animalTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data urodzenia / przyjęcia.
+        /// </summary>
+        public static string animalManageViewModel_birthday {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Data urodzenia zwierzęcia jest wymagana.
+        /// </summary>
+        public static string animalManageViewModel_birthdayRequired {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_birthdayRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodatkowe informacje.
+        /// </summary>
+        public static string animalManageViewModel_description {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Przebyte choroby.
+        /// </summary>
+        public static string animalManageViewModel_diseases {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_diseases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Przebyte badania.
+        /// </summary>
+        public static string animalManageViewModel_medicalExamination {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_medicalExamination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imię.
+        /// </summary>
+        public static string animalManageViewModel_name {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Imię zwierzęcia jest wymagane.
+        /// </summary>
+        public static string animalManageViewModel_nameRequired {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_nameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Właściciel.
+        /// </summary>
+        public static string animalManageViewModel_owner {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Właściciel jest wymagany.
+        /// </summary>
+        public static string animalManageViewModel_ownerRequired {
+            get {
+                return ResourceManager.GetString("animalManageViewModel_ownerRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodaj zwierzę.
         /// </summary>
         public static string animalsCreateView_headerForm {
@@ -777,6 +876,69 @@ namespace Weterynarz.Basic.Resources {
         public static string summaryVisit_successAddSummary {
             get {
                 return ResourceManager.GetString("summaryVisit_successAddSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodatkowe koszty.
+        /// </summary>
+        public static string summaryVisitManageViewModel_additionalCost {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_additionalCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opis.
+        /// </summary>
+        public static string summaryVisitManageViewModel_description {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Pole opis jest wymagane.
+        /// </summary>
+        public static string summaryVisitManageViewModel_descriptionRequired {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_descriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Choroby.
+        /// </summary>
+        public static string summaryVisitManageViewModel_disease {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_disease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Leki.
+        /// </summary>
+        public static string summaryVisitManageViewModel_drugs {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_drugs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Badania.
+        /// </summary>
+        public static string summaryVisitManageViewModel_medicalExamination {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_medicalExamination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cena za wizytę.
+        /// </summary>
+        public static string summaryVisitManageViewModel_price {
+            get {
+                return ResourceManager.GetString("summaryVisitManageViewModel_price", resourceCulture);
             }
         }
         

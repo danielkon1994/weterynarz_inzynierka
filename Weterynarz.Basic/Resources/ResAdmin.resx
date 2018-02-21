@@ -486,4 +486,58 @@
   <data name="priceListManageViewMode_type" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="animalManageViewModel_animalType" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="animalManageViewModel_animalTypeRequired" xml:space="preserve">
+    <value>Typ zwierzęcia jest wymagany</value>
+  </data>
+  <data name="animalManageViewModel_birthday" xml:space="preserve">
+    <value>Data urodzenia / przyjęcia</value>
+  </data>
+  <data name="animalManageViewModel_birthdayRequired" xml:space="preserve">
+    <value>Data urodzenia zwierzęcia jest wymagana</value>
+  </data>
+  <data name="animalManageViewModel_description" xml:space="preserve">
+    <value>Dodatkowe informacje</value>
+  </data>
+  <data name="animalManageViewModel_diseases" xml:space="preserve">
+    <value>Przebyte choroby</value>
+  </data>
+  <data name="animalManageViewModel_medicalExamination" xml:space="preserve">
+    <value>Przebyte badania</value>
+  </data>
+  <data name="animalManageViewModel_name" xml:space="preserve">
+    <value>Imię</value>
+  </data>
+  <data name="animalManageViewModel_nameRequired" xml:space="preserve">
+    <value>Imię zwierzęcia jest wymagane</value>
+  </data>
+  <data name="animalManageViewModel_owner" xml:space="preserve">
+    <value>Właściciel</value>
+  </data>
+  <data name="animalManageViewModel_ownerRequired" xml:space="preserve">
+    <value>Właściciel jest wymagany</value>
+  </data>
+  <data name="summaryVisitManageViewModel_additionalCost" xml:space="preserve">
+    <value>Dodatkowe koszty</value>
+  </data>
+  <data name="summaryVisitManageViewModel_description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="summaryVisitManageViewModel_descriptionRequired" xml:space="preserve">
+    <value>Pole opis jest wymagane</value>
+  </data>
+  <data name="summaryVisitManageViewModel_disease" xml:space="preserve">
+    <value>Choroby</value>
+  </data>
+  <data name="summaryVisitManageViewModel_drugs" xml:space="preserve">
+    <value>Leki</value>
+  </data>
+  <data name="summaryVisitManageViewModel_medicalExamination" xml:space="preserve">
+    <value>Badania</value>
+  </data>
+  <data name="summaryVisitManageViewModel_price" xml:space="preserve">
+    <value>Cena za wizytę</value>
+  </data>
 </root>
