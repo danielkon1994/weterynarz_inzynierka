@@ -519,8 +519,8 @@
   <data name="animalManageViewModel_ownerRequired" xml:space="preserve">
     <value>Właściciel jest wymagany</value>
   </data>
-  <data name="summaryVisitManageViewModel_additionalCost" xml:space="preserve">
-    <value>Dodatkowe koszty</value>
+  <data name="summaryVisitManageViewModel_cost" xml:space="preserve">
+    <value>Koszty</value>
   </data>
   <data name="summaryVisitManageViewModel_description" xml:space="preserve">
     <value>Opis</value>
@@ -539,5 +539,14 @@
   </data>
   <data name="summaryVisitManageViewModel_price" xml:space="preserve">
     <value>Cena za wizytę</value>
+  </data>
+  <data name="visitSummaryIndexView_price" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="summaryVisitPdf_empty" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="visitSummaryIndexView_costs" xml:space="preserve">
+    <value>Koszty</value>
   </data>
 </root>

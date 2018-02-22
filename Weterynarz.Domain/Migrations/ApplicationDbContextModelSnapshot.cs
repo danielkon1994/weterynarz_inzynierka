@@ -440,6 +440,19 @@ namespace Weterynarz.Domain.Migrations
                     b.ToTable("PriceLists");
                 });
 
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.PriceSummaryVisit", b =>
+                {
+                    b.Property<int>("SummaryVisitId");
+
+                    b.Property<int>("PriceListId");
+
+                    b.HasKey("SummaryVisitId", "PriceListId");
+
+                    b.HasIndex("PriceListId");
+
+                    b.ToTable("PriceSummaryVisits");
+                });
+
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.SettingsContent", b =>
                 {
                     b.Property<int>("Id")
@@ -487,6 +500,8 @@ namespace Weterynarz.Domain.Migrations
                     b.Property<string>("Drugs");
 
                     b.Property<DateTime?>("ModificationDate");
+
+                    b.Property<decimal>("Price");
 
                     b.Property<int>("VisitId");
 
@@ -638,6 +653,19 @@ namespace Weterynarz.Domain.Migrations
                     b.HasOne("Weterynarz.Domain.EntitiesDb.MedicalExaminationType", "MedicalExamination")
                         .WithOne("Price")
                         .HasForeignKey("Weterynarz.Domain.EntitiesDb.PriceList", "MedicalExaminationId");
+                });
+
+            modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.PriceSummaryVisit", b =>
+                {
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.PriceList", "PriceList")
+                        .WithMany("PriceSummaryVisit")
+                        .HasForeignKey("PriceListId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Weterynarz.Domain.EntitiesDb.SummaryVisit", "SummaryVisit")
+                        .WithMany("PriceSummaryVisit")
+                        .HasForeignKey("SummaryVisitId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Weterynarz.Domain.EntitiesDb.SummaryVisit", b =>

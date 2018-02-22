@@ -9,6 +9,11 @@ namespace Weterynarz.Domain.EntitiesDb
 {
     public class SummaryVisit : BaseEntity
     {
+        public SummaryVisit()
+        {
+            PriceSummaryVisit = new Collection<PriceSummaryVisit>();
+        }
+
         [Required]
         public int VisitId { get; set; }
         [ForeignKey("VisitId")]
@@ -20,5 +25,7 @@ namespace Weterynarz.Domain.EntitiesDb
 
         [Required]
         public string Description { get; set; }
+
+        public virtual ICollection<PriceSummaryVisit> PriceSummaryVisit { get; set; }
     }
 }

@@ -63,6 +63,9 @@ namespace Weterynarz.Domain.ContextDb
             builder.Entity<AnimalMedicalExamination>()
                 .HasKey(a => new { a.AnimalId, a.MedicalExaminationId });
 
+            builder.Entity<PriceSummaryVisit>()
+                .HasKey(a => new { a.SummaryVisitId, a.PriceListId });
+
             //builder.Entity<AnimalMedicalExamination>()
             //    .HasOne(x => x.Animal)
             //    .WithMany(x => x.AnimalMedicalExaminations)
@@ -109,6 +112,7 @@ namespace Weterynarz.Domain.ContextDb
         public DbSet<AnimalDisease> AnimalDiseases { get; set; }
         public DbSet<AnimalMedicalExamination> AnimalMedicalExaminations { get; set; }
         public DbSet<PriceList> PriceLists { get; set; }
+        public DbSet<PriceSummaryVisit> PriceSummaryVisits { get; set; }
         #endregion
     }
 }

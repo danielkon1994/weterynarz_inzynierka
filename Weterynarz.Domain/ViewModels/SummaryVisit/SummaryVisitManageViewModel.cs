@@ -20,12 +20,13 @@ namespace Weterynarz.Domain.ViewModels.SummaryVisit
         public IEnumerable<int> MedicalExaminationIds { get; set; }
         public IEnumerable<SelectListItem> MedicalExaminationSelectList { get; set; }
 
-        [Display(Name = "summaryVisitManageViewModel_additionalCost", ResourceType = typeof(ResAdmin))]
-        public IEnumerable<int> AdditionalCostIds { get; set; }
-        public IEnumerable<ExtendSelectListItem> AdditionalCostsSelectList { get; set; }
+        [Display(Name = "summaryVisitManageViewModel_cost", ResourceType = typeof(ResAdmin))]
+        public IEnumerable<int> CostIds { get; set; }
+        public IEnumerable<ExtendSelectListItem> CostsSelectList { get; set; }
 
         [Display(Name = "summaryVisitManageViewModel_price", ResourceType = typeof(ResAdmin))]
-        public decimal Price { get; set; }
+        [RegularExpression(@"\d+(\.\d{0,1,2})?", ErrorMessage = "Invalid price")]
+        public string Price { get; set; }
 
         [Display(Name = "summaryVisitManageViewModel_drugs", ResourceType = typeof(ResAdmin))]
         public string Drugs { get; set; }

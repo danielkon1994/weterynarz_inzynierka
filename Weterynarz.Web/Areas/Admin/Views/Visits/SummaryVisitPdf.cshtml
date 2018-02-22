@@ -38,7 +38,7 @@
                             <p class="mb-1">@Model.Animal</p>
                         </a>
                         @if(Model.Diseases.Any())
-                {
+                        {
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_diseases</h5>
@@ -46,15 +46,15 @@
                                 <p class="mb-1">
                                     <ul>
                                         @foreach(var disease in Model.Diseases)
-                                {
+                                        {
                                             <li>@disease</li>
-                                }
+                                        }
                                     </ul>
                                 </p>
                             </a>
-                }
+                        }
                         @if (Model.MedicalExaminations.Any())
-                {
+                        {
                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_medicalExaminations</h5>
@@ -62,24 +62,46 @@
                                 <p class="mb-1">
                                     <ul>
                                         @foreach (var medicalExaminations in Model.MedicalExaminations)
-                                {
+                                        {
                                             <li>@medicalExaminations</li>
-                                }
+                                        }
                                     </ul>
                                 </p>
                             </a>
-                }
+                        }
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_drugs</h5>
                             </div>
-                            <p class="mb-1">@Model.Drugs</p>
+                            <p class="mb-1">@(!string.IsNullOrEmpty(Model.Drugs) ? Model.Drugs : ResAdmin.summaryVisitPdf_empty)</p>
                         </a>
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_description</h5>
                             </div>
-                            <p class="mb-1">@Model.Description</p>
+                            <p class="mb-1">@(!string.IsNullOrEmpty(Model.Description) ? Model.Description : ResAdmin.summaryVisitPdf_empty)</p>
+                        </a>
+                        @if (Model.Costs.Any())
+                        {
+                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_costs</h5>
+                                </div>
+                                <p class="mb-1">
+                                    <ul>
+                                        @foreach (var cost in Model.Costs)
+                                        {
+                                            <li>@cost</li>
+                                        }
+                                    </ul>
+                                </p>
+                            </a>
+                        }
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@ResAdmin.visitSummaryIndexView_price</h5>
+                            </div>
+                            <p class="mb-1">@Model.Price.ToString("C")</p>
                         </a>
                     </div>
                 </div>

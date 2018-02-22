@@ -46,12 +46,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
         {
             SummaryVisitIndexViewModel model;
             //var summaryVisit = base.GetById(id);
-            var visit = _visitRepository.GetById(visitId, new string[] { "SummaryVisit", "Animal.Owner", "Animal.AnimalDiseases.Disease", "Animal.AnimalMedicalExaminations.MedicalExamination" });
+            var visit = _visitRepository.GetById(visitId, new string[] { "SummaryVisit.PriceSummaryVisit.PriceList", "Animal.Owner", "Animal.AnimalDiseases.Disease", "Animal.AnimalMedicalExaminations.MedicalExamination" });
 
             if (visit.SummaryVisit != null)
             {
                 var diseases = visit.Animal.AnimalDiseases?.Select(m => m.Disease).ToList();
                 var medicalExamination = visit.Animal.AnimalMedicalExaminations?.Select(m => m.MedicalExamination).ToList();
+                var costs = visit.SummaryVisit.PriceSummaryVisit?.Select(m => m.PriceList).ToList();
 
                 model = new SummaryVisitIndexViewModel
                 {
@@ -61,9 +62,11 @@ namespace Weterynarz.Domain.Repositories.Implementations
                     Drugs = visit.SummaryVisit.Drugs,
                     MedicalExaminations = medicalExamination?.Select(x => x.Name),
                     Owner = visit.Animal.Owner.Name + " " + visit.Animal.Owner.Surname,
+                    Costs = costs.Select(s => $"{s.Name} ({s.Price})"),
                     VisitDate = visit.VisitDate,
                     Id = visit.SummaryVisit.Id,
                     Description = visit.SummaryVisit.Description,
+                    Price = visit.SummaryVisit.Price
                 };
 
                 return model;
@@ -82,7 +85,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
 
             model.DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList();
             model.MedicalExaminationSelectList = _medicalExaminationTypesRepository.GetMedicalExaminationSelectList();
-            model.AdditionalCostsSelectList = _priceListRepository.GetPriceListSelectList();
+            model.CostsSelectList = _priceListRepository.GetPriceListSelectList();
 
             return model;
         }
@@ -99,7 +102,7 @@ namespace Weterynarz.Domain.Repositories.Implementations
                 Description = model.Description,
                 VisitId = model.VisitId,
                 Visit = visit,
-                Price = model.Price
+                Price = Convert.ToDecimal(model.Price)
             };
 
             var animal = visit.Animal;
@@ -115,11 +118,6 @@ namespace Weterynarz.Domain.Repositories.Implementations
             {
                 animal.AnimalDiseases.Add(new AnimalDisease { Disease = disease, Animal = animal });
             }
-            var diseasesToRemoveList = existingDiseases.Except(diseasesCollection).ToList();
-            foreach (var disease in diseasesToRemoveList)
-            {
-                animal.AnimalDiseases.Remove(animal.AnimalDiseases.First(x => x.Disease == disease));
-            }
 
             var medicalExaminationCollection = _db.MedicalExaminationTypes.AsNoTracking().Where(d => model.MedicalExaminationIds.Contains(d.Id)).ToList();
             var existingMedicalExaminations = _db.AnimalMedicalExaminations.AsNoTracking().Where(x => x.AnimalId == animal.Id).Select(x => x.MedicalExamination).ToList();
@@ -128,10 +126,13 @@ namespace Weterynarz.Domain.Repositories.Implementations
             {
                 animal.AnimalMedicalExaminations.Add(new AnimalMedicalExamination { MedicalExamination = medicalExamination, Animal = animal });
             }
-            var medicalExaminationToRemoveList = existingMedicalExaminations.Except(medicalExaminationCollection).ToList();
-            foreach (var medicalExamination in medicalExaminationToRemoveList)
+
+            var costCollection = _db.PriceLists.AsNoTracking().Where(d => model.CostIds.Contains(d.Id)).ToList();
+            var existingCost = summary.PriceSummaryVisit.Select(x => x.PriceList).ToList();
+            var costToAddList = costCollection.Except(existingCost).ToList();
+            foreach (var cost in costToAddList)
             {
-                animal.AnimalMedicalExaminations.Remove(animal.AnimalMedicalExaminations.First(x => x.MedicalExamination == medicalExamination));
+                summary.PriceSummaryVisit.Add(new PriceSummaryVisit { PriceList = cost, SummaryVisit = summary });
             }
 
             await base.InsertAsync(summary);
@@ -149,10 +150,10 @@ namespace Weterynarz.Domain.Repositories.Implementations
                     Drugs = summaryVisit.Drugs,
                     MedicalExaminationSelectList = _medicalExaminationTypesRepository.GetMedicalExaminationSelectList(),
                     DiseaseSelectList = _diseasesRepository.GetDiseasesSelectList(),
-                    AdditionalCostsSelectList = _priceListRepository.GetPriceListSelectList(),
+                    CostsSelectList = _priceListRepository.GetPriceListSelectList(),
                     Id = summaryVisit.Id,
                     Description = summaryVisit.Description,
-                    Price = summaryVisit.Price
+                    Price = summaryVisit.Price.ToString()
                 };
 
                 return model;
@@ -198,11 +199,24 @@ namespace Weterynarz.Domain.Repositories.Implementations
                     animal.AnimalMedicalExaminations.Remove(animal.AnimalMedicalExaminations.First(x => x.MedicalExamination == medicalExamination));
                 }
 
+                var costCollection = _db.PriceLists.AsNoTracking().Where(d => model.CostIds.Contains(d.Id)).ToList();
+                var existingCost = summaryVisit.PriceSummaryVisit.Select(x => x.PriceList).ToList();
+                var costToAddList = costCollection.Except(existingCost).ToList();
+                foreach (var cost in costToAddList)
+                {
+                    summaryVisit.PriceSummaryVisit.Add(new PriceSummaryVisit { PriceList = cost, SummaryVisit = summaryVisit });
+                }
+                var costToRemoveList = existingCost.Except(costCollection).ToList();
+                foreach (var cost in costToRemoveList)
+                {
+                    summaryVisit.PriceSummaryVisit.Remove(summaryVisit.PriceSummaryVisit.First(x => x.PriceList == cost));
+                }
+
                 summaryVisit.Active = model.Active;
                 summaryVisit.Drugs = model.Drugs;
                 summaryVisit.Description = model.Description;
                 summaryVisit.ModificationDate = DateTime.Now;
-                summaryVisit.Price = model.Price;
+                summaryVisit.Price = Convert.ToDecimal(model.Price);
 
                 await _db.SaveChangesAsync();
 

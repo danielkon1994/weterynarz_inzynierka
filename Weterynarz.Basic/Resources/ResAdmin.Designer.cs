@@ -880,11 +880,11 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Dodatkowe koszty.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Koszty.
         /// </summary>
-        public static string summaryVisitManageViewModel_additionalCost {
+        public static string summaryVisitManageViewModel_cost {
             get {
-                return ResourceManager.GetString("summaryVisitManageViewModel_additionalCost", resourceCulture);
+                return ResourceManager.GetString("summaryVisitManageViewModel_cost", resourceCulture);
             }
         }
         
@@ -939,6 +939,15 @@ namespace Weterynarz.Basic.Resources {
         public static string summaryVisitManageViewModel_price {
             get {
                 return ResourceManager.GetString("summaryVisitManageViewModel_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Brak.
+        /// </summary>
+        public static string summaryVisitPdf_empty {
+            get {
+                return ResourceManager.GetString("summaryVisitPdf_empty", resourceCulture);
             }
         }
         
@@ -1258,6 +1267,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Koszty.
+        /// </summary>
+        public static string visitSummaryIndexView_costs {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_costs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opis wizyty.
         /// </summary>
         public static string visitSummaryIndexView_description {
@@ -1299,6 +1317,15 @@ namespace Weterynarz.Basic.Resources {
         public static string visitSummaryIndexView_owner {
             get {
                 return ResourceManager.GetString("visitSummaryIndexView_owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cena.
+        /// </summary>
+        public static string visitSummaryIndexView_price {
+            get {
+                return ResourceManager.GetString("visitSummaryIndexView_price", resourceCulture);
             }
         }
         

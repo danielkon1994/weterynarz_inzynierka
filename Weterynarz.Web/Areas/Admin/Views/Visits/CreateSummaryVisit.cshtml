@@ -72,13 +72,35 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label asp-for="AdditionalCostIds"></label>
-                                <select asp-for="AdditionalCostIds" class="form-control" asp-items="@Model.AdditionalCostsSelectList" placeholder="Dodatkowe koszty"></select>
-                                <span asp-validation-for="AdditionalCostIds" class="help-block text-danger"></span>
+                                <label asp-for="CostIds"></label>
+                                @*<select asp-for="CostIds" class="form-control" asp-items="@(new SelectList(Model.CostsSelectList, "Value", "Text"))" placeholder="Dodatkowe koszty">
+                                    <option value=""></option>
+                                </select>*@
+                                @*@Html.ListBoxFor(m => m.CostIds, new SelectList(Model.CostsSelectList, "Value", "Text"), new { @class="form-control" })*@
+                                <select class="form-control" name="CostIds[]" id="CostIds" multiple="multiple">
+                                    @if(Model.CostsSelectList.Any())
+                                    {
+                                        foreach(var item in Model.CostsSelectList)
+                                        {
+                                            <option value="@item.Value" data-price="@item.DataAttribute">@item.Text</option>
+                                        }
+                                    }
+                                </select>
+                                <span asp-validation-for="CostIds" class="help-block text-danger"></span>
                             </div>
                         </div>
                     </div>
                     <!--/.row-->
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Price"></label>
+                                <input asp-for="Price" type="text" class="form-control" value="0" />
+                                <span asp-validation-for="Price" class="help-block text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="card-footer">
@@ -92,11 +114,27 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('#DiseaseIds').select2();
             $('#MedicalExaminationIds').select2();
-            $('#AdditionalCostIds').select2();
+            $('#CostIds').select2();
+
+            $('#CostIds').change(function () {
+                var totalPrice = 0;
+                $(this).find(':selected').each(function () {
+                    try {
+                        totalPrice += parseFloat($(this).data('price'));
+                    }
+                    catch (e)
+                    {
+                        console.log(e);
+                    }
+                });
+
+                $('#Price').val(totalPrice);
+            });
         });
     </script>
 }

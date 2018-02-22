@@ -11,7 +11,9 @@ namespace Weterynarz.Domain.ViewModels.SummaryVisit
         public string Animal { get; set; }
         public IEnumerable<string> Diseases { get; set; }
         public IEnumerable<string> MedicalExaminations { get; set; }
+        public IEnumerable<string> Costs { get; set; }
         public string Drugs { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 }
