@@ -14,6 +14,7 @@ using Weterynarz.Web.Services;
 using Weterynarz.Basic.Const;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
+using System.Threading;
 
 namespace Weterynarz.Web.Controllers
 {
@@ -90,19 +91,15 @@ namespace Weterynarz.Web.Controllers
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
-
-                    try
+                    
+                    string visitUrl = Url.Action("Index", "Visits", new { area = AreaNames.Admin }, this.HttpContext.Request.Path);
+                    string userEmail = visit.Animal.Owner.Email;
+                    Thread email = new Thread(() =>
                     {
-                        string visitUrl = Url.Action("Index", "Visits", new { area = AreaNames.Admin}, this.HttpContext.Request.Path);
-                        string userEmail = visit.Animal.Owner.Email;
-
-                        await _emailSender.SendEmailAsync(userEmail, "Dodano wizytę",
-                           $"Aby przejść do listy swoich wizyt naciśnij: <a href='{visitUrl}'>Link</a>");
-                    }
-                    catch(Exception ex)
-                    {
-                        _logger.LogError(ex, ResWebsite.visitSendEmailError);
-                    }
+                        SendEmail(userEmail, "Dodano wizytę", $"Aby przejść do listy swoich wizyt naciśnij: <a href='{visitUrl}'>Link</a>");
+                    });
+                    email.IsBackground = true;
+                    email.Start();
                 }
                 catch(Exception ex)
                 {
@@ -121,6 +118,18 @@ namespace Weterynarz.Web.Controllers
 
             model = await _visitRepository.GetMakeVisitViewModel(model);
             return View(model);
+        }
+
+        private void SendEmail(string email, string subject, string message)
+        {
+            try
+            {
+                _emailSender.SendEmailAsync(email, subject, message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ResWebsite.visitSendEmailError);
+            }
         }
 
         private async Task checkUserFromMakeVisitFormAsync(VisitMakeVisitViewModel model)

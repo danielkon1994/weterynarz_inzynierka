@@ -174,6 +174,19 @@ namespace Weterynarz.Domain.Repositories.Implementations
             });
         }
 
+        public IQueryable<VisitReportViewModel> GetVisitReportViewModel(string doctorId)
+        {
+            var visitQueryable = base.GetAllNotDeleted().Include(x => x.Doctor).Include(x => x.SummaryVisit).Where(x => x.DoctorId == doctorId);
+
+            return visitQueryable.Select(i => new VisitReportViewModel
+            {
+                VisitDate = i.VisitDate,
+                Owner = i.Animal.Owner.Name + " " + i.Animal.Owner.Surname,
+                Animal = i.Animal.Name + " (" + i.Animal.AnimalType.Name + ")",
+                Status = i.SummaryVisit != null ? "Zakończona" : "Do realizacji"
+            });
+        }
+
         public async Task<VisitMakeVisitViewModel> GetMakeVisitViewModel(ApplicationUser user)
         {
             VisitMakeVisitViewModel model = new VisitMakeVisitViewModel();

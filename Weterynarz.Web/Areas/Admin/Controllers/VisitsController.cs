@@ -14,6 +14,7 @@ using Weterynarz.Basic.Resources;
 using Microsoft.AspNet.Identity;
 using Weterynarz.Basic.Const;
 using Weterynarz.Web.Services;
+using System.Threading;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -37,7 +38,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             var userId = User.Identity.GetUserId();
             var listElements = await _visitsRepository.GetIndexViewModel(userId);
-            var listVisit = listElements.OrderBy(a => a.VisitDate);
+            var listVisit = listElements.OrderByDescending(a => a.VisitDate);
             var model = await PagingList.CreateAsync(listVisit, 20, page);
 
             return View(model);
@@ -168,6 +169,19 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
+        public IActionResult GenerateVisitReport(string doctorId)
+        {
+            var model = _visitsRepository.GetVisitReportViewModel(doctorId);
+            if (model != null)
+            {
+                string guid = Guid.NewGuid().ToString();
+                return new Rotativa.AspNetCore.ViewAsPdf("VisitReportPdf", model) { FileName = $"{guid}.pdf" };
+            }
+
+            base.NotifyMessage("Upppsss !", ResAdmin.summaryVisit_errorNotFoundSummary, MessageStatus.error);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult SummaryVisit(int visitId)
         {
             var model = _summaryVisitRepository.GetIndexViewModel(visitId);
@@ -227,25 +241,20 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                         MessageStatus = Models.NotifyMessage.MessageStatus.success
                     };
                     base.NotifyMessage(message);
-
-                    try
+                    
+                    string summaryVisitUrl = Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = model.VisitId }, this.HttpContext.Request.Scheme);
+                    var visit = _visitsRepository.GetById(model.VisitId, new string[] { "Animal.Owner" });
+                    string userEmail = string.Empty;
+                    if (visit != null)
                     {
-                        string summaryVisitUrl = Url.Action("SummaryVisit", "Visits", new { area = AreaNames.Admin, visitId = model.VisitId }, this.HttpContext.Request.Scheme);
-                        var visit = _visitsRepository.GetById(model.VisitId, new string[] { "Animal.Owner" });
-
-                        string userEmail = string.Empty;
-                        if (visit != null)
-                        { 
-                            userEmail = visit.Animal.Owner.Email;
-                        }
-
-                        await _emailSender.SendEmailAsync(userEmail, "Dodano podsumowanie wizyty",
-                           $"Dodano podsumowanie wizyty. Aby zobaczyć naciśnij: <a href='{summaryVisitUrl}'>Link</a>");
+                        userEmail = visit.Animal.Owner.Email;
                     }
-                    catch (Exception ex)
+                    Thread email = new Thread(() =>
                     {
-                        _logger.LogError(ex, ResAdmin.visitSummary_errorSendEmail);
-                    }
+                        SendEmail(userEmail, "Dodano podsumowanie wizyty", $"Dodano podsumowanie wizyty. Aby zobaczyć naciśnij: <a href='{summaryVisitUrl}'>Link</a>");
+                    });
+                    email.IsBackground = true;
+                    email.Start();
                 }
                 catch (Exception ex)
                 {
@@ -258,6 +267,18 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
             model = _summaryVisitRepository.GetCreateViewModel(model.VisitId, model);
             return View(model);
+        }
+        
+        private void SendEmail(string email, string subject, string message)
+        {
+            try
+            {
+                _emailSender.SendEmailAsync(email, subject, message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ResWebsite.visitSendEmailError);
+            }
         }
     }
 }

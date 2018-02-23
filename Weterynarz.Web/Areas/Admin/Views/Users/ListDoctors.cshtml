@@ -11,19 +11,7 @@
     </ol>
 }
 
-<div class="container">
-    @*<div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    @ResAdmin.text_options
-                </div>
-                <div class="card-body">
-                    <a class="btn btn-warning" asp-controller="Users" asp-action="Register" asp-area="@AreaNames.Admin">@ResAdmin.button_add</a>
-                </div>
-            </div>
-        </div>
-    </div>*@
+<div class="container">    
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -48,12 +36,21 @@
                                         <td>@item.Name</td>
                                         <td>@item.Surname</td>
                                         <td class="text-right">
-                                            <a class="btn btn-secondary showGraphic" data-doctor-id="@item.Id">Zobacz aktualny grafik</a>
-                                            @*<a href="@Url.Action("ShowGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id })" class="btn btn-secondary">Zobacz aktualny grafik</a>*@
-                                            @if (User.IsInRole(UserRoles.Admin))
-                                            {
-                                                <a href="@Url.Action("ShowGraphics", "DoctorGraphics", new { area = AreaNames.Admin, doctorId = item.Id })" class="btn btn-warning">Zobacz wszystkie grafiki</a>
-                                            }
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Menu
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item showGraphic" data-doctor-id="@item.Id">Zobacz aktualny grafik</a>
+                                                    @*<a href="@Url.Action("ShowGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id })" class="btn btn-secondary">Zobacz aktualny grafik</a>*@
+                                                    @if (User.IsInRole(UserRoles.Admin))
+                                                    {
+                                                        <a href="@Url.Action("ShowGraphics", "DoctorGraphics", new { area = AreaNames.Admin, doctorId = item.Id })" class="dropdown-item">Zobacz wszystkie grafiki</a>
+                                                    }
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="@Url.Action("GenerateVisitReport", "Visits", new { area = AreaNames.Admin, doctorId = item.Id })" class="dropdown-item">Generuj zestawienie wizyt</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 }

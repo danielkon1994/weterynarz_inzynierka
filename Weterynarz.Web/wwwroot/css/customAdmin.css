@@ -72,3 +72,6 @@ body {
   color: #495057;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
 
+.showGraphic {
+  cursor: pointer; }
+

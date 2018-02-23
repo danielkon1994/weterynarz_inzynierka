@@ -549,4 +549,7 @@
   <data name="visitSummaryIndexView_costs" xml:space="preserve">
     <value>Koszty</value>
   </data>
+  <data name="visit_errorNotFoundDoctor" xml:space="preserve">
+    <value>Nie znaleziono doktora</value>
+  </data>
 </root>

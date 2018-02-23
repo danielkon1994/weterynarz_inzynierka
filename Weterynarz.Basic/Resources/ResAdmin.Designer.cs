@@ -1141,6 +1141,15 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Nie znaleziono doktora.
+        /// </summary>
+        public static string visit_errorNotFoundDoctor {
+            get {
+                return ResourceManager.GetString("visit_errorNotFoundDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Wystąpił błąd podczas zatwierdzania wizyty.
         /// </summary>
         public static string visit_errorVisitApproved {
