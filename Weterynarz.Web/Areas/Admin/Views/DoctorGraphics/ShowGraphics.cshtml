@@ -50,8 +50,11 @@
                                     <td>@item.AvailableTo.ToString(FormatsDate.DateWithoutTime)</td>
                                     <td>@(item.Active ? Html.Raw("<span class='badge badge-success'>Aktywny</span>") : Html.Raw("<span class='badge badge-danger'>Nieaktywny</span>"))</td>
                                     <td class="text-right">
-                                        <a href="@Url.Action("EditGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id, doctorId = (string)ViewBag.DoctorId })" class="btn btn-dark">Edytuj</a>
-                                        <button id="btnDeleteGraphic" class="btn btn-danger" data-id="@item.Id">Usuń</button>
+                                        @if(User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Worker))
+                                        { 
+                                            <a href="@Url.Action("EditGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id, doctorId = (string)ViewBag.DoctorId })" class="btn btn-dark">Edytuj</a>
+                                            <button id="btnDeleteGraphic" class="btn btn-danger" data-id="@item.Id">Usuń</button>
+                                        }
                                     </td>
                                 </tr>
                             }

@@ -7,44 +7,53 @@
             <span class="nav-link-text"> @ResAdmin.leftNavbar_home</span>
         </a>
     </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
-        <a class="nav-link" asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin">
-            <i class="fa fa-fw fa-user-md"></i>
-            <span class="nav-link-text"> @ResAdmin.leftNavbar_doctors</span>
-        </a>
-    </li>
-    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
-        <a class="nav-link" asp-controller="Animals" asp-action="Index" asp-area="@AreaNames.Admin">
-            <i class="fa fa-fw fa-linux"></i>
-            <span class="nav-link-text"> @ResAdmin.leftNavbar_animals</span>
-        </a>
-    </li>
+    @if (!User.IsInRole(UserRoles.Doctor))
+    { 
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+            <a class="nav-link" asp-controller="Users" asp-action="ListDoctors" asp-area="@AreaNames.Admin">
+                <i class="fa fa-fw fa-user-md"></i>
+                <span class="nav-link-text"> @ResAdmin.leftNavbar_doctors</span>
+            </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+            <a class="nav-link" asp-controller="Animals" asp-action="Index" asp-area="@AreaNames.Admin">
+                <i class="fa fa-fw fa-linux"></i>
+                <span class="nav-link-text"> @ResAdmin.leftNavbar_animals</span>
+            </a>
+        </li>
+    }
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Visits">
         <a class="nav-link" asp-controller="Visits" asp-action="Index" asp-area="@AreaNames.Admin">
             <i class="fa fa-fw fa-umbrella"></i>
             <span class="nav-link-text"> @ResAdmin.leftNavbar_visits</span>
         </a>
     </li>
-    @if (User.IsInRole(UserRoles.Admin))
+    @if (User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Worker))
     {
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
-            <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin">
-                <i class="fa fa-fw fa-users"></i>
-                <span class="nav-link-text"> @ResAdmin.leftNavbar_users</span>
-            </a>
-        </li>
+        if(User.IsInRole(UserRoles.Admin))
+        { 
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Doctors">
+                <a class="nav-link" asp-controller="Users" asp-action="ListAll" asp-area="@AreaNames.Admin">
+                    <i class="fa fa-fw fa-users"></i>
+                    <span class="nav-link-text"> @ResAdmin.leftNavbar_users</span>
+                </a>
+            </li>
+        }
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
             <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
                 <i class="fa fa-fw fa-sitemap"></i>
                 <span class="nav-link-text">@ResAdmin.leftNavbar_settings</span>
             </a>
             <ul class="sidenav-second-level collapse" id="collapseMulti">
-                <li>
-                    <a asp-controller="Settings" asp-action="Content" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_contentHomePage</a>
-                </li>
-                <li>
-                    <a asp-controller="PriceList" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_priceList</a>
-                </li>
+                @if (User.IsInRole(UserRoles.Admin))
+                {
+                    <li>
+                        <a asp-controller="Settings" asp-action="Content" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_contentHomePage</a>
+                    </li>                
+                    <li>
+                        <a asp-controller="PriceList" asp-action="Index" asp-area="@AreaNames.Admin">@ResAdmin.leftNavbar_priceList</a>
+                    </li>
+                }
                 <li>
                     <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">@ResAdmin.leftNavbar_dictionares</a>
                     <ul class="sidenav-third-level collapse" id="collapseMulti2">

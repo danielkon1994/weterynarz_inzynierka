@@ -7,9 +7,12 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.Settings;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class SettingsController : AdminBaseController
     {
         private ISettingsContentRepository _settingsContentRepository;

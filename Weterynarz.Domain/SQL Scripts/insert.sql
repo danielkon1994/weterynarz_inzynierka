@@ -45,5 +45,24 @@ SET IDENTITY_INSERT [dbo].[SettingsContent] OFF
 
 
 SET IDENTITY_INSERT [dbo].[AnimalTypes] ON
-INSERT INTO [dbo].[AnimalTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-01-15 22:31:35', 0, N'Typ 1', NULL, N'Typ 1')
+INSERT INTO [dbo].[AnimalTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-01-15 22:31:35', 0, N'Pies', NULL, N'Pies')
+INSERT INTO [dbo].[AnimalTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-01-15 22:31:35', 0, N'Kot', NULL, N'Kot')
+INSERT INTO [dbo].[AnimalTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-01-15 22:31:35', 0, N'Chomik', NULL, N'Chomik')
+INSERT INTO [dbo].[AnimalTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-01-15 22:31:35', 0, N'Świnka morska', NULL, N'Świnka morska')
 SET IDENTITY_INSERT [dbo].[AnimalTypes] OFF
+
+
+SET IDENTITY_INSERT [dbo].[Diseases] ON
+INSERT INTO [dbo].[Diseases] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-02-09 18:35:15', 0, N'Zapalenie płuc', NULL, N'Zapalenie płuc')
+INSERT INTO [dbo].[Diseases] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (2, 1, N'2018-02-09 18:35:25', 0, N'Złamanie', NULL, N'Złamanie')
+SET IDENTITY_INSERT [dbo].[Diseases] OFF
+
+SET IDENTITY_INSERT [dbo].[MedicalExaminationTypes] ON
+INSERT INTO [dbo].[MedicalExaminationTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (1, 1, N'2018-02-09 18:34:22', 0, N'Prześwietlenie', NULL, N'Prześwietlenie')
+INSERT INTO [dbo].[MedicalExaminationTypes] ([Id], [Active], [CreationDate], [Deleted], [Description], [ModificationDate], [Name]) VALUES (2, 1, N'2018-02-09 18:34:42', 0, N'Diagnostyka serca', NULL, N'Diagnostyka serca')
+SET IDENTITY_INSERT [dbo].[MedicalExaminationTypes] OFF
+
+SET IDENTITY_INSERT [dbo].[PriceLists] ON
+INSERT INTO [dbo].[PriceLists] ([Id], [Active], [CreationDate], [Deleted], [MedicalExaminationId], [ModificationDate], [Name], [Price], [PriceListEntryType]) VALUES (2, 1, N'2018-02-20 22:55:18', 0, NULL, NULL, N'Prześwietlenie', CAST(50.00 AS Decimal(18, 2)), 2)
+INSERT INTO [dbo].[PriceLists] ([Id], [Active], [CreationDate], [Deleted], [MedicalExaminationId], [ModificationDate], [Name], [Price], [PriceListEntryType]) VALUES (2, 1, N'2018-02-20 22:55:18', 0, NULL, NULL, N'Wizyta', CAST(50.00 AS Decimal(18, 2)), 3)
+SET IDENTITY_INSERT [dbo].[PriceLists] OFF

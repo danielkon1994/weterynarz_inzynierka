@@ -538,7 +538,7 @@ namespace Weterynarz.Basic.Resources {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Gatunki zwierząt.
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Typy zwierząt.
         /// </summary>
         public static string leftNavbar_animalTypes {
             get {

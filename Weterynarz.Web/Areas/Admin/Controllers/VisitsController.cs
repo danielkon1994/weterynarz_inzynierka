@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity;
 using Weterynarz.Basic.Const;
 using Weterynarz.Web.Services;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -33,7 +34,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             _logger = logger;
             _emailSender = emailSender;
         }
-
+        
         public async Task<IActionResult> Index(int page = 1)
         {
             var userId = User.Identity.GetUserId();
@@ -44,6 +45,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
         public async Task<IActionResult> Create()
         {
             VisitManageViewModel model = await _visitsRepository.GetCreateNewViewModel();
@@ -75,6 +77,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
         public async Task<IActionResult> Edit(int id)
         {
             VisitManageViewModel model = await _visitsRepository.GetEditViewModel(id);
@@ -145,6 +148,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         //[HttpPost]
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -169,6 +173,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
         public IActionResult GenerateVisitReport(string doctorId)
         {
             var model = _visitsRepository.GetVisitReportViewModel(doctorId);

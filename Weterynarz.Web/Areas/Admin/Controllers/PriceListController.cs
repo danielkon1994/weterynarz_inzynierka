@@ -10,9 +10,12 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.Disease;
 using Microsoft.Extensions.Logging;
 using Weterynarz.Domain.ViewModels.PriceList;
+using Weterynarz.Basic.Const;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class PriceListController : AdminBaseController
     {
         private IPriceListRepository _priceListRepository;

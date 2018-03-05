@@ -25,6 +25,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.Mvc;
 using Weterynarz.Web.ModelBinders;
 using Rotativa.AspNetCore;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Web
 {

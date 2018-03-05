@@ -9,9 +9,12 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.ViewModels.AnimalTypes;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Microsoft.Extensions.Logging;
+using Weterynarz.Basic.Const;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
     public class AnimalTypesController : AdminBaseController
     {
         private readonly IAnimalTypesRepository _animalTypesRepository;

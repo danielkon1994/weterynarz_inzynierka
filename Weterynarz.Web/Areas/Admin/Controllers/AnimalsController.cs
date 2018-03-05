@@ -9,9 +9,12 @@ using ReflectionIT.Mvc.Paging;
 using Weterynarz.Web.Models.NotifyMessage;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
     public class AnimalsController : AdminBaseController
     {
         private IAnimalRepository _animalsRepository;
@@ -27,7 +30,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         {
             var userId = User.Identity.GetUserId();
             var listElements = await _animalsRepository.GetIndexViewModel(userId);
-            var listAnimals = listElements.OrderBy(a => a.Name);
+            var listAnimals = listElements.OrderByDescending(a => a.CreationDate);
             var model = await PagingList.CreateAsync(listAnimals, 20, page);
 
             return View(model);

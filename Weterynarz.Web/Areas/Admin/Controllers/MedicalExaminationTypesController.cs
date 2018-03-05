@@ -9,9 +9,12 @@ using Weterynarz.Web.Models.NotifyMessage;
 using Weterynarz.Domain.Repositories.Interfaces;
 using Weterynarz.Domain.ViewModels.MedicalExaminationTypes;
 using Microsoft.Extensions.Logging;
+using Weterynarz.Basic.Const;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
     public class MedicalExaminationTypesController : AdminBaseController
     {
         private readonly IMedicalExaminationTypesRepository _medicalExaminationTypesRepository;

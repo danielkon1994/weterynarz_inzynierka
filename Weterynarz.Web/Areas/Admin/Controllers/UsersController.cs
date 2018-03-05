@@ -40,6 +40,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             _usersRepository = usersRepository;
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         public async Task<IActionResult> ListAll(int page = 1)
         {
@@ -49,6 +50,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
         [HttpGet]
         public IActionResult ListDoctors(int page = 1)
         {
@@ -58,6 +60,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         public IActionResult Add(string returnUrl = null)
         {
@@ -70,6 +73,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(UsersManageViewModel model, string returnUrl = null)
@@ -129,7 +133,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
+                
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
@@ -203,6 +207,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Edit(string id)
         {
             UsersManageViewModel model;
@@ -221,6 +226,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UsersManageViewModel model)
@@ -266,6 +272,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> UnlockAsync(string id)
         {
             Message message = null;
@@ -312,6 +319,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return RedirectToAction("ListAll");
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost]
         public async Task<IActionResult> DeleteAsync(string id)
         {
@@ -353,7 +361,8 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
 
             return Json(message);
         }
-        
+
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> BanAsync(string id)
         {
             Message message = null;
@@ -400,6 +409,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return RedirectToAction("ListAll");
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Client + "," + UserRoles.Worker)]
         public async Task<IActionResult> ShowGraphic(string id)
         {
             Message message = null;
@@ -426,8 +436,6 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 };
                 base.NotifyMessage(message);
             }
-
-
 
             return View();
         }

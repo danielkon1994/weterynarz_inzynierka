@@ -9,6 +9,8 @@ using Weterynarz.Domain.ViewModels.Doctor;
 using Weterynarz.Web.Models.NotifyMessage;
 using Microsoft.Extensions.Logging;
 using Weterynarz.Basic.Resources;
+using Microsoft.AspNetCore.Authorization;
+using Weterynarz.Basic.Const;
 
 namespace Weterynarz.Web.Areas.Admin.Controllers
 {
@@ -57,6 +59,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
         public IActionResult CreateGraphic(string doctorId)
         {
             if (string.IsNullOrEmpty(doctorId))
@@ -103,6 +106,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
         public async Task<IActionResult> EditGraphic(int id, string doctorId)
         {
             if (string.IsNullOrEmpty(doctorId))
@@ -147,6 +151,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin + "," + UserRoles.Worker)]
         public async Task<IActionResult> DeleteGraphic(int id, string doctorId)
         {
             Message message = null;
