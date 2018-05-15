@@ -53,7 +53,7 @@
                                         @if(User.IsInRole(UserRoles.Admin) || User.IsInRole(UserRoles.Worker))
                                         { 
                                             <a href="@Url.Action("EditGraphic", "DoctorGraphics", new { area = AreaNames.Admin, id = item.Id, doctorId = (string)ViewBag.DoctorId })" class="btn btn-dark">Edytuj</a>
-                                            <button id="btnDeleteGraphic" class="btn btn-danger" data-id="@item.Id">Usuń</button>
+                                            <button class="btn btn-danger btnDeleteGraphic" data-id="@item.Id">Usuń</button>
                                         }
                                     </td>
                                 </tr>
@@ -78,11 +78,11 @@
 @section Scripts {
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#btnDeleteGraphic").click(function () {
+            $(".btnDeleteGraphic").click(function () {
                 var rowId = $(this).data('id');
                 var row = $(this).parents('tr');
                 var table = $("#graphicsTable");
-                
+
                 AppNotify.confirm('Czy na pewno chcesz usunąć ten grafik?', function () {
                     $.ajax({
                         method: "POST",
@@ -95,7 +95,7 @@
                             {
                                 row.fadeOut();
                             }
-                            AppNotify.notifyMessage(response, function () { 
+                            AppNotify.notifyMessage(response, function () {
                                 location.reload();
                             });
                         }

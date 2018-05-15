@@ -204,7 +204,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             var model = _summaryVisitRepository.GetIndexViewModel(visitId);
             if (model != null)
             {
-                return new Rotativa.AspNetCore.ViewAsPdf("SummaryVisitPdf", model) { FileName = "test.pdf" };
+                return new Rotativa.AspNetCore.ViewAsPdf("SummaryVisitPdf", model) { FileName = $"podsumowanie_{visitId}.pdf" };
             }
 
             base.NotifyMessage("Upppsss !", ResAdmin.summaryVisit_errorNotFoundSummary, MessageStatus.error);

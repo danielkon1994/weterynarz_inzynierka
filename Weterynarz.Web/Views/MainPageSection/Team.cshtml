@@ -13,53 +13,53 @@
         </div>
         @if (Model.Doctors.Any())
         {
-            foreach (var doctor in Model.Doctors)
-            {
-                <div class="row">
+            <div class="row">
+                @foreach (var doctor in Model.Doctors)
+                {
                     <div class="col-sm-4">
                         <div class="team-member">
                             <h4>@doctor.DisplayName</h4>
                             <p class="text-muted">@doctor.Specialization</p>
                             @if (doctor.Graphic != null)
                             {
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Dzień</th>
-                                        <th class="text-center">Godziny</th>
-                                    </tr>
-                                </thead>                                
-                                <tbody>
-                                    <tr>
-                                        <td>Poniedziałek</td>
-                                        <td>@doctor.Graphic.Monday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Wtorek</td>
-                                        <td>@doctor.Graphic.Tuesday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Środa</td>
-                                        <td>@doctor.Graphic.Wednesday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Czwartek</td>
-                                        <td>@doctor.Graphic.Thursday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Piątek</td>
-                                        <td>@doctor.Graphic.Friday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Sobota</td>
-                                        <td>@doctor.Graphic.Saturday</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Niedziela</td>
-                                        <td>@doctor.Graphic.Sunday</td>
-                                    </tr>
-                                </tbody>                                
-                            </table>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Dzień</th>
+                                            <th class="text-center">Godziny</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Poniedziałek</td>
+                                            <td>@doctor.Graphic.Monday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Wtorek</td>
+                                            <td>@doctor.Graphic.Tuesday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Środa</td>
+                                            <td>@doctor.Graphic.Wednesday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Czwartek</td>
+                                            <td>@doctor.Graphic.Thursday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Piątek</td>
+                                            <td>@doctor.Graphic.Friday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sobota</td>
+                                            <td>@doctor.Graphic.Saturday</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Niedziela</td>
+                                            <td>@doctor.Graphic.Sunday</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             }
                             else
                             {
@@ -67,8 +67,8 @@
                             }
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         }
     </div>
 </section>

@@ -51,7 +51,7 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
                 return RedirectToAction("ListDoctors", "Users");
             }
 
-            var listElements = _doctorGraphicsRepository.GetAllGraphicsForDoctorViewModel().OrderBy(a => a.CreationDate);
+            var listElements = _doctorGraphicsRepository.GetAllGraphicsForDoctorViewModel(doctorId).OrderBy(a => a.CreationDate);
             var model = await PagingList.CreateAsync(listElements, 20, page);
 
             ViewBag.DoctorId = doctorId;
@@ -116,6 +116,11 @@ namespace Weterynarz.Web.Areas.Admin.Controllers
             }
 
             DoctorGraphicManageViewModel model = await _doctorGraphicsRepository.GetEditGraphicViewModel(id, doctorId);
+            if(model == null)
+            {
+                base.NotifyMessage("Upppsss !", ResAdmin.doctorGraphic_errorDoctorNotFound, MessageStatus.error);
+                return RedirectToAction("ShowGraphics", "DoctorGraphics", new { doctorId = doctorId});
+            }
 
             return View(model);
         }

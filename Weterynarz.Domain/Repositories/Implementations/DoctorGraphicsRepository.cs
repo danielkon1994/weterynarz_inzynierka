@@ -147,9 +147,9 @@ namespace Weterynarz.Domain.Repositories.Implementations
             return model;
         }
 
-        public IQueryable<DoctorGraphicItem> GetAllGraphicsForDoctorViewModel()
+        public IQueryable<DoctorGraphicItem> GetAllGraphicsForDoctorViewModel(string doctorId)
         {
-            return base.GetAllNotDeleted().Select(i => new DoctorGraphicItem
+            return base.Where(i => i.Active && !i.Deleted && i.DoctorId == doctorId).Select(i => new DoctorGraphicItem
             {
                 Id = i.Id,
                 Active = i.Active,

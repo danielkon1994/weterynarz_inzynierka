@@ -13,7 +13,7 @@ namespace Weterynarz.Domain.Repositories.Interfaces
     public interface IDoctorGraphicsRepository : IBaseRepository<DoctorGraphic>
     {
         IEnumerable<SelectListItem> GetDoctorGraphicsSelectList();
-        IQueryable<DoctorGraphicItem> GetAllGraphicsForDoctorViewModel();
+        IQueryable<DoctorGraphicItem> GetAllGraphicsForDoctorViewModel(string doctorId);
         DoctorShowGraphicViewModel GetDoctorGraphicToShowViewModel(string doctorId);
         Task CreateNew(DoctorGraphicManageViewModel model);
         Task<DoctorGraphicManageViewModel> GetEditGraphicViewModel(int id, string doctorId);
